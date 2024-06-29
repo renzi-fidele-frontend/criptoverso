@@ -5,17 +5,17 @@ import "./App.css";
 import Home from "./pages/Home/Home";
 import Criptomoedas from "./pages/Criptomoeadas/Criptomoedas";
 import Movimentos from "./pages/Movimentos/Movimentos";
-import Noticias from "./pages/noticias/Noticias";
+import Noticias from "./pages/Noticias/Noticias";
 
 function App() {
    return (
       <>
          <BrowserRouter>
             <div id="App" className="d-flex flex-row w-100">
-               <div>
+               <div className="">
                   <SideBar />
                </div>
-               <div>
+               <div className="px-5 py-4 w-100">
                   <Routes>
                      <Route exact path="/" element={<Home />} />
                      <Route path="/criptomoedas" element={<Criptomoedas />} />

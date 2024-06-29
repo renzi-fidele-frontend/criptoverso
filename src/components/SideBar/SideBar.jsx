@@ -1,5 +1,7 @@
 import styles from "./SideBar.module.css";
 import { CDBSidebar, CDBSidebarContent, CDBSidebarFooter, CDBSidebarHeader, CDBSidebarMenu, CDBSidebarMenuItem } from "cdbreact";
+import { Dropdown, Image } from "react-bootstrap";
+import fotoUser from "../../assets/fotoUser.jpg";
 
 import { NavLink, useLocation } from "react-router-dom";
 
@@ -7,7 +9,7 @@ const SideBar = () => {
    const rota = useLocation().pathname;
    return (
       <div id={styles.ct} className="d-flex h-100 " style={{ overflow: "scroll initial" }}>
-         <CDBSidebar textColor="#fff" className={styles.sidebar}>
+         <CDBSidebar maxWidth="350px" textColor="#fff" className={`${styles.sidebar} pb-4`}>
             <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
                <a href="/" className="text-decoration-none" style={{ color: "inherit" }}>
                   Criptoverso
@@ -39,14 +41,15 @@ const SideBar = () => {
                </CDBSidebarMenu>
             </CDBSidebarContent>
 
-            <CDBSidebarFooter style={{ textAlign: "center" }}>
-               <div
-                  style={{
-                     padding: "20px 5px",
-                  }}
-               >
-                  Sidebar Footer
-               </div>
+            <CDBSidebarFooter className="text-center">
+               <Dropdown drop="up-centered">
+                  <Dropdown.Toggle className="rounded-circle" id={styles.tg} variant="light">
+                     <Image id={styles.fotoUser} className="object-fit-cover rounded-circle" src={fotoUser} />
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu className="border border-black">
+                     <Dropdown.Item>Editar Perfil</Dropdown.Item>
+                  </Dropdown.Menu>
+               </Dropdown>
             </CDBSidebarFooter>
          </CDBSidebar>
       </div>
