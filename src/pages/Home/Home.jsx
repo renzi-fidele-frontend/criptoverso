@@ -1,8 +1,26 @@
 import { Col, Container, Row } from "react-bootstrap";
 import styles from "./Home.module.css";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Home = () => {
+   const fetchOptions = {
+      method: "GET",
+      url: "https://coinranking1.p.rapidapi.com/stats?referenceCurrencyUuid=yhjMzLPhuIDl",
+      params: {
+         referenceCurrencyUuid: "yhjMzLPhuIDl",
+      },
+      headers: {
+         "x-rapidapi-key": "69b11e51eamsh115553615181e35p1ed117jsnfc95950b64fd",
+         "x-rapidapi-host": "coinranking1.p.rapidapi.com",
+      },
+   };
+
+   async function apanharCryptoData() {
+      const res = await axios.request(fetchOptions);
+      console.log(res.data);
+   }
+
    return (
       <div id={styles.ct}>
          <Container fluid>
