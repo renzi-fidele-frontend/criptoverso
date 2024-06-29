@@ -5,6 +5,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCryptoData } from "../../state/crypto/cryptoSlice";
+import millify from "millify";
 
 const fetchOptions = {
    method: "GET",
@@ -29,7 +30,7 @@ const Home = () => {
       try {
          res = await axios.request(fetchOptions);
          console.log(res.data);
-         dispatch(setCryptoData(res.data));
+         dispatch(setCryptoData(res?.data?.data));
       } catch (error) {
          console.log(error);
       }
@@ -48,31 +49,31 @@ const Home = () => {
                <Col md={6}>
                   <div>
                      <h5 className="text-secondary">Total de criptomoedas</h5>
-                     <p className="fs-2">12,155</p>
+                     <p className="fs-2">{cryptoData?.totalCoins}</p>
                   </div>
                </Col>
                <Col md={6}>
                   <div>
                      <h5 className="text-secondary">Total de movimentos</h5>
-                     <p className="fs-2">12,155</p>
+                     <p className="fs-2">{millify(cryptoData?.totalExchanges)}</p>
                   </div>
                </Col>
                <Col md={6}>
                   <div>
                      <h5 className="text-secondary">Valor total de mercado</h5>
-                     <p className="fs-2">12,155</p>
+                     <p className="fs-2">{millify(Number(cryptoData?.totalMarketCap))}</p>
                   </div>
                </Col>
                <Col md={6}>
                   <div>
                      <h5 className="text-secondary">Maior volume nas últimas 24h</h5>
-                     <p className="fs-2">12,155</p>
+                     <p className="fs-2">{millify(cryptoData?.total24hVolume)}</p>
                   </div>
                </Col>
                <Col md={6}>
                   <div>
                      <h5 className="text-secondary">Total de mercados</h5>
-                     <p className="fs-2">12,155</p>
+                     <p className="fs-2">{millify(cryptoData?.totalMarkets)}</p>
                   </div>
                </Col>
             </Row>
