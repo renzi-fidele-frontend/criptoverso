@@ -1,7 +1,32 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import SideBar from "./components/SideBar/SideBar";
+
 import "./App.css";
+import Home from "./pages/Home/Home";
+import Criptomoedas from "./pages/Criptomoeadas/Criptomoedas";
+import Movimentos from "./pages/Movimentos/Movimentos";
+import Noticias from "./pages/noticias/Noticias";
 
 function App() {
-   return <div></div>;
+   return (
+      <>
+         <BrowserRouter>
+            <div id="App" className="d-flex flex-row w-100">
+               <div>
+                  <SideBar />
+               </div>
+               <div>
+                  <Routes>
+                     <Route exact path="/" element={<Home />} />
+                     <Route path="/criptomoedas" element={<Criptomoedas />} />
+                     <Route path="/movimentos" element={<Movimentos />} />
+                     <Route path="/noticias" element={<Noticias />} />
+                  </Routes>
+               </div>
+            </div>
+         </BrowserRouter>
+      </>
+   );
 }
 
 export default App;
