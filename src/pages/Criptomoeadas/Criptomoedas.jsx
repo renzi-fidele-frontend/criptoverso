@@ -9,16 +9,24 @@ import CardMoeda from "../../components/CardMoeda/CardMoeda";
 
 const Criptomoedas = () => {
    const [loading, setLoading] = useState(false);
-   const { criptomoedas } = useSelector((state) => state.crypto);
+   const { criptomoedas, paginaAtual, tamanhoPagina } = useSelector((state) => state.crypto);
    const dispatch = useDispatch();
+   const [criptomoedasPaginadas, setCriptomoedasPaginadas] = useState([]);
+
+   function paginarArray(array, paginaAtual, tamanhoPagina) {
+      const startIndex = (paginaAtual - 1) * tamanhoPagina;
+      const endIndex = startIndex + tamanhoPagina;
+      return array?.slice(startIndex, endIndex);
+   }
 
    async function apanharCriptomoedas() {
       setLoading(true);
       let res;
       try {
-         res = await axios.request({ ...CryptofetchOptions, url: "https://coinranking1.p.rapidapi.com/coins" });
+         res = await axios.request({ ...CryptofetchOptions, url: "https://coinranking1.p.rapidapi.com/coins?limit=100" });
          console.log(res.data);
          dispatch(setCriptomoedas(res?.data?.data?.coins));
+         setCriptomoedasPaginadas(paginarArray(res?.data?.data?.coins, paginaAtual, tamanhoPagina));
       } catch (error) {
          console.log(error);
       }
@@ -26,7 +34,9 @@ const Criptomoedas = () => {
    }
 
    useEffect(() => {
-      if (!criptomoedas) apanharCriptomoedas();
+      if (!criptomoedas) {
+         apanharCriptomoedas();
+      }
    }, [criptomoedas]);
 
    return (
@@ -49,7 +59,7 @@ const Criptomoedas = () => {
          {/*  Todas as criptomoedas   */}
          <Row className="g-3">
             {criptomoedas ? (
-               criptomoedas.map((v, k) => (
+               criptomoedasPaginadas.map((v, k) => (
                   <Col md={3} key={k}>
                      <CardMoeda moeda={v} />
                   </Col>
