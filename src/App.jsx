@@ -18,7 +18,7 @@ function App() {
                   <div className="">
                      <SideBar />
                   </div>
-                  <div className="px-5 py-4 w-100">
+                  <div style={{ height: "100dvh", overflowY: "scroll" }} className="px-5 py-4 w-100">
                      <Routes>
                         <Route exact path="/" element={<Home />} />
                         <Route path="/criptomoedas" element={<Criptomoedas />} />

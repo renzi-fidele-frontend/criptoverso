@@ -1,18 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-   cryptoData: null,
+   cryptoStats: null,
+   criptomoedas: null,
 };
 
 const cryptoSlice = createSlice({
    name: "crypto",
    initialState,
    reducers: {
-      setCryptoData: (state, action) => {
-         state.cryptoData = action.payload;
+      setCryptoStats: (state, action) => {
+         state.cryptoStats = action.payload;
+      },
+      setCriptomoedas: (state, action) => {
+         state.criptomoedas = action.payload;
       },
    },
 });
 
-export const { setCryptoData } = cryptoSlice.actions;
+export const { setCryptoStats, setCriptomoedas } = cryptoSlice.actions;
 export default cryptoSlice.reducer;

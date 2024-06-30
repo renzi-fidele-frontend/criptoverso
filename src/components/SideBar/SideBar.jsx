@@ -8,8 +8,8 @@ import { NavLink, useLocation } from "react-router-dom";
 const SideBar = () => {
    const rota = useLocation().pathname;
    return (
-      <div id={styles.ct} className="d-flex h-100 " style={{ overflow: "scroll initial" }}>
-         <CDBSidebar maxWidth="350px" textColor="#fff" className={`${styles.sidebar} pb-4`}>
+      <div id={styles.ct} className="d-flex position-sticky" style={{ overflow: "scroll initial" }}>
+         <CDBSidebar maxWidth="310px" textColor="#fff" className={`${styles.sidebar} pb-4`}>
             <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
                <a href="/" className="text-decoration-none" style={{ color: "inherit" }}>
                   Criptoverso
