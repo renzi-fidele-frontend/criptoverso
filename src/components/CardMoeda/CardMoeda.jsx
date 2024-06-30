@@ -1,10 +1,11 @@
 import millify from "millify";
 import { Card, Image } from "react-bootstrap";
 import styles from "./CardMoeda.module.css";
+import { Link } from "react-router-dom";
 
 const CardMoeda = ({ moeda }) => {
    return (
-      <Card>
+      <Card as={Link} className={styles.ct} to={`/criptomoeda/${moeda.uuid}`}>
          <Card.Header className="flex-row align-items-center justify-content-between d-flex">
             <p className="mb-0">{`${moeda?.rank}. ${moeda?.name}`}</p>
             <Image id={styles.foto} src={moeda?.iconUrl} />

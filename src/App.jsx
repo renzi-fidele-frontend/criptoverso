@@ -8,6 +8,7 @@ import Movimentos from "./pages/Movimentos/Movimentos";
 import Noticias from "./pages/Noticias/Noticias";
 import { Provider } from "react-redux";
 import store from "./state/store";
+import MoedaIndividual from "./components/MoedaIndividual/MoedaIndividual";
 
 function App() {
    return (
@@ -22,6 +23,7 @@ function App() {
                      <Routes>
                         <Route exact path="/" element={<Home />} />
                         <Route path="/criptomoedas" element={<Criptomoedas />} />
+                        <Route path="/criptomoeda/:uuid" element={<MoedaIndividual />} />
                         <Route path="/movimentos" element={<Movimentos />} />
                         <Route path="/noticias" element={<Noticias />} />
                      </Routes>

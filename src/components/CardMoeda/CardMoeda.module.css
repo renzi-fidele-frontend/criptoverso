@@ -1,3 +1,12 @@
+.ct {
+   transition: 0.3s all ease-in-out;
+}
+
+.ct:hover {
+   transform: translateY(-3px);
+   box-shadow: 0px 0px 10px rgb(205, 205, 207);
+}
+
 #foto {
    width: 45px;
    height: 45px;
