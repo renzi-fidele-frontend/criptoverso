@@ -5,6 +5,7 @@ const initialState = {
    criptomoedas: null,
    paginaAtual: 1,
    tamanhoPagina: 12,
+   totalPaginas: Math.ceil(100 / 12),
 };
 
 const cryptoSlice = createSlice({
@@ -23,8 +24,11 @@ const cryptoSlice = createSlice({
       setTamanhoPagina: (state, action) => {
          state.tamanhoPagina = action.payload;
       },
+      setTotalPaginas: (state, action) => {
+         state.totalPaginas = action.payload;
+      },
    },
 });
 
-export const { setCryptoStats, setCriptomoedas, setPaginaAtual, setTamanhoPagina } = cryptoSlice.actions;
+export const { setCryptoStats, setCriptomoedas, setPaginaAtual, setTamanhoPagina, setTotalPaginas } = cryptoSlice.actions;
 export default cryptoSlice.reducer;
