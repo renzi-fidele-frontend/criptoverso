@@ -1,4 +1,4 @@
-import { Card, Col, Container, Image, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import styles from "./Home.module.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -19,7 +19,6 @@ const Home = () => {
       let res;
       try {
          res = await axios.request({ ...CryptofetchOptions, url: "https://coinranking1.p.rapidapi.com/stats" });
-         console.log(res.data);
          dispatch(setCryptoStats(res?.data?.data));
       } catch (error) {
          console.log(error);
@@ -32,8 +31,22 @@ const Home = () => {
       let res;
       try {
          res = await axios.request({ ...CryptofetchOptions, url: "https://coinranking1.p.rapidapi.com/coins" });
-         console.log(res.data);
          dispatch(setCriptomoedas(res?.data?.data?.coins));
+      } catch (error) {
+         console.log(error);
+      }
+      setLoading(false);
+   }
+
+   async function apanharNoticias() {
+      setLoading(true);
+      let res;
+      try {
+         res = await axios.get(
+            "https://min-api.cryptocompare.com/data/v2/news/?lang=PT&api_key=df6fc44edb45b681313377b928ca5f322340d29fdbb6b044d81a3f2095392499"
+         );
+         console.log(res.data.Data);
+         
       } catch (error) {
          console.log(error);
       }
@@ -43,7 +56,8 @@ const Home = () => {
    useEffect(() => {
       if (!cryptoStats) apanharStats();
       if (!criptomoedas) apanharCriptomoedas();
-   }, [criptomoedas]);
+      apanharNoticias();
+   }, [criptomoedas, cryptoStats]);
 
    return (
       <Container id={styles.ct} fluid>

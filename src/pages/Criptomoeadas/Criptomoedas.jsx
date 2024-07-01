@@ -38,7 +38,7 @@ const Criptomoedas = () => {
    }
 
    function pesquisarAoDigitar() {
-      if (termoPesquisaRef?.current?.value === "") return setResultadosPesquisaInstantanea([]);
+      if (termoPesquisaRef?.current?.value === "") return setResultadosPesquisaInstantanea(null);
       setResultadosPesquisaInstantanea(
          criptomoedas?.filter((criptomoeda) => criptomoeda?.name?.toLowerCase()?.includes(termoPesquisaRef?.current?.value?.toLowerCase()))
       );
