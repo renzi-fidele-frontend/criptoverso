@@ -1,0 +1,36 @@
+.ct {
+   transition: 0.3s all ease-in-out;
+}
+
+.ct:hover {
+   transform: translateY(-3px);
+   box-shadow: 0px 0px 10px rgb(205, 205, 207);
+}
+
+#fotoNoticia {
+   height: 260px;
+   object-fit: cover;
+}
+
+#fotoAutor {
+   width: 42px;
+   height: 42px;
+   object-fit: cover;
+   border-radius: 50%;
+}
+
+#titulo {
+   display: -webkit-box;
+   max-width: 100%;
+   -webkit-line-clamp: 2;
+   -webkit-box-orient: vertical;
+   overflow: hidden;
+}
+
+#body {
+   display: -webkit-box;
+   max-width: 100%;
+   -webkit-line-clamp: 4;
+   -webkit-box-orient: vertical;
+   overflow: hidden;
+}

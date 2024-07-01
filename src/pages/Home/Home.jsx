@@ -8,6 +8,7 @@ import { setCriptomoedas, setCryptoStats, setNoticias } from "../../state/crypto
 import millify from "millify";
 import { CryptofetchOptions } from "../../services/cryptoApi";
 import CardMoeda from "../../components/CardMoeda/CardMoeda";
+import CardNoticia from "../../components/CardNoticia/CardNoticia";
 
 const Home = () => {
    const [loading, setLoading] = useState(false);
@@ -30,7 +31,7 @@ const Home = () => {
       setLoading(true);
       let res;
       try {
-         res = await axios.request({ ...CryptofetchOptions, url: "https://coinranking1.p.rapidapi.com/coins" });
+         res = await axios.request({ ...CryptofetchOptions, url: "https://coinranking1.p.rapidapi.com/coins?limit=100" });
          dispatch(setCriptomoedas(res?.data?.data?.coins));
       } catch (error) {
          console.log(error);
@@ -56,7 +57,7 @@ const Home = () => {
       if (!cryptoStats) apanharStats();
       if (!criptomoedas) apanharCriptomoedas();
       if (!noticias) apanharNoticias();
-   }, [criptomoedas, cryptoStats]);
+   }, [criptomoedas, cryptoStats, noticias]);
 
    return (
       <Container id={styles.ct} fluid>
@@ -131,17 +132,29 @@ const Home = () => {
          </div>
 
          {/*   Notícias  */}
-         <Row className="mt-5">
-            <Col md={6}>
-               <h2 className="fw-bold mb-5">Últimas notícias sobre o mundo Crypto</h2>
-               <div></div>
-            </Col>
-            <Col className="text-end" md={6}>
-               <Link className="fs-4" to="/criptomoedas">
-                  Ver mais
-               </Link>
-            </Col>
-         </Row>
+         <div className="my-5">
+            <Row>
+               <Col md={6}>
+                  <h2 className="fw-bold mb-5">Últimas notícias sobre o mundo Crypto</h2>
+               </Col>
+               <Col className="text-end" md={6}>
+                  <Link className="fs-4" to="/criptomoedas">
+                     Ver mais
+                  </Link>
+               </Col>
+            </Row>
+            <Row className="g-4">
+               {noticias &&
+                  noticias.map((v, k) => {
+                     if (k < 7 && k !== 1 && v?.imageurl.length > 0)
+                        return (
+                           <Col md={6} key={k}>
+                              <CardNoticia noticia={v} />
+                           </Col>
+                        );
+                  })}
+            </Row>
+         </div>
       </Container>
    );
 };

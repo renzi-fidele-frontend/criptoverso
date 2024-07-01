@@ -8,7 +8,7 @@ import Movimentos from "./pages/Movimentos/Movimentos";
 import Noticias from "./pages/Noticias/Noticias";
 import { Provider } from "react-redux";
 import store from "./state/store";
-import MoedaIndividual from "./components/MoedaIndividual/MoedaIndividual";
+import MoedaIndividual from "./pages/MoedaIndividual/MoedaIndividual";
 
 function App() {
    return (
