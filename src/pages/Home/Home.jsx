@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setCriptomoedas, setCryptoStats } from "../../state/crypto/cryptoSlice";
+import { setCriptomoedas, setCryptoStats, setNoticias } from "../../state/crypto/cryptoSlice";
 import millify from "millify";
 import { CryptofetchOptions } from "../../services/cryptoApi";
 import CardMoeda from "../../components/CardMoeda/CardMoeda";
 
 const Home = () => {
    const [loading, setLoading] = useState(false);
-   const { cryptoStats, criptomoedas } = useSelector((state) => state.crypto);
+   const { cryptoStats, criptomoedas, noticias } = useSelector((state) => state.crypto);
    const dispatch = useDispatch();
 
    async function apanharStats() {
@@ -45,8 +45,7 @@ const Home = () => {
          res = await axios.get(
             "https://min-api.cryptocompare.com/data/v2/news/?lang=PT&api_key=df6fc44edb45b681313377b928ca5f322340d29fdbb6b044d81a3f2095392499"
          );
-         console.log(res.data.Data);
-         
+         dispatch(setNoticias(res.data.Data));
       } catch (error) {
          console.log(error);
       }
@@ -56,7 +55,7 @@ const Home = () => {
    useEffect(() => {
       if (!cryptoStats) apanharStats();
       if (!criptomoedas) apanharCriptomoedas();
-      apanharNoticias();
+      if (!noticias) apanharNoticias();
    }, [criptomoedas, cryptoStats]);
 
    return (

@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
    cryptoStats: null,
    criptomoedas: null,
+   noticias: null,
    paginaAtual: 1,
    tamanhoPagina: 12,
    totalPaginas: Math.ceil(100 / 12),
@@ -27,8 +28,11 @@ const cryptoSlice = createSlice({
       setTotalPaginas: (state, action) => {
          state.totalPaginas = action.payload;
       },
+      setNoticias: (state, action) => {
+         state.noticias = action.payload;
+      },
    },
 });
 
-export const { setCryptoStats, setCriptomoedas, setPaginaAtual, setTamanhoPagina, setTotalPaginas } = cryptoSlice.actions;
+export const { setCryptoStats, setCriptomoedas, setPaginaAtual, setTamanhoPagina, setTotalPaginas, setNoticias } = cryptoSlice.actions;
 export default cryptoSlice.reducer;
