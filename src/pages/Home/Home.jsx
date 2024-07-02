@@ -135,7 +135,7 @@ const Home = () => {
          <div className="my-5">
             <Row>
                <Col md={6}>
-                  <h2 className="fw-bold mb-5">Últimas notícias sobre o mundo Crypto</h2>
+                  <h2 className="fw-bold mb-4">Últimas notícias sobre o mundo Crypto</h2>
                </Col>
                <Col className="text-end" md={6}>
                   <Link className="fs-4" to="/criptomoedas">
