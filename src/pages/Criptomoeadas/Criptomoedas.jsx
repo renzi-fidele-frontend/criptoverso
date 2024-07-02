@@ -1,27 +1,22 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CryptofetchOptions } from "../../services/cryptoApi";
-import { setCriptomoedas, setPaginaAtual } from "../../state/crypto/cryptoSlice";
+import { setCriptomoedas, setPaginaAtualCriptomoedas } from "../../state/crypto/cryptoSlice";
 import axios from "axios";
 import { Alert, Button, Col, Container, Form, FormControl, Image, Pagination, Row } from "react-bootstrap";
 import styles from "./Criptomoedas.module.css";
 import CardMoeda from "../../components/CardMoeda/CardMoeda";
 import { gerarArray } from "../../hooks/useGerarArray";
 import nadaEncontrado from "../../assets/nadaEncontrado.png";
+import { paginarArray } from "../../hooks/usePaginarArray";
 
 const Criptomoedas = () => {
    const [loading, setLoading] = useState(false);
-   const { criptomoedas, paginaAtual, tamanhoPagina, totalPaginas } = useSelector((state) => state.crypto);
+   const { criptomoedas, paginaAtualCriptomoedas, itemsPorPaginaCriptomoedas, totalPaginasCriptomoedas } = useSelector((state) => state.crypto);
    const dispatch = useDispatch();
    const [criptomoedasPaginadas, setCriptomoedasPaginadas] = useState([]);
    const [resultadosPesquisaInstantanea, setResultadosPesquisaInstantanea] = useState(null);
    const termoPesquisaRef = useRef(null);
-
-   function paginarArray(array, paginaAtual, tamanhoPagina) {
-      const startIndex = (paginaAtual - 1) * tamanhoPagina;
-      const endIndex = startIndex + tamanhoPagina;
-      return array?.slice(startIndex, endIndex);
-   }
 
    async function apanharCriptomoedas() {
       setLoading(true);
@@ -30,7 +25,7 @@ const Criptomoedas = () => {
          res = await axios.request({ ...CryptofetchOptions, url: "https://coinranking1.p.rapidapi.com/coins?limit=100" });
          console.log(res.data);
          dispatch(setCriptomoedas(res?.data?.data?.coins));
-         setCriptomoedasPaginadas(paginarArray(res?.data?.data?.coins, paginaAtual, tamanhoPagina));
+         setCriptomoedasPaginadas(paginarArray(res?.data?.data?.coins, paginaAtualCriptomoedas, itemsPorPaginaCriptomoedas));
       } catch (error) {
          console.log(error);
       }
@@ -44,6 +39,9 @@ const Criptomoedas = () => {
       );
    }
 
+   {
+      /*   TODO: Adicionar feature de pesquisa ao se clickar no botão */
+   }
    async function pesquisarCriptomoeda(e) {
       e.preventDefault;
    }
@@ -51,14 +49,14 @@ const Criptomoedas = () => {
    useEffect(() => {
       if (!criptomoedas) apanharCriptomoedas();
 
-      if (criptomoedasPaginadas?.length === 0) setCriptomoedasPaginadas(paginarArray(criptomoedas, paginaAtual, tamanhoPagina));
+      if (criptomoedasPaginadas?.length === 0 && criptomoedas)
+         setCriptomoedasPaginadas(paginarArray(criptomoedas, paginaAtualCriptomoedas, itemsPorPaginaCriptomoedas));
    }, [criptomoedas, criptomoedasPaginadas]);
 
    return (
       <Container id={styles.ct} fluid>
          {/*   Campo de pesquisa  */}
 
-         {/*   TODO: Adicionar feature de pesquisa ao se clickar no botão */}
          <Row className="mb-5">
             <Col md={9}>
                <h2 className="fw-bold">Veja todas as criptomoedas do mercado</h2>
@@ -82,7 +80,7 @@ const Criptomoedas = () => {
          {/*  Todas as criptomoedas   */}
          <Row className="g-3">
             {criptomoedas && !resultadosPesquisaInstantanea ? (
-               criptomoedasPaginadas.map((v, k) => (
+               criptomoedasPaginadas?.map((v, k) => (
                   <Col md={3} key={k}>
                      <CardMoeda moeda={v} />
                   </Col>
@@ -110,16 +108,16 @@ const Criptomoedas = () => {
             <Row className="mt-2 mb-1 mb-md-0">
                <Col className="mt-md-5">
                   <Pagination size="lg" className="d-none d-md-flex justify-content-center">
-                     {gerarArray(totalPaginas)?.map((v, k) => (
+                     {gerarArray(totalPaginasCriptomoedas)?.map((v, k) => (
                         <Pagination.Item
                            onClick={() => {
-                              if (v !== paginaAtual.current) {
+                              if (v !== paginaAtualCriptomoedas.current) {
                                  window.scrollTo({ top: 0, behavior: "smooth" });
-                                 dispatch(setPaginaAtual(v));
-                                 setCriptomoedasPaginadas(paginarArray(criptomoedas, v, tamanhoPagina));
+                                 dispatch(setPaginaAtualCriptomoedas(v));
+                                 setCriptomoedasPaginadas(paginarArray(criptomoedas, v, itemsPorPaginaCriptomoedas));
                               }
                            }}
-                           active={v === paginaAtual}
+                           active={v === paginaAtualCriptomoedas}
                            key={k}
                         >
                            {v}

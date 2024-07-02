@@ -9,7 +9,7 @@ const CardNoticia = ({ noticia }) => {
    moment.locale("pt", pt);
 
    return (
-      <Card className={styles.ct} as={Link}>
+      <Card className={styles.ct} as={Link} to={noticia?.url} target="_blank">
          <Card.Body as={Row}>
             <Col>
                <Image className="border rounded-1" id={styles.fotoNoticia} src={noticia?.imageurl} />
