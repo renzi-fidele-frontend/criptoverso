@@ -33,7 +33,10 @@ const Noticias = () => {
    useEffect(() => {
       if (!noticias) apanharNoticias();
 
-      if (noticiasPaginadas?.length === 0 && noticias) setNoticiasPaginadas(paginarArray(noticias, paginaAtualNoticias, itemsPorPaginaNoticias));
+      if (noticiasPaginadas?.length === 0 && noticias) {
+         dispatch(setTotalPaginasNoticias(Math.ceil(Number(noticias.length) / itemsPorPaginaNoticias)));
+         setNoticiasPaginadas(paginarArray(noticias, paginaAtualNoticias, itemsPorPaginaNoticias));
+      }
    }, [noticias, noticiasPaginadas]);
 
    return (
