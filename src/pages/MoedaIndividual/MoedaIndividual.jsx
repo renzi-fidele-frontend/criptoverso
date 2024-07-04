@@ -43,8 +43,12 @@ const MoedaIndividual = () => {
       { titulo: "Total de Exchanges", valor: criptomoeda?.numberOfExchanges, icone: <i className="bi bi-arrow-left-right"></i> },
       {
          titulo: "Validação do fornecimento",
-         valor: criptomoeda?.supply?.confirmed ? <i className="bi bi-check2-square"></i> : <i className="bi bi-check2-square"></i>,
-         icone: <i className="bi bi-bank"></i>,
+         valor: criptomoeda?.supply?.confirmed ? (
+            <i style={{ fontWeight: "bold !important" }} className="bi bi-check2-square text-success"></i>
+         ) : (
+            <i className="bi bi-x-square text-danger"></i>
+         ),
+         icone: <i className="bi bi-bank" style={{ fontWeight: "bold !important" }}></i>,
       },
       {
          titulo: "Total de moedas fornecidas",
@@ -71,8 +75,11 @@ const MoedaIndividual = () => {
       <Container fluid>
          <Row>
             <Col className="text-center">
-               <h2 style={{ color: criptomoeda?.color, textShadow: "1px 1px 1px black" }} className="fw-bold fs-1 mt-4 ">
-                  Estatísticas do {criptomoeda?.name} ({criptomoeda?.symbol})
+               <h2 className="fw-bold fs-1 mt-4">
+                  Estatísticas do{" "}
+                  <span style={{ color: criptomoeda?.color, textShadow: "1px 1px 1px black" }}>
+                     {criptomoeda?.name} ({criptomoeda?.symbol})
+                  </span>
                </h2>
                <p className="px-5 mt-4 mb-5">{criptomoeda?.description}</p>
 
@@ -92,7 +99,7 @@ const MoedaIndividual = () => {
 
                {/*   Estatisticas da criptomoeda  */}
                <Row className="mt-5 gx-5" fluid>
-                  <Col >
+                  <Col>
                      <h3>Estatísticas de valor do {criptomoeda?.name}</h3>
                      <p>Visão geral mostrando as estatisticas do {criptomoeda?.name}</p>
                      <ListGroup className="mt-4">
@@ -110,7 +117,7 @@ const MoedaIndividual = () => {
                         ))}
                      </ListGroup>
                   </Col>
-                  <Col >
+                  <Col>
                      <h3>Outras Estatísticas</h3>
                      <p>Visão geral mostrando as estatisticas de todas as criptomoedas</p>
                      <ListGroup className="mt-4">
@@ -123,6 +130,28 @@ const MoedaIndividual = () => {
                                  </div>
 
                                  <span className="fw-bold">{v.valor}</span>
+                              </div>
+                           </ListGroup.Item>
+                        ))}
+                     </ListGroup>
+                  </Col>
+               </Row>
+
+               <hr className="mt-4" />
+
+               {/*   Perguntas frequentes e Links */}
+               <Row className="mt-4 pt-3 gx-5" fluid>
+                  <Col></Col>
+                  <Col>
+                     <h3 className="fs-1">Links do {criptomoeda?.name}</h3>
+                     <ListGroup className="mt-3">
+                        {criptomoeda?.links?.map((v, k) => (
+                           <ListGroup.Item action key={k}>
+                              <div className="p-3 d-flex align-items-center justify-content-between">
+                                 <p className="mb-0 text-capitalize">{v?.type}</p>
+                                 <a href={v?.url} className="fw-bolder" target="_blank">
+                                    {v?.name}
+                                 </a>
                               </div>
                            </ListGroup.Item>
                         ))}
