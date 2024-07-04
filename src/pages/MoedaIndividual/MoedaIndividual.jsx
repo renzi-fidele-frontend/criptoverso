@@ -4,17 +4,22 @@ import { useParams } from "react-router-dom";
 import { CryptofetchOptions } from "../../services/cryptoApi";
 import { Col, Container, Form, ListGroup, Row } from "react-bootstrap";
 import millify from "millify";
+import translate from "translate";
 
 const MoedaIndividual = () => {
    const { uuid } = useParams();
    const [loading, setLoading] = useState(false);
    const [criptomoeda, setCriptomoeda] = useState(null);
+   const [descricaoTraduzida, setDescricaoTraduzida] = useState("");
 
    async function apanharDetalhesCriptomoeda() {
       setLoading(true);
       try {
          const res = await axios.request({ ...CryptofetchOptions, url: `https://coinranking1.p.rapidapi.com/coin/${uuid}` });
          setCriptomoeda(res.data.data.coin);
+         const textoTraduzido = await translate(res.data.data.coin?.description, "pt");
+         console.log(res.data.data.coin?.description, textoTraduzido);
+         setDescricaoTraduzida(textoTraduzido);
       } catch (error) {
          console.log(error);
       }
@@ -81,7 +86,7 @@ const MoedaIndividual = () => {
                      {criptomoeda?.name} ({criptomoeda?.symbol})
                   </span>
                </h2>
-               <p className="px-5 mt-4 mb-5">{criptomoeda?.description}</p>
+               <p className="px-5 mt-4 mb-5">{descricaoTraduzida}</p>
 
                <hr className="" />
 
@@ -141,10 +146,9 @@ const MoedaIndividual = () => {
 
                {/*   Perguntas frequentes e Links */}
                <Row className="mt-4 pt-3 gx-5" fluid>
-                  <Col></Col>
                   <Col>
-                     <h3 className="fs-1">Links do {criptomoeda?.name}</h3>
-                     <ListGroup className="mt-3">
+                     <h3 className="fs-2">Links do {criptomoeda?.name}</h3>
+                     <ListGroup className="mt-4">
                         {criptomoeda?.links?.map((v, k) => (
                            <ListGroup.Item action key={k}>
                               <div className="p-3 d-flex align-items-center justify-content-between">
