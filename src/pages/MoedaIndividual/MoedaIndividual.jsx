@@ -31,15 +31,31 @@ const MoedaIndividual = () => {
       { titulo: "Posição Global", valor: `#${criptomoeda?.rank}`, icone: <i className="bi bi-hash"></i> },
       { titulo: "Volume nas últimas 24h", valor: `${millify(criptomoeda?.["24hVolume"])} USD`, icone: <i className="bi bi-clipboard-data"></i> },
       { titulo: "Capitalização de mercado", valor: `${millify(criptomoeda?.marketCap)} USD`, icone: <i className="bi bi-cash-stack"></i> },
-      { titulo: "Auge(média diária)", valor: `${millify(criptomoeda?.allTimeHigh?.price)} USD`, icone: <i className="bi bi-graph-up-arrow"></i> },
+      {
+         titulo: "Auge (média diária)",
+         valor: `${millify(criptomoeda?.allTimeHigh?.price)} USD`,
+         icone: <i className="bi bi-trophy"></i>,
+      },
    ];
 
    const estatisticas_genericas = [
-      { titulo: "Total de mercados", valor: `` },
-      { titulo: "Total de Exchanges", valor: `` },
-      { titulo: "Qtd de moedas aprovadas", valor: `` },
-      { titulo: "Qtd de moedas", valor: `` },
-      { titulo: "Qtd de moedas circulando", valor: `` },
+      { titulo: "Total de mercados", valor: criptomoeda?.numberOfMarkets, icone: <i className="bi bi-graph-up-arrow"></i> },
+      { titulo: "Total de Exchanges", valor: criptomoeda?.numberOfExchanges, icone: <i className="bi bi-arrow-left-right"></i> },
+      {
+         titulo: "Validação do fornecimento",
+         valor: criptomoeda?.supply?.confirmed ? <i className="bi bi-check2-square"></i> : <i className="bi bi-check2-square"></i>,
+         icone: <i className="bi bi-bank"></i>,
+      },
+      {
+         titulo: "Total de moedas fornecidas",
+         valor: `${millify(criptomoeda?.supply?.total)} USD`,
+         icone: <i className="bi bi-exclamation-octagon"></i>,
+      },
+      {
+         titulo: "Total de moedas circulando",
+         valor: `${millify(criptomoeda?.supply?.circulating)} USD`,
+         icone: <i className="bi bi-exclamation-octagon"></i>,
+      },
    ];
 
    function handleSelectChange(novoValor) {
@@ -74,8 +90,9 @@ const MoedaIndividual = () => {
                </Col>
                {/*   TODO: Adicionar linha de gráfico */}
 
+               {/*   Estatisticas da criptomoeda  */}
                <Row className="mt-5 gx-5" fluid>
-                  <Col className="text-start">
+                  <Col >
                      <h3>Estatísticas de valor do {criptomoeda?.name}</h3>
                      <p>Visão geral mostrando as estatisticas do {criptomoeda?.name}</p>
                      <ListGroup className="mt-4">
@@ -93,11 +110,11 @@ const MoedaIndividual = () => {
                         ))}
                      </ListGroup>
                   </Col>
-                  <Col className="text-end">
+                  <Col >
                      <h3>Outras Estatísticas</h3>
                      <p>Visão geral mostrando as estatisticas de todas as criptomoedas</p>
                      <ListGroup className="mt-4">
-                        {estatisticas.map((v, k) => (
+                        {estatisticas_genericas.map((v, k) => (
                            <ListGroup.Item key={k} action>
                               <div className="p-3 d-flex flex-row align-items-center justify-content-between">
                                  <div className="d-flex gap-3 align-items-center">
