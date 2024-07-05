@@ -11,6 +11,8 @@ const MoedaIndividual = () => {
    const [loading, setLoading] = useState(false);
    const [criptomoeda, setCriptomoeda] = useState(null);
    const [descricaoTraduzida, setDescricaoTraduzida] = useState("");
+   const [historico, setHistorico] = useState(null);
+   const periodo = ["3 horas", "1 dia", "1 semana", "1 mês", "3 mêses", "1 ano", "3 anos", "5 anos"];
 
    async function apanharDetalhesCriptomoeda() {
       setLoading(true);
@@ -18,7 +20,6 @@ const MoedaIndividual = () => {
          const res = await axios.request({ ...CryptofetchOptions, url: `https://coinranking1.p.rapidapi.com/coin/${uuid}` });
          setCriptomoeda(res.data.data.coin);
          const textoTraduzido = await translate(res.data.data.coin?.description, "pt");
-         console.log(res.data.data.coin?.description, textoTraduzido);
          setDescricaoTraduzida(textoTraduzido);
       } catch (error) {
          console.log(error);
@@ -26,7 +27,23 @@ const MoedaIndividual = () => {
       setLoading(false);
    }
 
-   const periodo = ["3 horas", "1 dia", "1 semana", "1 mês", "3 mêses", "1 ano", "3 anos", "5 anos"];
+   async function apanharHistoricoCriptomoeda() {
+      setLoading(true);
+      try {
+         const res = await axios.request({ ...CryptofetchOptions, url: `https://coinranking1.p.rapidapi.com/coin/${uuid}/history` });
+         console.log(res.data.data);
+         setHistorico(res.data.data);
+      } catch (error) {
+         console.log(error);
+      }
+      setLoading(false);
+   }
+
+   useEffect(() => {
+      console.log(`O uuid é: ${uuid}`);
+      if (!criptomoeda) apanharDetalhesCriptomoeda();
+      if (!historico) apanharHistoricoCriptomoeda();
+   }, [uuid]);
 
    // TODO: Adicionar icone com tooltip passando mais info
    //o Market Cap nada mais é do que o valor total das ações de uma companhia.
@@ -70,11 +87,6 @@ const MoedaIndividual = () => {
    function handleSelectChange(novoValor) {
       console.log(novoValor?.currentTarget.value);
    }
-
-   useEffect(() => {
-      console.log(`O uuid é: ${uuid}`);
-      if (!criptomoeda) apanharDetalhesCriptomoeda();
-   }, [uuid]);
 
    return (
       <Container fluid>
@@ -144,7 +156,7 @@ const MoedaIndividual = () => {
 
                <hr className="mt-4" />
 
-               {/*   Perguntas frequentes e Links */}
+               {/*   Links da criptomoeda */}
                <Row className="mt-4 pt-3 gx-5" fluid>
                   <Col>
                      <h3 className="fs-2">Links do {criptomoeda?.name}</h3>
@@ -152,7 +164,7 @@ const MoedaIndividual = () => {
                         {criptomoeda?.links?.map((v, k) => (
                            <ListGroup.Item action key={k}>
                               <div className="p-3 d-flex align-items-center justify-content-between">
-                                 <p className="mb-0 text-capitalize">{v?.type}</p>
+                                 <p className="mb-0 text-capitalize fw-medium">{v?.type}</p>
                                  <a href={v?.url} className="fw-bolder" target="_blank">
                                     {v?.name}
                                  </a>
