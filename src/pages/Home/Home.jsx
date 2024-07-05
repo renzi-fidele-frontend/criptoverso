@@ -1,4 +1,4 @@
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Image, Row } from "react-bootstrap";
 import styles from "./Home.module.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -9,6 +9,7 @@ import millify from "millify";
 import { CryptofetchOptions } from "../../services/cryptoApi";
 import CardMoeda from "../../components/CardMoeda/CardMoeda";
 import CardNoticia from "../../components/CardNoticia/CardNoticia";
+import foto from "../../assets/ill.png";
 
 const Home = () => {
    const [loading, setLoading] = useState(false);
@@ -63,41 +64,48 @@ const Home = () => {
       <Container id={styles.ct} fluid>
          <h2 className="fw-bold mb-4">Estatísticas globais de criptomoedas</h2>
          <Row className="gy-3">
-            <Col md={6}>
-               <div>
-                  <h5 className="text-secondary">Total de criptomoedas</h5>
-                  <p className="fs-2">{cryptoStats?.totalCoins}</p>
-               </div>
+            <Col>
+               <Row>
+                  <Col md={6}>
+                     <div>
+                        <h5 className="text-secondary">Total de criptomoedas</h5>
+                        <p className="fs-2">{cryptoStats?.totalCoins}</p>
+                     </div>
+                  </Col>
+                  <Col md={6}>
+                     <div>
+                        <h5 className="text-secondary">Total de movimentos</h5>
+                        <p className="fs-2">{millify(cryptoStats?.totalExchanges)}</p>
+                     </div>
+                  </Col>
+                  <Col md={6}>
+                     <div>
+                        <h5 className="text-secondary">Valor total do mercado</h5>
+                        <p className="fs-2">{millify(Number(cryptoStats?.totalMarketCap))} USD</p>
+                     </div>
+                  </Col>
+                  <Col md={6}>
+                     <div>
+                        <h5 className="text-secondary">Maior volume nas últimas 24h</h5>
+                        <p className="fs-2">{millify(cryptoStats?.total24hVolume)} USD</p>
+                     </div>
+                  </Col>
+                  <Col md={6}>
+                     <div>
+                        <h5 className="text-secondary">Total de mercados</h5>
+                        <p className="fs-2">{millify(cryptoStats?.totalMarkets)}</p>
+                     </div>
+                  </Col>
+                  <Col md={6}>
+                     <div>
+                        <h5 className="text-secondary">Domínio do Bitcoin</h5>
+                        <p className="fs-2">{millify(cryptoStats?.btcDominance)}%</p>
+                     </div>
+                  </Col>
+               </Row>
             </Col>
-            <Col md={6}>
-               <div>
-                  <h5 className="text-secondary">Total de movimentos</h5>
-                  <p className="fs-2">{millify(cryptoStats?.totalExchanges)}</p>
-               </div>
-            </Col>
-            <Col md={6}>
-               <div>
-                  <h5 className="text-secondary">Valor total do mercado</h5>
-                  <p className="fs-2">{millify(Number(cryptoStats?.totalMarketCap))} USD</p>
-               </div>
-            </Col>
-            <Col md={6}>
-               <div>
-                  <h5 className="text-secondary">Maior volume nas últimas 24h</h5>
-                  <p className="fs-2">{millify(cryptoStats?.total24hVolume)} USD</p>
-               </div>
-            </Col>
-            <Col md={6}>
-               <div>
-                  <h5 className="text-secondary">Total de mercados</h5>
-                  <p className="fs-2">{millify(cryptoStats?.totalMarkets)}</p>
-               </div>
-            </Col>
-            <Col md={6}>
-               <div>
-                  <h5 className="text-secondary">Domínio do Bitcoin</h5>
-                  <p className="fs-2">{millify(cryptoStats?.btcDominance)}%</p>
-               </div>
+            <Col>
+               <Image src={foto} id={styles.foto} />
             </Col>
          </Row>
 
