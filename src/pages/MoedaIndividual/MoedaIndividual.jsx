@@ -5,6 +5,11 @@ import { CryptofetchOptions } from "../../services/cryptoApi";
 import { Col, Container, Form, ListGroup, Row } from "react-bootstrap";
 import millify from "millify";
 import translate from "translate";
+import Chart from "chart.js/auto";
+import { Line } from "react-chartjs-2";
+import { CategoryScale } from "chart.js";
+
+Chart.register(CategoryScale);
 
 const MoedaIndividual = () => {
    const { uuid } = useParams();
@@ -12,7 +17,22 @@ const MoedaIndividual = () => {
    const [criptomoeda, setCriptomoeda] = useState(null);
    const [descricaoTraduzida, setDescricaoTraduzida] = useState("");
    const [historico, setHistorico] = useState(null);
-   const periodo = ["3 horas", "1 dia", "1 semana", "1 mês", "3 mêses", "1 ano", "3 anos", "5 anos"];
+   const periodo = [
+      { nome: "3 horas", valor: "3h" },
+      { nome: "1 dia", valor: "24h" },
+      { nome: "1 semana", valor: "7d" },
+      { nome: "1 mês", valor: "30d" },
+      { nome: "3 meses", valor: "3m" },
+      { nome: "12 meses", valor: "1y" },
+      { nome: "3 anos", valor: "3y" },
+      { nome: "5 anos", valor: "5y" },
+   ];
+   const [datasCriptomoeda, setDatasCriptomoeda] = useState([]);
+   const [precosCriptomoeda, setPrecosCriptomoeda] = useState([]);
+
+   // Problema atual - 3h 24h 7d 30d 3m 1y 3y 5y
+   // TODO: Criar array de labels contendo a data formatada
+   // TODO: Criar array de precos de todos os tempos, da criptomoeda, deverá estar em respectivo com as labels
 
    async function apanharDetalhesCriptomoeda() {
       setLoading(true);
@@ -27,12 +47,22 @@ const MoedaIndividual = () => {
       setLoading(false);
    }
 
-   async function apanharHistoricoCriptomoeda() {
+   async function apanharHistoricoCriptomoeda(periodo) {
       setLoading(true);
       try {
-         const res = await axios.request({ ...CryptofetchOptions, url: `https://coinranking1.p.rapidapi.com/coin/${uuid}/history` });
-         console.log(res.data.data);
+         const res = await axios.request({
+            ...CryptofetchOptions,
+            url: `https://coinranking1.p.rapidapi.com/coin/${uuid}/history?timePeriod=${periodo}`,
+         });
+         console.log(res.data.data.history);
+         let sortedHist = res.data.data.history;
+         sortedHist.sort((a, b) => b.timestamp - a.timestamp);
+         console.log(sortedHist);
          setHistorico(res.data.data);
+         let datas = sortedHist.map((v) => new Date(v.timestamp * 1000).toLocaleDateString());
+         let precos = sortedHist.map((v) => v.price);
+         setDatasCriptomoeda(datas);
+         setPrecosCriptomoeda(precos);
       } catch (error) {
          console.log(error);
       }
@@ -42,7 +72,7 @@ const MoedaIndividual = () => {
    useEffect(() => {
       console.log(`O uuid é: ${uuid}`);
       if (!criptomoeda) apanharDetalhesCriptomoeda();
-      if (!historico) apanharHistoricoCriptomoeda();
+      if (!historico) apanharHistoricoCriptomoeda("7d");
    }, [uuid]);
 
    // TODO: Adicionar icone com tooltip passando mais info
@@ -85,11 +115,11 @@ const MoedaIndividual = () => {
    ];
 
    function handleSelectChange(novoValor) {
-      console.log(novoValor?.currentTarget.value);
+      apanharHistoricoCriptomoeda(novoValor?.currentTarget.value);
    }
 
    return (
-      <Container fluid>
+      <Container className="pb-5" fluid>
          <Row>
             <Col className="text-center">
                <h2 className="fw-bold fs-1 mt-4">
@@ -106,16 +136,37 @@ const MoedaIndividual = () => {
                <Col className="mt-2" md={2}>
                   <Form.Select onChange={handleSelectChange} defaultValue="7d" style={{ cursor: "pointer" }}>
                      {periodo.map((v, k) => (
-                        <option key={k} value={v}>
-                           {v}
+                        <option key={k} value={v.valor}>
+                           {v.nome}
                         </option>
                      ))}
                   </Form.Select>
                </Col>
-               {/*   TODO: Adicionar linha de gráfico */}
+
+               {/*   Gráfico  */}
+               <Row className="mt-3">
+                  <Col>
+                     <h3 className="text-start fs-2">Gráfico do preço do {criptomoeda?.name}</h3>
+                  </Col>
+                  <Col className="d-flex gap-4 justify-content-end fs-5">
+                     <span>
+                        <i className="bi bi-arrow-down-up"></i> Alteração:{" "}
+                        <b className={`${historico?.change >= 0 ? "text-success" : "text-danger"}`}>{historico?.change}% </b>
+                     </span>
+                     <span>
+                        <i className="bi bi-coin"></i> Preço atual: <b>{millify(criptomoeda?.price)} USD</b>
+                     </span>
+                  </Col>
+               </Row>
+               <div>
+                  <Line
+                     data={{ labels: datasCriptomoeda, datasets: [{ label: "Preço em dólar", data: precosCriptomoeda }] }}
+                     options={{ responsive: true }}
+                  />
+               </div>
 
                {/*   Estatisticas da criptomoeda  */}
-               <Row className="mt-5 gx-5" fluid>
+               <Row className="mt-5 gx-5">
                   <Col>
                      <h3>Estatísticas de valor do {criptomoeda?.name}</h3>
                      <p>Visão geral mostrando as estatisticas do {criptomoeda?.name}</p>
