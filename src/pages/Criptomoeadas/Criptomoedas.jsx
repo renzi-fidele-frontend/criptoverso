@@ -12,8 +12,9 @@ import { paginarArray } from "../../hooks/usePaginarArray";
 
 const Criptomoedas = () => {
    const [loading, setLoading] = useState(false);
-   const { criptomoedas, paginaAtualCriptomoedas, itemsPorPaginaCriptomoedas, totalPaginasCriptomoedas } = useSelector((state) => state.criptomoedas);
-
+   const { criptomoedas, paginaAtualCriptomoedas, itemsPorPaginaCriptomoedas, totalPaginasCriptomoedas } = useSelector(
+      (state) => state.criptomoedas
+   );
 
    const dispatch = useDispatch();
    const [criptomoedasPaginadas, setCriptomoedasPaginadas] = useState([]);
@@ -41,9 +42,7 @@ const Criptomoedas = () => {
       );
    }
 
-   {
-      /*   TODO: Adicionar feature de pesquisa ao se clickar no botão */
-   }
+   /*   TODO: Adicionar feature de pesquisa ao se clickar no botão */
    async function pesquisarCriptomoeda(e) {
       e.preventDefault;
    }
