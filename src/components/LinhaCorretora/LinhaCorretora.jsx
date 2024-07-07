@@ -1,9 +1,27 @@
 import { Badge, Collapse, Image } from "react-bootstrap";
 import styles from "./LinhaCorretora.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import translate from "translate";
 
 const LinhaCorretora = ({ corretora, chave }) => {
    const [mostrar, setMostrar] = useState(false);
+   const [descricaoTraduzida, setDescricaoTraduzida] = useState("");
+   const [loading, setLoading] = useState(false);
+
+   async function traduzirTexto(texto) {
+      setLoading(true);
+      try {
+         const textoTraduzido = await translate(texto, "pt");
+         setDescricaoTraduzida(textoTraduzido);
+      } catch (error) {
+         console.log("Erro ao traduzir");
+      }
+      setLoading(false);
+   }
+
+   useEffect(() => {
+      if (descricaoTraduzida.length === 0) traduzirTexto(corretora?.Description);
+   }, [corretora]);
 
    return (
       <>
@@ -36,7 +54,7 @@ const LinhaCorretora = ({ corretora, chave }) => {
          <div style={{ display: "table-row" }} className={!mostrar && "border-0"}>
             <td className={!mostrar && "p-0 border-0"} colSpan={12}>
                <Collapse in={mostrar}>
-                  <div>{corretora?.Description}</div>
+                  <div>{descricaoTraduzida}</div>
                </Collapse>
             </td>
          </div>

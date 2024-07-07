@@ -30,10 +30,6 @@ const MoedaIndividual = () => {
    const [datasCriptomoeda, setDatasCriptomoeda] = useState([]);
    const [precosCriptomoeda, setPrecosCriptomoeda] = useState([]);
 
-   // Problema atual - 3h 24h 7d 30d 3m 1y 3y 5y
-   // TODO: Criar array de labels contendo a data formatada
-   // TODO: Criar array de precos de todos os tempos, da criptomoeda, deverá estar em respectivo com as labels
-
    async function apanharDetalhesCriptomoeda() {
       setLoading(true);
       try {
