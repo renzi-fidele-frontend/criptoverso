@@ -74,7 +74,7 @@ const Home = () => {
                   </Col>
                   <Col md={6}>
                      <div>
-                        <h5 className="text-secondary">Total de movimentos</h5>
+                        <h5 className="text-secondary">Corretoras disponíveis</h5>
                         <p className="fs-2">{millify(cryptoStats?.totalExchanges)}</p>
                      </div>
                   </Col>

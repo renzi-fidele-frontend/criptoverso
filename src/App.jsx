@@ -4,7 +4,7 @@ import SideBar from "./components/SideBar/SideBar";
 import "./App.css";
 import Home from "./pages/Home/Home";
 import Criptomoedas from "./pages/Criptomoeadas/Criptomoedas";
-import Movimentos from "./pages/Movimentos/Movimentos";
+import Corretoras from "./pages/Corretoras/Corretoras";
 import Noticias from "./pages/Noticias/Noticias";
 import { Provider } from "react-redux";
 import store from "./state/store";
@@ -24,7 +24,7 @@ function App() {
                         <Route exact path="/" element={<Home />} />
                         <Route path="/criptomoedas" element={<Criptomoedas />} />
                         <Route path="/criptomoeda/:uuid" element={<MoedaIndividual />} />
-                        <Route path="/movimentos" element={<Movimentos />} />
+                        <Route path="/corretoras" element={<Corretoras />} />
                         <Route path="/noticias" element={<Noticias />} />
                      </Routes>
                   </div>

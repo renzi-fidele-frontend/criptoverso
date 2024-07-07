@@ -17,20 +17,20 @@ const SideBar = () => {
             </CDBSidebarHeader>
 
             <CDBSidebarContent className="sidebar-content">
-               <CDBSidebarMenu>
+               <CDBSidebarMenu >
                   <NavLink to="/">
                      <CDBSidebarMenuItem active={rota === "/"} icon="home">
                         Início
                      </CDBSidebarMenuItem>
                   </NavLink>
                   <NavLink to="/criptomoedas">
-                     <CDBSidebarMenuItem active={rota === "/criptomoedas"} icon="yen-sign">
+                     <CDBSidebarMenuItem active={rota === "/criptomoedas"} icon="bi bi-currency-exchange">
                         Criptomoedas
                      </CDBSidebarMenuItem>
                   </NavLink>
-                  <NavLink to="/movimentos">
-                     <CDBSidebarMenuItem active={rota === "/movimentos"} icon="chart-line">
-                        Movimentos
+                  <NavLink to="/corretoras">
+                     <CDBSidebarMenuItem active={rota === "/corretoras"} icon="chart-line">
+                        Corretoras
                      </CDBSidebarMenuItem>
                   </NavLink>
                   <NavLink to="/noticias">

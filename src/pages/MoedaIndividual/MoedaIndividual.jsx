@@ -92,7 +92,7 @@ const MoedaIndividual = () => {
 
    const estatisticas_genericas = [
       { titulo: "Total de mercados", valor: criptomoeda?.numberOfMarkets, icone: <i className="bi bi-graph-up-arrow"></i> },
-      { titulo: "Total de Exchanges", valor: criptomoeda?.numberOfExchanges, icone: <i className="bi bi-arrow-left-right"></i> },
+      { titulo: "Corretoras disponíveis", valor: criptomoeda?.numberOfExchanges, icone: <i className="bi bi-arrow-left-right"></i> },
       {
          titulo: "Validação do fornecimento",
          valor: criptomoeda?.supply?.confirmed ? (
