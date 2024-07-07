@@ -28,5 +28,4 @@ const noticiasSlice = createSlice({
 });
 
 export const { setNoticias, setItensPorPaginaNoticias, setPaginaAtualNoticias, setTotalPaginasNoticias } = noticiasSlice.actions;
-
 export default noticiasSlice.reducer;
