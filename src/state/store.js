@@ -1,6 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import cryptoReducer from "./crypto/cryptoSlice";
+import estatisticasGeraisReducer from "./estatisticasGerais/estatisticasGeraisSlice";
+import noticiasReducer from "./noticias/noticiasSlice";
+import criptomoedasReducer from "./criptomoedas/criptomoedasSlice";
 
 export default configureStore({
-   reducer: { crypto: cryptoReducer },
+   reducer: { estatisticasGerais: estatisticasGeraisReducer, noticias: noticiasReducer, criptomoedas: criptomoedasReducer },
 });

@@ -4,16 +4,21 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setCriptomoedas, setCryptoStats, setNoticias } from "../../state/crypto/cryptoSlice";
 import millify from "millify";
 import { CryptofetchOptions } from "../../services/cryptoApi";
 import CardMoeda from "../../components/CardMoeda/CardMoeda";
 import CardNoticia from "../../components/CardNoticia/CardNoticia";
 import foto from "../../assets/ill.png";
+import { setEstatisticasGerais } from "../../state/estatisticasGerais/estatisticasGeraisSlice";
+import { setCriptomoedas } from "../../state/criptomoedas/criptomoedasSlice";
+import { setNoticias } from "../../state/noticias/noticiasSlice";
 
 const Home = () => {
    const [loading, setLoading] = useState(false);
-   const { cryptoStats, criptomoedas, noticias } = useSelector((state) => state.crypto);
+   const { estatisticasGerais } = useSelector((state) => state.estatisticasGerais);
+   const { criptomoedas } = useSelector((state) => state.criptomoedas);
+   const { noticias } = useSelector((state) => state.noticias);
+
    const dispatch = useDispatch();
 
    async function apanharStats() {
@@ -21,7 +26,7 @@ const Home = () => {
       let res;
       try {
          res = await axios.request({ ...CryptofetchOptions, url: "https://coinranking1.p.rapidapi.com/stats" });
-         dispatch(setCryptoStats(res?.data?.data));
+         dispatch(setEstatisticasGerais(res?.data?.data));
       } catch (error) {
          console.log(error);
       }
@@ -55,10 +60,10 @@ const Home = () => {
    }
 
    useEffect(() => {
-      if (!cryptoStats) apanharStats();
+      if (!estatisticasGerais) apanharStats();
       if (!criptomoedas) apanharCriptomoedas();
       if (!noticias) apanharNoticias();
-   }, [criptomoedas, cryptoStats, noticias]);
+   }, [criptomoedas, estatisticasGerais, noticias]);
 
    return (
       <Container id={styles.ct} fluid>
@@ -69,37 +74,37 @@ const Home = () => {
                   <Col md={6}>
                      <div>
                         <h5 className="text-secondary">Total de criptomoedas</h5>
-                        <p className="fs-2">{cryptoStats?.totalCoins}</p>
+                        <p className="fs-2">{estatisticasGerais?.totalCoins}</p>
                      </div>
                   </Col>
                   <Col md={6}>
                      <div>
                         <h5 className="text-secondary">Corretoras disponíveis</h5>
-                        <p className="fs-2">{millify(cryptoStats?.totalExchanges)}</p>
+                        <p className="fs-2">{millify(estatisticasGerais?.totalExchanges)}</p>
                      </div>
                   </Col>
                   <Col md={6}>
                      <div>
                         <h5 className="text-secondary">Valor total do mercado</h5>
-                        <p className="fs-2">{millify(Number(cryptoStats?.totalMarketCap))} USD</p>
+                        <p className="fs-2">{millify(Number(estatisticasGerais?.totalMarketCap))} USD</p>
                      </div>
                   </Col>
                   <Col md={6}>
                      <div>
                         <h5 className="text-secondary">Maior volume nas últimas 24h</h5>
-                        <p className="fs-2">{millify(cryptoStats?.total24hVolume)} USD</p>
+                        <p className="fs-2">{millify(estatisticasGerais?.total24hVolume)} USD</p>
                      </div>
                   </Col>
                   <Col md={6}>
                      <div>
                         <h5 className="text-secondary">Total de mercados</h5>
-                        <p className="fs-2">{millify(cryptoStats?.totalMarkets)}</p>
+                        <p className="fs-2">{millify(estatisticasGerais?.totalMarkets)}</p>
                      </div>
                   </Col>
                   <Col md={6}>
                      <div>
                         <h5 className="text-secondary">Domínio do Bitcoin</h5>
-                        <p className="fs-2">{millify(cryptoStats?.btcDominance)}%</p>
+                        <p className="fs-2">{millify(estatisticasGerais?.btcDominance)}%</p>
                      </div>
                   </Col>
                </Row>

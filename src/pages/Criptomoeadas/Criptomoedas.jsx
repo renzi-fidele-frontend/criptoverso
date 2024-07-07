@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CryptofetchOptions } from "../../services/cryptoApi";
-import { setCriptomoedas, setPaginaAtualCriptomoedas } from "../../state/crypto/cryptoSlice";
+import { setCriptomoedas, setPaginaAtualCriptomoedas } from "../../state/criptomoedas/criptomoedasSlice";
 import axios from "axios";
 import { Alert, Button, Col, Container, Form, FormControl, Image, Pagination, Row } from "react-bootstrap";
 import styles from "./Criptomoedas.module.css";
@@ -12,7 +12,9 @@ import { paginarArray } from "../../hooks/usePaginarArray";
 
 const Criptomoedas = () => {
    const [loading, setLoading] = useState(false);
-   const { criptomoedas, paginaAtualCriptomoedas, itemsPorPaginaCriptomoedas, totalPaginasCriptomoedas } = useSelector((state) => state.crypto);
+   const { criptomoedas, paginaAtualCriptomoedas, itemsPorPaginaCriptomoedas, totalPaginasCriptomoedas } = useSelector((state) => state.criptomoedas);
+
+
    const dispatch = useDispatch();
    const [criptomoedasPaginadas, setCriptomoedasPaginadas] = useState([]);
    const [resultadosPesquisaInstantanea, setResultadosPesquisaInstantanea] = useState(null);

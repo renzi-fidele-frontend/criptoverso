@@ -2,7 +2,7 @@ import { Col, Container, Pagination, Row } from "react-bootstrap";
 import CardNoticia from "../../components/CardNoticia/CardNoticia";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { setNoticias, setPaginaAtualNoticias, setTotalPaginasNoticias } from "../../state/crypto/cryptoSlice";
+import { setNoticias, setPaginaAtualNoticias, setTotalPaginasNoticias } from "../../state/noticias/noticiasSlice";
 import { useEffect, useState } from "react";
 import { gerarArray } from "../../hooks/useGerarArray";
 import { paginarArray } from "../../hooks/usePaginarArray";
@@ -12,7 +12,7 @@ const Noticias = () => {
    const [noticiasPaginadas, setNoticiasPaginadas] = useState([]);
    const dispatch = useDispatch();
 
-   const { noticias, paginaAtualNoticias, itemsPorPaginaNoticias, totalPaginasNoticias } = useSelector((state) => state.crypto);
+   const { noticias, paginaAtualNoticias, itemsPorPaginaNoticias, totalPaginasNoticias } = useSelector((state) => state.noticias);
 
    async function apanharNoticias() {
       setLoading(true);
