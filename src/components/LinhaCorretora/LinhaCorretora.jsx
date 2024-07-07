@@ -27,7 +27,7 @@ const LinhaCorretora = ({ corretora, chave }) => {
                   </span>
                ) : (
                   <span className="text-danger">
-                     <i className="bi bi-x-circle-fill me-2 border"></i>Não
+                     <i className="bi bi-x-circle-fill me-2"></i>Não
                   </span>
                )}
             </td>
