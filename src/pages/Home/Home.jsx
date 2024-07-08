@@ -172,6 +172,11 @@ const Home = () => {
                         );
                   })}
             </Row>
+            <div className="d-md-none text-center">
+               <Button as={Link} className="mt-3" to="/noticias">
+                  Ver mais
+               </Button>
+            </div>
          </div>
       </Container>
    );

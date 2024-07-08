@@ -35,3 +35,31 @@
    -webkit-box-orient: vertical;
    overflow: hidden;
 }
+
+@media screen and (max-width: 900px) {
+   #fotoNoticia {
+      height: 220px;
+   }
+}
+
+@media screen and (max-width: 768px) {
+   #fotoNoticia {
+      height: 250px;
+   }
+}
+
+@media screen and (max-width: 500px) {
+   #fotoNoticia {
+      height: 210px;
+   }
+
+   #titulo {
+      font-size: 17px;
+   }
+}
+
+@media screen and (max-width: 400px) {
+   #fotoNoticia {
+      height: 170px;
+   }
+}
