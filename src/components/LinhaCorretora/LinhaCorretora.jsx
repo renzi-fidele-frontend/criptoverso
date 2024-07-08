@@ -6,13 +6,16 @@ import translate from "translate";
 const LinhaCorretora = ({ corretora, chave }) => {
    const [mostrar, setMostrar] = useState(false);
    const [descricaoTraduzida, setDescricaoTraduzida] = useState("");
+   const [paisTraduzido, setPaisTraduzido] = useState("");
    const [loading, setLoading] = useState(false);
 
-   async function traduzirTexto(texto) {
+   async function traduzirTexto() {
       setLoading(true);
       try {
-         const textoTraduzido = await translate(texto, "pt");
-         setDescricaoTraduzida(textoTraduzido);
+         const descTraduzido = await translate(corretora?.Description, "pt");
+         const coutryTraduzido = await translate(corretora?.Country, "pt");
+         setPaisTraduzido(coutryTraduzido);
+         setDescricaoTraduzida(descTraduzido);
       } catch (error) {
          console.log("Erro ao traduzir");
       }
@@ -20,7 +23,7 @@ const LinhaCorretora = ({ corretora, chave }) => {
    }
 
    useEffect(() => {
-      if (descricaoTraduzida.length === 0) traduzirTexto(corretora?.Description);
+      traduzirTexto();
    }, [corretora]);
 
    return (
@@ -37,7 +40,7 @@ const LinhaCorretora = ({ corretora, chave }) => {
                {corretora?.GradePoints < 50 && corretora?.GradePoints > 0 && <Badge bg="danger">{corretora?.GradePoints}</Badge>}
             </td>
             <td>{corretora?.DISPLAYTOTALVOLUME24H?.BTC}</td>
-            <td>{corretora?.Country}</td>
+            <td>{paisTraduzido}</td>
             <td>
                {corretora?.Trades ? (
                   <span className="text-success">
