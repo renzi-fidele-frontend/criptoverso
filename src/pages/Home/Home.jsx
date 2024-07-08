@@ -69,39 +69,39 @@ const Home = () => {
       <Container id={styles.ct} fluid>
          <h2 className="fw-bold mb-4">Estatísticas globais de criptomoedas</h2>
          <Row className="gy-3">
-            <Col>
+            <Col xs={12} sm={12} xl={8}>
                <Row>
-                  <Col md={6}>
+                  <Col sm={6}>
                      <div>
                         <h5 className="text-secondary">Total de criptomoedas</h5>
                         <p className="fs-2">{estatisticasGerais?.totalCoins}</p>
                      </div>
                   </Col>
-                  <Col md={6}>
+                  <Col sm={6}>
                      <div>
                         <h5 className="text-secondary">Corretoras disponíveis</h5>
                         <p className="fs-2">{millify(estatisticasGerais?.totalExchanges)}</p>
                      </div>
                   </Col>
-                  <Col md={6}>
+                  <Col sm={6}>
                      <div>
                         <h5 className="text-secondary">Valor total do mercado</h5>
                         <p className="fs-2">{millify(Number(estatisticasGerais?.totalMarketCap))} USD</p>
                      </div>
                   </Col>
-                  <Col md={6}>
+                  <Col sm={6}>
                      <div>
                         <h5 className="text-secondary">Maior volume nas últimas 24h</h5>
                         <p className="fs-2">{millify(estatisticasGerais?.total24hVolume)} USD</p>
                      </div>
                   </Col>
-                  <Col md={6}>
+                  <Col sm={6}>
                      <div>
                         <h5 className="text-secondary">Total de mercados</h5>
                         <p className="fs-2">{millify(estatisticasGerais?.totalMarkets)}</p>
                      </div>
                   </Col>
-                  <Col md={6}>
+                  <Col sm={6}>
                      <div>
                         <h5 className="text-secondary">Domínio do Bitcoin</h5>
                         <p className="fs-2">{millify(estatisticasGerais?.btcDominance)}%</p>
@@ -109,7 +109,7 @@ const Home = () => {
                   </Col>
                </Row>
             </Col>
-            <Col>
+            <Col className="d-none d-xl-inline">
                <Image src={foto} id={styles.foto} />
             </Col>
          </Row>
@@ -117,10 +117,10 @@ const Home = () => {
          <div className="my-4">
             {/*   Top 10 */}
             <Row>
-               <Col md={6}>
+               <Col md={8}>
                   <h2 className="fw-bold mb-4">Top 10 criptomoedas no mundo</h2>
                </Col>
-               <Col className="text-end" md={6}>
+               <Col className="text-end">
                   <Link className="fs-4" to="/criptomoedas">
                      Ver mais
                   </Link>

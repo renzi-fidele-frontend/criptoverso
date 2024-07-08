@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import translate from "translate";
 
 const CardNoticia = ({ noticia }) => {
-   // TODO: Resolver o bug do millify traduzido
    const [textoTraduzido, setTextoTraduzido] = useState("");
 
    async function traduzirTexto() {
