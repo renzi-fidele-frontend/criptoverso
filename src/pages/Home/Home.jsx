@@ -1,4 +1,4 @@
-import { Col, Container, Image, Row } from "react-bootstrap";
+import { Button, Col, Container, Image, Row } from "react-bootstrap";
 import styles from "./Home.module.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -117,10 +117,10 @@ const Home = () => {
          <div className="my-4">
             {/*   Top 10 */}
             <Row>
-               <Col md={8}>
+               <Col xs={12} md={9}>
                   <h2 className="fw-bold mb-4">Top 10 criptomoedas no mundo</h2>
                </Col>
-               <Col className="text-end">
+               <Col className="text-end d-none d-md-inline">
                   <Link className="fs-4" to="/criptomoedas">
                      Ver mais
                   </Link>
@@ -131,7 +131,7 @@ const Home = () => {
                   criptomoedas.map((v, k) => {
                      if (k < 10)
                         return (
-                           <Col md={3} key={k}>
+                           <Col md={6} lg={4} xxl={3} key={k}>
                               <CardMoeda moeda={v} />
                            </Col>
                         );
@@ -142,15 +142,20 @@ const Home = () => {
                   </>
                )}
             </Row>
+            <div className="d-md-none text-center">
+               <Button as={Link} className="mt-3" to="/criptomoedas">
+                  Ver mais
+               </Button>
+            </div>
          </div>
 
          {/*   Notícias  */}
          <div className="my-5">
             <Row>
-               <Col md={6}>
+               <Col xs={12} md={9}>
                   <h2 className="fw-bold mb-4">Últimas notícias sobre o mundo Crypto</h2>
                </Col>
-               <Col className="text-end" md={6}>
+               <Col className="text-end d-none d-md-inline">
                   <Link className="fs-4" to="/noticias">
                      Ver mais
                   </Link>
