@@ -2,11 +2,26 @@ import { Card, Col, Image, Row } from "react-bootstrap";
 import styles from "./CardNoticia.module.css";
 import { Link } from "react-router-dom";
 import moment from "moment";
-import pt from "moment/locale/pt-br";
+import { useEffect, useState } from "react";
+import translate from "translate";
 
 const CardNoticia = ({ noticia }) => {
    // TODO: Resolver o bug do millify traduzido
-   moment.locale("pt", pt);
+   const [textoTraduzido, setTextoTraduzido] = useState("");
+
+   async function traduzirTexto() {
+      const tempo = moment.unix(noticia?.published_on).fromNow();
+      try {
+         const tempoTraduzido = await translate(tempo, "pt");
+         setTextoTraduzido(tempoTraduzido);
+      } catch (error) {
+         console.log(error);
+      }
+   }
+
+   useEffect(() => {
+      traduzirTexto();
+   }, [noticia]);
 
    return (
       <Card className={styles.ct} as={Link} to={noticia?.url} target="_blank">
@@ -21,7 +36,7 @@ const CardNoticia = ({ noticia }) => {
                   <Image id={styles.fotoAutor} src={noticia?.source_info?.img} />
                   <div>
                      <Card.Text className="mb-0 ">{noticia?.source_info?.name}</Card.Text>
-                     <span className="text-secondary fst-italic small">{moment.unix(noticia?.published_on).fromNow()}</span>
+                     <span className="text-secondary fst-italic small">{textoTraduzido}</span>
                   </div>
                </Card.Footer>
             </Col>

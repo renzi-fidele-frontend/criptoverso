@@ -72,7 +72,7 @@ const Corretoras = () => {
          {corretorasPaginadas && (
             <Row className="mt-2 mb-1 mb-md-0">
                <Col className="mt-md-5">
-                  <Pagination className="d-none d-md-flex justify-content-center">
+                  <Pagination className="d-none d-md-flex flex-wrap justify-content-center">
                      {gerarArray(totalPaginas)?.map((v, k) => (
                         <Pagination.Item
                            onClick={() => {
