@@ -29,7 +29,7 @@ const LinhaCorretora = ({ corretora, chave }) => {
    return (
       <>
          <tr style={{ cursor: "pointer" }} onClick={() => setMostrar(!mostrar)}>
-            <td>{chave + 1}.</td>
+            <td>{corretora?.numero}.</td>
             <td>
                <Image id={styles.foto} src={`https://www.cryptocompare.com/${corretora?.LogoUrl}`} />
                <span className="fw-medium ms-3">{corretora?.Name}</span>
