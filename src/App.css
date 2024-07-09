@@ -18,7 +18,17 @@
    width: 100%;
 }
 
+#corpo {
+   height: 100dvh;
+   overflow-y: auto;
+}
 
+@media screen and (max-width: 992px) {
+   #corpo {
+      height: initial;
+      overflow-y: initial;
+   }
+}
 
 @media screen and (max-width: 450px) {
    .titulo1 {

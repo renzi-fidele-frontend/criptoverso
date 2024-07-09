@@ -25,7 +25,7 @@ function App() {
                      {/*  No Mobile */}
                      <NavBarMobile />
                   </div>
-                  <div style={{ height: "100dvh", overflowY: "scroll" }} className="px-2 px-sm-4 px-md-5 py-4 w-100">
+                  <div id="corpo" className="px-2 px-sm-4 px-md-5 py-4 w-100">
                      <Routes>
                         <Route exact path="/" element={<Home />} />
                         <Route path="/criptomoedas" element={<Criptomoedas />} />
