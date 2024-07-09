@@ -17,7 +17,7 @@ const SideBar = () => {
             </CDBSidebarHeader>
 
             <CDBSidebarContent className="sidebar-content">
-               <CDBSidebarMenu >
+               <CDBSidebarMenu>
                   <NavLink to="/">
                      <CDBSidebarMenuItem active={rota === "/"} icon="home">
                         Início
@@ -41,15 +41,18 @@ const SideBar = () => {
                </CDBSidebarMenu>
             </CDBSidebarContent>
 
-            <CDBSidebarFooter className="text-center">
-               <Dropdown drop="up-centered">
-                  <Dropdown.Toggle className="rounded-circle" id={styles.tg} variant="light">
-                     <Image id={styles.fotoUser} className="object-fit-cover rounded-circle" src={fotoUser} />
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu className="border border-black">
-                     <Dropdown.Item>Editar Perfil</Dropdown.Item>
-                  </Dropdown.Menu>
-               </Dropdown>
+            <CDBSidebarFooter className=" text-center">
+               <CDBSidebarMenu>
+                  <CDBSidebarMenuItem>
+                     <div className="border-top pt-2 border-secondary">
+                        <small>Criado por:</small>
+                        <br />
+                        <a target="_blank" href="https://portfolio-renzi.vercel.app/">
+                           <b>Renzi Fidele</b>
+                        </a>
+                     </div>
+                  </CDBSidebarMenuItem>
+               </CDBSidebarMenu>
             </CDBSidebarFooter>
          </CDBSidebar>
       </div>
