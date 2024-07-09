@@ -163,8 +163,8 @@ const Home = () => {
             </Row>
             <Row className="g-4">
                {noticias &&
-                  noticias.map((v, k) => {
-                     if (k < 7 && k !== 1 && v?.imageurl.length > 0)
+                  noticias?.map((v, k) => {
+                     if (k < 7 && k !== 1 && v?.imageurl?.length > 0)
                         return (
                            <Col md={6} key={k}>
                               <CardNoticia noticia={v} />

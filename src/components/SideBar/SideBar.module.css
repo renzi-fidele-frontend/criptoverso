@@ -5,6 +5,7 @@
 .sidebar {
    background-color: #0b3a58 !important;
    background-image: linear-gradient(135deg, #0b3a58 0%, #24264d 100%) !important;
+   max-width: 580px !important;
 }
 
 #fotoUser {
@@ -19,4 +20,7 @@
 #tg::after,
 #tg::before {
    content: none;
+}
+
+@media screen and (max-width: 1200px) {
 }

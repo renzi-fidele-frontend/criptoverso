@@ -9,15 +9,21 @@ import Noticias from "./pages/Noticias/Noticias";
 import { Provider } from "react-redux";
 import store from "./state/store";
 import MoedaIndividual from "./pages/MoedaIndividual/MoedaIndividual";
+import NavBarMobile from "./components/NavBarMobile/NavBarMobile";
+import FooterNavBar from "./components/FooterNavBar/FooterNavBar";
 
 function App() {
    return (
       <>
          <BrowserRouter>
             <Provider store={store}>
-               <div id="App" className="d-flex flex-row w-100">
-                  <div className="">
+               <div id="App" className="d-flex flex-column flex-lg-row w-100">
+                  <div>
+                     {/*  No Desktop */}
                      <SideBar />
+
+                     {/*  No Mobile */}
+                     <NavBarMobile />
                   </div>
                   <div style={{ height: "100dvh", overflowY: "scroll" }} className="px-3 px-sm-5 py-4 w-100">
                      <Routes>
@@ -29,6 +35,8 @@ function App() {
                      </Routes>
                   </div>
                </div>
+               {/*   No mobile */}
+               <FooterNavBar />
             </Provider>
          </BrowserRouter>
       </>
