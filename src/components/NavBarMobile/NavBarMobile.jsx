@@ -9,7 +9,7 @@ const NavBarMobile = () => {
    const { mostrar } = useSelector((state) => state.mostrarNavBar);
 
    return (
-      <Navbar className="px-3 d-lg-none d-flex" id={styles.ct}>
+      <Navbar className="px-3 d-lg-none d-flex" id={styles.ct} style={{ zIndex: 10 }}>
          <Container className="container-sm d-flex justify-content-between align-items-center">
             <Navbar.Brand as={Link} to="/" className="fw-bold text-light">
                Criptoverso

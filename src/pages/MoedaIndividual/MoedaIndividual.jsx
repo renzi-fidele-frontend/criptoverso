@@ -118,7 +118,7 @@ const MoedaIndividual = () => {
       <Container className="pb-5" fluid>
          <Row>
             <Col className="text-center">
-               <h2 className="fw-bold fs-1 mt-4">
+               <h2 className="fw-bold fs-1 mt-4 titulo1">
                   Estatísticas do{" "}
                   <span style={{ color: criptomoeda?.color, textShadow: "1px 1px 1px black" }}>
                      {criptomoeda?.name} ({criptomoeda?.symbol})

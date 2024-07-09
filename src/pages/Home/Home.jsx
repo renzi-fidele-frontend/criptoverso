@@ -67,7 +67,7 @@ const Home = () => {
 
    return (
       <Container id={styles.ct} fluid>
-         <h2 className="fw-bold mb-4">Estatísticas globais de criptomoedas</h2>
+         <h2 className="fw-bold mb-4 titulo1">Estatísticas globais de criptomoedas</h2>
          <Row className="gy-3">
             <Col xs={12} sm={12} xl={8}>
                <Row>
@@ -118,7 +118,7 @@ const Home = () => {
             {/*   Top 10 */}
             <Row>
                <Col xs={12} md={9}>
-                  <h2 className="fw-bold mb-4">Top 10 criptomoedas no mundo</h2>
+                  <h2 className="fw-bold mb-4 titulo1">Top 10 criptomoedas no mundo</h2>
                </Col>
                <Col className="text-end d-none d-md-inline">
                   <Link className="fs-4" to="/criptomoedas">
@@ -153,7 +153,7 @@ const Home = () => {
          <div className="my-5">
             <Row>
                <Col xs={12} md={9}>
-                  <h2 className="fw-bold mb-4">Últimas notícias sobre o mundo Crypto</h2>
+                  <h2 className="fw-bold mb-4 titulo1">Últimas notícias sobre o mundo Crypto</h2>
                </Col>
                <Col className="text-end d-none d-md-inline">
                   <Link className="fs-4" to="/noticias">
@@ -173,7 +173,7 @@ const Home = () => {
                   })}
             </Row>
             <div className="d-md-none text-center">
-               <Button as={Link} className="mt-3" to="/noticias">
+               <Button as={Link} className="mt-3 mb-5 mb-lg-0" to="/noticias">
                   Ver mais
                </Button>
             </div>

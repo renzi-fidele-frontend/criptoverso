@@ -41,7 +41,7 @@ const Noticias = () => {
 
    return (
       <Container fluid>
-         <h2 className="fw-bold mb-5">Veja as notícias sobre o mundo crypto</h2>
+         <h2 className="fw-bold mb-5 titulo1">Veja as notícias sobre o mundo crypto</h2>
 
          <Row className="g-4">
             {noticiasPaginadas.length > 0 &&

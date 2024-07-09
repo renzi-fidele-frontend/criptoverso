@@ -17,3 +17,9 @@
 #root {
    width: 100%;
 }
+
+@media screen and (max-width: 450px) {
+   .titulo1 {
+      font-size: 21px !important;
+   }
+}

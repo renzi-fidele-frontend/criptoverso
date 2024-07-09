@@ -58,9 +58,9 @@ const Criptomoedas = () => {
       <Container id={styles.ct} fluid>
          {/*   Campo de pesquisa  */}
 
-         <Row className="mb-5">
-            <Col md={9}>
-               <h2 className="fw-bold">Veja todas as criptomoedas do mercado</h2>
+         <Row className="mb-4 mb-sm-5 mb-xl-5">
+            <Col xs={12} lg={9}>
+               <h2 className="fw-bold titulo1">Veja todas as criptomoedas do mercado</h2>
             </Col>
             <Col>
                <Form onSubmit={pesquisarCriptomoeda} className="d-flex gap-2">
@@ -82,7 +82,7 @@ const Criptomoedas = () => {
          <Row className="g-3">
             {criptomoedas && !resultadosPesquisaInstantanea ? (
                criptomoedasPaginadas?.map((v, k) => (
-                  <Col md={3} key={k}>
+                  <Col md={6} lg={4} xxl={3} key={k}>
                      <CardMoeda moeda={v} />
                   </Col>
                ))
@@ -106,9 +106,29 @@ const Criptomoedas = () => {
 
          {/*  Paginação  */}
          {!resultadosPesquisaInstantanea && (
-            <Row className="mt-2 mb-1 mb-md-0">
+            <Row className="mt-5 mt-md-0 mb-5 pb-0 pb-5 mb-lg-0">
                <Col className="mt-md-5">
-                  <Pagination size="lg" className="d-none d-md-flex justify-content-center">
+                  {/*  Desktop  */}
+                  <Pagination size="lg" className="d-none d-md-flex flex-wrap justify-content-center">
+                     {gerarArray(totalPaginasCriptomoedas)?.map((v, k) => (
+                        <Pagination.Item
+                           onClick={() => {
+                              if (v !== paginaAtualCriptomoedas.current) {
+                                 window.scrollTo({ top: 0, behavior: "smooth" });
+                                 dispatch(setPaginaAtualCriptomoedas(v));
+                                 setCriptomoedasPaginadas(paginarArray(criptomoedas, v, itemsPorPaginaCriptomoedas));
+                              }
+                           }}
+                           active={v === paginaAtualCriptomoedas}
+                           key={k}
+                        >
+                           {v}
+                        </Pagination.Item>
+                     ))}
+                  </Pagination>
+
+                  {/*  Mobile  */}
+                  <Pagination size="sm" className="mb-5 mb-lg-0 d-flex d-md-none flex-wrap justify-content-center">
                      {gerarArray(totalPaginasCriptomoedas)?.map((v, k) => (
                         <Pagination.Item
                            onClick={() => {

@@ -45,7 +45,7 @@ const Corretoras = () => {
       <Container fluid>
          <Row>
             <Col>
-               <h2 className="fw-bold mb-4">Veja todas as corretoras do mercado</h2>
+               <h2 className="fw-bold mb-4 titulo1">Veja todas as corretoras do mercado</h2>
 
                <div>
                   <Table striped size="lg" responsive hover>
