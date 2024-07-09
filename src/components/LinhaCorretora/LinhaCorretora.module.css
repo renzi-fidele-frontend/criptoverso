@@ -1,5 +1,19 @@
 #foto {
-    width: 40px;
-    height: 40px;
- }
- 
+   width: 40px;
+   height: 40px;
+}
+
+.td {
+   vertical-align: middle;
+}
+
+@media screen and (max-width: 500px) {
+   #foto {
+      width: 33px;
+      height: 33px;
+   }
+
+   .td {
+      font-size: 14px;
+   }
+}

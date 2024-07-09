@@ -29,19 +29,23 @@ const LinhaCorretora = ({ corretora, chave }) => {
    return (
       <>
          <tr style={{ cursor: "pointer" }} onClick={() => setMostrar(!mostrar)}>
-            <td>{corretora?.numero}.</td>
-            <td>
-               <Image id={styles.foto} src={`https://www.cryptocompare.com/${corretora?.LogoUrl}`} />
-               <span className="fw-medium ms-3">{corretora?.Name}</span>
+            <td className={styles.td}>{corretora?.numero}.</td>
+            <td className={styles.td}>
+               <div className="d-flex gap-1 gap-lg-3 flex-nowrap align-items-center">
+                  <Image id={styles.foto} src={`https://www.cryptocompare.com/${corretora?.LogoUrl}`} />
+                  <span className="fw-medium text-truncate">{corretora?.Name}</span>
+               </div>
             </td>
-            <td>
-               {corretora?.GradePoints === 0 && <Badge bg="warning">Indisponível</Badge>}
-               {corretora?.GradePoints >= 50 && <Badge bg="success">{corretora?.GradePoints}</Badge>}
-               {corretora?.GradePoints < 50 && corretora?.GradePoints > 0 && <Badge bg="danger">{corretora?.GradePoints}</Badge>}
+            <td className={styles.td}>
+               <div className="d-flex align-items-center h-100">
+                  {corretora?.GradePoints === 0 && <Badge bg="warning">Indisponível</Badge>}
+                  {corretora?.GradePoints >= 50 && <Badge bg="success">{corretora?.GradePoints}</Badge>}
+                  {corretora?.GradePoints < 50 && corretora?.GradePoints > 0 && <Badge bg="danger">{corretora?.GradePoints}</Badge>}
+               </div>
             </td>
-            <td>{corretora?.DISPLAYTOTALVOLUME24H?.BTC}</td>
-            <td>{paisTraduzido}</td>
-            <td>
+            <td className={styles.td}>{corretora?.DISPLAYTOTALVOLUME24H?.BTC}</td>
+            <td className={styles.td}>{paisTraduzido}</td>
+            <td className={styles.td}>
                {corretora?.Trades ? (
                   <span className="text-success">
                      <i className="bi bi-check-circle-fill me-2"></i>Sim
@@ -54,10 +58,10 @@ const LinhaCorretora = ({ corretora, chave }) => {
             </td>
          </tr>
          {/*  Escondido  */}
-         <div style={{ display: "table-row" }} className={!mostrar && "border-0"}>
+         <div style={{ display: "table-row" }} className={`${!mostrar && "border-0"}`}>
             <td className={!mostrar && "p-0 border-0"} colSpan={12}>
                <Collapse in={mostrar}>
-                  <div>{descricaoTraduzida}</div>
+                  <div className={styles.td}>{descricaoTraduzida}</div>
                </Collapse>
             </td>
          </div>

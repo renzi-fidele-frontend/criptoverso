@@ -92,7 +92,7 @@ const Criptomoedas = () => {
             {criptomoedas &&
                resultadosPesquisaInstantanea?.length > 0 &&
                resultadosPesquisaInstantanea?.map((v, k) => (
-                  <Col md={3} key={k}>
+                  <Col md={6} lg={4} xxl={3} key={k}>
                      <CardMoeda moeda={v} />
                   </Col>
                ))}

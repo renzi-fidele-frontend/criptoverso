@@ -51,12 +51,24 @@ const Corretoras = () => {
                   <Table striped size="lg" responsive hover>
                      <thead>
                         <tr>
-                           <th className="fs-5 fw-medium fst-italic text-truncate">#</th>
-                           <th className="fs-5 fw-medium fst-italic text-truncate">Corretora</th>
-                           <th className="fs-5 fw-medium fst-italic text-truncate">Pontuação</th>
-                           <th className="fs-5 fw-medium fst-italic text-truncate">Volume de 24h</th>
-                           <th className="fs-5 fw-medium fst-italic text-truncate">País de origem</th>
-                           <th className="fs-5 fw-medium fst-italic text-truncate">É Negociável?</th>
+                           <th id={styles.th} className="text-truncate">
+                              #
+                           </th>
+                           <th id={styles.th} className="text-truncate">
+                              Corretora
+                           </th>
+                           <th id={styles.th} className="text-truncate">
+                              Pontuação
+                           </th>
+                           <th id={styles.th} className="text-truncate">
+                              Volume de 24h
+                           </th>
+                           <th id={styles.th} className="text-truncate">
+                              País de origem
+                           </th>
+                           <th id={styles.th} className="text-truncate">
+                              É Negociável?
+                           </th>
                         </tr>
                      </thead>
                      <tbody>
@@ -71,8 +83,28 @@ const Corretoras = () => {
          {/*  Paginação  */}
          {corretorasPaginadas && (
             <Row className="mt-2 mb-1 mb-md-0">
-               <Col className="mt-md-5">
-                  <Pagination className="d-none d-md-flex flex-wrap justify-content-center">
+               <Col className="mt-xxl-4 ">
+                  {/*  Desktop  */}
+                  <Pagination className="d-none d-md-flex flex-wrap justify-content-center mb-5 pb-5 mb-lg-0 pb-lg-0">
+                     {gerarArray(totalPaginas)?.map((v, k) => (
+                        <Pagination.Item
+                           onClick={() => {
+                              if (v !== paginaAtual.current) {
+                                 window.scrollTo({ top: 0, behavior: "smooth" });
+                                 dispatch(setPaginaAtual(v));
+                                 setCorretorasPaginadas(paginarArray(corretoras, v, itemsPorPagina));
+                              }
+                           }}
+                           active={v === paginaAtual}
+                           key={k}
+                        >
+                           {v}
+                        </Pagination.Item>
+                     ))}
+                  </Pagination>
+
+                  {/*  Mobile  */}
+                  <Pagination size="sm" className="d-flex d-md-none flex-wrap justify-content-center mb-5 pb-5 mb-lg-0 pb-lg-0">
                      {gerarArray(totalPaginas)?.map((v, k) => (
                         <Pagination.Item
                            onClick={() => {
