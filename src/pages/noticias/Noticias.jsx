@@ -65,9 +65,28 @@ const Noticias = () => {
 
          {/*  Paginação  */}
          {noticias && (
-            <Row className="mt-2 mb-1 mb-md-0">
+            <Row className="mt-2 mb-5 mb-lg-0 pb-5 pb-lg-0">
                <Col className="mt-md-5">
-                  <Pagination size="lg" className="d-none d-md-flex justify-content-center">
+                  {/*  Desktop  */}
+                  <Pagination size="lg" className="d-none d-md-flex flex-wrap justify-content-center">
+                     {gerarArray(totalPaginasNoticias)?.map((page, k) => (
+                        <Pagination.Item
+                           onClick={() => {
+                              if (page !== paginaAtualNoticias.current) {
+                                 window.scrollTo({ top: 0, behavior: "smooth" });
+                                 dispatch(setPaginaAtualNoticias(page));
+                                 setNoticiasPaginadas(paginarArray(noticias, page, itemsPorPaginaNoticias));
+                              }
+                           }}
+                           active={page === paginaAtualNoticias}
+                           key={k}
+                        >
+                           {page}
+                        </Pagination.Item>
+                     ))}
+                  </Pagination>
+                  {/*  Mobile  */}
+                  <Pagination size="sm" className="mt-4 mb-5 mb-lg-0 d-flex d-md-none flex-wrap justify-content-center">
                      {gerarArray(totalPaginasNoticias)?.map((page, k) => (
                         <Pagination.Item
                            onClick={() => {

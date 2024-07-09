@@ -41,10 +41,10 @@ const SideBar = () => {
                </CDBSidebarMenu>
             </CDBSidebarContent>
 
-            <CDBSidebarFooter className=" text-center">
+            <CDBSidebarFooter className="text-center">
                <CDBSidebarMenu>
                   <CDBSidebarMenuItem>
-                     <div className="border-top pt-2 border-secondary">
+                     <div className="border-top pt-3 border-secondary">
                         <small>Criado por:</small>
                         <br />
                         <a target="_blank" href="https://portfolio-renzi.vercel.app/">
