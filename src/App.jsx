@@ -2,10 +2,10 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import SideBar from "./components/SideBar/SideBar";
 
 import "./App.css";
+import Noticias from "./pages/mmdla/Noticias";
 import Home from "./pages/Home/Home";
 import Criptomoedas from "./pages/Criptomoeadas/Criptomoedas";
 import Corretoras from "./pages/Corretoras/Corretoras";
-import Noticias from "./pages/Noticias/Noticias";
 import { Provider } from "react-redux";
 import store from "./state/store";
 import MoedaIndividual from "./pages/MoedaIndividual/MoedaIndividual";
