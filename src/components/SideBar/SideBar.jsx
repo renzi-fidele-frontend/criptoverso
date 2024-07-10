@@ -10,6 +10,12 @@ const SideBar = () => {
    const dispatch = useDispatch();
    const { modoEscuro } = useSelector((state) => state.tema);
 
+   function mudarTema() {
+      dispatch(setModoEscuro(!modoEscuro));
+      let tema = !modoEscuro ? "dark" : "light";
+      document.documentElement.setAttribute("data-bs-theme", tema);
+   }
+
    return (
       <div id={styles.ct} className="d-none d-lg-flex" style={{ overflow: "scroll initial" }}>
          <CDBSidebar textColor="#fff" className={`${styles.sidebar} pb-4`}>
@@ -42,15 +48,11 @@ const SideBar = () => {
                      </CDBSidebarMenuItem>
                   </NavLink>
                   <hr />
-                  <CDBSidebarMenuItem icon={"bi bi-brightness-high-fill"}>
-                     <span
-                        onClick={() => {
-                           dispatch(setModoEscuro(!modoEscuro));
-                        }}
-                     >
-                        Modo {"escuro"}
-                     </span>{" "}
-                  </CDBSidebarMenuItem>
+                  <div onClick={mudarTema}>
+                     <CDBSidebarMenuItem icon={`bi ${!modoEscuro ? "bi-moon-stars-fill" : "bi-brightness-high-fill"}`}>
+                        Modo {modoEscuro ? "claro" : "escuro"}
+                     </CDBSidebarMenuItem>
+                  </div>
                </CDBSidebarMenu>
             </CDBSidebarContent>
 
