@@ -8,6 +8,7 @@ import translate from "translate";
 import Chart from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 import { CategoryScale } from "chart.js";
+import styles from "./MoedaIndividual.module.css";
 
 Chart.register(CategoryScale);
 
@@ -50,10 +51,8 @@ const MoedaIndividual = () => {
             ...CryptofetchOptions,
             url: `https://coinranking1.p.rapidapi.com/coin/${uuid}/history?timePeriod=${periodo}`,
          });
-         console.log(res.data.data.history);
          let sortedHist = res.data.data.history;
          sortedHist.sort((a, b) => b.timestamp - a.timestamp);
-         console.log(sortedHist);
          setHistorico(res.data.data);
          let datas = sortedHist.map((v) => new Date(v.timestamp * 1000).toLocaleDateString());
          let precos = sortedHist.map((v) => v.price);
@@ -118,18 +117,20 @@ const MoedaIndividual = () => {
       <Container className="pb-5" fluid>
          <Row>
             <Col className="text-center">
-               <h2 className="fw-bold fs-1 mt-4 titulo1">
+               <h2 id={styles.tit} className="fw-bold fs-1 mt-2 mt-md-4">
                   Estatísticas do{" "}
                   <span style={{ color: criptomoeda?.color, textShadow: "1px 1px 1px black" }}>
                      {criptomoeda?.name} ({criptomoeda?.symbol})
                   </span>
                </h2>
-               <p className="px-5 mt-4 mb-5">{descricaoTraduzida}</p>
+               <p id={styles.descricao} className="px-xl-5 mt-3 mt-md-4 mb-3 mb-md-5">
+                  {descricaoTraduzida}
+               </p>
 
-               <hr className="" />
+               <hr />
 
                {/*   Período  */}
-               <Col className="mt-2" md={2}>
+               <Col className="mt-2 mx-auto mx-xxl-0" md={5} xl={2}>
                   <Form.Select onChange={handleSelectChange} defaultValue="7d" style={{ cursor: "pointer" }}>
                      {periodo.map((v, k) => (
                         <option key={k} value={v.valor}>
@@ -141,20 +142,23 @@ const MoedaIndividual = () => {
 
                {/*   Gráfico  */}
                <Row className="mt-3">
-                  <Col>
-                     <h3 className="text-start fs-2">Gráfico do preço do {criptomoeda?.name}</h3>
+                  <Col xs={12} xxl={6}>
+                     <h3 id={styles.titulo2} className="text-xxl-start fs-2 text-center">
+                        Gráfico do preço do {criptomoeda?.name}
+                     </h3>
                   </Col>
-                  <Col className="d-flex gap-4 justify-content-end fs-5">
+                  <Col id={styles.destaque} className="d-flex gap-4 justify-content-center justify-content-xxl-end fs-5 mb-4 mb-xxl-0">
                      <span>
-                        <i className="bi bi-arrow-down-up"></i> Alteração:{" "}
+                        <i className="bi bi-arrow-down-up"></i> Alteração: <br className="d-inline d-sm-none" />
                         <b className={`${historico?.change >= 0 ? "text-success" : "text-danger"}`}>{historico?.change}% </b>
                      </span>
                      <span>
-                        <i className="bi bi-coin"></i> Preço atual: <b>{millify(criptomoeda?.price)} USD</b>
+                        <i className="bi bi-coin"></i> Preço atual: <br className="d-inline d-sm-none" />
+                        <b>{millify(criptomoeda?.price)} USD</b>
                      </span>
                   </Col>
                </Row>
-               <div>
+               <div className="d-flex align-items-center justify-content-center">
                   <Line
                      data={{ labels: datasCriptomoeda, datasets: [{ label: "Preço em dólar", data: precosCriptomoeda }] }}
                      options={{ responsive: true }}
@@ -162,17 +166,17 @@ const MoedaIndividual = () => {
                </div>
 
                {/*   Estatisticas da criptomoeda  */}
-               <Row className="mt-5 gx-5">
-                  <Col>
-                     <h3>Estatísticas de valor do {criptomoeda?.name}</h3>
+               <Row className="mt-5 gx-md-5">
+                  <Col xs={12} xxl={6}>
+                     <h3 id={styles.subtit}>Estatísticas de valor do {criptomoeda?.name}</h3>
                      <p>Visão geral mostrando as estatisticas do {criptomoeda?.name}</p>
                      <ListGroup className="mt-4">
                         {estatisticas.map((v, k) => (
                            <ListGroup.Item key={k} action>
-                              <div className="p-3 d-flex flex-row align-items-center justify-content-between">
+                              <div className="p-1 p-md-3 d-flex flex-column flex-sm-row align-items-center justify-content-between">
                                  <div className="d-flex gap-3 align-items-center">
                                     {v.icone}
-                                    <p className="mb-0">{v.titulo}</p>
+                                    <p className="mb-0 text-truncate">{v.titulo}</p>
                                  </div>
 
                                  <span className="fw-bold">{v.valor}</span>
@@ -181,16 +185,16 @@ const MoedaIndividual = () => {
                         ))}
                      </ListGroup>
                   </Col>
-                  <Col>
-                     <h3>Outras Estatísticas</h3>
+                  <Col className="pt-5 pt-xxl-0">
+                     <h3 id={styles.subtit}>Outras Estatísticas</h3>
                      <p>Visão geral mostrando as estatisticas de todas as criptomoedas</p>
                      <ListGroup className="mt-4">
                         {estatisticas_genericas.map((v, k) => (
                            <ListGroup.Item key={k} action>
-                              <div className="p-3 d-flex flex-row align-items-center justify-content-between">
+                              <div className="p-1 p-md-3 d-flex flex-column flex-sm-row align-items-center justify-content-between">
                                  <div className="d-flex gap-3 align-items-center">
                                     {v.icone}
-                                    <p className="mb-0">{v.titulo}</p>
+                                    <p className="mb-0 text-truncate">{v.titulo}</p>
                                  </div>
 
                                  <span className="fw-bold">{v.valor}</span>
@@ -204,13 +208,15 @@ const MoedaIndividual = () => {
                <hr className="mt-4" />
 
                {/*   Links da criptomoeda */}
-               <Row className="mt-4 pt-3 gx-5" fluid>
+               <Row className="mt-4 mb-5 mb-lg-0 pt-3" fluid>
                   <Col>
-                     <h3 className="fs-2">Links do {criptomoeda?.name}</h3>
+                     <h3 id={styles.titulo2} className="fs-2">
+                        Links do {criptomoeda?.name}
+                     </h3>
                      <ListGroup className="mt-4">
                         {criptomoeda?.links?.map((v, k) => (
                            <ListGroup.Item action key={k}>
-                              <div className="p-3 d-flex align-items-center justify-content-between">
+                              <div className="p-1 p-md-3 d-flex align-items-center justify-content-between">
                                  <p className="mb-0 text-capitalize fw-medium">{v?.type}</p>
                                  <a href={v?.url} className="fw-bolder" target="_blank">
                                     {v?.name}
