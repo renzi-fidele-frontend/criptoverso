@@ -4,6 +4,7 @@ import noticiasReducer from "./noticias/noticiasSlice";
 import criptomoedasReducer from "./criptomoedas/criptomoedasSlice";
 import corretorasReducer from "./corretoras/corretorasSlice";
 import MostrarNavBarReducer from "./MostrarNavBar/MostrarNavBarSlice";
+import temaReducer from "./tema/temaSlice";
 
 export default configureStore({
    reducer: {
@@ -12,5 +13,6 @@ export default configureStore({
       criptomoedas: criptomoedasReducer,
       corretoras: corretorasReducer,
       mostrarNavBar: MostrarNavBarReducer,
+      tema: temaReducer,
    },
 });

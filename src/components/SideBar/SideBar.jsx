@@ -1,12 +1,15 @@
 import styles from "./SideBar.module.css";
 import { CDBSidebar, CDBSidebarContent, CDBSidebarFooter, CDBSidebarHeader, CDBSidebarMenu, CDBSidebarMenuItem } from "cdbreact";
-import { Dropdown, Image } from "react-bootstrap";
-import fotoUser from "../../assets/fotoUser.jpg";
 
 import { NavLink, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setModoEscuro } from "../../state/tema/temaSlice";
 
 const SideBar = () => {
    const rota = useLocation().pathname;
+   const dispatch = useDispatch();
+   const { modoEscuro } = useSelector((state) => state.tema);
+
    return (
       <div id={styles.ct} className="d-none d-lg-flex" style={{ overflow: "scroll initial" }}>
          <CDBSidebar textColor="#fff" className={`${styles.sidebar} pb-4`}>
@@ -38,6 +41,16 @@ const SideBar = () => {
                         Notícias
                      </CDBSidebarMenuItem>
                   </NavLink>
+                  <hr />
+                  <CDBSidebarMenuItem icon={"bi bi-brightness-high-fill"}>
+                     <span
+                        onClick={() => {
+                           dispatch(setModoEscuro(!modoEscuro));
+                        }}
+                     >
+                        Modo {"escuro"}
+                     </span>{" "}
+                  </CDBSidebarMenuItem>
                </CDBSidebarMenu>
             </CDBSidebarContent>
 
