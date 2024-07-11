@@ -68,30 +68,41 @@ const LinhaCorretora = ({ corretora, chave }) => {
       </>
    ) : (
       <>
-         <Placeholder></Placeholder>
          <tr style={{ cursor: "pointer" }} onClick={() => setMostrar(!mostrar)}>
             <td className={styles.td}>
-               <Placeholder xs={4} xl={3} />.
+               <Placeholder animation="wave">
+                  <Placeholder xs={4} xl={3} />.
+               </Placeholder>
             </td>
             <td className={styles.td}>
-               <div className="d-flex gap-1 gap-lg-3 flex-nowrap align-items-center">
-                  <Placeholder id={styles.foto} />
-                  <Placeholder xs={7} />
+               <div>
+                  <Placeholder className="d-flex gap-1 gap-lg-3 flex-nowrap align-items-center" animation="wave">
+                     <Placeholder id={styles.foto} />
+                     <Placeholder xs={7} />
+                  </Placeholder>
                </div>
             </td>
             <td className={styles.td}>
-               <div className="d-flex align-items-center h-100">
+               <div>
+                  <Placeholder className="d-flex align-items-center h-100" animation="wave">
+                     <Placeholder xs={4} />
+                  </Placeholder>
+               </div>
+            </td>
+            <td className={styles.td}>
+               <Placeholder animation="wave">
                   <Placeholder xs={4} />
-               </div>
+               </Placeholder>
             </td>
             <td className={styles.td}>
-               <Placeholder xs={4} />
+               <Placeholder animation="wave">
+                  <Placeholder xs={7} />
+               </Placeholder>
             </td>
             <td className={styles.td}>
-               <Placeholder xs={7} />
-            </td>
-            <td className={styles.td}>
-               <Placeholder xs={4} />
+               <Placeholder animation="wave">
+                  <Placeholder xs={4} />
+               </Placeholder>
             </td>
          </tr>
       </>
