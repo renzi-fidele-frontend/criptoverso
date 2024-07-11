@@ -7,3 +7,10 @@
         height: 245px;
     }
 }
+
+@media screen and (max-width: 400px) {
+    #subtit {
+        font-size: 17px !important;
+    }
+  
+}

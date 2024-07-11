@@ -1,4 +1,4 @@
-import { Button, Col, Container, Image, Row } from "react-bootstrap";
+import { Button, Col, Container, Image, Placeholder, Row } from "react-bootstrap";
 import styles from "./Home.module.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -12,6 +12,7 @@ import foto from "../../assets/ill.png";
 import { setEstatisticasGerais } from "../../state/estatisticasGerais/estatisticasGeraisSlice";
 import { setCriptomoedas } from "../../state/criptomoedas/criptomoedasSlice";
 import { setNoticias } from "../../state/noticias/noticiasSlice";
+import { gerarArray } from "../../hooks/useGerarArray";
 
 const Home = () => {
    const [loading, setLoading] = useState(false);
@@ -65,48 +66,42 @@ const Home = () => {
       if (!noticias) apanharNoticias();
    }, [criptomoedas, estatisticasGerais, noticias]);
 
+   const estatisticasGlobais = [
+      { nome: "Total de criptomoedas", valor: estatisticasGerais?.totalCoins },
+      { nome: "Corretoras disponíveis", valor: millify(estatisticasGerais?.totalExchanges) },
+      { nome: "Valor total do mercado", valor: millify(Number(estatisticasGerais?.totalMarketCap)) },
+      { nome: "Maior volume nas últimas 24h", valor: millify(estatisticasGerais?.total24hVolume) },
+      { nome: "Total de mercados", valor: millify(estatisticasGerais?.totalMarkets) },
+      { nome: "Domínio do Bitcoin", valor: millify(estatisticasGerais?.btcDominance) + "%" },
+   ];
+
    return (
       <Container id={styles.ct} fluid>
          <h2 className="fw-bold mb-4 titulo1">Estatísticas globais de criptomoedas</h2>
          <Row className="gy-3">
             <Col xs={12} sm={12} xl={8}>
                <Row>
-                  <Col sm={6}>
-                     <div>
-                        <h5 className="text-secondary">Total de criptomoedas</h5>
-                        <p className="fs-2">{estatisticasGerais?.totalCoins}</p>
-                     </div>
-                  </Col>
-                  <Col sm={6}>
-                     <div>
-                        <h5 className="text-secondary">Corretoras disponíveis</h5>
-                        <p className="fs-2">{millify(estatisticasGerais?.totalExchanges)}</p>
-                     </div>
-                  </Col>
-                  <Col sm={6}>
-                     <div>
-                        <h5 className="text-secondary">Valor total do mercado</h5>
-                        <p className="fs-2">{millify(Number(estatisticasGerais?.totalMarketCap))} USD</p>
-                     </div>
-                  </Col>
-                  <Col sm={6}>
-                     <div>
-                        <h5 className="text-secondary">Maior volume nas últimas 24h</h5>
-                        <p className="fs-2">{millify(estatisticasGerais?.total24hVolume)} USD</p>
-                     </div>
-                  </Col>
-                  <Col sm={6}>
-                     <div>
-                        <h5 className="text-secondary">Total de mercados</h5>
-                        <p className="fs-2">{millify(estatisticasGerais?.totalMarkets)}</p>
-                     </div>
-                  </Col>
-                  <Col sm={6}>
-                     <div>
-                        <h5 className="text-secondary">Domínio do Bitcoin</h5>
-                        <p className="fs-2">{millify(estatisticasGerais?.btcDominance)}%</p>
-                     </div>
-                  </Col>
+                  {loading
+                     ? estatisticasGlobais?.map((v, k) => (
+                          <Col key={k} sm={6}>
+                             <div>
+                                <h5 id={styles.subtit} className="text-secondary">{v.nome}</h5>
+                                <p className="fs-2">{v.valor}</p>
+                             </div>
+                          </Col>
+                       ))
+                     : estatisticasGlobais?.map((v, k) => (
+                          <Col key={k} sm={6}>
+                             <div>
+                                <h5 id={styles.subtit} className="text-secondary">{v.nome}</h5>
+                                <p className="fs-2">
+                                   <Placeholder key={k} animation="wave">
+                                      <Placeholder xs={5} md={8} />
+                                   </Placeholder>
+                                </p>
+                             </div>
+                          </Col>
+                       ))}
                </Row>
             </Col>
             <Col className="d-none d-xl-inline">
