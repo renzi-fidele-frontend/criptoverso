@@ -126,8 +126,8 @@ const Home = () => {
                </Col>
             </Row>
             <Row className="g-3">
-               {loading ? (
-                  criptomoedas.map((v, k) => {
+               {!loading ? (
+                  criptomoedas?.map((v, k) => {
                      if (k < 10)
                         return (
                            <Col md={6} lg={4} xxl={3} key={k}>
@@ -165,15 +165,20 @@ const Home = () => {
                </Col>
             </Row>
             <Row className="g-4">
-               {noticias &&
-                  noticias?.map((v, k) => {
-                     if (k < 7 && k !== 1 && v?.imageurl?.length > 0)
-                        return (
-                           <Col md={6} key={k}>
-                              <CardNoticia noticia={v} />
-                           </Col>
-                        );
-                  })}
+               {!loading
+                  ? noticias?.map((v, k) => {
+                       if (k < 7 && k !== 1 && v?.imageurl?.length > 0)
+                          return (
+                             <Col md={6} key={k}>
+                                <CardNoticia noticia={v} />
+                             </Col>
+                          );
+                    })
+                  : gerarArray(6).map((v, k) => (
+                       <Col md={6} key={k}>
+                          <CardNoticia />
+                       </Col>
+                    ))}
             </Row>
             <div className="d-md-none text-center">
                <Button as={Link} className="mt-3 mb-5 mb-lg-0" to="/noticias">
