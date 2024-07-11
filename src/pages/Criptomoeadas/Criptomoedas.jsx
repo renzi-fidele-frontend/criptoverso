@@ -26,7 +26,6 @@ const Criptomoedas = () => {
       let res;
       try {
          res = await axios.request({ ...CryptofetchOptions, url: "https://coinranking1.p.rapidapi.com/coins?limit=100" });
-         console.log(res.data);
          dispatch(setCriptomoedas(res?.data?.data?.coins));
          setCriptomoedasPaginadas(paginarArray(res?.data?.data?.coins, paginaAtualCriptomoedas, itemsPorPaginaCriptomoedas));
       } catch (error) {
@@ -80,32 +79,42 @@ const Criptomoedas = () => {
 
          {/*  Todas as criptomoedas   */}
          <Row className="g-3">
-            {criptomoedas && !resultadosPesquisaInstantanea ? (
-               criptomoedasPaginadas?.map((v, k) => (
+            {!loading ? (
+               <>
+                  {criptomoedas && !resultadosPesquisaInstantanea ? (
+                     criptomoedasPaginadas?.map((v, k) => (
+                        <Col md={6} lg={4} xxl={3} key={k}>
+                           <CardMoeda moeda={v} />
+                        </Col>
+                     ))
+                  ) : (
+                     <>{!resultadosPesquisaInstantanea && <p>Loading</p>}</>
+                  )}
+                  {criptomoedas &&
+                     resultadosPesquisaInstantanea?.length > 0 &&
+                     resultadosPesquisaInstantanea?.map((v, k) => (
+                        <Col md={6} lg={4} xxl={3} key={k}>
+                           <CardMoeda moeda={v} />
+                        </Col>
+                     ))}
+                  {criptomoedas && resultadosPesquisaInstantanea?.length === 0 && (
+                     <Col className="align-items-center d-flex flex-column">
+                        <Image id={styles.nadaEncontrado} src={nadaEncontrado} />
+                        <Alert className="mt-4">Nada foi encontrado, tente clicar no botão de pesquisa</Alert>
+                     </Col>
+                  )}
+               </>
+            ) : (
+               gerarArray(12).map((v, k) => (
                   <Col md={6} lg={4} xxl={3} key={k}>
-                     <CardMoeda moeda={v} />
+                     <CardMoeda />
                   </Col>
                ))
-            ) : (
-               <>{!resultadosPesquisaInstantanea && <p>Loading</p>}</>
-            )}
-            {criptomoedas &&
-               resultadosPesquisaInstantanea?.length > 0 &&
-               resultadosPesquisaInstantanea?.map((v, k) => (
-                  <Col md={6} lg={4} xxl={3} key={k}>
-                     <CardMoeda moeda={v} />
-                  </Col>
-               ))}
-            {criptomoedas && resultadosPesquisaInstantanea?.length === 0 && (
-               <Col className="align-items-center d-flex flex-column">
-                  <Image id={styles.nadaEncontrado} src={nadaEncontrado} />
-                  <Alert className="mt-4">Nada foi encontrado, tente clicar no botão de pesquisa</Alert>
-               </Col>
             )}
          </Row>
 
          {/*  Paginação  */}
-         {!resultadosPesquisaInstantanea && (
+         {!resultadosPesquisaInstantanea && criptomoedas && (
             <Row className="mt-5 mt-md-0 mb-5 pb-0 pb-5 mb-lg-0">
                <Col className="mt-md-5">
                   {/*  Desktop  */}
