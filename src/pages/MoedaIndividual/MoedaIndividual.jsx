@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CryptofetchOptions } from "../../services/cryptoApi";
-import { Col, Container, Form, ListGroup, Placeholder, Row } from "react-bootstrap";
+import { Col, Container, Form, ListGroup, Placeholder, Row, Spinner } from "react-bootstrap";
 import millify from "millify";
 import translate from "translate";
 import Chart from "chart.js/auto";
@@ -16,6 +16,7 @@ Chart.register(CategoryScale);
 const MoedaIndividual = () => {
    const { uuid } = useParams();
    const [loading, setLoading] = useState(false);
+   const [chartLoading, setChartLoading] = useState(false);
    const [criptomoeda, setCriptomoeda] = useState(null);
    const [descricaoTraduzida, setDescricaoTraduzida] = useState("");
    const [historico, setHistorico] = useState(null);
@@ -46,7 +47,7 @@ const MoedaIndividual = () => {
    }
 
    async function apanharHistoricoCriptomoeda(periodo) {
-      setLoading(true);
+      setChartLoading(true);
       try {
          const res = await axios.request({
             ...CryptofetchOptions,
@@ -62,7 +63,7 @@ const MoedaIndividual = () => {
       } catch (error) {
          console.log(error);
       }
-      setLoading(false);
+      setChartLoading(false);
    }
 
    useEffect(() => {
@@ -135,7 +136,7 @@ const MoedaIndividual = () => {
                <hr />
 
                {/*   Período  */}
-               <Col className="mt-2 mx-auto mx-xxl-0" md={5} xl={2}>
+               <Col className="mt-2 mx-auto mx-xxl-0 d-flex" md={5} xl={2}>
                   <Form.Select onChange={handleSelectChange} defaultValue="7d" style={{ cursor: "pointer" }}>
                      {periodo.map((v, k) => (
                         <option key={k} value={v.valor}>
@@ -168,7 +169,7 @@ const MoedaIndividual = () => {
                   </Col>
                </Row>
                <div className="d-flex align-items-center justify-content-center">
-                  {!loading ? (
+                  {!chartLoading ? (
                      <Line
                         data={{ labels: datasCriptomoeda, datasets: [{ label: "Preço em dólar", data: precosCriptomoeda }] }}
                         options={{ responsive: true }}
