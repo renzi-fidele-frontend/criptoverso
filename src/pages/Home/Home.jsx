@@ -81,7 +81,7 @@ const Home = () => {
          <Row className="gy-3">
             <Col xs={12} sm={12} xl={8}>
                <Row>
-                  {loading
+                  {!loading
                      ? estatisticasGlobais?.map((v, k) => (
                           <Col key={k} sm={6}>
                              <div>
