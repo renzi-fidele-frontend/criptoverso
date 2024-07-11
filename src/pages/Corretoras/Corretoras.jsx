@@ -72,7 +72,7 @@ const Corretoras = () => {
                         </tr>
                      </thead>
                      <tbody>
-                        {loading
+                        {!loading
                            ? corretorasPaginadas?.map((v, k) => <LinhaCorretora corretora={v} chave={k} key={k} />)
                            : gerarArray(12).map((v, k) => <LinhaCorretora chave={k} key={k} />)}
                      </tbody>

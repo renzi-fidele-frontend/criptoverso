@@ -2,13 +2,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CryptofetchOptions } from "../../services/cryptoApi";
-import { Col, Container, Form, ListGroup, Row } from "react-bootstrap";
+import { Col, Container, Form, ListGroup, Placeholder, Row } from "react-bootstrap";
 import millify from "millify";
 import translate from "translate";
 import Chart from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 import { CategoryScale } from "chart.js";
 import styles from "./MoedaIndividual.module.css";
+import { gerarArray } from "../../hooks/useGerarArray";
 
 Chart.register(CategoryScale);
 
@@ -119,12 +120,16 @@ const MoedaIndividual = () => {
             <Col className="text-center">
                <h2 id={styles.tit} className="fw-bold fs-1 mt-2 mt-md-4">
                   Estatísticas do{" "}
-                  <span style={{ color: criptomoeda?.color, textShadow: "1px 1px 1px black" }}>
-                     {criptomoeda?.name} ({criptomoeda?.symbol})
-                  </span>
+                  {!loading ? (
+                     <span style={{ color: criptomoeda?.color, textShadow: "1px 1px 1px black" }}>
+                        {criptomoeda?.name} ({criptomoeda?.symbol})
+                     </span>
+                  ) : (
+                     <Placeholder xs={3} />
+                  )}
                </h2>
                <p id={styles.descricao} className="px-xl-5 mt-3 mt-md-4 mb-3 mb-md-5">
-                  {descricaoTraduzida}
+                  {!loading ? descricaoTraduzida : <Placeholder xs={12} />}
                </p>
 
                <hr />
@@ -144,32 +149,44 @@ const MoedaIndividual = () => {
                <Row className="mt-3">
                   <Col xs={12} xxl={6}>
                      <h3 id={styles.titulo2} className="text-xxl-start fs-2 text-center">
-                        Gráfico do preço do {criptomoeda?.name}
+                        Gráfico do preço do {!loading ? criptomoeda?.name : <Placeholder xs={4} />}
                      </h3>
                   </Col>
                   <Col id={styles.destaque} className="d-flex gap-4 justify-content-center justify-content-xxl-end fs-5 mb-4 mb-xxl-0">
                      <span>
                         <i className="bi bi-arrow-down-up"></i> Alteração: <br className="d-inline d-sm-none" />
-                        <b className={`${historico?.change >= 0 ? "text-success" : "text-danger"}`}>{historico?.change}% </b>
+                        {!loading ? (
+                           <b className={`${historico?.change >= 0 ? "text-success" : "text-danger"}`}>{historico?.change}% </b>
+                        ) : (
+                           <Placeholder xs={7} />
+                        )}
                      </span>
                      <span>
                         <i className="bi bi-coin"></i> Preço atual: <br className="d-inline d-sm-none" />
-                        <b>{millify(criptomoeda?.price)} USD</b>
+                        {!loading ? <b>{millify(criptomoeda?.price)} USD</b> : <Placeholder xs={7} />}
                      </span>
                   </Col>
                </Row>
                <div className="d-flex align-items-center justify-content-center">
-                  <Line
-                     data={{ labels: datasCriptomoeda, datasets: [{ label: "Preço em dólar", data: precosCriptomoeda }] }}
-                     options={{ responsive: true }}
-                  />
+                  {!loading ? (
+                     <Line
+                        data={{ labels: datasCriptomoeda, datasets: [{ label: "Preço em dólar", data: precosCriptomoeda }] }}
+                        options={{ responsive: true }}
+                     />
+                  ) : (
+                     <Placeholder xs={12} animation="wave">
+                        <Placeholder className="mt-3 d-flex align-items-center justify-content-center" id={styles.grafLoad} xs={12}>
+                           <p className="text-light fs-5">Carregando o gráfico...</p>
+                        </Placeholder>
+                     </Placeholder>
+                  )}
                </div>
 
                {/*   Estatisticas da criptomoeda  */}
                <Row className="mt-5 gx-md-5">
                   <Col xs={12} xxl={6}>
-                     <h3 id={styles.subtit}>Estatísticas de valor do {criptomoeda?.name}</h3>
-                     <p>Visão geral mostrando as estatisticas do {criptomoeda?.name}</p>
+                     <h3 id={styles.subtit}>Estatísticas de valor do {!loading ? criptomoeda?.name : <Placeholder xs={3} />}</h3>
+                     <p>Visão geral mostrando as estatisticas do {!loading ? criptomoeda?.name : <Placeholder xs={2} />}</p>
                      <ListGroup className="mt-4">
                         {estatisticas.map((v, k) => (
                            <ListGroup.Item key={k} action>
@@ -179,7 +196,7 @@ const MoedaIndividual = () => {
                                     <p className="mb-0 text-truncate">{v.titulo}</p>
                                  </div>
 
-                                 <span className="fw-bold">{v.valor}</span>
+                                 {!loading ? <span className="fw-bold">{v.valor}</span> : <Placeholder xs={3} />}
                               </div>
                            </ListGroup.Item>
                         ))}
@@ -197,7 +214,7 @@ const MoedaIndividual = () => {
                                     <p className="mb-0 text-truncate">{v.titulo}</p>
                                  </div>
 
-                                 <span className="fw-bold">{v.valor}</span>
+                                 {!loading ? <span className="fw-bold">{v.valor}</span> : <Placeholder xs={3} />}
                               </div>
                            </ListGroup.Item>
                         ))}
@@ -211,19 +228,30 @@ const MoedaIndividual = () => {
                <Row className="mt-4 mb-5 mb-lg-0 pt-3" fluid>
                   <Col>
                      <h3 id={styles.titulo2} className="fs-2">
-                        Links do {criptomoeda?.name}
+                        Links do {!loading ? criptomoeda?.name : <Placeholder xs={4} md={3} />}
                      </h3>
                      <ListGroup className="mt-4">
-                        {criptomoeda?.links?.map((v, k) => (
-                           <ListGroup.Item action key={k}>
-                              <div className="p-1 p-md-3 d-flex align-items-center justify-content-between">
-                                 <p className="mb-0 text-capitalize fw-medium">{v?.type}</p>
-                                 <a href={v?.url} className="fw-bolder" target="_blank">
-                                    {v?.name}
-                                 </a>
-                              </div>
-                           </ListGroup.Item>
-                        ))}
+                        {!loading
+                           ? criptomoeda?.links?.map((v, k) => (
+                                <ListGroup.Item action key={k}>
+                                   <div className="p-1 p-md-3 d-flex align-items-center justify-content-between">
+                                      <p className="mb-0 text-capitalize fw-medium">{v?.type}</p>
+                                      <a href={v?.url} className="fw-bolder" target="_blank">
+                                         {v?.name}
+                                      </a>
+                                   </div>
+                                </ListGroup.Item>
+                             ))
+                           : gerarArray(5).map((v, k) => (
+                                <ListGroup.Item action key={k}>
+                                   <div className="p-1 p-md-3">
+                                      <Placeholder animation="wave" className="d-flex align-items-center justify-content-between">
+                                         <Placeholder xs={3} />
+                                         <Placeholder xs={6} />
+                                      </Placeholder>
+                                   </div>
+                                </ListGroup.Item>
+                             ))}
                      </ListGroup>
                   </Col>
                </Row>
