@@ -44,23 +44,28 @@ const Noticias = () => {
          <h2 className="fw-bold mb-5 titulo1">Veja as notícias sobre o mundo crypto</h2>
 
          <Row className="g-4">
-            {noticiasPaginadas.length > 0 &&
-               noticiasPaginadas.map((v, k) => {
-                  if (paginaAtualNoticias !== 1) {
-                     return (
-                        <Col md={6} key={k}>
-                           <CardNoticia noticia={v} />
-                        </Col>
-                     );
-                  } else {
-                     if (k !== 1)
-                        return (
-                           <Col md={6} key={k}>
-                              <CardNoticia noticia={v} />
-                           </Col>
-                        );
-                  }
-               })}
+            {!loading
+               ? noticiasPaginadas.map((v, k) => {
+                    if (paginaAtualNoticias !== 1) {
+                       return (
+                          <Col md={6} key={k}>
+                             <CardNoticia noticia={v} />
+                          </Col>
+                       );
+                    } else {
+                       if (k !== 1)
+                          return (
+                             <Col md={6} key={k}>
+                                <CardNoticia noticia={v} />
+                             </Col>
+                          );
+                    }
+                 })
+               : gerarArray(6).map((v, k) => (
+                    <Col md={6} key={k}>
+                       <CardNoticia />
+                    </Col>
+                 ))}
          </Row>
 
          {/*  Paginação  */}
