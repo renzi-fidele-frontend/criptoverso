@@ -85,7 +85,9 @@ const Home = () => {
                      ? estatisticasGlobais?.map((v, k) => (
                           <Col key={k} sm={6}>
                              <div>
-                                <h5 id={styles.subtit} className="text-secondary">{v.nome}</h5>
+                                <h5 id={styles.subtit} className="text-secondary">
+                                   {v.nome}
+                                </h5>
                                 <p className="fs-2">{v.valor}</p>
                              </div>
                           </Col>
@@ -93,7 +95,9 @@ const Home = () => {
                      : estatisticasGlobais?.map((v, k) => (
                           <Col key={k} sm={6}>
                              <div>
-                                <h5 id={styles.subtit} className="text-secondary">{v.nome}</h5>
+                                <h5 id={styles.subtit} className="text-secondary">
+                                   {v.nome}
+                                </h5>
                                 <p className="fs-2">
                                    <Placeholder key={k} animation="wave">
                                       <Placeholder xs={5} md={8} />
@@ -122,7 +126,7 @@ const Home = () => {
                </Col>
             </Row>
             <Row className="g-3">
-               {criptomoedas ? (
+               {loading ? (
                   criptomoedas.map((v, k) => {
                      if (k < 10)
                         return (
@@ -133,7 +137,11 @@ const Home = () => {
                   })
                ) : (
                   <>
-                     <p>Loading</p>
+                     {gerarArray(6).map((v, k) => (
+                        <Col md={6} lg={4} xxl={3} key={k}>
+                           <CardMoeda />
+                        </Col>
+                     ))}
                   </>
                )}
             </Row>
