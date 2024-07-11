@@ -72,8 +72,9 @@ const Corretoras = () => {
                         </tr>
                      </thead>
                      <tbody>
-                        {corretorasPaginadas.length > 0 &&
-                           corretorasPaginadas?.map((v, k) => <LinhaCorretora corretora={v} chave={k} key={k} />)}
+                        {!loading
+                           ? corretorasPaginadas?.map((v, k) => <LinhaCorretora corretora={v} chave={k} key={k} />)
+                           : gerarArray(12).map((v, k) => <LinhaCorretora chave={k} key={k} />)}
                      </tbody>
                   </Table>
                </div>

@@ -1,4 +1,4 @@
-import { Badge, Collapse, Image } from "react-bootstrap";
+import { Badge, Collapse, Image, Placeholder } from "react-bootstrap";
 import styles from "./LinhaCorretora.module.css";
 import { useEffect, useState } from "react";
 import translate from "translate";
@@ -26,7 +26,7 @@ const LinhaCorretora = ({ corretora, chave }) => {
       traduzirTexto();
    }, [corretora]);
 
-   return (
+   return corretora ? (
       <>
          <tr style={{ cursor: "pointer" }} onClick={() => setMostrar(!mostrar)}>
             <td className={styles.td}>{corretora?.numero}.</td>
@@ -65,6 +65,35 @@ const LinhaCorretora = ({ corretora, chave }) => {
                </Collapse>
             </td>
          </div>
+      </>
+   ) : (
+      <>
+         <Placeholder></Placeholder>
+         <tr style={{ cursor: "pointer" }} onClick={() => setMostrar(!mostrar)}>
+            <td className={styles.td}>
+               <Placeholder xs={4} xl={3} />.
+            </td>
+            <td className={styles.td}>
+               <div className="d-flex gap-1 gap-lg-3 flex-nowrap align-items-center">
+                  <Placeholder id={styles.foto} />
+                  <Placeholder xs={7} />
+               </div>
+            </td>
+            <td className={styles.td}>
+               <div className="d-flex align-items-center h-100">
+                  <Placeholder xs={4} />
+               </div>
+            </td>
+            <td className={styles.td}>
+               <Placeholder xs={4} />
+            </td>
+            <td className={styles.td}>
+               <Placeholder xs={7} />
+            </td>
+            <td className={styles.td}>
+               <Placeholder xs={4} />
+            </td>
+         </tr>
       </>
    );
 };
