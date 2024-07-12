@@ -56,7 +56,13 @@ const MoedaIndividual = () => {
          let sortedHist = res.data.data.history;
          sortedHist.sort((a, b) => b.timestamp - a.timestamp);
          setHistorico(res.data.data);
-         let datas = sortedHist.map((v) => new Date(v.timestamp * 1000).toLocaleDateString());
+         let datas;
+         if (periodo === "24h" || periodo === "3h") {
+            datas = sortedHist.map((v) => new Date(v.timestamp * 1000).toLocaleTimeString());
+         } else {
+            datas = sortedHist.map((v) => new Date(v.timestamp * 1000).toLocaleDateString());
+         }
+
          let precos = sortedHist.map((v) => v.price);
          setDatasCriptomoeda(datas);
          setPrecosCriptomoeda(precos);
