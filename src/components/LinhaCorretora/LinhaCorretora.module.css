@@ -3,6 +3,11 @@
    height: 40px;
 }
 
+#fotoBandeira {
+   width: 40px;
+   height: 40px;
+}
+
 .td {
    vertical-align: middle;
 }

@@ -15,7 +15,6 @@ const Criptomoedas = () => {
    const { criptomoedas, paginaAtualCriptomoedas, itemsPorPaginaCriptomoedas, totalPaginasCriptomoedas } = useSelector(
       (state) => state.criptomoedas
    );
-
    const dispatch = useDispatch();
    const [criptomoedasPaginadas, setCriptomoedasPaginadas] = useState([]);
    const [resultadosPesquisaInstantanea, setResultadosPesquisaInstantanea] = useState(null);
@@ -41,11 +40,6 @@ const Criptomoedas = () => {
       );
    }
 
-   /*   TODO: Adicionar feature de pesquisa ao se clickar no botão */
-   async function pesquisarCriptomoeda(e) {
-      e.preventDefault;
-   }
-
    useEffect(() => {
       if (!criptomoedas) apanharCriptomoedas();
 
@@ -56,13 +50,12 @@ const Criptomoedas = () => {
    return (
       <Container id={styles.ct} fluid>
          {/*   Campo de pesquisa  */}
-
          <Row className="mb-4 mb-sm-5 mb-xl-5">
             <Col xs={12} lg={9}>
                <h2 className="fw-bold titulo1">Veja todas as criptomoedas do mercado</h2>
             </Col>
             <Col>
-               <Form onSubmit={pesquisarCriptomoeda} className="d-flex gap-2">
+               <Form onSubmit={(e) => e.preventDefault()} className="d-flex gap-2">
                   <FormControl
                      ref={termoPesquisaRef}
                      placeholder="Encontre a sua moeda favorita"

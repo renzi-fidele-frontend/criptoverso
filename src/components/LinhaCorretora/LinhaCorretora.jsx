@@ -2,11 +2,15 @@ import { Badge, Collapse, Image, Placeholder } from "react-bootstrap";
 import styles from "./LinhaCorretora.module.css";
 import { useEffect, useState } from "react";
 import translate from "translate";
+import axios from "axios";
+import naoDisponivel from "../../assets/semBandeira.png";
 
 const LinhaCorretora = ({ corretora, chave }) => {
    const [mostrar, setMostrar] = useState(false);
    const [descricaoTraduzida, setDescricaoTraduzida] = useState("");
    const [paisTraduzido, setPaisTraduzido] = useState("");
+   const [fotoBandeira, setFotoBandeira] = useState("");
+
    const [loading, setLoading] = useState(false);
 
    async function traduzirTexto() {
@@ -22,8 +26,18 @@ const LinhaCorretora = ({ corretora, chave }) => {
       setLoading(false);
    }
 
+   async function apanharCountryCode(nome) {
+      try {
+         const res = await axios(`https://restcountries.com/v3.1/name/${encodeURIComponent(nome)}`);
+         setFotoBandeira(res.data[0].flags.png);
+      } catch (error) {
+         setFotoBandeira(naoDisponivel);
+      }
+   }
+
    useEffect(() => {
       traduzirTexto();
+      apanharCountryCode(corretora?.Country);
    }, [corretora]);
 
    return corretora ? (
@@ -44,7 +58,22 @@ const LinhaCorretora = ({ corretora, chave }) => {
                </div>
             </td>
             <td className={styles.td}>{corretora?.DISPLAYTOTALVOLUME24H?.BTC}</td>
-            <td className={styles.td}>{paisTraduzido}</td>
+            <td className={styles.td}>
+               <div className="d-flex gap-2 align-items-center">
+                  {loading ? (
+                     <>
+                        <Placeholder xs={12} animation="wave">
+                           <Placeholder xs={9} />
+                        </Placeholder>
+                     </>
+                  ) : (
+                     <>
+                        <Image id={styles.fotoBandeira} src={fotoBandeira} />
+                        <span>{paisTraduzido}</span>
+                     </>
+                  )}
+               </div>
+            </td>
             <td className={styles.td}>
                {corretora?.Trades ? (
                   <span className="text-success">
