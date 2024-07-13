@@ -28,16 +28,21 @@ const LinhaCorretora = ({ corretora, chave }) => {
 
    async function apanharCountryCode(nome) {
       try {
-         const res = await axios(`https://restcountries.com/v3.1/name/${encodeURIComponent(nome)}`);
+         const res = await axios(
+            `https://restcountries.com/v3.1/name/${encodeURIComponent(nome?.toLowerCase()?.includes("u.s.a") ? "united states" : nome)}`
+         );
          setFotoBandeira(res.data[0].flags.png);
       } catch (error) {
+         console.log(error.message);
          setFotoBandeira(naoDisponivel);
       }
    }
 
    useEffect(() => {
-      traduzirTexto();
-      apanharCountryCode(corretora?.Country);
+      if (corretora) {
+         traduzirTexto();
+         apanharCountryCode(corretora?.Country);
+      }
    }, [corretora]);
 
    return corretora ? (
