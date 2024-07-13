@@ -68,7 +68,7 @@ const LinhaCorretora = ({ corretora, chave }) => {
                      </>
                   ) : (
                      <>
-                        <Image id={styles.fotoBandeira} src={fotoBandeira} />
+                        <Image id={styles.foto} src={fotoBandeira} />
                         <span>{paisTraduzido}</span>
                      </>
                   )}
