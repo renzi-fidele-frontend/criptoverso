@@ -4,6 +4,8 @@ import { CDBSidebar, CDBSidebarContent, CDBSidebarFooter, CDBSidebarHeader, CDBS
 import { NavLink, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setModoEscuro } from "../../state/tema/temaSlice";
+import { Image } from "react-bootstrap";
+import logo from "../../assets/logo1.png";
 
 const SideBar = () => {
    const rota = useLocation().pathname;
@@ -20,9 +22,9 @@ const SideBar = () => {
       <div id={styles.ct} className="d-none d-lg-flex" style={{ overflow: "scroll initial" }}>
          <CDBSidebar textColor="#fff" className={`${styles.sidebar} pb-4`}>
             <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
-               <a href="/" className="text-decoration-none" style={{ color: "inherit" }}>
-                  Criptoverso
-               </a>
+               <div className="d-flex align-items-center">
+                  <Image id={styles.logo} src={logo} />
+               </div>
             </CDBSidebarHeader>
 
             <CDBSidebarContent className="sidebar-content">
