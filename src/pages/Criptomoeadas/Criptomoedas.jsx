@@ -9,6 +9,7 @@ import CardMoeda from "../../components/CardMoeda/CardMoeda";
 import { gerarArray } from "../../hooks/useGerarArray";
 import nadaEncontrado from "../../assets/nadaEncontrado.png";
 import { paginarArray } from "../../hooks/usePaginarArray";
+import Paginacao from "../../components/Paginacao/Paginacao";
 
 const Criptomoedas = () => {
    const [loading, setLoading] = useState(false);
@@ -108,47 +109,17 @@ const Criptomoedas = () => {
 
          {/*  Paginação  */}
          {!resultadosPesquisaInstantanea && criptomoedas && (
-            <Row className="mt-5 mt-md-0 mb-5 pb-0 pb-5 mb-lg-0">
-               <Col className="mt-md-5">
-                  {/*  Desktop  */}
-                  <Pagination size="lg" className="d-none d-md-flex flex-wrap justify-content-center">
-                     {gerarArray(totalPaginasCriptomoedas)?.map((v, k) => (
-                        <Pagination.Item
-                           onClick={() => {
-                              if (v !== paginaAtualCriptomoedas.current) {
-                                 window.scrollTo({ top: 0, behavior: "smooth" });
-                                 dispatch(setPaginaAtualCriptomoedas(v));
-                                 setCriptomoedasPaginadas(paginarArray(criptomoedas, v, itemsPorPaginaCriptomoedas));
-                              }
-                           }}
-                           active={v === paginaAtualCriptomoedas}
-                           key={k}
-                        >
-                           {v}
-                        </Pagination.Item>
-                     ))}
-                  </Pagination>
-
-                  {/*  Mobile  */}
-                  <Pagination size="sm" className="mb-5 mb-lg-0 d-flex d-md-none flex-wrap justify-content-center">
-                     {gerarArray(totalPaginasCriptomoedas)?.map((v, k) => (
-                        <Pagination.Item
-                           onClick={() => {
-                              if (v !== paginaAtualCriptomoedas.current) {
-                                 window.scrollTo({ top: 0, behavior: "smooth" });
-                                 dispatch(setPaginaAtualCriptomoedas(v));
-                                 setCriptomoedasPaginadas(paginarArray(criptomoedas, v, itemsPorPaginaCriptomoedas));
-                              }
-                           }}
-                           active={v === paginaAtualCriptomoedas}
-                           key={k}
-                        >
-                           {v}
-                        </Pagination.Item>
-                     ))}
-                  </Pagination>
-               </Col>
-            </Row>
+            <Paginacao
+               paginaAtual={paginaAtualCriptomoedas}
+               tamanhoDesktop="lg"
+               tamanhoMobile="sm"
+               totalPaginas={totalPaginasCriptomoedas}
+               onPageClick={(pagina) => {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                  dispatch(setPaginaAtualCriptomoedas(pagina));
+                  setCriptomoedasPaginadas(paginarArray(criptomoedas, pagina, itemsPorPaginaCriptomoedas));
+               }}
+            />
          )}
       </Container>
    );
