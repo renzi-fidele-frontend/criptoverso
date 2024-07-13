@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./NavBarMobile.module.css";
-import { Button, Container, Navbar } from "react-bootstrap";
+import { Button, Container, Image, Navbar } from "react-bootstrap";
 import { setMostrar } from "../../state/MostrarNavBar/MostrarNavBarSlice";
 import { Link } from "react-router-dom";
 import { setModoEscuro } from "../../state/tema/temaSlice";
+import logo from "../../assets/logo1.png";
 
 const NavBarMobile = () => {
    const dispatch = useDispatch();
@@ -19,9 +20,9 @@ const NavBarMobile = () => {
    return (
       <Navbar className="px-3 d-lg-none d-flex" id={styles.ct} style={{ zIndex: 10 }}>
          <Container className="container-sm d-flex justify-content-between align-items-center">
-            <Navbar.Brand as={Link} to="/" className="fw-bold text-light">
-               Criptoverso
-            </Navbar.Brand>
+            <div className="d-flex align-items-center">
+               <Image src={logo} id={styles.logo} />
+            </div>
 
             <div className="d-flex gap-2 gap-sm-3 align-items-center">
                <Button onClick={mudarTema} className="rounded-circle" variant="outline-light">
