@@ -25,8 +25,10 @@ const CardNoticia = ({ noticia }) => {
    return noticia ? (
       <Card className={styles.ct} as={Link} to={noticia?.url} target="_blank">
          <Card.Body as={Row}>
-            <Col xs={12} xl={6}>
-               <Image className="border rounded-1" id={styles.fotoNoticia} src={noticia?.imageurl} />
+            <Col xs={12} xl={6} className="position-relative">
+               <div id={styles.fotoIndisponivel}>
+                  <Image className="border rounded-1" id={styles.fotoNoticia} src={noticia?.imageurl} />
+               </div>
             </Col>
             <Col className="d-flex pt-2 pt-xl-0 flex-column justify-content-between">
                <Card.Title id={styles.titulo}>{noticia?.title}</Card.Title>

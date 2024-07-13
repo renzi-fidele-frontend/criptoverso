@@ -47,22 +47,11 @@ const Noticias = () => {
 
          <Row className="g-4">
             {!loading
-               ? noticiasPaginadas.map((v, k) => {
-                    if (paginaAtualNoticias !== 1) {
-                       return (
-                          <Col md={6} key={k}>
-                             <CardNoticia noticia={v} />
-                          </Col>
-                       );
-                    } else {
-                       if (k !== 1)
-                          return (
-                             <Col md={6} key={k}>
-                                <CardNoticia noticia={v} />
-                             </Col>
-                          );
-                    }
-                 })
+               ? noticiasPaginadas.map((v, k) => (
+                    <Col md={6} key={k}>
+                       <CardNoticia noticia={v} />
+                    </Col>
+                 ))
                : gerarArray(6).map((v, k) => (
                     <Col md={6} key={k}>
                        <CardNoticia />

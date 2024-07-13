@@ -13,6 +13,14 @@
    object-fit: cover;
 }
 
+#fotoIndisponivel {
+   background-color: #d1d1ff;
+   background: radial-gradient(circle, transparent 20%, #d1d1ff 20%, #d1d1ff 80%, transparent 80%, transparent),
+      radial-gradient(circle, transparent 20%, #d1d1ff 20%, #d1d1ff 80%, transparent 80%, transparent) 25px 25px,
+      linear-gradient(#414489 2px, transparent 2px) 0 -1px, linear-gradient(90deg, #414489 2px, #d1d1ff 2px) -1px 0;
+   background-size: 50px 50px, 50px 50px, 25px 25px, 25px 25px;
+}
+
 #fotoAutor {
    width: 44px;
    height: 44px;
