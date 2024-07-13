@@ -7,6 +7,7 @@ import styles from "./Corretoras.module.css";
 import LinhaCorretora from "../../components/LinhaCorretora/LinhaCorretora";
 import { paginarArray } from "../../hooks/usePaginarArray";
 import { gerarArray } from "../../hooks/useGerarArray";
+import Paginacao from "../../components/Paginacao/Paginacao";
 
 const Corretoras = () => {
    const [loading, setLoading] = useState(false);
@@ -83,47 +84,17 @@ const Corretoras = () => {
 
          {/*  Paginação  */}
          {corretorasPaginadas && (
-            <Row className="mt-2 mb-1 mb-md-0">
-               <Col className="mt-xxl-4 ">
-                  {/*  Desktop  */}
-                  <Pagination className="d-none d-md-flex flex-wrap justify-content-center mb-5 pb-5 mb-lg-0 pb-lg-0">
-                     {gerarArray(totalPaginas)?.map((v, k) => (
-                        <Pagination.Item
-                           onClick={() => {
-                              if (v !== paginaAtual.current) {
-                                 window.scrollTo({ top: 0, behavior: "smooth" });
-                                 dispatch(setPaginaAtual(v));
-                                 setCorretorasPaginadas(paginarArray(corretoras, v, itemsPorPagina));
-                              }
-                           }}
-                           active={v === paginaAtual}
-                           key={k}
-                        >
-                           {v}
-                        </Pagination.Item>
-                     ))}
-                  </Pagination>
-
-                  {/*  Mobile  */}
-                  <Pagination size="sm" className="d-flex d-md-none flex-wrap justify-content-center mb-5 pb-5 mb-lg-0 pb-lg-0">
-                     {gerarArray(totalPaginas)?.map((v, k) => (
-                        <Pagination.Item
-                           onClick={() => {
-                              if (v !== paginaAtual.current) {
-                                 window.scrollTo({ top: 0, behavior: "smooth" });
-                                 dispatch(setPaginaAtual(v));
-                                 setCorretorasPaginadas(paginarArray(corretoras, v, itemsPorPagina));
-                              }
-                           }}
-                           active={v === paginaAtual}
-                           key={k}
-                        >
-                           {v}
-                        </Pagination.Item>
-                     ))}
-                  </Pagination>
-               </Col>
-            </Row>
+            <Paginacao
+               paginaAtual={paginaAtual}
+               tamanhoDesktop="md"
+               tamanhoMobile="sm"
+               totalPaginas={totalPaginas}
+               onPageClick={(pagina) => {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                  dispatch(setPaginaAtual(pagina));
+                  setCorretorasPaginadas(paginarArray(corretoras, pagina, itemsPorPagina));
+               }}
+            />
          )}
       </Container>
    );
