@@ -19,6 +19,7 @@ const Home = () => {
    const { estatisticasGerais } = useSelector((state) => state.estatisticasGerais);
    const { criptomoedas } = useSelector((state) => state.criptomoedas);
    const { noticias } = useSelector((state) => state.noticias);
+   const { modoEscuro } = useSelector((state) => state.tema);
 
    const dispatch = useDispatch();
 
@@ -109,7 +110,7 @@ const Home = () => {
                </Row>
             </Col>
             <Col className="d-none d-xl-inline">
-               <Image src={foto} id={styles.foto} />
+               <Image src={foto} className={modoEscuro && styles.filtroEscuro} id={styles.foto} />
             </Col>
          </Row>
 
