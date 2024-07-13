@@ -10,6 +10,7 @@ const Paginacao = ({ onPageClick, paginaAtual, totalPaginas, tamanhoDesktop, tam
                {gerarArray(totalPaginas)?.map((v, k) => (
                   <Pagination.Item
                      onClick={() => {
+                        document.querySelector("#corpo").scrollTo({ top: 0, behavior: "smooth" });
                         if (v !== paginaAtual) onPageClick(v);
                      }}
                      active={v === paginaAtual}

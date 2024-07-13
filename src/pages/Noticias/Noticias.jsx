@@ -1,9 +1,9 @@
-import { Col, Container, Pagination, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import CardNoticia from "../../components/CardNoticia/CardNoticia";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setNoticias, setPaginaAtualNoticias, setTotalPaginasNoticias } from "../../state/noticias/noticiasSlice";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gerarArray } from "../../hooks/useGerarArray";
 import { paginarArray } from "../../hooks/usePaginarArray";
 import Paginacao from "../../components/Paginacao/Paginacao";
@@ -12,6 +12,7 @@ const Noticias = () => {
    const [loading, setLoading] = useState(false);
    const [noticiasPaginadas, setNoticiasPaginadas] = useState([]);
    const dispatch = useDispatch();
+   const ctRef = useRef(null);
 
    const { noticias, paginaAtualNoticias, itemsPorPaginaNoticias, totalPaginasNoticias } = useSelector((state) => state.noticias);
 
@@ -41,7 +42,7 @@ const Noticias = () => {
    }, [noticias, noticiasPaginadas]);
 
    return (
-      <Container fluid>
+      <Container ref={ctRef} fluid>
          <h2 className="fw-bold mb-5 titulo1">Veja as notícias sobre o mundo crypto</h2>
 
          <Row className="g-4">
