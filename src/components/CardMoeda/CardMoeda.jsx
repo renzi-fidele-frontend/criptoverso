@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const CardMoeda = ({ moeda }) => {
    return moeda ? (
-      <Card as={Link} className={styles.ct} preventScrollReset={false} to={`/criptomoeda/${moeda.uuid}`}>
+      <Card as={Link} className={styles.ct} to={`/criptomoeda/${moeda.uuid}`}>
          <Card.Header className="flex-row align-items-center justify-content-between d-flex">
             <p className="mb-0 fw-medium">{`${moeda?.rank}. ${moeda?.name}`}</p>
             <Image id={styles.foto} src={moeda?.iconUrl} />

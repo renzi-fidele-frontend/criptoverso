@@ -74,6 +74,7 @@ const MoedaIndividual = () => {
 
    useEffect(() => {
       console.log(`O uuid é: ${uuid}`);
+      window.scrollTo({ top: 0, behavior: "smooth" });
       if (!criptomoeda) apanharDetalhesCriptomoeda();
       if (!historico) apanharHistoricoCriptomoeda("7d");
    }, [uuid]);
