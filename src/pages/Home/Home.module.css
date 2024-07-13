@@ -3,7 +3,7 @@
 }
 
 .filtroEscuro {
-   filter: grayscale(100%);
+   filter: saturate(85%);
 }
 
 @media screen and (max-width: 1300px) {
