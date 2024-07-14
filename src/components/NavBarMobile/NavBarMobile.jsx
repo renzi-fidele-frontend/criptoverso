@@ -21,7 +21,9 @@ const NavBarMobile = () => {
       <Navbar className="px-3 d-lg-none d-flex" id={styles.ct} style={{ zIndex: 10 }}>
          <Container className="container-sm d-flex justify-content-between align-items-center">
             <div className="d-flex align-items-center">
-               <Image src={logo} id={styles.logo} />
+               <Link to="/" preventScrollReset={false}>
+                  <Image src={logo} id={styles.logo} />
+               </Link>
             </div>
 
             <div className="d-flex gap-2 gap-sm-3 align-items-center">
