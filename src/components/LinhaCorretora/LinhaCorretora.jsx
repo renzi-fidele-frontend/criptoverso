@@ -1,9 +1,10 @@
-import { Badge, Collapse, Image, Placeholder } from "react-bootstrap";
+import { Badge, Button, Collapse, Image, Placeholder } from "react-bootstrap";
 import styles from "./LinhaCorretora.module.css";
 import { useEffect, useState } from "react";
 import translate from "translate";
 import axios from "axios";
 import naoDisponivel from "../../assets/semBandeira.png";
+import { Link } from "react-router-dom";
 
 const LinhaCorretora = ({ corretora, chave }) => {
    const [mostrar, setMostrar] = useState(false);
@@ -95,7 +96,12 @@ const LinhaCorretora = ({ corretora, chave }) => {
          <div style={{ display: "table-row" }} className={`${!mostrar && "border-0"}`}>
             <td className={!mostrar && "p-0 border-0"} colSpan={12}>
                <Collapse in={mostrar}>
-                  <div className={styles.td}>{descricaoTraduzida}</div>
+                  <div className={`${styles.td} pb-2`}>
+                     <p>{descricaoTraduzida}</p>
+                     <a target="_blank" className="border rounded-1 p-1 shadow-sm" href={corretora?.AffiliateURL}>
+                        Link de Afiliação <i className="bi bi-globe"></i>
+                     </a>
+                  </div>
                </Collapse>
             </td>
          </div>
