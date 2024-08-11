@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CryptofetchOptions } from "../../services/cryptoApi";
-import { Col, Container, Form, ListGroup, Placeholder, Row } from "react-bootstrap";
+import { Col, Container, Form, ListGroup, OverlayTrigger, Placeholder, Row, Tooltip } from "react-bootstrap";
 import millify from "millify";
 import translate from "translate";
 import Chart from "chart.js/auto";
@@ -79,24 +79,45 @@ const MoedaIndividual = () => {
       if (!historico) apanharHistoricoCriptomoeda("7d");
    }, [uuid]);
 
-   // TODO: Adicionar icone com tooltip passando mais info
-   //o Market Cap nada mais é do que o valor total das ações de uma companhia.
-
    const estatisticas = [
       { titulo: "Preço", valor: `${millify(criptomoeda?.price)} USD`, icone: <i className="bi bi-coin"></i> },
       { titulo: "Posição Global", valor: `#${criptomoeda?.rank}`, icone: <i className="bi bi-hash"></i> },
-      { titulo: "Volume nas últimas 24h", valor: `${millify(criptomoeda?.["24hVolume"])} USD`, icone: <i className="bi bi-clipboard-data"></i> },
-      { titulo: "Capitalização de mercado", valor: `${millify(criptomoeda?.marketCap)} USD`, icone: <i className="bi bi-cash-stack"></i> },
       {
-         titulo: "Auge (média diária)",
+         titulo: "Volume nas últimas 24h",
+         valor: `${millify(criptomoeda?.["24hVolume"])} USD`,
+         icone: <i className="bi bi-clipboard-data"></i>,
+         tooltip: "Volume total de transações realizadas para esta criptomoeda nas últimas 24 horas",
+      },
+      {
+         titulo: "Capitalização de mercado",
+         valor: `${millify(criptomoeda?.marketCap)} USD`,
+         icone: <i className="bi bi-cash-stack"></i>,
+         tooltip:
+            "Valor total de mercado da criptomoeda, calculado multiplicando o preço atual pelo número total de moedas em circulação. Reflete a importância relativa da criptomoeda no mercado",
+      },
+      {
+         titulo: "Auge",
          valor: `${millify(criptomoeda?.allTimeHigh?.price)} USD`,
          icone: <i className="bi bi-trophy"></i>,
+         tooltip:
+            "Maior preço registrado para esta criptomoeda desde o seu lançamento, refletindo o pico máximo de valorização ao longo do tempo.",
       },
    ];
 
    const estatisticas_genericas = [
-      { titulo: "Total de mercados", valor: criptomoeda?.numberOfMarkets, icone: <i className="bi bi-graph-up-arrow"></i> },
-      { titulo: "Corretoras disponíveis", valor: criptomoeda?.numberOfExchanges, icone: <i className="bi bi-arrow-left-right"></i> },
+      {
+         titulo: "Total de mercados",
+         valor: criptomoeda?.numberOfMarkets,
+         icone: <i className="bi bi-graph-up-arrow"></i>,
+         tooltip: "Número total de mercados ou pares de negociação disponíveis para esta criptomoeda",
+      },
+      {
+         titulo: "Corretoras disponíveis",
+         valor: criptomoeda?.numberOfExchanges,
+         icone: <i className="bi bi-arrow-left-right"></i>,
+         tooltip:
+            "Número total de corretoras onde esta criptomoeda está listada e disponível para negociação, mostrando a acessibilidade da moeda no mercado",
+      },
       {
          titulo: "Validação do fornecimento",
          valor: criptomoeda?.supply?.confirmed ? (
@@ -105,16 +126,22 @@ const MoedaIndividual = () => {
             <i className="bi bi-x-square text-danger"></i>
          ),
          icone: <i className="bi bi-bank" style={{ fontWeight: "bold !important" }}></i>,
+         tooltip:
+            "Confirmação de que o fornecimento total da criptomoeda foi verificado e é preciso, garantindo a transparência sobre a quantidade em circulação",
       },
       {
          titulo: "Total de moedas fornecidas",
          valor: `${millify(criptomoeda?.supply?.total)} USD`,
          icone: <i className="bi bi-exclamation-octagon"></i>,
+         tooltip:
+            "Quantidade total de unidades desta criptomoeda que foram criadas ou estão disponíveis até o momento, incluindo moedas em circulação e aquelas que ainda não foram emitidas",
       },
       {
          titulo: "Total de moedas circulando",
          valor: `${millify(criptomoeda?.supply?.circulating)} USD`,
          icone: <i className="bi bi-exclamation-octagon"></i>,
+         tooltip:
+            "Quantidade total de unidades desta criptomoeda que estão atualmente em circulação no mercado, disponíveis para negociação ou uso",
       },
    ];
 
@@ -201,7 +228,14 @@ const MoedaIndividual = () => {
                               <div className="p-1 p-md-3 d-flex flex-column flex-sm-row align-items-center justify-content-between">
                                  <div className="d-flex gap-3 align-items-center">
                                     {v.icone}
-                                    <p className="mb-0 text-truncate">{v.titulo}</p>
+                                    <p className="mb-0 text-truncate">
+                                       {v.titulo}{" "}
+                                       {v?.tooltip && (
+                                          <OverlayTrigger overlay={<Tooltip>{v?.tooltip}</Tooltip>}>
+                                             <i className="ms-1 bi bi-info-circle-fill"></i>
+                                          </OverlayTrigger>
+                                       )}
+                                    </p>
                                  </div>
 
                                  {!loading ? <span className="fw-bold">{v.valor}</span> : <Placeholder xs={3} />}
@@ -219,7 +253,14 @@ const MoedaIndividual = () => {
                               <div className="p-1 p-md-3 d-flex flex-column flex-sm-row align-items-center justify-content-between">
                                  <div className="d-flex gap-3 align-items-center">
                                     {v.icone}
-                                    <p className="mb-0 text-truncate">{v.titulo}</p>
+                                    <p className="mb-0 text-truncate">
+                                       {v.titulo}{" "}
+                                       {v?.tooltip && (
+                                          <OverlayTrigger overlay={<Tooltip>{v?.tooltip}</Tooltip>}>
+                                             <i className="ms-1 bi bi-info-circle-fill"></i>
+                                          </OverlayTrigger>
+                                       )}
+                                    </p>
                                  </div>
 
                                  {!loading ? <span className="fw-bold">{v.valor}</span> : <Placeholder xs={3} />}

@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCorretoras, setPaginaAtual, setTotalPaginas } from "../../state/corretoras/corretorasSlice";
-import { Col, Container, OverlayTrigger, Pagination, Row, Table, Tooltip } from "react-bootstrap";
+import { Col, Container, OverlayTrigger, Row, Table, Tooltip } from "react-bootstrap";
 import styles from "./Corretoras.module.css";
 import LinhaCorretora from "../../components/LinhaCorretora/LinhaCorretora";
 import { paginarArray } from "../../hooks/usePaginarArray";
