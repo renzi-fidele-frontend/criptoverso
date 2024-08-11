@@ -146,11 +146,31 @@ const LinhaCorretora = ({ corretora, chave }) => {
                               />
                            </div>
                         </Modal.Body>
-                        <Modal.Footer>
+                        <Modal.Footer className="flex-column flex-sm-row">
                            <p>
-                              Pontuação total: {corretora?.GradePoints === 0 && <Badge bg="warning">Indisponível</Badge>}
-                              {corretora?.GradePoints >= 50 && <Badge bg="success">{corretora?.GradePoints}</Badge>}
-                              {corretora?.GradePoints < 50 && corretora?.GradePoints > 0 && <Badge bg="danger">{corretora?.GradePoints}</Badge>}
+                              Pontuação total:{" "}
+                              {corretora?.GradePoints === 0 && (
+                                 <Badge className="fs-6" bg="warning">
+                                    Indisponível
+                                 </Badge>
+                              )}
+                              {corretora?.GradePoints >= 50 && (
+                                 <Badge className="fs-6" bg="success">
+                                    {corretora?.GradePoints}
+                                 </Badge>
+                              )}
+                              {corretora?.GradePoints < 50 && corretora?.GradePoints > 0 && (
+                                 <Badge className="fs-6" bg="danger">
+                                    {corretora?.GradePoints}
+                                 </Badge>
+                              )}
+                           </p>
+                           <div className="vr d-none d-sm-block"></div>
+                           <p>
+                              Classificação:{" "}
+                              <Badge bg="secondary" className="fw-bolder fs-6">
+                                 {corretora?.Grade}
+                              </Badge>
                            </p>
                         </Modal.Footer>
                      </Modal>
