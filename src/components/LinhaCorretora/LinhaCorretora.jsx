@@ -1,16 +1,17 @@
-import { Badge, Button, Collapse, Image, Placeholder } from "react-bootstrap";
+import { Badge, Collapse, Image, Modal, Placeholder } from "react-bootstrap";
 import styles from "./LinhaCorretora.module.css";
 import { useEffect, useState } from "react";
 import translate from "translate";
 import axios from "axios";
 import naoDisponivel from "../../assets/semBandeira.png";
-import { Link } from "react-router-dom";
+import { Pie } from "react-chartjs-2";
 
 const LinhaCorretora = ({ corretora, chave }) => {
    const [mostrar, setMostrar] = useState(false);
    const [descricaoTraduzida, setDescricaoTraduzida] = useState("");
    const [paisTraduzido, setPaisTraduzido] = useState("");
    const [fotoBandeira, setFotoBandeira] = useState("");
+   const [mostrarModal, setMostrarModal] = useState(false);
 
    const [loading, setLoading] = useState(false);
 
@@ -98,9 +99,61 @@ const LinhaCorretora = ({ corretora, chave }) => {
                <Collapse in={mostrar}>
                   <div className={`${styles.td} pb-2`}>
                      <p>{descricaoTraduzida}</p>
-                     <a target="_blank" className="border rounded-1 p-1 shadow-sm" href={corretora?.AffiliateURL}>
-                        Link de Afiliação <i className="bi bi-globe"></i>
+                     <a target="_blank" className="border border-primary rounded-1 p-1 shadow-sm" href={corretora?.AffiliateURL}>
+                        Site de Afiliação <i className="bi bi-globe"></i>
                      </a>
+
+                     <a
+                        href="#"
+                        onClick={() => setMostrarModal(true)}
+                        className="text-secondary border-secondary ms-3 border rounded-1 p-1 shadow-sm"
+                     >
+                        Pontuação detalhada <i className="bi bi-info-circle-fill"></i>
+                     </a>
+                     <Modal size="lg" centered onHide={() => setMostrarModal(false)} show={mostrarModal}>
+                        <Modal.Header closeButton>
+                           <Modal.Title>Pontuação detalhada do {corretora?.Name}</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                           <div id={styles.chartCt}>
+                              <Pie
+                                 data={{
+                                    labels: [
+                                       "Legalização",
+                                       "Risco de transação",
+                                       "Equipe",
+                                       "Fornecimento de dados",
+                                       "Qualidade e Diversidade de Ativos",
+                                       "Qualidade do mercado",
+                                       "Segurarança",
+                                       "Penalidade de relatórios negativos",
+                                    ],
+                                    datasets: [
+                                       {
+                                          data: [
+                                             corretora?.GradePointsSplit?.Legal,
+                                             corretora?.GradePointsSplit?.KYCAndTransactionRisk,
+                                             corretora?.GradePointsSplit?.Team,
+                                             corretora?.GradePointsSplit?.DataProvision,
+                                             corretora?.GradePointsSplit?.AssetQualityAndDiversity,
+                                             corretora?.GradePointsSplit?.MarketQuality,
+                                             corretora?.GradePointsSplit?.Security,
+                                             corretora?.GradePointsSplit?.NegativeReportsPenalty,
+                                          ],
+                                       },
+                                    ],
+                                 }}
+                              />
+                           </div>
+                        </Modal.Body>
+                        <Modal.Footer>
+                           <p>
+                              Pontuação total: {corretora?.GradePoints === 0 && <Badge bg="warning">Indisponível</Badge>}
+                              {corretora?.GradePoints >= 50 && <Badge bg="success">{corretora?.GradePoints}</Badge>}
+                              {corretora?.GradePoints < 50 && corretora?.GradePoints > 0 && <Badge bg="danger">{corretora?.GradePoints}</Badge>}
+                           </p>
+                        </Modal.Footer>
+                     </Modal>
                   </div>
                </Collapse>
             </td>

@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CryptofetchOptions } from "../../services/cryptoApi";
-import { Col, Container, Form, ListGroup, Placeholder, Row, Spinner } from "react-bootstrap";
+import { Col, Container, Form, ListGroup, Placeholder, Row } from "react-bootstrap";
 import millify from "millify";
 import translate from "translate";
 import Chart from "chart.js/auto";

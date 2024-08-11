@@ -8,6 +8,11 @@
    height: 40px;
 }
 
+#chartCt {
+   max-width: 600px;
+   margin-inline: auto;
+}
+
 .td {
    vertical-align: middle;
 }
