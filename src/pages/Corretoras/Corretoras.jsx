@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCorretoras, setPaginaAtual, setTotalPaginas } from "../../state/corretoras/corretorasSlice";
-import { Col, Container, Pagination, Row, Table } from "react-bootstrap";
+import { Col, Container, OverlayTrigger, Pagination, Row, Table, Tooltip } from "react-bootstrap";
 import styles from "./Corretoras.module.css";
 import LinhaCorretora from "../../components/LinhaCorretora/LinhaCorretora";
 import { paginarArray } from "../../hooks/usePaginarArray";
@@ -62,13 +62,23 @@ const Corretoras = () => {
                               Pontuação
                            </th>
                            <th id={styles.th} className="text-truncate">
-                              Volume de 24h
+                              Volume de 24h{" "}
+                              <OverlayTrigger
+                                 overlay={<Tooltip>Volume total de transações realizadas na corretora nas últimas 24 horas</Tooltip>}
+                              >
+                                 <i className="bi bi-info-circle-fill"></i>
+                              </OverlayTrigger>
                            </th>
                            <th id={styles.th} className="text-truncate">
                               País de origem
                            </th>
                            <th id={styles.th} className="text-truncate">
-                              É Negociável?
+                              É Negociável?{" "}
+                              <OverlayTrigger
+                                 overlay={<Tooltip>Indica se a corretora permite a execução de operações de compra e venda</Tooltip>}
+                              >
+                                 <i className="bi bi-info-circle-fill"></i>
+                              </OverlayTrigger>
                            </th>
                         </tr>
                      </thead>
