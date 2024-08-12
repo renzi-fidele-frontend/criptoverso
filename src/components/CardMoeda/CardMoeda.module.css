@@ -2,6 +2,13 @@
    transition: 0.3s all ease-in-out;
 }
 
+#chartCt {
+   display: flex;
+   align-items: center;
+   justify-content: start;
+   height: 80px;
+}
+
 .ct:hover {
    transform: translateY(-3px);
    box-shadow: 0px 0px 10px rgb(205, 205, 207);

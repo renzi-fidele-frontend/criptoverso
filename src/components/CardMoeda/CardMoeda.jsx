@@ -2,6 +2,8 @@ import millify from "millify";
 import { Card, Image, Placeholder } from "react-bootstrap";
 import styles from "./CardMoeda.module.css";
 import { Link } from "react-router-dom";
+import { Line } from "react-chartjs-2";
+import { gerarArray } from "../../hooks/useGerarArray";
 
 const CardMoeda = ({ moeda }) => {
    return moeda ? (
@@ -15,11 +17,32 @@ const CardMoeda = ({ moeda }) => {
             <p>
                Volume de mercado: <span>{millify(moeda?.marketCap)}</span>
             </p>
-            <p>
+            <p className="pb-0">
                Alteração:{" "}
                <span className={`${Number(millify(moeda?.change)) >= 0 ? "text-success" : "text-danger"}`}>{millify(moeda?.change)}%</span>
             </p>
          </Card.Body>
+         <Card.Footer className="py-0">
+            <div id={styles.chartCt}>
+               <Line
+                  options={{
+                     plugins: {
+                        legend: false,
+                        tooltip: false,
+                     },
+                     scales: {
+                        x: {
+                           display: false,
+                        },
+                        y: {
+                           display: false,
+                        },
+                     },
+                  }}
+                  data={{ labels: gerarArray(20), datasets: [{ data: moeda?.sparkline?.toReversed()?.slice(0, 20), fill: true }] }}
+               />
+            </div>
+         </Card.Footer>
       </Card>
    ) : (
       <Card className={`${styles.ct}`}>
