@@ -38,8 +38,12 @@ const CardMoeda = ({ moeda }) => {
                            display: false,
                         },
                      },
+                     maintainAspectRatio: false,
                   }}
-                  data={{ labels: gerarArray(20), datasets: [{ data: moeda?.sparkline?.toReversed()?.slice(0, 20), fill: true }] }}
+                  data={{
+                     labels: gerarArray(23),
+                     datasets: [{ data: moeda?.sparkline?.toReversed()?.slice(0, 23), fill: true, pointBorderWidth: 0 }],
+                  }}
                />
             </div>
          </Card.Footer>
