@@ -5,6 +5,7 @@ import criptomoedasReducer from "./criptomoedas/criptomoedasSlice";
 import corretorasReducer from "./corretoras/corretorasSlice";
 import MostrarNavBarReducer from "./MostrarNavBar/MostrarNavBarSlice";
 import temaReducer from "./tema/temaSlice";
+import carteirasReducer from "./carteiras/carteirasSlice";
 
 export default configureStore({
    reducer: {
@@ -14,5 +15,6 @@ export default configureStore({
       corretoras: corretorasReducer,
       mostrarNavBar: MostrarNavBarReducer,
       tema: temaReducer,
+      carteiras: carteirasReducer,
    },
 });
