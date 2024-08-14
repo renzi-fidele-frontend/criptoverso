@@ -19,7 +19,9 @@ const CardMoeda = ({ moeda }) => {
             </p>
             <p className="pb-0">
                Alteração:{" "}
-               <span className={`${Number(millify(moeda?.change)) >= 0 ? "text-success" : "text-danger"}`}>{millify(moeda?.change)}%</span>
+               <span className={`${moeda?.change >= 0 ? "text-success" : "text-danger"}`}>{`${moeda?.change >= 0 ? "+" : ""}${
+                  moeda?.change
+               }%`}</span>
             </p>
          </Card.Body>
          <Card.Footer className="py-0">
