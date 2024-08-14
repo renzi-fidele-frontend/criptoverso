@@ -11,6 +11,7 @@ import store from "./state/store";
 import MoedaIndividual from "./pages/MoedaIndividual/MoedaIndividual";
 import NavBarMobile from "./components/NavBarMobile/NavBarMobile";
 import FooterNavBar from "./components/FooterNavBar/FooterNavBar";
+import Carteiras from "./pages/Carteiras/Carteiras";
 // TODO: Adicionar a página das carteiras crypto, com a api do https://min-api.cryptocompare.com/data/wallets/general
 function App() {
    return (
@@ -32,6 +33,7 @@ function App() {
                         <Route path="/criptomoeda/:uuid" element={<MoedaIndividual />} />
                         <Route path="/corretoras" element={<Corretoras />} />
                         <Route path="/noticias" element={<Noticias />} />
+                        <Route path="/carteiras" element={<Carteiras />} />
                      </Routes>
                   </div>
                </div>

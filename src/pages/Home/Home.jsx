@@ -70,8 +70,8 @@ const Home = () => {
    const estatisticasGlobais = [
       { nome: "Total de criptomoedas", valor: estatisticasGerais?.totalCoins },
       { nome: "Corretoras disponíveis", valor: millify(estatisticasGerais?.totalExchanges) },
-      { nome: "Valor total do mercado", valor: millify(Number(estatisticasGerais?.totalMarketCap)) },
-      { nome: "Maior volume nas últimas 24h", valor: millify(estatisticasGerais?.total24hVolume) },
+      { nome: "Valor total do mercado", valor: millify(Number(estatisticasGerais?.totalMarketCap)), usd: true },
+      { nome: "Maior volume nas últimas 24h", valor: millify(estatisticasGerais?.total24hVolume), usd: true },
       { nome: "Total de mercados", valor: millify(estatisticasGerais?.totalMarkets) },
       { nome: "Domínio do Bitcoin", valor: millify(estatisticasGerais?.btcDominance) + "%" },
    ];
@@ -89,7 +89,9 @@ const Home = () => {
                                 <h5 id={styles.subtit} className="text-secondary">
                                    {v.nome}
                                 </h5>
-                                <p className="fs-2">{v.valor}</p>
+                                <p className="fs-2">
+                                   {v.valor} {v?.usd ? "USD" : ""}
+                                </p>
                              </div>
                           </Col>
                        ))
