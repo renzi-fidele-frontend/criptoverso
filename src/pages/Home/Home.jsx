@@ -51,9 +51,7 @@ const Home = () => {
       setLoading(true);
       let res;
       try {
-         res = await axios.get(
-            "https://min-api.cryptocompare.com/data/v2/news/?lang=PT&api_key=df6fc44edb45b681313377b928ca5f322340d29fdbb6b044d81a3f2095392499"
-         );
+         res = await axios.get(`https://min-api.cryptocompare.com/data/v2/news/?lang=PT&api_key=${import.meta.env.VITE_CRYPTO_WATCH_APIKEY}`);
          dispatch(setNoticias(res.data.Data));
       } catch (error) {
          console.log(error);

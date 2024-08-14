@@ -20,7 +20,7 @@ const Corretoras = () => {
       setLoading(true);
       try {
          const res = await axios(
-            "https://min-api.cryptocompare.com/data/exchanges/general?api_key=df6fc44edb45b681313377b928ca5f322340d29fdbb6b044d81a3f2095392499"
+            `https://min-api.cryptocompare.com/data/exchanges/general?api_key=${import.meta.env.VITE_CRYPTO_WATCH_APIKEY}`
          );
          let data = Object.entries(res.data.Data).map((v, k) => {
             return { ...v[1], numero: k + 1 };

@@ -4,7 +4,7 @@ export const CryptofetchOptions = {
        referenceCurrencyUuid: "yhjMzLPhuIDl",
     },
     headers: {
-       "x-rapidapi-key": "69b11e51eamsh115553615181e35p1ed117jsnfc95950b64fd",
+       "x-rapidapi-key": import.meta.env.VITE_COINRANKING_APIKEY,
        "x-rapidapi-host": "coinranking1.p.rapidapi.com",
     },
  };

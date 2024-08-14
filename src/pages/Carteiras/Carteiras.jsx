@@ -5,14 +5,15 @@ import { useEffect } from "react";
 const Carteiras = () => {
    async function apanharCarteiras() {
       try {
-         const carteiras = await axios("https://min-api.cryptocompare.com/data/wallets/general?");
+         const res = await axios(`https://min-api.cryptocompare.com/data/wallets/general?api_key=${import.meta.env.VITE_CRYPTO_WATCH_APIKEY}`);
+         console.log(res.data);
       } catch (error) {
          console.log(error.message);
       }
    }
 
    useEffect(() => {
-      apanharCarteiras();
+      // apanharCarteiras();
    }, []);
 
    return <div>Carteiras</div>;
