@@ -15,7 +15,7 @@ const CardMoeda = ({ moeda }) => {
          <Card.Body>
             <p>Preço: {millify(moeda?.price)} USD</p>
             <p>
-               Volume de mercado: <span>{millify(moeda?.marketCap)}</span>
+               Volume de mercado: <span>{millify(moeda?.marketCap)} USD</span>
             </p>
             <p className="pb-0">
                Alteração:{" "}

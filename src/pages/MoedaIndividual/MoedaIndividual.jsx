@@ -10,6 +10,7 @@ import { Line } from "react-chartjs-2";
 import { CategoryScale } from "chart.js";
 import styles from "./MoedaIndividual.module.css";
 import { gerarArray } from "../../hooks/useGerarArray";
+import { useSelector } from "react-redux";
 
 Chart.register(CategoryScale);
 
@@ -32,6 +33,7 @@ const MoedaIndividual = () => {
    ];
    const [datasCriptomoeda, setDatasCriptomoeda] = useState([]);
    const [precosCriptomoeda, setPrecosCriptomoeda] = useState([]);
+   const { modoEscuro } = useSelector((state) => state.tema);
 
    async function apanharDetalhesCriptomoeda() {
       setLoading(true);
@@ -156,7 +158,7 @@ const MoedaIndividual = () => {
                <h2 id={styles.tit} className="fw-bold fs-1 mt-2 mt-md-4">
                   Estatísticas do{" "}
                   {!loading ? (
-                     <span style={{ color: criptomoeda?.color, textShadow: "1px 1px 1px black" }}>
+                     <span style={{ color: modoEscuro ? null : criptomoeda?.color, textShadow: "1px 1px 1px black" }}>
                         {criptomoeda?.name} ({criptomoeda?.symbol})
                      </span>
                   ) : (
@@ -191,7 +193,10 @@ const MoedaIndividual = () => {
                      <span>
                         <i className="bi bi-arrow-down-up"></i> Alteração: <br className="d-inline d-sm-none" />
                         {!loading ? (
-                           <b className={`${historico?.change >= 0 ? "text-success" : "text-danger"}`}>{historico?.change}% </b>
+                           <b className={`${historico?.change >= 0 ? "text-success" : "text-danger"}`}>
+                              {historico?.change >= 0 && "+"}
+                              {historico?.change}%{" "}
+                           </b>
                         ) : (
                            <Placeholder xs={7} />
                         )}
