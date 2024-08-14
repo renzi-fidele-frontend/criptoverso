@@ -205,7 +205,7 @@ const MoedaIndividual = () => {
                <div className="d-flex align-items-center justify-content-center">
                   {!chartLoading ? (
                      <Line
-                        data={{ labels: datasCriptomoeda, datasets: [{ label: "Preço em dólar", data: precosCriptomoeda }] }}
+                        data={{ labels: datasCriptomoeda, datasets: [{ label: "Preço em dólar", data: precosCriptomoeda, fill: true }] }}
                         options={{ responsive: true }}
                      />
                   ) : (
