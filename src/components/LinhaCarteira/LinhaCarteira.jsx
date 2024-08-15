@@ -70,17 +70,7 @@ const LinhaCarteira = ({ carteira, chave }) => {
                   )}
                </div>
             </td>
-            <td className={styles.td}>
-               {carteira?.Trades ? (
-                  <span className="text-success">
-                     <i className="bi bi-check-circle-fill me-2"></i>Sim
-                  </span>
-               ) : (
-                  <span className="text-danger">
-                     <i className="bi bi-x-circle-fill me-2"></i>Não
-                  </span>
-               )}
-            </td>
+            <td className={styles.td}>{carteira?.EaseOfUse}</td>
          </tr>
          {/*  Escondido  */}
          <div style={{ display: "table-row" }} className={`${!mostrar && "border-0"}`}>
