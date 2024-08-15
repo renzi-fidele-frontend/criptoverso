@@ -45,7 +45,7 @@ const FooterNavBar = () => {
                   <span className={`text-truncate ${styles.tit}`}>Corretoras</span>
                </Button>
                <Button
-                  to="/corretoras"
+                  to="/carteiras"
                   preventScrollReset={false}
                   active={loc.pathname === "/carteiras"}
                   style={{ width: "20%" }}

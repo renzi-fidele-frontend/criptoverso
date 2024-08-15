@@ -57,7 +57,6 @@ const Carteiras = () => {
                            </th>
                            <th id={styles.th} className="text-truncate">
                               Classificação
-                              {/* TODO: Criar componente de estrelas */}
                            </th>
                            <th id={styles.th} className="text-truncate">
                               Facilidade de uso
