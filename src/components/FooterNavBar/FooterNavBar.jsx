@@ -11,7 +11,14 @@ const FooterNavBar = () => {
       <Collapse in={mostrar}>
          <div style={{ zIndex: 100 }} className={`w-100 "d-flex" d-lg-none position-fixed bottom-0 start-0 end-0`}>
             <ButtonGroup className="w-100">
-               <Button to="/" preventScrollReset={false} active={loc.pathname === "/"} className="w-25 rounded-0 d-flex flex-column" as={Link}>
+               <Button
+                  to="/"
+                  preventScrollReset={false}
+                  active={loc.pathname === "/"}
+                  style={{ width: "20%" }}
+                  className="rounded-0 d-flex flex-column"
+                  as={Link}
+               >
                   <i className="bi bi-house-heart-fill fs-2"></i>
                   <span className={`text-truncate ${styles.tit}`}>Início</span>
                </Button>
@@ -19,7 +26,8 @@ const FooterNavBar = () => {
                   to="/criptomoedas"
                   preventScrollReset={false}
                   active={loc.pathname === "/criptomoedas"}
-                  className="w-25 rounded-0 d-flex flex-column"
+                  style={{ width: "20%" }}
+                  className="rounded-0 d-flex flex-column"
                   as={Link}
                >
                   <i className="bi-currency-exchange fs-2"></i>
@@ -29,17 +37,30 @@ const FooterNavBar = () => {
                   to="/corretoras"
                   preventScrollReset={false}
                   active={loc.pathname === "/corretoras"}
-                  className="w-25 rounded-0 d-flex flex-column"
+                  style={{ width: "20%" }}
+                  className="rounded-0 d-flex flex-column"
                   as={Link}
                >
                   <i className="bi bi-graph-up-arrow fs-2"></i>
                   <span className={`text-truncate ${styles.tit}`}>Corretoras</span>
                </Button>
                <Button
+                  to="/corretoras"
+                  preventScrollReset={false}
+                  active={loc.pathname === "/carteiras"}
+                  style={{ width: "20%" }}
+                  className="rounded-0 d-flex flex-column"
+                  as={Link}
+               >
+                  <i className="bi bi-wallet-fill fs-2"></i>
+                  <span className={`text-truncate ${styles.tit}`}>Carteiras</span>
+               </Button>
+               <Button
                   to="/noticias"
                   preventScrollReset={false}
                   active={loc.pathname === "/noticias"}
-                  className="w-25 rounded-0 d-flex flex-column"
+                  style={{ width: "20%" }}
+                  className="rounded-0 d-flex flex-column"
                   as={Link}
                >
                   <i className="bi bi-newspaper fs-2"></i>
