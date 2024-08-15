@@ -40,7 +40,7 @@ const Carteiras = () => {
                <h2 className="fw-bold mb-4 titulo1">Veja todas as carteiras digitais</h2>
 
                <div>
-                  <Table striped size="lg" responsive hover>
+                  <Table  striped size="lg" responsive hover>
                      <thead>
                         <tr>
                            <th id={styles.th} className="text-truncate">
@@ -52,8 +52,8 @@ const Carteiras = () => {
                            <th id={styles.th} className="text-truncate">
                               Plataformas
                            </th>
-                           <th id={styles.th} className="text-truncate">
-                              Criptomoedas
+                           <th id={styles.th} className="d-none d-xl-block text-truncate">
+                              Seguraça
                            </th>
                            <th id={styles.th} className="text-truncate">
                               Classificação

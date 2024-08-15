@@ -5,6 +5,9 @@ import linux from "../../assets/linux.png";
 import ios from "../../assets/ios.png";
 import windows from "../../assets/windows.png";
 import android from "../../assets/android.png";
+import hardware from "../../assets/hardware.png";
+import star from "../../assets/star.png";
+import { gerarArray } from "../../hooks/useGerarArray";
 
 const LinhaCarteira = ({ carteira, chave }) => {
    const [mostrar, setMostrar] = useState(false);
@@ -19,11 +22,13 @@ const LinhaCarteira = ({ carteira, chave }) => {
       } else if (plataforma?.toLowerCase()?.includes("windows")) {
          return <Image title={plataforma} src={windows} />;
       } else if (plataforma?.toLowerCase()?.includes("linux")) {
-         return <Image title={plataforma} src={linux} />
+         return <Image title={plataforma} src={linux} />;
       } else if (plataforma?.toLowerCase()?.includes("web")) {
          return <i title={plataforma} className="bi bi-globe"></i>;
       } else if (plataforma?.toLowerCase()?.includes("ios")) {
          return <Image title={plataforma} src={ios} />;
+      } else if (plataforma?.toLowerCase()?.includes("hardware")) {
+         return <Image title={plataforma} src={hardware} />;
       }
    };
    return (
@@ -37,13 +42,13 @@ const LinhaCarteira = ({ carteira, chave }) => {
                </div>
             </td>
             <td className={styles.td}>
-               <div id={styles.plataformas} className="d-flex gap-2 align-items-center h-100">
+               <div id={styles.plataformas} className="d-flex gap-2 align-items-center flex-wrap h-100 ">
                   {carteira?.Platforms?.map((v) => {
                      return iconePlataforma(v);
                   })}
                </div>
             </td>
-            <td className={styles.td}>{carteira?.DISPLAYTOTALVOLUME24H?.BTC}</td>
+            <td className={styles.td + " d-none d-xl-table-cell"}>{carteira?.Security}</td>
             <td className={styles.td}>
                <div className="d-flex gap-2 align-items-center">
                   {loading ? (
@@ -54,8 +59,13 @@ const LinhaCarteira = ({ carteira, chave }) => {
                      </>
                   ) : (
                      <>
-                        <Image id={styles.foto} src={fotoBandeira} />
-                        <span>{paisTraduzido}</span>
+                        <span>{carteira?.Rating?.Avg}/5</span>
+                        <div className="d-none d-xl-flex gap-1 align-items-center">
+                           {gerarArray(carteira?.Rating?.Avg).map((v, k) => (
+                              <Image key={k} id={styles.star} src={star} />
+                           ))}
+                        </div>
+                        <Image className="d-xl-none" id={styles.star} src={star} />
                      </>
                   )}
                </div>
