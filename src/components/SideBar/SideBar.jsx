@@ -44,6 +44,11 @@ const SideBar = () => {
                         Corretoras
                      </CDBSidebarMenuItem>
                   </NavLink>
+                  <NavLink to="/carteiras">
+                     <CDBSidebarMenuItem active={rota === "/carteiras"} icon="bi bi-wallet-fill">
+                        Carteiras
+                     </CDBSidebarMenuItem>
+                  </NavLink>
                   <NavLink to="/noticias">
                      <CDBSidebarMenuItem active={rota === "/noticias"} icon="newspaper">
                         Notícias
