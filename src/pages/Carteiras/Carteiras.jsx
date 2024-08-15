@@ -31,7 +31,10 @@ const Carteiras = () => {
 
    useEffect(() => {
       if (!carteiras) apanharCarteiras();
-   }, [carteiras]);
+      if (carteirasPaginadas.length === 0 && carteiras) {
+         setCarteirasPaginadas(paginarArray(carteiras, paginaAtual, itemsPorPagina));
+      }
+   }, [carteiras, carteirasPaginadas]);
 
    return (
       <Container fluid>
@@ -40,7 +43,7 @@ const Carteiras = () => {
                <h2 className="fw-bold mb-4 titulo1">Veja todas as carteiras digitais</h2>
 
                <div>
-                  <Table bordered  striped size="lg" responsive hover>
+                  <Table bordered striped size="lg" responsive hover>
                      <thead>
                         <tr>
                            <th id={styles.th} className="text-truncate">
