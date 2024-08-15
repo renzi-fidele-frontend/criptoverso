@@ -1,6 +1,6 @@
-import { Badge, Collapse, Image, Placeholder } from "react-bootstrap";
+import { Collapse, Image, Placeholder } from "react-bootstrap";
 import styles from "./LinhaCarteira.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import linux from "../../assets/linux.png";
 import ios from "../../assets/ios.png";
 import windows from "../../assets/windows.png";
@@ -9,12 +9,31 @@ import hardware from "../../assets/hardware.png";
 import star from "../../assets/star.png";
 import chrome_extension from "../../assets/chrome_extension.png";
 import { gerarArray } from "../../hooks/useGerarArray";
+import translate from "translate";
 
 const LinhaCarteira = ({ carteira, chave }) => {
    const [mostrar, setMostrar] = useState(false);
-   const [loading, setLoading] = useState(false);
-   const [fotoBandeira, setFotoBandeira] = useState(false);
-   const [paisTraduzido, setPaisTraduzido] = useState(false);
+   const [loadingTraducao, setLoadingTraducao] = useState(false);
+   const [segurancaTraduzido, setSegurancaTraduzido] = useState(false);
+   const [facilidadeTraduzida, setFacilidadeTraduzida] = useState("");
+
+   async function traduzirTexto() {
+      setLoadingTraducao(true);
+      try {
+         const secTraduzido = await translate(carteira?.Security, "pt");
+         const easyTraduzido = await translate(carteira?.EaseOfUse, "pt");
+         setSegurancaTraduzido(secTraduzido);
+         setFacilidadeTraduzida(easyTraduzido);
+      } catch (error) {
+         console.log(error.message);
+      }
+      setLoadingTraducao(false);
+   }
+
+   useEffect(() => {
+      if (carteira) traduzirTexto();
+   }, [carteira]);
+
    const iconePlataforma = (plataforma) => {
       if (plataforma?.toLowerCase()?.includes("android")) {
          return <Image title={plataforma} src={android} />;
@@ -51,29 +70,19 @@ const LinhaCarteira = ({ carteira, chave }) => {
                   })}
                </div>
             </td>
-            <td className={styles.td + " d-none d-xl-table-cell"}>{carteira?.Security}</td>
+            <td className={styles.td + " d-none d-xl-table-cell"}>{segurancaTraduzido}</td>
             <td className={styles.td}>
                <div className="d-flex gap-2 align-items-center">
-                  {loading ? (
-                     <>
-                        <Placeholder xs={12} animation="wave">
-                           <Placeholder xs={9} />
-                        </Placeholder>
-                     </>
-                  ) : (
-                     <>
-                        <span>{carteira?.Rating?.Avg}/5</span>
-                        <div className="d-none d-xl-flex gap-1 align-items-center">
-                           {gerarArray(carteira?.Rating?.Avg).map((v, k) => (
-                              <Image key={k} id={styles.star} src={star} />
-                           ))}
-                        </div>
-                        <Image className="d-xl-none" id={styles.star} src={star} />
-                     </>
-                  )}
+                  <span>{carteira?.Rating?.Avg}/5</span>
+                  <div className="d-none d-xl-flex gap-1 align-items-center">
+                     {gerarArray(carteira?.Rating?.Avg).map((v, k) => (
+                        <Image key={k} id={styles.star} src={star} />
+                     ))}
+                  </div>
+                  <Image className="d-xl-none" id={styles.star} src={star} />
                </div>
             </td>
-            <td className={styles.td}>{carteira?.EaseOfUse}</td>
+            <td className={styles.td}>{facilidadeTraduzida}</td>
          </tr>
          {/*  Escondido  */}
          <div style={{ display: "table-row" }} className={`${!mostrar && "border-0"}`}>
