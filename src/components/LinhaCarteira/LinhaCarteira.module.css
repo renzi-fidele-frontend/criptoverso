@@ -3,18 +3,15 @@
    height: 40px;
 }
 
-#fotoBandeira {
-   width: 40px;
-   height: 40px;
-}
-
-#chartCt {
-   max-width: 600px;
-   margin-inline: auto;
-}
-
 .td {
    vertical-align: middle;
+}
+
+#plataformas img {
+   width: 25px;
+}
+#plataformas i {
+    font-size: 25px;
 }
 
 @media screen and (max-width: 500px) {

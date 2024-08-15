@@ -1,16 +1,29 @@
 import axios from "axios";
 import styles from "./Carteiras.module.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setCarteiras } from "../../state/carteiras/carteirasSlice";
+import { setCarteiras, setPaginaAtual, setTotalPaginas } from "../../state/carteiras/carteirasSlice";
+import { Col, Container, Row, Table } from "react-bootstrap";
+import LinhaCarteira from "../../components/LinhaCarteira/LinhaCarteira";
+import { gerarArray } from "../../hooks/useGerarArray";
+import Paginacao from "../../components/Paginacao/Paginacao";
+import { paginarArray } from "../../hooks/usePaginarArray";
 
 const Carteiras = () => {
-   const { carteiras } = useSelector((state) => state.carteiras);
+   const { carteiras, paginaAtual, totalPaginas, itemsPorPagina } = useSelector((state) => state.carteiras);
+   const [carteirasPaginadas, setCarteirasPaginadas] = useState([]);
+   const [loading, setLoading] = useState(false);
    const dispatch = useDispatch();
+
    async function apanharCarteiras() {
       try {
          const res = await axios(`https://min-api.cryptocompare.com/data/wallets/general?api_key=${import.meta.env.VITE_CRYPTO_WATCH_APIKEY}`);
-         dispatch(setCarteiras(res.data.Data));
+         let data = Object.entries(res.data.Data).map((v, k) => {
+            return { ...v[1], numero: k + 1 };
+         });
+         dispatch(setCarteiras(data));
+         dispatch(setTotalPaginas(Math.ceil(data.length / itemsPorPagina)));
+         setCarteirasPaginadas(paginarArray(data, paginaAtual, itemsPorPagina));
       } catch (error) {
          console.log(error.message);
       }
@@ -18,8 +31,64 @@ const Carteiras = () => {
 
    useEffect(() => {
       if (!carteiras) apanharCarteiras();
-   }, []);
+   }, [carteiras]);
 
-   return <div>Carteiras</div>;
+   return (
+      <Container fluid>
+         <Row>
+            <Col>
+               <h2 className="fw-bold mb-4 titulo1">Veja todas as carteiras digitais</h2>
+
+               <div>
+                  <Table striped size="lg" responsive hover>
+                     <thead>
+                        <tr>
+                           <th id={styles.th} className="text-truncate">
+                              #
+                           </th>
+                           <th id={styles.th} className="text-truncate">
+                              Carteira
+                           </th>
+                           <th id={styles.th} className="text-truncate">
+                              Plataformas
+                           </th>
+                           <th id={styles.th} className="text-truncate">
+                              Criptomoedas
+                           </th>
+                           <th id={styles.th} className="text-truncate">
+                              Classificação
+                              {/* TODO: Criar componente de estrelas */}
+                           </th>
+                           <th id={styles.th} className="text-truncate">
+                              Facilidade de uso
+                           </th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        {!loading
+                           ? carteirasPaginadas?.map((v, k) => <LinhaCarteira carteira={v} chave={k} key={k} />)
+                           : gerarArray(12).map((v, k) => <LinhaCarteira chave={k} key={k} />)}
+                     </tbody>
+                  </Table>
+               </div>
+            </Col>
+         </Row>
+
+         {/*  Paginação  */}
+         {carteirasPaginadas && (
+            <Paginacao
+               paginaAtual={paginaAtual}
+               tamanhoDesktop="md"
+               tamanhoMobile="sm"
+               totalPaginas={totalPaginas}
+               onPageClick={(pagina) => {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                  dispatch(setPaginaAtual(pagina));
+                  setCarteirasPaginadas(paginarArray(carteiras, pagina, itemsPorPagina));
+               }}
+            />
+         )}
+      </Container>
+   );
 };
 export default Carteiras;
