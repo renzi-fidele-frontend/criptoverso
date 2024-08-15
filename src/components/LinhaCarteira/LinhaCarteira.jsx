@@ -7,6 +7,7 @@ import windows from "../../assets/windows.png";
 import android from "../../assets/android.png";
 import hardware from "../../assets/hardware.png";
 import star from "../../assets/star.png";
+import chrome_extension from "../../assets/chrome_extension.png";
 import { gerarArray } from "../../hooks/useGerarArray";
 
 const LinhaCarteira = ({ carteira, chave }) => {
@@ -29,6 +30,8 @@ const LinhaCarteira = ({ carteira, chave }) => {
          return <Image title={plataforma} src={ios} />;
       } else if (plataforma?.toLowerCase()?.includes("hardware")) {
          return <Image title={plataforma} src={hardware} />;
+      } else if (plataforma?.toLowerCase()?.includes("chrome")) {
+         return <Image title={plataforma} src={chrome_extension} />;
       }
    };
    return (
@@ -77,8 +80,16 @@ const LinhaCarteira = ({ carteira, chave }) => {
             <td className={!mostrar && "p-0 border-0"} colSpan={12}>
                <Collapse in={mostrar}>
                   <div className={`${styles.td} pb-2`}>
-                     <a target="_blank" className="border border-primary rounded-1 p-1 shadow-sm" href={carteira?.AffiliateURL}>
-                        Site de Afiliação <i className="bi bi-globe"></i>
+                     <div>
+                        <h6>Criptomoedas suportadas:</h6>
+                        <p className="">- {carteira?.Coins?.join(" | ")}</p>
+                     </div>
+
+                     <a target="_blank" className="text-bg-primary rounded-1 py-1 px-2 shadow-sm" href={carteira?.AffiliateURL}>
+                        Utilizar carteira <i className="bi bi-box-arrow-in-up-right"></i>
+                     </a>
+                     <a target="_blank" className="text-bg-dark rounded-1 py-1 px-2 shadow-sm ms-2" href={carteira?.SourceCodeUrl}>
+                        Acessar repositório <i className="bi bi-github"></i>
                      </a>
                   </div>
                </Collapse>
