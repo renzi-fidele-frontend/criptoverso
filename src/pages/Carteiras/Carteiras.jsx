@@ -16,6 +16,7 @@ const Carteiras = () => {
    const dispatch = useDispatch();
 
    async function apanharCarteiras() {
+      setLoading(true);
       try {
          const res = await axios(`https://min-api.cryptocompare.com/data/wallets/general?api_key=${import.meta.env.VITE_CRYPTO_WATCH_APIKEY}`);
          let data = Object.entries(res.data.Data).map((v, k) => {
@@ -27,6 +28,7 @@ const Carteiras = () => {
       } catch (error) {
          console.log(error.message);
       }
+      setLoading(false);
    }
 
    useEffect(() => {

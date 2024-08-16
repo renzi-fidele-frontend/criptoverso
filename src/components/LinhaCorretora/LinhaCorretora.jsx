@@ -68,11 +68,9 @@ const LinhaCorretora = ({ corretora, chave }) => {
             <td className={styles.td}>
                <div className="d-flex gap-2 align-items-center">
                   {loading ? (
-                     <>
-                        <Placeholder xs={12} animation="wave">
-                           <Placeholder xs={9} />
-                        </Placeholder>
-                     </>
+                     <Placeholder xs={12} animation="wave">
+                        <Placeholder xs={9} />
+                     </Placeholder>
                   ) : (
                      <>
                         <Image id={styles.foto} src={fotoBandeira} />
@@ -181,7 +179,7 @@ const LinhaCorretora = ({ corretora, chave }) => {
       </>
    ) : (
       <>
-         <tr style={{ cursor: "pointer" }} onClick={() => setMostrar(!mostrar)}>
+         <tr>
             <td className={styles.td}>
                <Placeholder animation="wave">
                   <Placeholder xs={4} xl={3} />.

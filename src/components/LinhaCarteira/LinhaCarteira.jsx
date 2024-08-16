@@ -13,12 +13,10 @@ import translate from "translate";
 
 const LinhaCarteira = ({ carteira, chave }) => {
    const [mostrar, setMostrar] = useState(false);
-   const [loadingTraducao, setLoadingTraducao] = useState(false);
    const [segurancaTraduzido, setSegurancaTraduzido] = useState(false);
    const [facilidadeTraduzida, setFacilidadeTraduzida] = useState("");
 
    async function traduzirTexto() {
-      setLoadingTraducao(true);
       try {
          const secTraduzido = await translate(carteira?.Security, "pt");
          const easyTraduzido = await translate(carteira?.EaseOfUse, "pt");
@@ -27,7 +25,6 @@ const LinhaCarteira = ({ carteira, chave }) => {
       } catch (error) {
          console.log(error.message);
       }
-      setLoadingTraducao(false);
    }
 
    useEffect(() => {
@@ -53,7 +50,8 @@ const LinhaCarteira = ({ carteira, chave }) => {
          return <Image title={plataforma} src={chrome_extension} />;
       }
    };
-   return (
+
+   return carteira ? (
       <>
          <tr style={{ cursor: "pointer" }} onClick={() => setMostrar(!mostrar)}>
             <td className={styles.td}>{carteira?.numero}.</td>
@@ -70,7 +68,15 @@ const LinhaCarteira = ({ carteira, chave }) => {
                   })}
                </div>
             </td>
-            <td className={styles.td + " d-none d-xl-table-cell"}>{segurancaTraduzido}</td>
+            <td className={styles.td + " d-none d-xl-table-cell"}>
+               {segurancaTraduzido.length > 0 ? (
+                  segurancaTraduzido
+               ) : (
+                  <Placeholder xs={12} animation="wave">
+                     <Placeholder xs={7} />
+                  </Placeholder>
+               )}
+            </td>
             <td className={styles.td}>
                <div className="d-flex gap-2 align-items-center">
                   <span>{carteira?.Rating?.Avg}/5</span>
@@ -82,7 +88,15 @@ const LinhaCarteira = ({ carteira, chave }) => {
                   <Image className="d-xl-none" id={styles.star} src={star} />
                </div>
             </td>
-            <td className={styles.td}>{facilidadeTraduzida}</td>
+            <td className={styles.td}>
+               {facilidadeTraduzida.length > 0 ? (
+                  facilidadeTraduzida
+               ) : (
+                  <Placeholder xs={12} animation="wave">
+                     <Placeholder xs={7} />
+                  </Placeholder>
+               )}
+            </td>
          </tr>
          {/*  Escondido  */}
          <div style={{ display: "table-row" }} className={`${!mostrar && "border-0"}`}>
@@ -104,6 +118,49 @@ const LinhaCarteira = ({ carteira, chave }) => {
                </Collapse>
             </td>
          </div>
+      </>
+   ) : (
+      <>
+         <tr>
+            <td className={styles.td}>
+               <Placeholder animation="wave">
+                  <Placeholder xs={4} xl={3} />.
+               </Placeholder>
+            </td>
+            <td className={styles.td}>
+               <div>
+                  <Placeholder className="d-flex gap-1 gap-lg-3 flex-nowrap align-items-center" animation="wave">
+                     <Placeholder id={styles.foto} />
+                     <Placeholder xs={7} />
+                  </Placeholder>
+               </div>
+            </td>
+            <td className={styles.td}>
+               <div>
+                  <Placeholder className="d-flex gap-3 align-items-center h-100" animation="wave">
+                     <Placeholder id={styles.foto} />
+                     <Placeholder id={styles.foto} />
+                     <Placeholder id={styles.foto} />
+                  </Placeholder>
+               </div>
+            </td>
+            <td className={styles.td + " d-none d-xl-table-cell"}>
+               <Placeholder animation="wave">
+                  <Placeholder xs={7} />
+               </Placeholder>
+            </td>
+            <td className={styles.td}>
+               <Placeholder animation="wave" className="d-flex align-items-center">
+                  <Placeholder xs={2} /> <span className="ms-1">/5</span>
+                  <Image className="ms-2" id={styles.star} src={star} />
+               </Placeholder>
+            </td>
+            <td className={styles.td}>
+               <Placeholder animation="wave">
+                  <Placeholder xs={4} />
+               </Placeholder>
+            </td>
+         </tr>
       </>
    );
 };
