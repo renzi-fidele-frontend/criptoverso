@@ -140,10 +140,10 @@ const LinhaCarteira = ({ carteira, chave }) => {
                         <Modal.Body>
                            <Row>
                               <Col sm={3}>
-                                 <h5 className="mb-0 fst-italic">Média</h5>
+                                 <h5 className="fst-italic mb-0">Média</h5>
                                  <hr />
                                  <h6 id={styles.media}>{carteira?.Rating?.Avg}</h6>
-                                 <div className="d-flex gap-2">
+                                 <div className="d-flex gap-2 mb-3 mb-sm-0">
                                     {gerarArray(carteira?.Rating?.Avg).map((v, k) => (
                                        <Image src={star} key={k} />
                                     ))}
