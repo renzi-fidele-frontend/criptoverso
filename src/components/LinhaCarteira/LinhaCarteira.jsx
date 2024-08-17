@@ -1,4 +1,4 @@
-import { Collapse, Image, Placeholder } from "react-bootstrap";
+import { Badge, Col, Collapse, Image, Modal, Placeholder, Row } from "react-bootstrap";
 import styles from "./LinhaCarteira.module.css";
 import { useEffect, useState } from "react";
 import linux from "../../assets/linux.png";
@@ -10,11 +10,15 @@ import star from "../../assets/star.png";
 import chrome_extension from "../../assets/chrome_extension.png";
 import { gerarArray } from "../../hooks/useGerarArray";
 import translate from "translate";
+import { useSelector } from "react-redux";
+import { Bar } from "react-chartjs-2";
 
 const LinhaCarteira = ({ carteira, chave }) => {
    const [mostrar, setMostrar] = useState(false);
    const [segurancaTraduzido, setSegurancaTraduzido] = useState(false);
    const [facilidadeTraduzida, setFacilidadeTraduzida] = useState("");
+   const { modoEscuro } = useSelector((state) => state.tema);
+   const [mostrarClassificacao, setMostrarClassificacao] = useState(false);
 
    async function traduzirTexto() {
       try {
@@ -103,17 +107,78 @@ const LinhaCarteira = ({ carteira, chave }) => {
             <td className={!mostrar && "p-0 border-0"} colSpan={12}>
                <Collapse in={mostrar}>
                   <div className={`${styles.td} pb-2`}>
-                     <div>
-                        <h6>Criptomoedas suportadas:</h6>
-                        <p className="">- {carteira?.Coins?.join(" | ")}</p>
+                     <div className="d-flex">
+                        <div>
+                           <h6>Criptomoedas suportadas:</h6>
+                           <p className="">- {carteira?.Coins?.join(" | ")}</p>
+                        </div>
+
+                        <div></div>
                      </div>
 
                      <a target="_blank" className="text-bg-primary rounded-1 py-1 px-2 shadow-sm" href={carteira?.AffiliateURL}>
                         Utilizar carteira <i className="bi bi-box-arrow-in-up-right"></i>
                      </a>
-                     <a target="_blank" className="text-bg-dark rounded-1 py-1 px-2 shadow-sm ms-2" href={carteira?.SourceCodeUrl}>
+                     <a
+                        target="_blank"
+                        className={`rounded-1 py-1 px-2 shadow-sm ms-2 ${modoEscuro ? "text-bg-light" : "text-bg-dark"}`}
+                        href={carteira?.SourceCodeUrl}
+                     >
                         Acessar repositório <i className="bi bi-github"></i>
                      </a>
+                     <a
+                        role="button"
+                        onClick={() => setMostrarClassificacao(true)}
+                        className={`text-bg-secondary rounded-1 py-1 px-2 shadow-sm ms-2 ${modoEscuro && "border-light border"}`}
+                     >
+                        Classificação detalhada <i className={`bi bi-info border rounded-circle text-bg-light`}></i>
+                     </a>
+                     <Modal centered size="lg" show={mostrarClassificacao} onHide={() => setMostrarClassificacao(false)}>
+                        <Modal.Header closeButton>
+                           <Modal.Title>Classificação detalhada do {carteira?.Name}</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                           <Row>
+                              <Col sm={3}>
+                                 <h5 className="mb-0 fst-italic">Média</h5>
+                                 <hr />
+                                 <h6 id={styles.media}>{carteira?.Rating?.Avg}</h6>
+                                 <div className="d-flex gap-2">
+                                    {gerarArray(carteira?.Rating?.Avg).map((v, k) => (
+                                       <Image src={star} key={k} />
+                                    ))}
+                                 </div>
+                              </Col>
+                              <Col sm={9}>
+                                 <div id={styles.chartCt}>
+                                    <Bar
+                                       data={{
+                                          labels: ["1 Estrela", "2 Estrelas", "3 Estrelas", "4 Estrelas", "5 Estrelas"],
+                                          datasets: [
+                                             {
+                                                label: "Classificações",
+                                                data: [
+                                                   carteira?.Rating?.One,
+                                                   carteira?.Rating?.Two,
+                                                   carteira?.Rating?.Three,
+                                                   carteira?.Rating?.Four,
+                                                   carteira?.Rating?.Five,
+                                                ],
+                                             },
+                                          ],
+                                       }}
+                                       options={{ indexAxis: "y", responsive: true }}
+                                    />
+                                 </div>
+                              </Col>
+                           </Row>
+                        </Modal.Body>
+                        <Modal.Footer>
+                           <span>
+                              Total de classificações: <Badge className="fs-6 bg-secondary">{carteira?.Rating?.TotalUsers}</Badge>
+                           </span>
+                        </Modal.Footer>
+                     </Modal>
                   </div>
                </Collapse>
             </td>

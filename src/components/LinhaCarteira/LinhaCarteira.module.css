@@ -18,6 +18,10 @@
     font-size: 25px;
 }
 
+#media {
+   font-size: 4rem;
+}
+
 @media screen and (max-width: 900px) {
    #plataformas img {
       width: 20px;
