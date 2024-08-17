@@ -107,13 +107,21 @@ const LinhaCarteira = ({ carteira, chave }) => {
             <td className={!mostrar && "p-0 border-0"} colSpan={12}>
                <Collapse in={mostrar}>
                   <div className={`${styles.td} pb-2`}>
-                     <div className="d-flex">
+                     <div className="d-flex gap-3 mb-3">
                         <div>
                            <h6>Criptomoedas suportadas:</h6>
-                           <p className="">- {carteira?.Coins?.join(" | ")}</p>
+                           <span>- {carteira?.Coins?.join(" | ")}</span>
                         </div>
-
-                        <div></div>
+                        <div className="vr"></div>
+                        <div>
+                           <h6>Tipo de validação:</h6>
+                           <span>- {carteira?.ValidationType}</span>
+                        </div>
+                        <div className="vr"></div>
+                        <div>
+                           <h6>Anônimidade:</h6>
+                           <span>- {carteira?.Anonymity}</span>
+                        </div>
                      </div>
 
                      <a target="_blank" className="text-bg-primary rounded-1 py-1 px-2 shadow-sm" href={carteira?.AffiliateURL}>
@@ -131,7 +139,7 @@ const LinhaCarteira = ({ carteira, chave }) => {
                         onClick={() => setMostrarClassificacao(true)}
                         className={`text-bg-secondary rounded-1 py-1 px-2 shadow-sm ms-2 ${modoEscuro && "border-light border"}`}
                      >
-                        Classificação detalhada <i className={`bi bi-info border rounded-circle text-bg-light`}></i>
+                        Classificação detalhada <i className="bi bi-info-circle-fill"></i>
                      </a>
                      <Modal centered size="lg" show={mostrarClassificacao} onHide={() => setMostrarClassificacao(false)}>
                         <Modal.Header closeButton>
