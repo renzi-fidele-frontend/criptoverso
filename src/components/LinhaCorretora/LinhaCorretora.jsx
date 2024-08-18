@@ -97,14 +97,22 @@ const LinhaCorretora = ({ corretora, chave }) => {
                <Collapse in={mostrar}>
                   <div className={`${styles.td} pb-2`}>
                      <p>{descricaoTraduzida}</p>
-                     <a target="_blank" className="border border-primary rounded-1 p-1 shadow-sm" href={corretora?.AffiliateURL}>
+                     <div>
+                        <h6 className="mb-0">Endereço</h6>
+                        <p>- {corretora?.FullAddress}</p>
+                     </div>
+                     <div>
+                        <h6 className="mb-0">Taxas</h6>
+                        <p dangerouslySetInnerHTML={{__html: corretora?.Fees}}></p>
+                     </div>
+                     <a target="_blank" className="text-bg-primary border border-primary rounded-1 p-1 shadow-sm" href={corretora?.AffiliateURL}>
                         Site de Afiliação <i className="bi bi-globe"></i>
                      </a>
-
+                     {/*  Pontuação detalhada */}
                      <a
                         href="#"
                         onClick={() => setMostrarModal(true)}
-                        className="text-secondary border-secondary ms-3 border rounded-1 p-1 shadow-sm"
+                        className="text-bg-secondary border-secondary ms-3 border rounded-1 p-1 shadow-sm"
                      >
                         Pontuação detalhada <i className="bi bi-info-circle-fill"></i>
                      </a>
