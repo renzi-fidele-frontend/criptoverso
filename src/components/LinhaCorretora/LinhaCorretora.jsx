@@ -99,12 +99,21 @@ const LinhaCorretora = ({ corretora, chave }) => {
                      <p>{descricaoTraduzida}</p>
                      <div>
                         <h6 className="mb-0">Endereço</h6>
-                        <p>- {corretora?.FullAddress}</p>
+                        <p>- {corretora?.FullAddress.length > 0 ? corretora?.FullAddress : "Indisponível"}</p>
                      </div>
                      <div>
                         <h6 className="mb-0">Taxas</h6>
-                        <p dangerouslySetInnerHTML={{__html: corretora?.Fees}}></p>
+                        <p dangerouslySetInnerHTML={{ __html: corretora?.Fees }}></p>
                      </div>
+                     <div>
+                        <h6 className="mb-0">Métodos de depósito</h6>
+                        <p dangerouslySetInnerHTML={{ __html: corretora?.DepositMethods }}></p>
+                     </div>
+                     <div>
+                        <h6 className="mb-0">Métodos de levantamento</h6>
+                        <p dangerouslySetInnerHTML={{ __html: corretora?.WithdrawalMethods }}></p>
+                     </div>
+                     {/*  Botões */}
                      <a target="_blank" className="text-bg-primary border border-primary rounded-1 p-1 shadow-sm" href={corretora?.AffiliateURL}>
                         Site de Afiliação <i className="bi bi-globe"></i>
                      </a>
