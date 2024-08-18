@@ -1,4 +1,4 @@
-import { Button, Col, Container, Image, Placeholder, Row } from "react-bootstrap";
+import { Button, Col, Container, Image, OverlayTrigger, Placeholder, Row, Tooltip } from "react-bootstrap";
 import styles from "./Home.module.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -67,11 +67,37 @@ const Home = () => {
 
    const estatisticasGlobais = [
       { nome: "Total de criptomoedas", valor: estatisticasGerais?.totalCoins },
-      { nome: "Corretoras disponíveis", valor: millify(estatisticasGerais?.totalExchanges) },
-      { nome: "Valor total do mercado", valor: millify(Number(estatisticasGerais?.totalMarketCap)), usd: true },
-      { nome: "Maior volume nas últimas 24h", valor: millify(estatisticasGerais?.total24hVolume), usd: true },
-      { nome: "Total de mercados", valor: millify(estatisticasGerais?.totalMarkets) },
-      { nome: "Domínio do Bitcoin", valor: millify(estatisticasGerais?.btcDominance) + "%" },
+      {
+         nome: "Corretoras disponíveis",
+         valor: millify(estatisticasGerais?.totalExchanges),
+         tooltip: "Número total de corretoras onde as criptomoedas estão listadas e disponíveis para negociação.",
+      },
+      {
+         nome: "Valor total do mercado",
+         valor: millify(Number(estatisticasGerais?.totalMarketCap)),
+         usd: true,
+         tooltip:
+            "Valor total de mercado de todas as criptomoedas combinadas, calculado pela soma das capitalizações de mercado individuais. Reflete o tamanho e a importância do mercado de criptomoedas como um todo.",
+      },
+      {
+         nome: "Maior volume nas últimas 24h",
+         valor: millify(estatisticasGerais?.total24hVolume),
+         usd: true,
+         tooltip:
+            "Volume total de transações realizadas nas últimas 24 horas para todas as criptomoedas, indicando a liquidez e a atividade de negociação global no mercado.",
+      },
+      {
+         nome: "Total de mercados",
+         valor: millify(estatisticasGerais?.totalMarkets),
+         tooltip:
+            "Número total de mercados ou pares de negociação disponíveis para todas as criptomoedas, representando a diversidade de opções de compra e venda no mercado global.",
+      },
+      {
+         nome: "Domínio do Bitcoin",
+         valor: millify(estatisticasGerais?.btcDominance) + "%",
+         tooltip:
+            "Percentual de dominância do Bitcoin no mercado de criptomoedas, indicando a participação do Bitcoin em relação ao valor total de mercado de todas as criptomoedas.",
+      },
    ];
 
    return (
@@ -89,6 +115,9 @@ const Home = () => {
                                 </h5>
                                 <p className="fs-2">
                                    {v.valor} {v?.usd ? "USD" : ""}
+                                   <OverlayTrigger overlay={<Tooltip>{v?.tooltip}</Tooltip>}>
+                                      <i className="bi bi-info-circle-fill ms-2"></i>
+                                   </OverlayTrigger>
                                 </p>
                              </div>
                           </Col>
