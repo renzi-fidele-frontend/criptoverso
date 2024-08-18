@@ -8,11 +8,15 @@ import LinhaCorretora from "../../components/LinhaCorretora/LinhaCorretora";
 import { paginarArray } from "../../hooks/usePaginarArray";
 import { gerarArray } from "../../hooks/useGerarArray";
 import Paginacao from "../../components/Paginacao/Paginacao";
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
+import "tippy.js/themes/light.css";
 
 const Corretoras = () => {
    const [loading, setLoading] = useState(false);
    const dispatch = useDispatch();
    const { corretoras, paginaAtual, itemsPorPagina, totalPaginas } = useSelector((state) => state.corretoras);
+   const { modoEscuro } = useSelector((state) => state.tema);
 
    const [corretorasPaginadas, setCorretorasPaginadas] = useState([]);
 
@@ -61,22 +65,24 @@ const Corretoras = () => {
                            </th>
                            <th id={styles.th} className="text-truncate">
                               Volume de 24h{" "}
-                              <OverlayTrigger
-                                 overlay={<Tooltip>Volume total de transações realizadas na corretora nas últimas 24 horas</Tooltip>}
+                              <Tippy
+                                 theme={modoEscuro && "light"}
+                                 content="Volume total de transações realizadas na corretora nas últimas 24 horas"
                               >
                                  <i className="bi bi-info-circle-fill"></i>
-                              </OverlayTrigger>
+                              </Tippy>
                            </th>
                            <th id={styles.th} className="text-truncate">
                               País de origem
                            </th>
                            <th id={styles.th} className="text-truncate">
                               É Negociável?{" "}
-                              <OverlayTrigger
-                                 overlay={<Tooltip>Indica se a corretora permite a execução de operações de compra e venda</Tooltip>}
+                              <Tippy
+                                 theme={modoEscuro && "light"}
+                                 content="Indica se a corretora permite a execução de operações de compra e venda"
                               >
                                  <i className="bi bi-info-circle-fill"></i>
-                              </OverlayTrigger>
+                              </Tippy>
                            </th>
                         </tr>
                      </thead>

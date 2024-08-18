@@ -11,6 +11,9 @@ import { CategoryScale } from "chart.js";
 import styles from "./MoedaIndividual.module.css";
 import { gerarArray } from "../../hooks/useGerarArray";
 import { useSelector } from "react-redux";
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
+import "tippy.js/themes/light.css";
 
 Chart.register(CategoryScale);
 
@@ -236,9 +239,9 @@ const MoedaIndividual = () => {
                                     <p className="mb-0 text-truncate">
                                        {v.titulo}{" "}
                                        {v?.tooltip && (
-                                          <OverlayTrigger overlay={<Tooltip>{v?.tooltip}</Tooltip>}>
+                                          <Tippy theme={modoEscuro && "light"} content={v?.tooltip}>
                                              <i className="ms-1 bi bi-info-circle-fill"></i>
-                                          </OverlayTrigger>
+                                          </Tippy>
                                        )}
                                     </p>
                                  </div>
@@ -261,9 +264,9 @@ const MoedaIndividual = () => {
                                     <p className="mb-0 text-truncate">
                                        {v.titulo}{" "}
                                        {v?.tooltip && (
-                                          <OverlayTrigger overlay={<Tooltip>{v?.tooltip}</Tooltip>}>
+                                          <Tippy theme={modoEscuro && "light"} content={v?.tooltip}>
                                              <i className="ms-1 bi bi-info-circle-fill"></i>
-                                          </OverlayTrigger>
+                                          </Tippy>
                                        )}
                                     </p>
                                  </div>

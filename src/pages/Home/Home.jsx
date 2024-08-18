@@ -1,4 +1,4 @@
-import { Button, Col, Container, Image, OverlayTrigger, Placeholder, Row, Tooltip } from "react-bootstrap";
+import { Button, Col, Container, Image, Placeholder, Row } from "react-bootstrap";
 import styles from "./Home.module.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -13,6 +13,9 @@ import { setEstatisticasGerais } from "../../state/estatisticasGerais/estatistic
 import { setCriptomoedas } from "../../state/criptomoedas/criptomoedasSlice";
 import { setNoticias } from "../../state/noticias/noticiasSlice";
 import { gerarArray } from "../../hooks/useGerarArray";
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
+import "tippy.js/themes/light.css";
 
 const Home = () => {
    const [loading, setLoading] = useState(false);
@@ -66,7 +69,12 @@ const Home = () => {
    }, [criptomoedas, estatisticasGerais, noticias]);
 
    const estatisticasGlobais = [
-      { nome: "Total de criptomoedas", valor: estatisticasGerais?.totalCoins },
+      {
+         nome: "Total de criptomoedas",
+         valor: estatisticasGerais?.totalCoins,
+         tooltip:
+            "Número total de criptomoedas disponíveis no mercado, incluindo tanto as mais conhecidas quanto as emergentes, mostrando a amplitude do ecossistema de criptomoedas.",
+      },
       {
          nome: "Corretoras disponíveis",
          valor: millify(estatisticasGerais?.totalExchanges),
@@ -115,9 +123,11 @@ const Home = () => {
                                 </h5>
                                 <p className="fs-2">
                                    {v.valor} {v?.usd ? "USD" : ""}
-                                   <OverlayTrigger overlay={<Tooltip>{v?.tooltip}</Tooltip>}>
-                                      <i className="bi bi-info-circle-fill ms-2"></i>
-                                   </OverlayTrigger>
+                                   {v?.tooltip && (
+                                      <Tippy theme={modoEscuro && "light"} content={v?.tooltip}>
+                                         <i className="bi bi-info-circle-fill ms-2"></i>
+                                      </Tippy>
+                                   )}
                                 </p>
                              </div>
                           </Col>
