@@ -12,7 +12,8 @@ import MoedaIndividual from "./pages/MoedaIndividual/MoedaIndividual";
 import NavBarMobile from "./components/NavBarMobile/NavBarMobile";
 import FooterNavBar from "./components/FooterNavBar/FooterNavBar";
 import Carteiras from "./pages/Carteiras/Carteiras";
-// TODO: Adicionar a página das carteiras crypto, com a api do https://min-api.cryptocompare.com/data/wallets/general
+
+// TODO: Adicionar internacionalização a minha aplicação
 function App() {
    return (
       <>
