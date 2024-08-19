@@ -14,6 +14,13 @@
          "dark": "Escuro",
          "light": "Claro",
          "name": "Modo"
-      }
+      },
+      "author": "Criado por"
+   },
+   "criptomoedas": {
+      "tit": "Veja todas as criptomoedas do mercado",
+      "search_placeholder": "Encontre a sua moeda favorita",
+      "not_found": "Nada foi encontrado, tente clicar no botão de pesquisa"
    }
 }
+

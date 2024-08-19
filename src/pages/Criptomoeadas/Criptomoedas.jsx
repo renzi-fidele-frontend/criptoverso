@@ -10,6 +10,7 @@ import { gerarArray } from "../../hooks/useGerarArray";
 import nadaEncontrado from "../../assets/nadaEncontrado.png";
 import { paginarArray } from "../../hooks/usePaginarArray";
 import Paginacao from "../../components/Paginacao/Paginacao";
+import { useTranslation } from "react-i18next";
 
 const Criptomoedas = () => {
    const [loading, setLoading] = useState(false);
@@ -20,6 +21,7 @@ const Criptomoedas = () => {
    const [criptomoedasPaginadas, setCriptomoedasPaginadas] = useState([]);
    const [resultadosPesquisaInstantanea, setResultadosPesquisaInstantanea] = useState(null);
    const termoPesquisaRef = useRef(null);
+   const { t } = useTranslation();
 
    async function apanharCriptomoedas() {
       setLoading(true);
@@ -50,16 +52,16 @@ const Criptomoedas = () => {
 
    return (
       <Container id={styles.ct} fluid>
-         {/*   Campo de pesquisa  */}
          <Row className="mb-4 mb-sm-5 mb-xl-5">
             <Col xs={12} lg={9}>
-               <h2 className="fw-bold titulo1">Veja todas as criptomoedas do mercado</h2>
+               <h2 className="fw-bold titulo1">{t("criptomoedas.tit")}</h2>
             </Col>
+            {/*   Campo de pesquisa  */}
             <Col>
                <Form onSubmit={(e) => e.preventDefault()} className="d-flex gap-2">
                   <FormControl
                      ref={termoPesquisaRef}
-                     placeholder="Encontre a sua moeda favorita"
+                     placeholder={t("criptomoedas.search_placeholder")}
                      onChange={pesquisarAoDigitar}
                      required
                      type="text"
@@ -94,7 +96,7 @@ const Criptomoedas = () => {
                   {criptomoedas && resultadosPesquisaInstantanea?.length === 0 && (
                      <Col className="align-items-center d-flex flex-column">
                         <Image id={styles.nadaEncontrado} src={nadaEncontrado} />
-                        <Alert className="mt-4">Nada foi encontrado, tente clicar no botão de pesquisa</Alert>
+                        <Alert className="mt-4">{t("criptomoedas.not_found")}</Alert>
                      </Col>
                   )}
                </>

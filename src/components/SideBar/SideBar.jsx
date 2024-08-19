@@ -65,7 +65,12 @@ const SideBar = () => {
                      </CDBSidebarMenuItem>
                   </NavLink>
                   <hr />
-                  <div className="d-none">
+                  <div onClick={mudarTema}>
+                     <CDBSidebarMenuItem icon={`bi ${!modoEscuro ? "bi-moon-stars-fill" : "bi-brightness-high-fill"}`}>
+                        {t("sidebar.modes.name")} {modoEscuro ? t("sidebar.modes.light") : t("sidebar.modes.dark")}
+                     </CDBSidebarMenuItem>
+                  </div>
+                  <div>
                      <CDBSidebarMenuItem>
                         <FormSelect className="border-0 bg-opacity-25 text-light bg-light" role="button" onChange={mudarIdioma}>
                            <option className="bg-opacity-100 text-dark" value="pt">
@@ -77,11 +82,6 @@ const SideBar = () => {
                         </FormSelect>
                      </CDBSidebarMenuItem>
                   </div>
-                  <div onClick={mudarTema}>
-                     <CDBSidebarMenuItem icon={`bi ${!modoEscuro ? "bi-moon-stars-fill" : "bi-brightness-high-fill"}`}>
-                        {t("sidebar.modes.name")} {modoEscuro ? t("sidebar.modes.light") : t("sidebar.modes.dark")}
-                     </CDBSidebarMenuItem>
-                  </div>
                </CDBSidebarMenu>
             </CDBSidebarContent>
 
@@ -89,7 +89,7 @@ const SideBar = () => {
                <CDBSidebarMenu>
                   <CDBSidebarMenuItem>
                      <div className="border-top pt-3 border-secondary">
-                        <small>Criado por:</small>
+                        <small>{t("sidebar.author")}:</small>
                         <br />
                         <a target="_blank" href="https://portfolio-renzi.vercel.app/">
                            <b>Renzi Fidele</b>
