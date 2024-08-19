@@ -8,12 +8,14 @@ import LinhaCarteira from "../../components/LinhaCarteira/LinhaCarteira";
 import { gerarArray } from "../../hooks/useGerarArray";
 import Paginacao from "../../components/Paginacao/Paginacao";
 import { paginarArray } from "../../hooks/usePaginarArray";
+import { useTranslation } from "react-i18next";
 
 const Carteiras = () => {
    const { carteiras, paginaAtual, totalPaginas, itemsPorPagina } = useSelector((state) => state.carteiras);
    const [carteirasPaginadas, setCarteirasPaginadas] = useState([]);
    const [loading, setLoading] = useState(false);
    const dispatch = useDispatch();
+   const { t } = useTranslation();
 
    async function apanharCarteiras() {
       setLoading(true);
@@ -42,7 +44,7 @@ const Carteiras = () => {
       <Container fluid>
          <Row>
             <Col>
-               <h2 className="fw-bold mb-4 titulo1">Veja todas as carteiras digitais</h2>
+               <h2 className="fw-bold mb-4 titulo1">{t("carteiras.tit")}</h2>
 
                <div>
                   <Table bordered striped size="lg" responsive hover>
@@ -52,19 +54,19 @@ const Carteiras = () => {
                               #
                            </th>
                            <th id={styles.th} className="text-truncate">
-                              Carteira
+                              {t("carteiras.th_wallet")}
                            </th>
                            <th id={styles.th} className="text-truncate">
-                              Plataformas
+                              {t("carteiras.th_platforms")}
                            </th>
                            <th id={styles.th} className="d-none d-xl-block text-truncate">
-                              Seguraça
+                              {t("carteiras.th_security")}
                            </th>
                            <th id={styles.th} className="text-truncate">
-                              Classificação
+                              {t("carteiras.th_rating")}
                            </th>
                            <th id={styles.th} className="text-truncate">
-                              Facilidade de uso
+                              {t("carteiras.th_ease")}
                            </th>
                         </tr>
                      </thead>

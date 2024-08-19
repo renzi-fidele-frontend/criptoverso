@@ -31,5 +31,13 @@
       "trades": "É Negociável?",
       "trades_tt": "Indica se a corretora permite a execução de operações de compra e venda",
       "24hvol_tt": "Volume total de transações realizadas na corretora nas últimas 24 horas"
+   },
+   "carteiras": {
+      "tit": "Veja todas as carteiras do mercado",
+      "th_wallet": "Carteira",
+      "th_platforms": "Plataformas",
+      "th_security": "Tipo de Segurança",
+      "th_rating": "Classificação",
+      "th_ease": "Facilidade de uso"
    }
 }
