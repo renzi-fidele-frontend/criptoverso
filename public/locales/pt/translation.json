@@ -39,5 +39,8 @@
       "th_security": "Tipo de Segurança",
       "th_rating": "Classificação",
       "th_ease": "Facilidade de uso"
+   },
+   "noticias": {
+      "tit": "Veja as notícias sobre o mundo crypto"
    }
 }

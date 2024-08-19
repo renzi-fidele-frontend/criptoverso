@@ -7,12 +7,14 @@ import { useEffect, useRef, useState } from "react";
 import { gerarArray } from "../../hooks/useGerarArray";
 import { paginarArray } from "../../hooks/usePaginarArray";
 import Paginacao from "../../components/Paginacao/Paginacao";
+import { useTranslation } from "react-i18next";
 
 const Noticias = () => {
    const [loading, setLoading] = useState(false);
    const [noticiasPaginadas, setNoticiasPaginadas] = useState([]);
    const dispatch = useDispatch();
    const ctRef = useRef(null);
+   const { t } = useTranslation();
 
    const { noticias, paginaAtualNoticias, itemsPorPaginaNoticias, totalPaginasNoticias } = useSelector((state) => state.noticias);
 
@@ -41,7 +43,7 @@ const Noticias = () => {
 
    return (
       <Container ref={ctRef} fluid>
-         <h2 className="fw-bold mb-5 titulo1">Veja as notícias sobre o mundo crypto</h2>
+         <h2 className="fw-bold mb-5 titulo1">{t("noticias.tit")}</h2>
 
          <Row className="g-4">
             {!loading
