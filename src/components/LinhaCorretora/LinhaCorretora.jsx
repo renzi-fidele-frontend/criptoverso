@@ -12,6 +12,9 @@ const LinhaCorretora = ({ corretora, chave }) => {
    const [paisTraduzido, setPaisTraduzido] = useState("");
    const [fotoBandeira, setFotoBandeira] = useState("");
    const [mostrarModal, setMostrarModal] = useState(false);
+   const [taxas, setTaxas] = useState("");
+   const [metodosDep, setMetodosDep] = useState("");
+   const [metodosLev, setMetodosLev] = useState("");
 
    const [loading, setLoading] = useState(false);
 
@@ -20,8 +23,15 @@ const LinhaCorretora = ({ corretora, chave }) => {
       try {
          const descTraduzido = await translate(corretora?.Description, "pt");
          const coutryTraduzido = await translate(corretora?.Country, "pt");
+         const taxasTraduzido = await translate(corretora?.Fees, "pt");
+         const metodosDepTraduzido = await translate(corretora?.DepositMethods, "pt");
+         const metodosLevTraduzido = await translate(corretora?.WithdrawalMethods, "pt");
+
          setPaisTraduzido(coutryTraduzido);
          setDescricaoTraduzida(descTraduzido);
+         setTaxas(taxasTraduzido);
+         setMetodosDep(metodosDepTraduzido);
+         setMetodosLev(metodosLevTraduzido);
       } catch (error) {
          console.log("Erro ao traduzir");
       }
@@ -103,15 +113,15 @@ const LinhaCorretora = ({ corretora, chave }) => {
                      </div>
                      <div>
                         <h6 className="mb-0">Taxas</h6>
-                        <p dangerouslySetInnerHTML={{ __html: corretora?.Fees }}></p>
+                        <p dangerouslySetInnerHTML={{ __html: taxas }}></p>
                      </div>
                      <div>
                         <h6 className="mb-0">Métodos de depósito</h6>
-                        <p dangerouslySetInnerHTML={{ __html: corretora?.DepositMethods }}></p>
+                        <p dangerouslySetInnerHTML={{ __html: metodosDep }}></p>
                      </div>
                      <div>
                         <h6 className="mb-0">Métodos de levantamento</h6>
-                        <p dangerouslySetInnerHTML={{ __html: corretora?.WithdrawalMethods }}></p>
+                        <p dangerouslySetInnerHTML={{ __html: metodosLev }}></p>
                      </div>
                      {/*  Botões */}
                      <a target="_blank" className="text-bg-primary border border-primary rounded-1 p-1 shadow-sm" href={corretora?.AffiliateURL}>
