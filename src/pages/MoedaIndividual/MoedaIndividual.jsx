@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CryptofetchOptions } from "../../services/cryptoApi";
-import { Col, Container, Form, ListGroup, OverlayTrigger, Placeholder, Row, Tooltip } from "react-bootstrap";
+import { Col, Container, Form, ListGroup, Placeholder, Row } from "react-bootstrap";
 import millify from "millify";
 import translate from "translate";
 import Chart from "chart.js/auto";
@@ -14,10 +14,12 @@ import { useSelector } from "react-redux";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
+import { useTranslation } from "react-i18next";
 
 Chart.register(CategoryScale);
 
 const MoedaIndividual = () => {
+   const { t } = useTranslation();
    const { uuid } = useParams();
    const [loading, setLoading] = useState(false);
    const [chartLoading, setChartLoading] = useState(false);
@@ -25,18 +27,19 @@ const MoedaIndividual = () => {
    const [descricaoTraduzida, setDescricaoTraduzida] = useState("");
    const [historico, setHistorico] = useState(null);
    const periodo = [
-      { nome: "3 horas", valor: "3h" },
-      { nome: "1 dia", valor: "24h" },
-      { nome: "1 semana", valor: "7d" },
-      { nome: "1 mês", valor: "30d" },
-      { nome: "3 meses", valor: "3m" },
-      { nome: "12 meses", valor: "1y" },
-      { nome: "3 anos", valor: "3y" },
-      { nome: "5 anos", valor: "5y" },
+      { nome: t("moedaIndividual.periodo.3h"), valor: "3h" },
+      { nome: t("moedaIndividual.periodo.24h"), valor: "24h" },
+      { nome: t("moedaIndividual.periodo.7d"), valor: "7d" },
+      { nome: t("moedaIndividual.periodo.30d"), valor: "30d" },
+      { nome: t("moedaIndividual.periodo.3m"), valor: "3m" },
+      { nome: t("moedaIndividual.periodo.1y"), valor: "1y" },
+      { nome: t("moedaIndividual.periodo.3y"), valor: "3y" },
+      { nome: t("moedaIndividual.periodo.5y"), valor: "5y" },
    ];
    const [datasCriptomoeda, setDatasCriptomoeda] = useState([]);
    const [precosCriptomoeda, setPrecosCriptomoeda] = useState([]);
    const { modoEscuro } = useSelector((state) => state.tema);
+   const { lang } = useSelector((state) => state.idioma);
 
    async function apanharDetalhesCriptomoeda() {
       setLoading(true);
@@ -85,68 +88,62 @@ const MoedaIndividual = () => {
    }, [uuid]);
 
    const estatisticas = [
-      { titulo: "Preço", valor: `${millify(criptomoeda?.price)} USD`, icone: <i className="bi bi-coin"></i> },
-      { titulo: "Posição Global", valor: `#${criptomoeda?.rank}`, icone: <i className="bi bi-hash"></i> },
+      { titulo: t("moedaIndividual.estatisticas.0.tit"), valor: `${millify(criptomoeda?.price)} USD`, icone: <i className="bi bi-coin"></i> },
+      { titulo: t("moedaIndividual.estatisticas.1.tit"), valor: `#${criptomoeda?.rank}`, icone: <i className="bi bi-hash"></i> },
       {
-         titulo: "Volume nas últimas 24h",
+         titulo: t("moedaIndividual.estatisticas.2.tit"),
          valor: `${millify(criptomoeda?.["24hVolume"])} USD`,
          icone: <i className="bi bi-clipboard-data"></i>,
-         tooltip: "Volume total de transações realizadas para esta criptomoeda nas últimas 24 horas",
+         tooltip: t("moedaIndividual.estatisticas.2.tp"),
       },
       {
-         titulo: "Capitalização de mercado",
+         titulo: t("moedaIndividual.estatisticas.3.tit"),
          valor: `${millify(criptomoeda?.marketCap)} USD`,
          icone: <i className="bi bi-cash-stack"></i>,
-         tooltip:
-            "Valor total de mercado da criptomoeda, calculado multiplicando o preço atual pelo número total de moedas em circulação. Reflete a importância relativa da criptomoeda no mercado",
+         tooltip: t("moedaIndividual.estatisticas.3.tp"),
       },
       {
-         titulo: "Auge",
+         titulo: t("moedaIndividual.estatisticas.4.tit"),
          valor: `${millify(criptomoeda?.allTimeHigh?.price)} USD`,
          icone: <i className="bi bi-trophy"></i>,
-         tooltip:
-            "Maior preço registrado para esta criptomoeda desde o seu lançamento, refletindo o pico máximo de valorização ao longo do tempo.",
+         tooltip: t("moedaIndividual.estatisticas.4.tp"),
       },
    ];
 
    const estatisticas_genericas = [
       {
-         titulo: "Total de mercados",
+         titulo: t("moedaIndividual.estatisticas_genericas.0.tit"),
          valor: criptomoeda?.numberOfMarkets,
          icone: <i className="bi bi-graph-up-arrow"></i>,
-         tooltip: "Número total de mercados ou pares de negociação disponíveis para esta criptomoeda",
+         tooltip: t("moedaIndividual.estatisticas_genericas.0.tp"),
       },
       {
-         titulo: "Corretoras disponíveis",
+         titulo: t("moedaIndividual.estatisticas_genericas.1.tit"),
          valor: criptomoeda?.numberOfExchanges,
          icone: <i className="bi bi-arrow-left-right"></i>,
-         tooltip:
-            "Número total de corretoras onde esta criptomoeda está listada e disponível para negociação, mostrando a acessibilidade da moeda no mercado",
+         tooltip: t("moedaIndividual.estatisticas_genericas.1.tp"),
       },
       {
-         titulo: "Validação do fornecimento",
+         titulo: t("moedaIndividual.estatisticas_genericas.2.tit"),
          valor: criptomoeda?.supply?.confirmed ? (
             <i style={{ fontWeight: "bold !important" }} className="bi bi-check2-square text-success"></i>
          ) : (
             <i className="bi bi-x-square text-danger"></i>
          ),
          icone: <i className="bi bi-bank" style={{ fontWeight: "bold !important" }}></i>,
-         tooltip:
-            "Confirmação de que o fornecimento total da criptomoeda foi verificado e é preciso, garantindo a transparência sobre a quantidade em circulação",
+         tooltip: t("moedaIndividual.estatisticas_genericas.2.tp"),
       },
       {
-         titulo: "Total de moedas fornecidas",
+         titulo: t("moedaIndividual.estatisticas_genericas.3.tit"),
          valor: `${millify(criptomoeda?.supply?.total)} USD`,
          icone: <i className="bi bi-exclamation-octagon"></i>,
-         tooltip:
-            "Quantidade total de unidades desta criptomoeda que foram criadas ou estão disponíveis até o momento, incluindo moedas em circulação e aquelas que ainda não foram emitidas",
+         tooltip: t("moedaIndividual.estatisticas_genericas.3.tp"),
       },
       {
-         titulo: "Total de moedas circulando",
+         titulo: t("moedaIndividual.estatisticas_genericas.4.tit"),
          valor: `${millify(criptomoeda?.supply?.circulating)} USD`,
          icone: <i className="bi bi-exclamation-octagon"></i>,
-         tooltip:
-            "Quantidade total de unidades desta criptomoeda que estão atualmente em circulação no mercado, disponíveis para negociação ou uso",
+         tooltip: t("moedaIndividual.estatisticas_genericas.4.tp"),
       },
    ];
 
@@ -159,7 +156,7 @@ const MoedaIndividual = () => {
          <Row>
             <Col className="text-center">
                <h2 id={styles.tit} className="fw-bold fs-1 mt-2 mt-md-4">
-                  Estatísticas do{" "}
+                  <span>{t("moedaIndividual.tit")} </span>
                   {!loading ? (
                      <span style={{ color: modoEscuro ? null : criptomoeda?.color, textShadow: "1px 1px 1px black" }}>
                         {criptomoeda?.name} ({criptomoeda?.symbol})
@@ -169,7 +166,8 @@ const MoedaIndividual = () => {
                   )}
                </h2>
                <p id={styles.descricao} className="px-xl-5 mt-3 mt-md-4 mb-3 mb-md-5">
-                  {!loading ? descricaoTraduzida : <Placeholder xs={12} />}
+                  {lang === "pt" && (!loading ? descricaoTraduzida : <Placeholder xs={12} />)}
+                  {lang === "en" && (!loading ? criptomoeda?.description : <Placeholder xs={12} />)}
                </p>
 
                <hr />
@@ -189,12 +187,17 @@ const MoedaIndividual = () => {
                <Row className="mt-3">
                   <Col xs={12} xxl={6}>
                      <h3 id={styles.titulo2} className="text-xxl-start fs-2 text-center">
-                        Gráfico do preço do {!loading ? criptomoeda?.name : <Placeholder xs={4} />}
+                        {lang === "pt" && (
+                           <>
+                              {t("moedaIndividual.h3_chart")} {!loading ? criptomoeda?.name : <Placeholder xs={4} />}
+                           </>
+                        )}
+                        {lang === "en" && <>{!loading ? criptomoeda?.name : <Placeholder xs={4} />} Price chart</>}
                      </h3>
                   </Col>
                   <Col id={styles.destaque} className="d-flex gap-4 justify-content-center justify-content-xxl-end fs-5 mb-4 mb-xxl-0">
                      <span>
-                        <i className="bi bi-arrow-down-up"></i> Alteração: <br className="d-inline d-sm-none" />
+                        <i className="bi bi-arrow-down-up"></i> {t("moedaIndividual.change")}: <br className="d-inline d-sm-none" />
                         {!loading ? (
                            <b className={`${historico?.change >= 0 ? "text-success" : "text-danger"}`}>
                               {historico?.change >= 0 && "+"}
@@ -205,7 +208,7 @@ const MoedaIndividual = () => {
                         )}
                      </span>
                      <span>
-                        <i className="bi bi-coin"></i> Preço atual: <br className="d-inline d-sm-none" />
+                        <i className="bi bi-coin"></i> {t("moedaIndividual.price")}: <br className="d-inline d-sm-none" />
                         {!loading ? <b>{millify(criptomoeda?.price)} USD</b> : <Placeholder xs={7} />}
                      </span>
                   </Col>
@@ -213,13 +216,16 @@ const MoedaIndividual = () => {
                <div className="d-flex align-items-center justify-content-center">
                   {!chartLoading ? (
                      <Line
-                        data={{ labels: datasCriptomoeda, datasets: [{ label: "Preço em dólar", data: precosCriptomoeda, fill: true }] }}
+                        data={{
+                           labels: datasCriptomoeda,
+                           datasets: [{ label: t("moedaIndividual.chartLabel"), data: precosCriptomoeda, fill: true }],
+                        }}
                         options={{ responsive: true }}
                      />
                   ) : (
                      <Placeholder xs={12} animation="wave">
                         <Placeholder className="mt-3 d-flex align-items-center justify-content-center" id={styles.grafLoad} xs={12}>
-                           <p className="text-light fs-5">Carregando o gráfico...</p>
+                           <p className="text-light fs-5">{t("moedaIndividual.chartLoad")}...</p>
                         </Placeholder>
                      </Placeholder>
                   )}
@@ -228,8 +234,12 @@ const MoedaIndividual = () => {
                {/*   Estatisticas da criptomoeda  */}
                <Row className="mt-5 gx-md-5">
                   <Col xs={12} xxl={6}>
-                     <h3 id={styles.subtit}>Estatísticas de valor do {!loading ? criptomoeda?.name : <Placeholder xs={3} />}</h3>
-                     <p>Visão geral mostrando as estatisticas do {!loading ? criptomoeda?.name : <Placeholder xs={2} />}</p>
+                     <h3 id={styles.subtit}>
+                        {t("moedaIndividual.coinValue")} {!loading ? criptomoeda?.name : <Placeholder xs={3} />}
+                     </h3>
+                     <p>
+                        {t("moedaIndividual.coinOverview")} {!loading ? criptomoeda?.name : <Placeholder xs={2} />}
+                     </p>
                      <ListGroup className="mt-4">
                         {estatisticas.map((v, k) => (
                            <ListGroup.Item key={k} action>
@@ -253,8 +263,8 @@ const MoedaIndividual = () => {
                      </ListGroup>
                   </Col>
                   <Col className="pt-5 pt-xxl-0">
-                     <h3 id={styles.subtit}>Outras Estatísticas</h3>
-                     <p>Visão geral mostrando as estatisticas de todas as criptomoedas</p>
+                     <h3 id={styles.subtit}>{t("moedaIndividual.otherStats")}</h3>
+                     <p>{t("moedaIndividual.otherStats_p")}</p>
                      <ListGroup className="mt-4">
                         {estatisticas_genericas.map((v, k) => (
                            <ListGroup.Item key={k} action>
@@ -285,7 +295,16 @@ const MoedaIndividual = () => {
                <Row className="mt-4 mb-5 mb-lg-0 pt-3" fluid>
                   <Col>
                      <h3 id={styles.titulo2} className="fs-2">
-                        Links do {!loading ? criptomoeda?.name : <Placeholder xs={4} md={3} />}
+                        {lang === "pt" && (
+                           <>
+                              {t("moedaIndividual.h3_links")} {!loading ? criptomoeda?.name : <Placeholder xs={4} md={3} />}
+                           </>
+                        )}
+                        {lang === "en" && (
+                           <>
+                              {!loading ? criptomoeda?.name : <Placeholder xs={4} md={3} />} {t("moedaIndividual.h3_links")}
+                           </>
+                        )}
                      </h3>
                      <ListGroup className="mt-4">
                         {!loading

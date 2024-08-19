@@ -42,5 +42,60 @@
    },
    "noticias": {
       "tit": "Veja as notícias sobre o mundo crypto"
+   },
+   "moedaIndividual": {
+      "tit": "Estatísticas do",
+      "periodo": {
+         "3h": "3 horas",
+         "24h": "1 dia",
+         "7d": "1 semana",
+         "30d": "1 mês",
+         "3m": "3 meses",
+         "1y": "12 meses",
+         "3y": "3 anos",
+         "5y": "5 anos"
+      },
+      "h3_chart": "Gráfico do preço do",
+      "change": "Alteração",
+      "price": "Preço atual",
+      "chartLabel": "Preço em dólar",
+      "chartLoad": "Carregando o gráfico",
+      "coinValue": "Estatísticas de valor do",
+      "coinOverview": "Visão geral mostrando as estatisticas do",
+      "otherStats": "Outras Estatísticas",
+      "otherStats_p": "Outros dados relacionados a esta criptomoeda",
+      "estatisticas": [
+         { "tit": "Preço" },
+         { "tit": "Posição Global" },
+         { "tit": "Volume nas últimas 24h", "tp": "Volume total de transações realizadas para esta criptomoeda nas últimas 24 horas" },
+         {
+            "tit": "Capitalização de mercado",
+            "tp": "Valor total de mercado da criptomoeda, calculado multiplicando o preço atual pelo número total de moedas em circulação. Reflete a importância relativa da criptomoeda no mercado"
+         },
+         {
+            "tit": "Auge",
+            "tp": "Maior preço registrado para esta criptomoeda desde o seu lançamento, refletindo o pico máximo de valorização ao longo do tempo."
+         }
+      ],
+      "estatisticas_genericas": [
+         { "tit": "Total de mercados", "tp": "Número total de mercados ou pares de negociação disponíveis para esta criptomoeda" },
+         {
+            "tit": "Corretoras disponíveis",
+            "tp": "Número total de corretoras onde esta criptomoeda está listada e disponível para negociação, mostrando a acessibilidade da moeda no mercado"
+         },
+         {
+            "tit": "Validação do fornecimento",
+            "tp": "Confirmação de que o fornecimento total da criptomoeda foi verificado e é preciso, garantindo a transparência sobre a quantidade em circulação"
+         },
+         {
+            "tit": "Total de moedas fornecidas",
+            "tp": "Quantidade total de unidades desta criptomoeda que foram criadas ou estão disponíveis até o momento, incluindo moedas em circulação e aquelas que ainda não foram emitidas"
+         },
+         {
+            "tit": "Total de moedas circulando",
+            "tp": "Quantidade total de unidades desta criptomoeda que estão atualmente em circulação no mercado, disponíveis para negociação ou uso"
+         }
+      ],
+      "h3_links": "Links do"
    }
 }
