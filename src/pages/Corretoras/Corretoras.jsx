@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCorretoras, setPaginaAtual, setTotalPaginas } from "../../state/corretoras/corretorasSlice";
-import { Col, Container, OverlayTrigger, Row, Table, Tooltip } from "react-bootstrap";
+import { Col, Container, Row, Table } from "react-bootstrap";
 import styles from "./Corretoras.module.css";
 import LinhaCorretora from "../../components/LinhaCorretora/LinhaCorretora";
 import { paginarArray } from "../../hooks/usePaginarArray";
@@ -11,12 +11,14 @@ import Paginacao from "../../components/Paginacao/Paginacao";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
+import { useTranslation } from "react-i18next";
 
 const Corretoras = () => {
    const [loading, setLoading] = useState(false);
    const dispatch = useDispatch();
    const { corretoras, paginaAtual, itemsPorPagina, totalPaginas } = useSelector((state) => state.corretoras);
    const { modoEscuro } = useSelector((state) => state.tema);
+   const { t } = useTranslation();
 
    const [corretorasPaginadas, setCorretorasPaginadas] = useState([]);
 
@@ -48,7 +50,7 @@ const Corretoras = () => {
       <Container fluid>
          <Row>
             <Col>
-               <h2 className="fw-bold mb-4 titulo1">Veja todas as corretoras do mercado</h2>
+               <h2 className="fw-bold mb-4 titulo1">{t("corretoras.tit")}</h2>
 
                <div>
                   <Table striped size="lg" responsive hover>
@@ -58,29 +60,23 @@ const Corretoras = () => {
                               #
                            </th>
                            <th id={styles.th} className="text-truncate">
-                              Corretora
+                              {t("corretoras.exchange")}
                            </th>
                            <th id={styles.th} className="text-truncate">
-                              Pontuação
+                              {t("corretoras.points")}
                            </th>
                            <th id={styles.th} className="text-truncate">
-                              Volume de 24h{" "}
-                              <Tippy
-                                 theme={modoEscuro && "light"}
-                                 content="Volume total de transações realizadas na corretora nas últimas 24 horas"
-                              >
+                              {t("corretoras.24hvol")}{" "}
+                              <Tippy theme={modoEscuro && "light"} content={t("corretoras.24hvol_tt")}>
                                  <i className="bi bi-info-circle-fill"></i>
                               </Tippy>
                            </th>
                            <th id={styles.th} className="text-truncate">
-                              País de origem
+                              {t("corretoras.country")}
                            </th>
                            <th id={styles.th} className="text-truncate">
-                              É Negociável?{" "}
-                              <Tippy
-                                 theme={modoEscuro && "light"}
-                                 content="Indica se a corretora permite a execução de operações de compra e venda"
-                              >
+                              {t("corretoras.trades")}{" "}
+                              <Tippy theme={modoEscuro && "light"} content={t("corretoras.trades_tt")}>
                                  <i className="bi bi-info-circle-fill"></i>
                               </Tippy>
                            </th>

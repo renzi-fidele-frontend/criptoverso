@@ -21,6 +21,15 @@
       "tit": "Veja todas as criptomoedas do mercado",
       "search_placeholder": "Encontre a sua moeda favorita",
       "not_found": "Nada foi encontrado, tente clicar no botão de pesquisa"
+   },
+   "corretoras": {
+      "tit": "Veja todas as criptomoedas do mercado",
+      "exchange": "Corretoras",
+      "points": "Pontuação",
+      "24hvol": "Volume de 24h",
+      "country": "País de origem",
+      "trades": "É Negociável?",
+      "trades_tt": "Indica se a corretora permite a execução de operações de compra e venda",
+      "24hvol_tt": "Volume total de transações realizadas na corretora nas últimas 24 horas"
    }
 }
-

@@ -70,7 +70,7 @@ const SideBar = () => {
                         {t("sidebar.modes.name")} {modoEscuro ? t("sidebar.modes.light") : t("sidebar.modes.dark")}
                      </CDBSidebarMenuItem>
                   </div>
-                  <div>
+                  <div className="d-none">
                      <CDBSidebarMenuItem>
                         <FormSelect className="border-0 bg-opacity-25 text-light bg-light" role="button" onChange={mudarIdioma}>
                            <option className="bg-opacity-100 text-dark" value="pt">
