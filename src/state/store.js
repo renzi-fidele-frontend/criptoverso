@@ -6,6 +6,7 @@ import corretorasReducer from "./corretoras/corretorasSlice";
 import MostrarNavBarReducer from "./MostrarNavBar/MostrarNavBarSlice";
 import temaReducer from "./tema/temaSlice";
 import carteirasReducer from "./carteiras/carteirasSlice";
+import idiomaReducer from "./idioma/idiomaSlice";
 
 export default configureStore({
    reducer: {
@@ -16,5 +17,6 @@ export default configureStore({
       mostrarNavBar: MostrarNavBarReducer,
       tema: temaReducer,
       carteiras: carteirasReducer,
+      idioma: idiomaReducer,
    },
 });

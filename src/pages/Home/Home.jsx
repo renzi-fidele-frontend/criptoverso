@@ -16,8 +16,11 @@ import { gerarArray } from "../../hooks/useGerarArray";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
+import { useTranslation } from "react-i18next";
 
 const Home = () => {
+   // i18n
+   const { t } = useTranslation();
    const [loading, setLoading] = useState(false);
    const { estatisticasGerais } = useSelector((state) => state.estatisticasGerais);
    const { criptomoedas } = useSelector((state) => state.criptomoedas);
@@ -110,7 +113,7 @@ const Home = () => {
 
    return (
       <Container id={styles.ct} fluid>
-         <h2 className="fw-bold mb-4 titulo1">Estatísticas globais de criptomoedas</h2>
+         <h2 className="fw-bold mb-4 titulo1">{t("home.globalStats")}</h2>
          <Row className="gy-3">
             <Col xs={12} sm={12} xl={8}>
                <Row>

@@ -1,13 +1,16 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-import { translations } from "./translations";
+import Backend from "i18next-http-backend";
 
-i18n.use(initReactI18next).init({
-   resources: translations,
-   lng: "pt",
-   interpolation: {
-      escapeValue: false,
-   },
-});
+i18n
+   .use(Backend)
+   .use(initReactI18next)
+   .init({
+      lng: "pt",
+      interpolation: {
+         escapeValue: false,
+      },
+      debug: true,
+   });
 
 export default i18n;

@@ -1,0 +1,19 @@
+{
+   "home": {
+      "globalStats": "Estatísticas gerais de criptomoedas",
+      "top10Coins": "Top 10 criptomoedas no mundo",
+      "lastNews": "Últimas notícias sobre o mundo Crypto"
+   },
+   "sidebar": {
+      "home": "Início",
+      "coins": "Criptomoedas",
+      "exchanges": "Corretoras",
+      "wallets": "Carteiras",
+      "news": "Notícias",
+      "modes": {
+         "dark": "Escuro",
+         "light": "Claro",
+         "name": "Modo"
+      }
+   }
+}
