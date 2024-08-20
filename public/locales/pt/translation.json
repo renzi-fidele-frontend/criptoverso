@@ -97,5 +97,12 @@
          }
       ],
       "h3_links": "Links do"
+   },
+   "components": {
+      "cardMoeda": {
+         "price": "Preço",
+         "marketVol": "Volume de mercado",
+         "change": "Alteração"
+      }
    }
 }

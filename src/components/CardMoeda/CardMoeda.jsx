@@ -4,8 +4,11 @@ import styles from "./CardMoeda.module.css";
 import { Link } from "react-router-dom";
 import { Line } from "react-chartjs-2";
 import { gerarArray } from "../../hooks/useGerarArray";
+import { useTranslation } from "react-i18next";
 
 const CardMoeda = ({ moeda }) => {
+   const { t } = useTranslation();
+
    return moeda ? (
       <Card as={Link} className={styles.ct} to={`/criptomoeda/${moeda.uuid}`}>
          <Card.Header className="flex-row align-items-center justify-content-between d-flex">
@@ -13,12 +16,14 @@ const CardMoeda = ({ moeda }) => {
             <Image id={styles.foto} src={moeda?.iconUrl} />
          </Card.Header>
          <Card.Body>
-            <p>Preço: {millify(moeda?.price)} USD</p>
             <p>
-               Volume de mercado: <span>{millify(moeda?.marketCap)} USD</span>
+               {t("components.cardMoeda.price")}: {millify(moeda?.price)} USD
+            </p>
+            <p>
+               {t("components.cardMoeda.marketVol")}: <span>{millify(moeda?.marketCap)} USD</span>
             </p>
             <p className="pb-0">
-               Alteração:{" "}
+               {t("components.cardMoeda.change")}:{" "}
                <span className={`${moeda?.change >= 0 ? "text-success" : "text-danger"}`}>{`${moeda?.change >= 0 ? "+" : ""}${
                   moeda?.change
                }%`}</span>
@@ -61,17 +66,17 @@ const CardMoeda = ({ moeda }) => {
          <Card.Body>
             <Placeholder className="d-flex flex-column gap-3" xs={12} animation="wave">
                <p>
-                  Preço: <Placeholder xs={2} /> USD
+                  {t("components.cardMoeda.price")}: <Placeholder xs={2} /> USD
                </p>
                <p>
-                  Volume de mercado:{" "}
+                  {t("components.cardMoeda.marketVol")}:{" "}
                   <span>
                      <Placeholder xs={2} />
                   </span>{" "}
                   USD
                </p>
                <p>
-                  Alteração:{" "}
+                  {t("components.cardMoeda.change")}:{" "}
                   <span className={`text-success`}>
                      <Placeholder xs={2} /> %
                   </span>
