@@ -74,10 +74,10 @@ const SideBar = () => {
                      <CDBSidebarMenuItem>
                         <FormSelect className="border-0 bg-opacity-25 text-light bg-light" role="button" onChange={mudarIdioma}>
                            <option className="bg-opacity-100 text-dark" value="pt">
-                              Português
+                              <div>🇵🇹 Português</div>
                            </option>
                            <option className="bg-opacity-100 text-dark" value="en">
-                              English
+                              🇺🇸 English
                            </option>
                         </FormSelect>
                      </CDBSidebarMenuItem>
