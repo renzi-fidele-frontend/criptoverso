@@ -12,8 +12,10 @@ import { gerarArray } from "../../hooks/useGerarArray";
 import translate from "translate";
 import { useSelector } from "react-redux";
 import { Bar } from "react-chartjs-2";
+import { useTranslation } from "react-i18next";
 
 const LinhaCarteira = ({ carteira, chave }) => {
+   const { t } = useTranslation();
    const [mostrar, setMostrar] = useState(false);
    const [segurancaTraduzido, setSegurancaTraduzido] = useState(false);
    const [facilidadeTraduzida, setFacilidadeTraduzida] = useState("");
@@ -33,7 +35,7 @@ const LinhaCarteira = ({ carteira, chave }) => {
    }
 
    useEffect(() => {
-      if (carteira) traduzirTexto();
+      if (carteira && lang === "pt") traduzirTexto();
    }, [carteira]);
 
    const iconePlataforma = (plataforma) => {
@@ -75,7 +77,11 @@ const LinhaCarteira = ({ carteira, chave }) => {
             </td>
             <td className={styles.td + " d-none d-xl-table-cell"}>
                {segurancaTraduzido.length > 0 ? (
-                  segurancaTraduzido
+                  lang === "pt" ? (
+                     segurancaTraduzido
+                  ) : (
+                     carteira?.Security
+                  )
                ) : (
                   <Placeholder xs={12} animation="wave">
                      <Placeholder xs={7} />
@@ -95,7 +101,11 @@ const LinhaCarteira = ({ carteira, chave }) => {
             </td>
             <td className={styles.td}>
                {facilidadeTraduzida.length > 0 ? (
-                  facilidadeTraduzida
+                  lang === "pt" ? (
+                     facilidadeTraduzida
+                  ) : (
+                     carteira?.EaseOfUse
+                  )
                ) : (
                   <Placeholder xs={12} animation="wave">
                      <Placeholder xs={7} />
@@ -110,46 +120,48 @@ const LinhaCarteira = ({ carteira, chave }) => {
                   <div className={`${styles.td} pb-2`}>
                      <div className="d-flex gap-3 mb-3">
                         <div>
-                           <h6>Criptomoedas suportadas:</h6>
+                           <h6>{t("components.linha_carteira.coins")}</h6>
                            <span>- {carteira?.Coins?.join(" | ")}</span>
                         </div>
                         <div className="vr"></div>
                         <div>
-                           <h6>Tipo de validação:</h6>
+                           <h6>{t("components.linha_carteira.valid")}:</h6>
                            <span>- {carteira?.ValidationType}</span>
                         </div>
                         <div className="vr"></div>
                         <div>
-                           <h6>Anônimidade:</h6>
+                           <h6>{t("components.linha_carteira.anon")}:</h6>
                            <span>- {carteira?.Anonymity}</span>
                         </div>
                      </div>
 
                      <a target="_blank" className="text-bg-primary rounded-1 py-1 px-2 shadow-sm" href={carteira?.AffiliateURL}>
-                        Utilizar carteira <i className="bi bi-box-arrow-in-up-right"></i>
+                        {t("components.linha_carteira.btn1")} <i className="bi bi-box-arrow-in-up-right"></i>
                      </a>
                      <a
                         target="_blank"
                         className={`rounded-1 py-1 px-2 shadow-sm ms-2 ${modoEscuro ? "text-bg-light" : "text-bg-dark"}`}
                         href={carteira?.SourceCodeUrl}
                      >
-                        Acessar repositório <i className="bi bi-github"></i>
+                        {t("components.linha_carteira.btn2")} <i className="bi bi-github"></i>
                      </a>
                      <a
                         role="button"
                         onClick={() => setMostrarClassificacao(true)}
                         className={`text-bg-secondary rounded-1 py-1 px-2 shadow-sm ms-2 ${modoEscuro && "border-light border"}`}
                      >
-                        Classificação detalhada <i className="bi bi-info-circle-fill"></i>
+                        {t("components.linha_carteira.btn3")} <i className="bi bi-info-circle-fill"></i>
                      </a>
                      <Modal centered size="lg" show={mostrarClassificacao} onHide={() => setMostrarClassificacao(false)}>
                         <Modal.Header closeButton>
-                           <Modal.Title>Classificação detalhada do {carteira?.Name}</Modal.Title>
+                           <Modal.Title>
+                              {t("components.linha_carteira.titMod")} {carteira?.Name}
+                           </Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                            <Row>
                               <Col sm={3}>
-                                 <h5 className="fst-italic mb-0">Média</h5>
+                                 <h5 className="fst-italic mb-0">{t("components.linha_carteira.avg")}</h5>
                                  <hr />
                                  <h6 id={styles.media}>{carteira?.Rating?.Avg}</h6>
                                  <div className="d-flex gap-2 mb-3 mb-sm-0">
@@ -162,10 +174,16 @@ const LinhaCarteira = ({ carteira, chave }) => {
                                  <div id={styles.chartCt}>
                                     <Bar
                                        data={{
-                                          labels: ["1 Estrela", "2 Estrelas", "3 Estrelas", "4 Estrelas", "5 Estrelas"],
+                                          labels: [
+                                             t("components.linha_carteira.chartLabels.0"),
+                                             t("components.linha_carteira.chartLabels.1"),
+                                             t("components.linha_carteira.chartLabels.2"),
+                                             t("components.linha_carteira.chartLabels.3"),
+                                             t("components.linha_carteira.chartLabels.4"),
+                                          ],
                                           datasets: [
                                              {
-                                                label: "Classificações",
+                                                label: t("components.linha_carteira.chartLabel"),
                                                 data: [
                                                    carteira?.Rating?.One,
                                                    carteira?.Rating?.Two,
@@ -184,7 +202,8 @@ const LinhaCarteira = ({ carteira, chave }) => {
                         </Modal.Body>
                         <Modal.Footer>
                            <span>
-                              Total de classificações: <Badge className="fs-6 bg-secondary">{carteira?.Rating?.TotalUsers}</Badge>
+                              {t("components.linha_carteira.totUsers")}:{" "}
+                              <Badge className="fs-6 bg-secondary">{carteira?.Rating?.TotalUsers}</Badge>
                            </span>
                         </Modal.Footer>
                      </Modal>

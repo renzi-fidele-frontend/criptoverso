@@ -128,6 +128,19 @@
             "Segurarança",
             "Penalidade de relatórios negativos"
          ]
+      },
+      "linha_carteira": {
+         "coins": "Criptomoedas suportadas",
+         "valid": "Tipo de validação",
+         "anon": "Anônimidade",
+         "btn1": "Utilizar carteira",
+         "btn2": "Acessar repositório",
+         "btn3": "Classificação detalhada",
+         "titMod": "Classificação detalhada do",
+         "avg": "Média",
+         "chartLabels": ["1 Estrela", "2 Estrelas", "3 Estrelas", "4 Estrelas", "5 Estrelas"],
+         "chartLabel": "Classificações",
+         "totUsers": "Total de classificações"
       }
    }
 }
