@@ -104,7 +104,7 @@
          "marketVol": "Volume de mercado",
          "change": "Alteração"
       },
-      "linha_carteira": {
+      "linha_corretora": {
          "trades": "Sim",
          "noTrades": "Não",
          "noGradePoins": "Indisponível",

@@ -73,7 +73,7 @@ const LinhaCorretora = ({ corretora, chave }) => {
             </td>
             <td className={styles.td}>
                <div className="d-flex align-items-center h-100">
-                  {corretora?.GradePoints === 0 && <Badge bg="warning">{t("components.linha_carteira.noGradePoins")}</Badge>}
+                  {corretora?.GradePoints === 0 && <Badge bg="warning">{t("components.linha_corretora.noGradePoins")}</Badge>}
                   {corretora?.GradePoints >= 50 && <Badge bg="success">{corretora?.GradePoints}</Badge>}
                   {corretora?.GradePoints < 50 && corretora?.GradePoints > 0 && <Badge bg="danger">{corretora?.GradePoints}</Badge>}
                </div>
@@ -97,12 +97,12 @@ const LinhaCorretora = ({ corretora, chave }) => {
                {corretora?.Trades ? (
                   <span className="text-success">
                      <i className="bi bi-check-circle-fill me-2"></i>
-                     {t("components.linha_carteira.trades")}
+                     {t("components.linha_corretora.trades")}
                   </span>
                ) : (
                   <span className="text-danger">
                      <i className="bi bi-x-circle-fill me-2"></i>
-                     {t("components.linha_carteira.noTrades")}
+                     {t("components.linha_corretora.noTrades")}
                   </span>
                )}
             </td>
@@ -114,24 +114,24 @@ const LinhaCorretora = ({ corretora, chave }) => {
                   <div className={`${styles.td} pb-2`}>
                      <p>{lang === "pt" ? descricaoTraduzida : corretora?.Description}</p>
                      <div>
-                        <h6 className="mb-0">{t("components.linha_carteira.address")}</h6>
-                        <p>- {corretora?.FullAddress.length > 0 ? corretora?.FullAddress : t("components.linha_carteira.noAddress")}</p>
+                        <h6 className="mb-0">{t("components.linha_corretora.address")}</h6>
+                        <p>- {corretora?.FullAddress.length > 0 ? corretora?.FullAddress : t("components.linha_corretora.noAddress")}</p>
                      </div>
                      <div>
-                        <h6 className="mb-0">{t("components.linha_carteira.taxes")}</h6>
+                        <h6 className="mb-0">{t("components.linha_corretora.taxes")}</h6>
                         <p dangerouslySetInnerHTML={{ __html: lang === "pt" ? taxas : corretora?.Fees }}></p>
                      </div>
                      <div>
-                        <h6 className="mb-0">{t("components.linha_carteira.depMets")}</h6>
+                        <h6 className="mb-0">{t("components.linha_corretora.depMets")}</h6>
                         <p dangerouslySetInnerHTML={{ __html: lang === "pt" ? metodosDep : corretora?.DepositMethods }}></p>
                      </div>
                      <div>
-                        <h6 className="mb-0">{t("components.linha_carteira.witMets")}</h6>
+                        <h6 className="mb-0">{t("components.linha_corretora.witMets")}</h6>
                         <p dangerouslySetInnerHTML={{ __html: lang === "pt" ? metodosLev : corretora?.WithdrawalMethods }}></p>
                      </div>
                      {/*  Botões */}
                      <a target="_blank" className="text-bg-primary border border-primary rounded-1 p-1 shadow-sm" href={corretora?.AffiliateURL}>
-                        {t("components.linha_carteira.officialSite")} <i className="bi bi-globe"></i>
+                        {t("components.linha_corretora.officialSite")} <i className="bi bi-globe"></i>
                      </a>
                      {/*  Pontuação detalhada */}
                      <a
@@ -139,12 +139,12 @@ const LinhaCorretora = ({ corretora, chave }) => {
                         onClick={() => setMostrarModal(true)}
                         className="text-bg-secondary border-secondary ms-3 border rounded-1 p-1 shadow-sm"
                      >
-                        {t("components.linha_carteira.points")} <i className="bi bi-info-circle-fill"></i>
+                        {t("components.linha_corretora.points")} <i className="bi bi-info-circle-fill"></i>
                      </a>
                      <Modal size="lg" centered onHide={() => setMostrarModal(false)} show={mostrarModal}>
                         <Modal.Header closeButton>
                            <Modal.Title>
-                              {t("components.linha_carteira.titPoints")} {corretora?.Name}
+                              {t("components.linha_corretora.titPoints")} {corretora?.Name}
                            </Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
@@ -152,14 +152,14 @@ const LinhaCorretora = ({ corretora, chave }) => {
                               <Pie
                                  data={{
                                     labels: [
-                                       t("components.linha_carteira.chartLabels.0"),
-                                       t("components.linha_carteira.chartLabels.1"),
-                                       t("components.linha_carteira.chartLabels.2"),
-                                       t("components.linha_carteira.chartLabels.3"),
-                                       t("components.linha_carteira.chartLabels.4"),
-                                       t("components.linha_carteira.chartLabels.5"),
-                                       t("components.linha_carteira.chartLabels.6"),
-                                       t("components.linha_carteira.chartLabels.7"),
+                                       t("components.linha_corretora.chartLabels.0"),
+                                       t("components.linha_corretora.chartLabels.1"),
+                                       t("components.linha_corretora.chartLabels.2"),
+                                       t("components.linha_corretora.chartLabels.3"),
+                                       t("components.linha_corretora.chartLabels.4"),
+                                       t("components.linha_corretora.chartLabels.5"),
+                                       t("components.linha_corretora.chartLabels.6"),
+                                       t("components.linha_corretora.chartLabels.7"),
                                     ],
                                     datasets: [
                                        {
@@ -181,10 +181,10 @@ const LinhaCorretora = ({ corretora, chave }) => {
                         </Modal.Body>
                         <Modal.Footer className="flex-column flex-sm-row">
                            <p>
-                              {t("components.linha_carteira.totalPoints")}:{" "}
+                              {t("components.linha_corretora.totalPoints")}:{" "}
                               {corretora?.GradePoints === 0 && (
                                  <Badge className="fs-6" bg="warning">
-                                    {t("components.linha_carteira.noGradePoints")}
+                                    {t("components.linha_corretora.noGradePoints")}
                                  </Badge>
                               )}
                               {corretora?.GradePoints >= 50 && (
@@ -200,7 +200,7 @@ const LinhaCorretora = ({ corretora, chave }) => {
                            </p>
                            <div className="vr d-none d-sm-block"></div>
                            <p>
-                              {t("components.linha_carteira.rank")}:{" "}
+                              {t("components.linha_corretora.rank")}:{" "}
                               <Badge bg="secondary" className="fw-bolder fs-6">
                                  {corretora?.Grade}
                               </Badge>

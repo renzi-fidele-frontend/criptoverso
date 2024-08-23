@@ -19,6 +19,7 @@ const LinhaCarteira = ({ carteira, chave }) => {
    const [facilidadeTraduzida, setFacilidadeTraduzida] = useState("");
    const { modoEscuro } = useSelector((state) => state.tema);
    const [mostrarClassificacao, setMostrarClassificacao] = useState(false);
+   const { lang } = useSelector((state) => state.idioma);
 
    async function traduzirTexto() {
       try {
