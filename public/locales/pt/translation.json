@@ -103,6 +103,21 @@
          "price": "Preço",
          "marketVol": "Volume de mercado",
          "change": "Alteração"
+      },
+      "linha_carteira": {
+         "trades": "Sim",
+         "noTrades": "Não",
+         "noGradePoins": "Indisponível",
+         "address": "Endereço",
+         "noAddress": "Indisponível",
+         "taxes": "Taxas",
+         "depMets": "Métodos de depósito",
+         "witMets": "Métodos de levantamento",
+         "officialSite": "Site de Afiliação",
+         "points": "Pontuação detalhada",
+         "titPoints": "Pontuação detalhada do",
+         "totalPoints": "Pontuação total",
+         "rank": "Classificação"
       }
    }
 }

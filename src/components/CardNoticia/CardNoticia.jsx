@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import translate from "translate";
+import { useTranslation } from "react-i18next";
 
 const CardNoticia = ({ noticia }) => {
+   const { t } = useTranslation();
    const [textoTraduzido, setTextoTraduzido] = useState("");
 
    async function traduzirTexto() {

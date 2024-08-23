@@ -5,8 +5,11 @@ import translate from "translate";
 import axios from "axios";
 import naoDisponivel from "../../assets/semBandeira.png";
 import { Pie } from "react-chartjs-2";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
 const LinhaCorretora = ({ corretora, chave }) => {
+   const { t } = useTranslation();
    const [mostrar, setMostrar] = useState(false);
    const [descricaoTraduzida, setDescricaoTraduzida] = useState("");
    const [paisTraduzido, setPaisTraduzido] = useState("");
@@ -15,6 +18,7 @@ const LinhaCorretora = ({ corretora, chave }) => {
    const [taxas, setTaxas] = useState("");
    const [metodosDep, setMetodosDep] = useState("");
    const [metodosLev, setMetodosLev] = useState("");
+   const { lang } = useSelector((state) => state.idioma);
 
    const [loading, setLoading] = useState(false);
 
@@ -52,14 +56,14 @@ const LinhaCorretora = ({ corretora, chave }) => {
 
    useEffect(() => {
       if (corretora) {
-         traduzirTexto();
+         if (lang === "pt") traduzirTexto();
          apanharCountryCode(corretora?.Country);
       }
    }, [corretora]);
 
    return corretora ? (
       <>
-         <tr style={{ cursor: "pointer" }} onClick={() => setMostrar(!mostrar)}>
+         <tr role="button" onClick={() => setMostrar(!mostrar)}>
             <td className={styles.td}>{corretora?.numero}.</td>
             <td className={styles.td}>
                <div className="d-flex gap-1 gap-lg-3 flex-nowrap align-items-center">
@@ -69,7 +73,7 @@ const LinhaCorretora = ({ corretora, chave }) => {
             </td>
             <td className={styles.td}>
                <div className="d-flex align-items-center h-100">
-                  {corretora?.GradePoints === 0 && <Badge bg="warning">Indisponível</Badge>}
+                  {corretora?.GradePoints === 0 && <Badge bg="warning">{t("components.linha_carteira.noGradePoins")}</Badge>}
                   {corretora?.GradePoints >= 50 && <Badge bg="success">{corretora?.GradePoints}</Badge>}
                   {corretora?.GradePoints < 50 && corretora?.GradePoints > 0 && <Badge bg="danger">{corretora?.GradePoints}</Badge>}
                </div>
@@ -84,7 +88,7 @@ const LinhaCorretora = ({ corretora, chave }) => {
                   ) : (
                      <>
                         <Image id={styles.foto} src={fotoBandeira} />
-                        <span>{paisTraduzido}</span>
+                        <span>{lang === "pt" ? paisTraduzido : corretora?.Country}</span>
                      </>
                   )}
                </div>
@@ -92,40 +96,42 @@ const LinhaCorretora = ({ corretora, chave }) => {
             <td className={styles.td}>
                {corretora?.Trades ? (
                   <span className="text-success">
-                     <i className="bi bi-check-circle-fill me-2"></i>Sim
+                     <i className="bi bi-check-circle-fill me-2"></i>
+                     {t("components.linha_carteira.trades")}
                   </span>
                ) : (
                   <span className="text-danger">
-                     <i className="bi bi-x-circle-fill me-2"></i>Não
+                     <i className="bi bi-x-circle-fill me-2"></i>
+                     {t("components.linha_carteira.noTrades")}
                   </span>
                )}
             </td>
          </tr>
          {/*  Escondido  */}
-         <div style={{ display: "table-row" }} className={`${!mostrar && "border-0"}`}>
+         <div className={`d-table-row ${!mostrar && "border-0"}`}>
             <td className={!mostrar && "p-0 border-0"} colSpan={12}>
                <Collapse in={mostrar}>
                   <div className={`${styles.td} pb-2`}>
-                     <p>{descricaoTraduzida}</p>
+                     <p>{lang === "pt" ? descricaoTraduzida : corretora?.Description}</p>
                      <div>
-                        <h6 className="mb-0">Endereço</h6>
-                        <p>- {corretora?.FullAddress.length > 0 ? corretora?.FullAddress : "Indisponível"}</p>
+                        <h6 className="mb-0">{t("components.linha_carteira.address")}</h6>
+                        <p>- {corretora?.FullAddress.length > 0 ? corretora?.FullAddress : t("components.linha_carteira.noAddress")}</p>
                      </div>
                      <div>
-                        <h6 className="mb-0">Taxas</h6>
-                        <p dangerouslySetInnerHTML={{ __html: taxas }}></p>
+                        <h6 className="mb-0">{t("components.linha_carteira.taxes")}</h6>
+                        <p dangerouslySetInnerHTML={{ __html: lang === "pt" ? taxas : corretora?.Fees }}></p>
                      </div>
                      <div>
-                        <h6 className="mb-0">Métodos de depósito</h6>
-                        <p dangerouslySetInnerHTML={{ __html: metodosDep }}></p>
+                        <h6 className="mb-0">{t("components.linha_carteira.depMets")}</h6>
+                        <p dangerouslySetInnerHTML={{ __html: lang === "pt" ? metodosDep : corretora?.DepositMethods }}></p>
                      </div>
                      <div>
-                        <h6 className="mb-0">Métodos de levantamento</h6>
-                        <p dangerouslySetInnerHTML={{ __html: metodosLev }}></p>
+                        <h6 className="mb-0">{t("components.linha_carteira.witMets")}</h6>
+                        <p dangerouslySetInnerHTML={{ __html: lang === "pt" ? metodosLev : corretora?.WithdrawalMethods }}></p>
                      </div>
                      {/*  Botões */}
                      <a target="_blank" className="text-bg-primary border border-primary rounded-1 p-1 shadow-sm" href={corretora?.AffiliateURL}>
-                        Site de Afiliação <i className="bi bi-globe"></i>
+                        {t("components.linha_carteira.officialSite")} <i className="bi bi-globe"></i>
                      </a>
                      {/*  Pontuação detalhada */}
                      <a
@@ -133,11 +139,13 @@ const LinhaCorretora = ({ corretora, chave }) => {
                         onClick={() => setMostrarModal(true)}
                         className="text-bg-secondary border-secondary ms-3 border rounded-1 p-1 shadow-sm"
                      >
-                        Pontuação detalhada <i className="bi bi-info-circle-fill"></i>
+                        {t("components.linha_carteira.points")} <i className="bi bi-info-circle-fill"></i>
                      </a>
                      <Modal size="lg" centered onHide={() => setMostrarModal(false)} show={mostrarModal}>
                         <Modal.Header closeButton>
-                           <Modal.Title>Pontuação detalhada do {corretora?.Name}</Modal.Title>
+                           <Modal.Title>
+                              {t("components.linha_carteira.titPoints")} {corretora?.Name}
+                           </Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                            <div id={styles.chartCt}>
@@ -173,10 +181,10 @@ const LinhaCorretora = ({ corretora, chave }) => {
                         </Modal.Body>
                         <Modal.Footer className="flex-column flex-sm-row">
                            <p>
-                              Pontuação total:{" "}
+                              {t("components.linha_carteira.totalPoints")}:{" "}
                               {corretora?.GradePoints === 0 && (
                                  <Badge className="fs-6" bg="warning">
-                                    Indisponível
+                                    {t("components.linha_carteira.noGradePoints")}
                                  </Badge>
                               )}
                               {corretora?.GradePoints >= 50 && (
@@ -192,7 +200,7 @@ const LinhaCorretora = ({ corretora, chave }) => {
                            </p>
                            <div className="vr d-none d-sm-block"></div>
                            <p>
-                              Classificação:{" "}
+                              {t("components.linha_carteira.rank")}:{" "}
                               <Badge bg="secondary" className="fw-bolder fs-6">
                                  {corretora?.Grade}
                               </Badge>
