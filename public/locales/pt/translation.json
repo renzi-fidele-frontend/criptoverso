@@ -117,7 +117,17 @@
          "points": "Pontuação detalhada",
          "titPoints": "Pontuação detalhada do",
          "totalPoints": "Pontuação total",
-         "rank": "Classificação"
+         "rank": "Classificação",
+         "chartLabels": [
+            "Legalização",
+            "Risco de transação",
+            "Equipe",
+            "Fornecimento de dados",
+            "Qualidade e Diversidade de Ativos",
+            "Qualidade do mercado",
+            "Segurarança",
+            "Penalidade de relatórios negativos"
+         ]
       }
    }
 }

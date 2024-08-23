@@ -152,14 +152,14 @@ const LinhaCorretora = ({ corretora, chave }) => {
                               <Pie
                                  data={{
                                     labels: [
-                                       "Legalização",
-                                       "Risco de transação",
-                                       "Equipe",
-                                       "Fornecimento de dados",
-                                       "Qualidade e Diversidade de Ativos",
-                                       "Qualidade do mercado",
-                                       "Segurarança",
-                                       "Penalidade de relatórios negativos",
+                                       t("components.linha_carteira.chartLabels.0"),
+                                       t("components.linha_carteira.chartLabels.1"),
+                                       t("components.linha_carteira.chartLabels.2"),
+                                       t("components.linha_carteira.chartLabels.3"),
+                                       t("components.linha_carteira.chartLabels.4"),
+                                       t("components.linha_carteira.chartLabels.5"),
+                                       t("components.linha_carteira.chartLabels.6"),
+                                       t("components.linha_carteira.chartLabels.7"),
                                     ],
                                     datasets: [
                                        {
