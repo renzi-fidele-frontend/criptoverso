@@ -1,7 +1,146 @@
 {
    "home": {
-      "globalStats": "Cryptocurrencies global stats",
-      "top10Coins": "Top 10 criptomoedas no mundo",
-      "lastNews": "Últimas notícias sobre o mundo Crypto"
+      "globalStats": "General Cryptocurrency Statistics",
+      "top10Coins": "Top 10 cryptocurrencies in the world",
+      "lastNews": "Latest news about the Crypto world"
+   },
+   "sidebar": {
+      "home": "Home",
+      "coins": "Cryptocurrencies",
+      "exchanges": "Exchanges",
+      "wallets": "Wallets",
+      "news": "News",
+      "modes": {
+         "dark": "Dark",
+         "light": "Light",
+         "name": "Mode"
+      },
+      "author": "Made by"
+   },
+   "criptomoedas": {
+      "tit": "See all cryptocurrencies on the market",
+      "search_placeholder": "Find your favorite currency",
+      "not_found": "Nothing found, try clicking the search button"
+   },
+   "corretoras": {
+      "tit": "See all cryptocurrencies on the market",
+      "exchange": "Exchanges",
+      "points": "Score",
+      "24hvol": "24h volume",
+      "country": "Country of origin",
+      "trades": "Trades?",
+      "trades_tt": "Indicates whether the broker allows the execution of purchase and sale operations",
+      "24hvol_tt": "Total volume of transactions carried out at the broker in the last 24 hours"
+   },
+   "carteiras": {
+      "tit": "See all crypto wallets on the market",
+      "th_wallet": "Wallets",
+      "th_platforms": "Platforms",
+      "th_security": "Security level",
+      "th_rating": "Rating",
+      "th_ease": "Ease of use"
+   },
+   "noticias": {
+      "tit": "See news about the crypto world"
+   },
+   "moedaIndividual": {
+      "tit": "Statistics",
+      "periodo": {
+         "3h": "3 hous",
+         "24h": "1 day",
+         "7d": "1 week",
+         "30d": "1 month",
+         "3m": "3 months",
+         "1y": "12 months",
+         "3y": "3 years",
+         "5y": "5 years"
+      },
+      "h3_chart": "Price chart",
+      "change": "Change",
+      "price": "Current price",
+      "chartLabel": "Price in dollars",
+      "chartLoad": "Loading the chart",
+      "coinValue": "Value Statistics",
+      "coinOverview": "Overview showing statistics of",
+      "otherStats": "Other statistics",
+      "otherStats_p": "Other data related to this cryptocurrency",
+      "estatisticas": [
+         { "tit": "Price" },
+         { "tit": "Global Position" },
+         { "tit": "Volume in the last 24h", "tp": "Total volume of transactions carried out for this cryptocurrency in the last 24 hours" },
+         {
+            "tit": "Market capitalization",
+            "tp": "Total market value of the cryptocurrency, calculated by multiplying the current price by the total number of coins in circulation. Reflects the relative importance of cryptocurrency in the market"
+         },
+         {
+            "tit": "Peak",
+            "tp": "Highest price recorded for this cryptocurrency since its launch, reflecting the maximum appreciation peak over time."
+         }
+      ],
+      "estatisticas_genericas": [
+         { "tit": "Total markets", "tp": "Total number of markets or trading pairs available for this cryptocurrency" },
+         {
+            "tit": "Available brokers",
+            "tp": "Total number of exchanges where this cryptocurrency is listed and available for trading, showing the currency's accessibility in the market"
+         },
+         {
+            "tit": "Supply validation",
+            "tp": "Confirmation that the total supply of cryptocurrency has been verified and is accurate, ensuring transparency about the quantity in circulation"
+         },
+         {
+            "tit": "Total Coins Provided",
+            "tp": "Total number of units of this cryptocurrency that have been created or are available to date, including coins in circulation and those that have not yet been issued"
+         },
+         {
+            "tit": "Total coins circulating",
+            "tp": "Total number of units of this cryptocurrency that are currently in circulation on the market, available for trading or use"
+         }
+      ],
+      "h3_links": "Links"
+   },
+   "components": {
+      "cardMoeda": {
+         "price": "Price",
+         "marketVol": "Market volume",
+         "change": "Change"
+      },
+      "linha_corretora": {
+         "trades": "Yes",
+         "noTrades": "No",
+         "noGradePoins": "Unavailable",
+         "address": "Address",
+         "noAddress": "Unavailable",
+         "taxes": "Taxes",
+         "depMets": "Deposit Methods",
+         "witMets": "Withdrawals methods",
+         "officialSite": "Visit website",
+         "points": "Detailed scoring",
+         "titPoints": "Detailed scoring",
+         "totalPoints": "Total score",
+         "rank": "Rank",
+         "chartLabels": [
+            "Legalization",
+            "Transaction risk",
+            "Team",
+            "Data provision",
+            "Asset Quality and Diversity",
+            "Market quality",
+            "Security",
+            "Negative reporting penalty"
+         ]
+      },
+      "linha_carteira": {
+         "coins": "Supported cryptocurrencies",
+         "valid": "Validation Type",
+         "anon": "Anonymity",
+         "btn1": "Use wallet",
+         "btn2": "Access repository",
+         "btn3": "Detailed score",
+         "titMod": "Detailed score",
+         "avg": "Average",
+         "chartLabels": ["1 Star", "2 Stars", "3 Stars", "4 Stars", "5 Stars"],
+         "chartLabel": "Users",
+         "totUsers": "Total users"
+      }
    }
 }
