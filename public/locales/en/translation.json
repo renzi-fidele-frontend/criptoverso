@@ -56,8 +56,8 @@
       "24hvol": "24h volume",
       "country": "Country of origin",
       "trades": "Trades?",
-      "trades_tt": "Indicates whether the broker allows the execution of purchase and sale operations",
-      "24hvol_tt": "Total volume of transactions carried out at the broker in the last 24 hours"
+      "trades_tt": "Indicates whether the exchange allows the execution of purchase and sale operations",
+      "24hvol_tt": "Total volume of transactions carried out at the exchange in the last 24 hours"
    },
    "carteiras": {
       "tit": "See all crypto wallets on the market",
@@ -107,7 +107,7 @@
       "estatisticas_genericas": [
          { "tit": "Total markets", "tp": "Total number of markets or trading pairs available for this cryptocurrency" },
          {
-            "tit": "Available brokers",
+            "tit": "Available exchanges",
             "tp": "Total number of exchanges where this cryptocurrency is listed and available for trading, showing the currency's accessibility in the market"
          },
          {
