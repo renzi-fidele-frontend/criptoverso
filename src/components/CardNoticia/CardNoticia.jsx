@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import translate from "translate";
-import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
 const CardNoticia = ({ noticia }) => {
-   const { t } = useTranslation();
+   const { lang } = useSelector((state) => state.idioma);
    const [textoTraduzido, setTextoTraduzido] = useState("");
 
    async function traduzirTexto() {
@@ -21,15 +21,15 @@ const CardNoticia = ({ noticia }) => {
    }
 
    useEffect(() => {
-      traduzirTexto();
+      if (lang === "pt") traduzirTexto();
    }, [noticia]);
 
    return noticia ? (
       <Card className={styles.ct} as={Link} to={noticia?.url} target="_blank">
          <Card.Body as={Row}>
             <Col xs={12} xl={6} className="position-relative">
-               <div id={styles.fotoIndisponivel}>
-                  <Image className="border rounded-1" id={styles.fotoNoticia} src={noticia?.imageurl} />
+               <div className="border rounded-1" id={styles.fotoIndisponivel}>
+                  <Image  id={styles.fotoNoticia} src={noticia?.imageurl} />
                </div>
             </Col>
             <Col className="d-flex pt-2 pt-xl-0 flex-column justify-content-between">
@@ -39,7 +39,7 @@ const CardNoticia = ({ noticia }) => {
                   <Image id={styles.fotoAutor} src={noticia?.source_info?.img} />
                   <div>
                      <Card.Text className="mb-0 ">{noticia?.source_info?.name}</Card.Text>
-                     <span className="text-secondary fst-italic small">{textoTraduzido}</span>
+                     <span className="text-secondary fst-italic small">{lang === "pt" ? textoTraduzido : moment.unix(noticia?.published_on).fromNow() }</span>
                   </div>
                </Card.Footer>
             </Col>
