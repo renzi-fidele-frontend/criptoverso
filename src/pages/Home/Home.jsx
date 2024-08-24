@@ -168,7 +168,7 @@ const Home = () => {
                   criptomoedas?.map((v, k) => {
                      if (k < 10)
                         return (
-                           <Col md={6} lg={4} xxl={3} key={k}>
+                           <Col md={6} xl={4} xxl={3} key={k}>
                               <CardMoeda moeda={v} />
                            </Col>
                         );
@@ -176,7 +176,7 @@ const Home = () => {
                ) : (
                   <>
                      {gerarArray(6).map((v, k) => (
-                        <Col md={6} lg={4} xxl={3} key={k}>
+                        <Col md={6} xl={4} xxl={3} key={k}>
                            <CardMoeda />
                         </Col>
                      ))}

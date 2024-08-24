@@ -79,7 +79,7 @@ const Criptomoedas = () => {
                <>
                   {criptomoedas && !resultadosPesquisaInstantanea ? (
                      criptomoedasPaginadas?.map((v, k) => (
-                        <Col md={6} lg={4} xxl={3} key={k}>
+                        <Col md={6} xl={4} xxl={3} key={k}>
                            <CardMoeda moeda={v} />
                         </Col>
                      ))
@@ -89,7 +89,7 @@ const Criptomoedas = () => {
                   {criptomoedas &&
                      resultadosPesquisaInstantanea?.length > 0 &&
                      resultadosPesquisaInstantanea?.map((v, k) => (
-                        <Col md={6} lg={4} xxl={3} key={k}>
+                        <Col md={6} xl={4} xxl={3} key={k}>
                            <CardMoeda moeda={v} />
                         </Col>
                      ))}
@@ -102,7 +102,7 @@ const Criptomoedas = () => {
                </>
             ) : (
                gerarArray(12).map((v, k) => (
-                  <Col md={6} lg={4} xxl={3} key={k}>
+                  <Col md={6} xl={4} xxl={3} key={k}>
                      <CardMoeda />
                   </Col>
                ))
