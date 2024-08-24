@@ -21,6 +21,7 @@ import { useTranslation } from "react-i18next";
 const Home = () => {
    // i18n
    const { t } = useTranslation();
+   const { lang } = useSelector((state) => state.idioma);
    const [loading, setLoading] = useState(false);
    const { estatisticasGerais } = useSelector((state) => state.estatisticasGerais);
    const { criptomoedas } = useSelector((state) => state.criptomoedas);
@@ -53,11 +54,13 @@ const Home = () => {
       setLoading(false);
    }
 
-   async function apanharNoticias() {
+   async function apanharNoticias(idioma) {
       setLoading(true);
       let res;
       try {
-         res = await axios.get(`https://min-api.cryptocompare.com/data/v2/news/?lang=PT&api_key=${import.meta.env.VITE_CRYPTO_WATCH_APIKEY}`);
+         res = await axios.get(
+            `https://min-api.cryptocompare.com/data/v2/news/?lang=${idioma}&api_key=${import.meta.env.VITE_CRYPTO_WATCH_APIKEY}`
+         );
          dispatch(setNoticias(res.data.Data));
       } catch (error) {
          console.log(error);
@@ -68,8 +71,18 @@ const Home = () => {
    useEffect(() => {
       if (!estatisticasGerais) apanharStats();
       if (!criptomoedas) apanharCriptomoedas();
-      if (!noticias) apanharNoticias();
+      if (!noticias && lang === "pt") apanharNoticias("PT");
    }, [criptomoedas, estatisticasGerais, noticias]);
+
+   // Controlador da mudança de idioma das notícias
+   useEffect(() => {
+      if (noticias && lang === "en") {
+         apanharNoticias("EN");
+      }
+      if (noticias && lang === "pt") {
+         apanharNoticias("PT");
+      }
+   }, [lang]);
 
    const estatisticasGlobais = [
       {
