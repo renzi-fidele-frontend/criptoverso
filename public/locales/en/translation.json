@@ -1,8 +1,35 @@
 {
    "home": {
-      "globalStats": "General Cryptocurrency Statistics",
+      "globalStats": "General cryptocurrency ctatistics",
       "top10Coins": "Top 10 cryptocurrencies in the world",
-      "lastNews": "Latest news about the Crypto world"
+      "lastNews": "Latest news about the Crypto world",
+      "seeMore": "See more",
+      "estatisticasGlobais": [
+         {
+            "nome": "Total cryptocurrencies",
+            "tooltip": "Total number of cryptocurrencies available on the market, including both well-known and emerging ones, showing the breadth of the cryptocurrency ecosystem."
+         },
+         {
+            "nome": "Available Exchanges",
+            "tooltip": "Total number of exchanges where cryptocurrencies are listed and available for trading."
+         },
+         {
+            "nome": "Total market value",
+            "tooltip": "Total market value of all cryptocurrencies combined, calculated by summing their individual market capitalizations. It reflects the size and importance of the cryptocurrency market as a whole."
+         },
+         {
+            "nome": "Highest volume in the last 24 hours",
+            "tooltip": "Total volume of transactions carried out in the last 24 hours for all cryptocurrencies, indicating the liquidity and global trading activity in the market."
+         },
+         {
+            "nome": "Total markets",
+            "tooltip": "Total number of markets or trading pairs available for all cryptocurrencies, representing the diversity of buying and selling options in the global market."
+         },
+         {
+            "nome": "Bitcoin Dominance",
+            "tooltip": "Percentage of Bitcoin dominance in the cryptocurrency market, indicating Bitcoin's share in relation to the total market value of all cryptocurrencies."
+         }
+      ]
    },
    "sidebar": {
       "home": "Home",

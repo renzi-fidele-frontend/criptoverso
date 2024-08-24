@@ -14,6 +14,7 @@ const SideBar = () => {
    const rota = useLocation().pathname;
    const dispatch = useDispatch();
    const { modoEscuro } = useSelector((state) => state.tema);
+   const { lang } = useSelector((state) => state.idioma);
 
    const { t } = useTranslation();
 
@@ -67,7 +68,8 @@ const SideBar = () => {
                   <hr />
                   <div onClick={mudarTema}>
                      <CDBSidebarMenuItem icon={`bi ${!modoEscuro ? "bi-moon-stars-fill" : "bi-brightness-high-fill"}`}>
-                        {t("sidebar.modes.name")} {modoEscuro ? t("sidebar.modes.light") : t("sidebar.modes.dark")}
+                        {lang === "en" && (modoEscuro ? t("sidebar.modes.light") : t("sidebar.modes.dark"))} {t("sidebar.modes.name")}{" "}
+                        {lang === "pt" && (modoEscuro ? t("sidebar.modes.light") : t("sidebar.modes.dark"))}
                      </CDBSidebarMenuItem>
                   </div>
                   <div className="">

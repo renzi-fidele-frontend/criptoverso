@@ -155,11 +155,11 @@ const Home = () => {
             {/*   Top 10 */}
             <Row>
                <Col xs={12} md={9}>
-                  <h2 className="fw-bold mb-4 titulo1">Top 10 criptomoedas no mundo</h2>
+                  <h2 className="fw-bold mb-4 titulo1">{t("home.top10Coins")}</h2>
                </Col>
                <Col className="text-end d-none d-md-inline">
                   <Link className="fs-4" to="/criptomoedas">
-                     Ver mais
+                     {t("home.seeMore")}
                   </Link>
                </Col>
             </Row>
@@ -185,7 +185,7 @@ const Home = () => {
             </Row>
             <div className="d-md-none text-center">
                <Button as={Link} className="mt-3" to="/criptomoedas">
-                  Ver mais
+                  {t("home.seeMore")}
                </Button>
             </div>
          </div>
@@ -194,11 +194,11 @@ const Home = () => {
          <div className="my-5">
             <Row>
                <Col xs={12} md={9}>
-                  <h2 className="fw-bold mb-4 titulo1">Últimas notícias sobre o mundo Crypto</h2>
+                  <h2 className="fw-bold mb-4 titulo1">{t("home.lastNews")}</h2>
                </Col>
                <Col className="text-end d-none d-md-inline">
                   <Link className="fs-4" to="/noticias">
-                     Ver mais
+                     {t("home.seeMore")}
                   </Link>
                </Col>
             </Row>
@@ -220,7 +220,7 @@ const Home = () => {
             </Row>
             <div className="d-md-none text-center">
                <Button as={Link} className="mt-3 mb-5 mb-lg-0" to="/noticias">
-                  Ver mais
+                  {t("home.seeMore")}
                </Button>
             </div>
          </div>
