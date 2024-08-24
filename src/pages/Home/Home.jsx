@@ -73,41 +73,36 @@ const Home = () => {
 
    const estatisticasGlobais = [
       {
-         nome: "Total de criptomoedas",
+         nome: t("home.estatisticasGlobais.0.nome"),
          valor: estatisticasGerais?.totalCoins,
-         tooltip:
-            "Número total de criptomoedas disponíveis no mercado, incluindo tanto as mais conhecidas quanto as emergentes, mostrando a amplitude do ecossistema de criptomoedas.",
+         tooltip: t("home.estatisticasGlobais.0.tooltip"),
       },
       {
-         nome: "Corretoras disponíveis",
+         nome: t("home.estatisticasGlobais.1.nome"),
          valor: millify(estatisticasGerais?.totalExchanges),
-         tooltip: "Número total de corretoras onde as criptomoedas estão listadas e disponíveis para negociação.",
+         tooltip: t("home.estatisticasGlobais.1.tooltip"),
       },
       {
-         nome: "Valor total do mercado",
+         nome: t("home.estatisticasGlobais.2.nome"),
          valor: millify(Number(estatisticasGerais?.totalMarketCap)),
          usd: true,
-         tooltip:
-            "Valor total de mercado de todas as criptomoedas combinadas, calculado pela soma das capitalizações de mercado individuais. Reflete o tamanho e a importância do mercado de criptomoedas como um todo.",
+         tooltip: t("home.estatisticasGlobais.2.tooltip"),
       },
       {
-         nome: "Maior volume nas últimas 24h",
+         nome: t("home.estatisticasGlobais.3.nome"),
          valor: millify(estatisticasGerais?.total24hVolume),
          usd: true,
-         tooltip:
-            "Volume total de transações realizadas nas últimas 24 horas para todas as criptomoedas, indicando a liquidez e a atividade de negociação global no mercado.",
+         tooltip: t("home.estatisticasGlobais.3.tooltip"),
       },
       {
-         nome: "Total de mercados",
+         nome: t("home.estatisticasGlobais.4.nome"),
          valor: millify(estatisticasGerais?.totalMarkets),
-         tooltip:
-            "Número total de mercados ou pares de negociação disponíveis para todas as criptomoedas, representando a diversidade de opções de compra e venda no mercado global.",
+         tooltip: t("home.estatisticasGlobais.4.tooltip"),
       },
       {
-         nome: "Domínio do Bitcoin",
+         nome: t("home.estatisticasGlobais.5.nome"),
          valor: millify(estatisticasGerais?.btcDominance) + "%",
-         tooltip:
-            "Percentual de dominância do Bitcoin no mercado de criptomoedas, indicando a participação do Bitcoin em relação ao valor total de mercado de todas as criptomoedas.",
+         tooltip: t("home.estatisticasGlobais.5.tooltip"),
       },
    ];
 

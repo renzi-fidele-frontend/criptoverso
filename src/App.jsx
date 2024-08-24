@@ -6,7 +6,7 @@ import Noticias from "./pages/Noticias/Noticias";
 import Home from "./pages/Home/Home";
 import Criptomoedas from "./pages/Criptomoeadas/Criptomoedas";
 import Corretoras from "./pages/Corretoras/Corretoras";
-import { Provider, useDispatch, useSelector } from "react-redux";
+import { Provider } from "react-redux";
 import store from "./state/store";
 import MoedaIndividual from "./pages/MoedaIndividual/MoedaIndividual";
 import NavBarMobile from "./components/NavBarMobile/NavBarMobile";
@@ -14,7 +14,7 @@ import FooterNavBar from "./components/FooterNavBar/FooterNavBar";
 import Carteiras from "./pages/Carteiras/Carteiras";
 import { Suspense } from "react";
 
-// TODO: Adicionar internacionalização a minha aplicação
+// TODO: Adicionar particulas ao sidebar com o pacote: jsparticles
 function App() {
    return (
       <>

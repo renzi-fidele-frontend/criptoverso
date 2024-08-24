@@ -2,7 +2,33 @@
    "home": {
       "globalStats": "Estatísticas gerais de criptomoedas",
       "top10Coins": "Top 10 criptomoedas no mundo",
-      "lastNews": "Últimas notícias sobre o mundo Crypto"
+      "lastNews": "Últimas notícias sobre o mundo Crypto",
+      "estatisticasGlobais": [
+         {
+            "nome": "Total de criptomoedas",
+            "tooltip": "Número total de criptomoedas disponíveis no mercado, incluindo tanto as mais conhecidas quanto as emergentes, mostrando a amplitude do ecossistema de criptomoedas."
+         },
+         {
+            "nome": "Corretoras disponíveis",
+            "tooltip": "Número total de corretoras onde as criptomoedas estão listadas e disponíveis para negociação."
+         },
+         {
+            "nome": "Valor total do mercado",
+            "tooltip": "Valor total de mercado de todas as criptomoedas combinadas, calculado pela soma das capitalizações de mercado individuais. Reflete o tamanho e a importância do mercado de criptomoedas como um todo."
+         },
+         {
+            "nome": "Maior volume nas últimas 24h",
+            "tooltip": "Volume total de transações realizadas nas últimas 24 horas para todas as criptomoedas, indicando a liquidez e a atividade de negociação global no mercado."
+         },
+         {
+            "nome": "Total de mercados",
+            "tooltip": "Número total de mercados ou pares de negociação disponíveis para todas as criptomoedas, representando a diversidade de opções de compra e venda no mercado global."
+         },
+         {
+            "nome": "Domínio do Bitcoin",
+            "tooltip": "Percentual de dominância do Bitcoin no mercado de criptomoedas, indicando a participação do Bitcoin em relação ao valor total de mercado de todas as criptomoedas."
+         }
+      ]
    },
    "sidebar": {
       "home": "Início",
