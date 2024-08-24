@@ -1,6 +1,6 @@
 {
    "home": {
-      "globalStats": "General cryptocurrency ctatistics",
+      "globalStats": "General cryptocurrency statistics",
       "top10Coins": "Top 10 cryptocurrencies in the world",
       "lastNews": "Latest news about the Crypto world",
       "seeMore": "See more",
@@ -51,7 +51,7 @@
    },
    "corretoras": {
       "tit": "See all cryptocurrencies on the market",
-      "exchange": "Exchanges",
+      "exchange": "Exchange",
       "points": "Score",
       "24hvol": "24h volume",
       "country": "Country of origin",
@@ -61,7 +61,7 @@
    },
    "carteiras": {
       "tit": "See all crypto wallets on the market",
-      "th_wallet": "Wallets",
+      "th_wallet": "Wallet",
       "th_platforms": "Platforms",
       "th_security": "Security level",
       "th_rating": "Rating",

@@ -35,7 +35,7 @@ const LinhaCarteira = ({ carteira, chave }) => {
    }
 
    useEffect(() => {
-      if (carteira && lang === "pt") traduzirTexto();
+      if (carteira) traduzirTexto();
    }, [carteira]);
 
    const iconePlataforma = (plataforma) => {
@@ -76,17 +76,22 @@ const LinhaCarteira = ({ carteira, chave }) => {
                </div>
             </td>
             <td className={styles.td + " d-none d-xl-table-cell"}>
-               {segurancaTraduzido.length > 0 ? (
-                  lang === "pt" ? (
+               {lang === "pt" &&
+                  (segurancaTraduzido.length > 0 ? (
                      segurancaTraduzido
                   ) : (
+                     <Placeholder xs={12} animation="wave">
+                        <Placeholder xs={7} />
+                     </Placeholder>
+                  ))}
+               {lang === "en" &&
+                  (carteira?.Security.length > 0 ? (
                      carteira?.Security
-                  )
-               ) : (
-                  <Placeholder xs={12} animation="wave">
-                     <Placeholder xs={7} />
-                  </Placeholder>
-               )}
+                  ) : (
+                     <Placeholder xs={12} animation="wave">
+                        <Placeholder xs={7} />
+                     </Placeholder>
+                  ))}
             </td>
             <td className={styles.td}>
                <div className="d-flex gap-2 align-items-center">
@@ -100,17 +105,22 @@ const LinhaCarteira = ({ carteira, chave }) => {
                </div>
             </td>
             <td className={styles.td}>
-               {facilidadeTraduzida.length > 0 ? (
-                  lang === "pt" ? (
+               {lang === "pt" &&
+                  (facilidadeTraduzida.length > 0 ? (
                      facilidadeTraduzida
                   ) : (
+                     <Placeholder xs={12} animation="wave">
+                        <Placeholder xs={7} />
+                     </Placeholder>
+                  ))}
+               {lang === "en" &&
+                  (carteira?.EaseOfUse?.length > 0 ? (
                      carteira?.EaseOfUse
-                  )
-               ) : (
-                  <Placeholder xs={12} animation="wave">
-                     <Placeholder xs={7} />
-                  </Placeholder>
-               )}
+                  ) : (
+                     <Placeholder xs={12} animation="wave">
+                        <Placeholder xs={7} />
+                     </Placeholder>
+                  ))}
             </td>
          </tr>
          {/*  Escondido  */}

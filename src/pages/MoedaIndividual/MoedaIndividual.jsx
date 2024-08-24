@@ -156,14 +156,15 @@ const MoedaIndividual = () => {
          <Row>
             <Col className="text-center">
                <h2 id={styles.tit} className="fw-bold fs-1 mt-2 mt-md-4">
-                  <span>{t("moedaIndividual.tit")} </span>
+                  {lang === "pt" && <span>{t("moedaIndividual.tit")} </span>}
                   {!loading ? (
                      <span style={{ color: modoEscuro ? null : criptomoeda?.color, textShadow: "1px 1px 1px black" }}>
                         {criptomoeda?.name} ({criptomoeda?.symbol})
                      </span>
                   ) : (
                      <Placeholder xs={3} />
-                  )}
+                  )}{" "}
+                  {lang === "en" && <span>{t("moedaIndividual.tit")} </span>}
                </h2>
                <p id={styles.descricao} className="px-xl-5 mt-3 mt-md-4 mb-3 mb-md-5">
                   {lang === "pt" && (!loading ? descricaoTraduzida : <Placeholder xs={12} />)}
@@ -235,7 +236,8 @@ const MoedaIndividual = () => {
                <Row className="mt-5 gx-md-5">
                   <Col xs={12} xxl={6}>
                      <h3 id={styles.subtit}>
-                        {t("moedaIndividual.coinValue")} {!loading ? criptomoeda?.name : <Placeholder xs={3} />}
+                        {lang === "pt" && t("moedaIndividual.coinValue")} {!loading ? criptomoeda?.name : <Placeholder xs={3} />}{" "}
+                        {lang === "en" && t("moedaIndividual.coinValue")}
                      </h3>
                      <p>
                         {t("moedaIndividual.coinOverview")} {!loading ? criptomoeda?.name : <Placeholder xs={2} />}
