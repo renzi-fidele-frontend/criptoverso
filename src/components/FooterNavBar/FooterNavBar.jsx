@@ -2,10 +2,12 @@ import { Button, ButtonGroup, Collapse } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 import styles from "./FooterNavBar.module.css";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const FooterNavBar = () => {
    const loc = useLocation();
    const { mostrar } = useSelector((state) => state.mostrarNavBar);
+   const { t } = useTranslation();
 
    return (
       <Collapse in={mostrar}>
@@ -20,7 +22,7 @@ const FooterNavBar = () => {
                   as={Link}
                >
                   <i className="bi bi-house-heart-fill fs-2"></i>
-                  <span className={`text-truncate ${styles.tit}`}>Início</span>
+                  <span className={`text-truncate ${styles.tit}`}>{t("sidebar.home")}</span>
                </Button>
                <Button
                   to="/criptomoedas"
@@ -31,7 +33,7 @@ const FooterNavBar = () => {
                   as={Link}
                >
                   <i className="bi-currency-exchange fs-2"></i>
-                  <span className={`text-truncate ${styles.tit}`}>Criptomoeadas</span>
+                  <span className={`text-truncate ${styles.tit}`}>{t("sidebar.coins")}</span>
                </Button>
                <Button
                   to="/corretoras"
@@ -42,7 +44,7 @@ const FooterNavBar = () => {
                   as={Link}
                >
                   <i className="bi bi-graph-up-arrow fs-2"></i>
-                  <span className={`text-truncate ${styles.tit}`}>Corretoras</span>
+                  <span className={`text-truncate ${styles.tit}`}>{t("sidebar.exchanges")}</span>
                </Button>
                <Button
                   to="/carteiras"
@@ -53,7 +55,7 @@ const FooterNavBar = () => {
                   as={Link}
                >
                   <i className="bi bi-wallet-fill fs-2"></i>
-                  <span className={`text-truncate ${styles.tit}`}>Carteiras</span>
+                  <span className={`text-truncate ${styles.tit}`}>{t("sidebar.wallets")}</span>
                </Button>
                <Button
                   to="/noticias"
@@ -64,7 +66,7 @@ const FooterNavBar = () => {
                   as={Link}
                >
                   <i className="bi bi-newspaper fs-2"></i>
-                  <span className={`text-truncate ${styles.tit}`}>Notícias</span>
+                  <span className={`text-truncate ${styles.tit}`}>{t("sidebar.news")}</span>
                </Button>
             </ButtonGroup>
          </div>
