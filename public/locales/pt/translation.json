@@ -80,7 +80,8 @@
          "3m": "3 meses",
          "1y": "12 meses",
          "3y": "3 anos",
-         "5y": "5 anos"
+         "5y": "5 anos",
+         "tooltip": "Selecione o período desejado para visualizar o histórico de preços da criptomoeda, com opções que variam das últimas 3 horas até os últimos 5 anos."
       },
       "h3_chart": "Gráfico do preço do",
       "change": "Alteração",

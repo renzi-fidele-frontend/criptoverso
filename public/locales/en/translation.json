@@ -80,7 +80,8 @@
          "3m": "3 months",
          "1y": "12 months",
          "3y": "3 years",
-         "5y": "5 years"
+         "5y": "5 years",
+         "tooltip": "Select the desired period to view the cryptocurrency's price history, with options ranging from the last 3 hours to the last 5 years."
       },
       "h3_chart": "Price chart",
       "change": "Change",

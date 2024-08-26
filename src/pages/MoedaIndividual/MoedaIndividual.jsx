@@ -174,7 +174,7 @@ const MoedaIndividual = () => {
                <hr />
 
                {/*   Período  */}
-               <Col className="mt-2 mx-auto mx-xxl-0 d-flex" md={5} xl={2}>
+               <Col className="mt-2 mx-auto gap-2 mx-xxl-0 d-flex align-items-center" md={5} xl={4} xxl={3}>
                   <Form.Select onChange={handleSelectChange} defaultValue="7d" style={{ cursor: "pointer" }}>
                      {periodo.map((v, k) => (
                         <option key={k} value={v.valor}>
@@ -182,6 +182,9 @@ const MoedaIndividual = () => {
                         </option>
                      ))}
                   </Form.Select>
+                  <Tippy theme={modoEscuro && "light"} content={t("moedaIndividual.periodo.tooltip")}>
+                     <i className="ms-1 bi fs-3 bi-info-circle-fill"></i>
+                  </Tippy>
                </Col>
 
                {/*   Gráfico  */}
