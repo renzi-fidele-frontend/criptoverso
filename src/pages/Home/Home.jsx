@@ -123,11 +123,7 @@ const Home = () => {
          <Row className="gy-3">
             <Col xs={12} sm={12} xl={8}>
                <Row>
-<<<<<<< HEAD
                   {estatisticasGerais
-=======
-                  {!estatisticasGerais
->>>>>>> c465f85d3dd0bd798a2ec55a6464b9910a8961e2
                      ? estatisticasGlobais?.map((v, k) => (
                           <Col key={k} sm={6}>
                              <div>
