@@ -31,7 +31,6 @@ const Home = () => {
    const dispatch = useDispatch();
 
    async function apanharStats() {
-      setLoading(true);
       let res;
       try {
          res = await axios.request({ ...CryptofetchOptions, url: "https://coinranking1.p.rapidapi.com/stats" });
@@ -39,7 +38,6 @@ const Home = () => {
       } catch (error) {
          console.log(error);
       }
-      setLoading(false);
    }
 
    async function apanharCriptomoedas() {
@@ -125,7 +123,7 @@ const Home = () => {
          <Row className="gy-3">
             <Col xs={12} sm={12} xl={8}>
                <Row>
-                  {!loading
+                  {estatisticasGerais
                      ? estatisticasGlobais?.map((v, k) => (
                           <Col key={k} sm={6}>
                              <div>
