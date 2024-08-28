@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { CryptofetchOptions } from "../../services/cryptoApi";
 import { setCriptomoedas, setPaginaAtualCriptomoedas } from "../../state/criptomoedas/criptomoedasSlice";
 import axios from "axios";
-import { Alert, Button, Col, Container, Form, FormControl, Image, Pagination, Row } from "react-bootstrap";
+import { Alert, Button, Col, Container, Form, FormControl, Image, Row } from "react-bootstrap";
 import styles from "./Criptomoedas.module.css";
 import CardMoeda from "../../components/CardMoeda/CardMoeda";
 import { gerarArray } from "../../hooks/useGerarArray";
@@ -11,6 +11,8 @@ import nadaEncontrado from "../../assets/nadaEncontrado.png";
 import { paginarArray } from "../../hooks/usePaginarArray";
 import Paginacao from "../../components/Paginacao/Paginacao";
 import { useTranslation } from "react-i18next";
+
+// TODO: Na última pagina mostrar o botão de apanhar mais criptomoedas
 
 const Criptomoedas = () => {
    const [loading, setLoading] = useState(false);
