@@ -169,6 +169,7 @@
          "chartLabels": ["1 Estrela", "2 Estrelas", "3 Estrelas", "4 Estrelas", "5 Estrelas"],
          "chartLabel": "Classificações",
          "totUsers": "Total de classificações"
-      }
+      },
+      "loadBtn": "Carregar mais"
    }
 }
