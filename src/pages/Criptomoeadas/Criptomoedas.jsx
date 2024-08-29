@@ -131,7 +131,7 @@ const Criptomoedas = () => {
             )}
             {totalPaginasCriptomoedas === paginaAtualCriptomoedas && (
                <Col className="text-center pt-4">
-                  <Button onClick={() => apanharMaisCriptomoedas(criptomoedas?.length)}>{t("components.loadBtn")}</Button>
+                  {!loading && <Button onClick={() => apanharMaisCriptomoedas(criptomoedas?.length)}>{t("components.loadBtn")}</Button>}
                </Col>
             )}
          </Row>
