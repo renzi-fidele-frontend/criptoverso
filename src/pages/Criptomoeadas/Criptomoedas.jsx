@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CryptofetchOptions } from "../../services/cryptoApi";
-import { setCriptomoedas, setPaginaAtualCriptomoedas } from "../../state/criptomoedas/criptomoedasSlice";
+import { setCriptomoedas, setPaginaAtualCriptomoedas, setTotalPaginasCriptomoedas } from "../../state/criptomoedas/criptomoedasSlice";
 import axios from "axios";
 import { Alert, Button, Col, Container, Form, FormControl, Image, Row } from "react-bootstrap";
 import styles from "./Criptomoedas.module.css";
@@ -12,7 +12,7 @@ import { paginarArray } from "../../hooks/usePaginarArray";
 import Paginacao from "../../components/Paginacao/Paginacao";
 import { useTranslation } from "react-i18next";
 
-// TODO: Na última pagina mostrar o botão de apanhar mais criptomoedas
+// TODO: Na última pagina mostrar o botão de apanhar mais criptomoedas , o offset deverá ser o length das criptomoedas
 
 const Criptomoedas = () => {
    const [loading, setLoading] = useState(false);
@@ -30,8 +30,28 @@ const Criptomoedas = () => {
       let res;
       try {
          res = await axios.request({ ...CryptofetchOptions, url: "https://coinranking1.p.rapidapi.com/coins?limit=100" });
-         dispatch(setCriptomoedas(res?.data?.data?.coins));
-         setCriptomoedasPaginadas(paginarArray(res?.data?.data?.coins, paginaAtualCriptomoedas, itemsPorPaginaCriptomoedas));
+         let moedas = res?.data?.data?.coins;
+         dispatch(setCriptomoedas(moedas));
+         dispatch(setTotalPaginasCriptomoedas(Math.ceil(moedas.length / itemsPorPaginaCriptomoedas)));
+         setCriptomoedasPaginadas(paginarArray(moedas, paginaAtualCriptomoedas, itemsPorPaginaCriptomoedas));
+      } catch (error) {
+         console.log(error);
+      }
+      setLoading(false);
+   }
+
+   async function apanharMaisCriptomoedas(offset) {
+      setLoading(true);
+      let res;
+      try {
+         res = await axios.request({
+            ...CryptofetchOptions,
+            url: `https://coinranking1.p.rapidapi.com/coins?limit=100&offset=${offset}`,
+         });
+         let moedas = res?.data?.data?.coins;
+         dispatch(setCriptomoedas(criptomoedas?.concat(moedas)));
+         dispatch(setTotalPaginasCriptomoedas(Math.ceil(criptomoedas?.concat(moedas).length / itemsPorPaginaCriptomoedas)));
+         setCriptomoedasPaginadas(paginarArray(criptomoedas?.concat(moedas), paginaAtualCriptomoedas, itemsPorPaginaCriptomoedas));
       } catch (error) {
          console.log(error);
       }
@@ -108,6 +128,11 @@ const Criptomoedas = () => {
                      <CardMoeda />
                   </Col>
                ))
+            )}
+            {totalPaginasCriptomoedas === paginaAtualCriptomoedas && (
+               <Col className="text-center pt-4">
+                  <Button onClick={() => apanharMaisCriptomoedas(criptomoedas?.length)}>Carregar mais</Button>
+               </Col>
             )}
          </Row>
 

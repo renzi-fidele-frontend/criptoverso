@@ -5,7 +5,7 @@ const initialState = {
    criptomoedas: null,
    paginaAtualCriptomoedas: 1,
    itemsPorPaginaCriptomoedas: 12,
-   totalPaginasCriptomoedas: Math.ceil(100 / 12),
+   totalPaginasCriptomoedas: 0,
 };
 
 const criptomoedasSlice = createSlice({
