@@ -22,7 +22,7 @@ const Home = () => {
    // i18n
    const { t } = useTranslation();
    const { lang } = useSelector((state) => state.idioma);
-   const [loading, setLoading] = useState(false);
+
    const { estatisticasGerais } = useSelector((state) => state.estatisticasGerais);
    const { criptomoedas } = useSelector((state) => state.criptomoedas);
    const { noticias } = useSelector((state) => state.noticias);
@@ -41,7 +41,6 @@ const Home = () => {
    }
 
    async function apanharCriptomoedas() {
-      setLoading(true);
       let res;
       try {
          res = await axios.request({ ...CryptofetchOptions, url: "https://coinranking1.p.rapidapi.com/coins?limit=100" });
@@ -49,11 +48,9 @@ const Home = () => {
       } catch (error) {
          console.log(error);
       }
-      setLoading(false);
    }
 
    async function apanharNoticias(idioma) {
-      setLoading(true);
       let res;
       try {
          res = await axios.get(
@@ -63,7 +60,6 @@ const Home = () => {
       } catch (error) {
          console.log(error);
       }
-      setLoading(false);
    }
 
    useEffect(() => {
@@ -175,7 +171,7 @@ const Home = () => {
                </Col>
             </Row>
             <Row className="g-3">
-               {!loading ? (
+               {criptomoedas ? (
                   criptomoedas?.map((v, k) => {
                      if (k < 10)
                         return (
@@ -214,7 +210,7 @@ const Home = () => {
                </Col>
             </Row>
             <Row className="g-4">
-               {!loading
+               {noticias
                   ? noticias?.map((v, k) => {
                        if (k < 7 && k !== 1 && v?.imageurl?.length > 0)
                           return (
