@@ -36,7 +36,7 @@ const Noticias = () => {
    }
 
    useEffect(() => {
-      if (!noticias) apanharNoticias("PT");
+      if (!noticias) apanharNoticias(lang?.toUpperCase());
 
       if (noticiasPaginadas?.length === 0 && noticias) {
          dispatch(setTotalPaginasNoticias(Math.ceil(Number(noticias.length) / itemsPorPaginaNoticias)));

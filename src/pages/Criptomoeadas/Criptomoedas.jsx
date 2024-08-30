@@ -12,8 +12,6 @@ import { paginarArray } from "../../hooks/usePaginarArray";
 import Paginacao from "../../components/Paginacao/Paginacao";
 import { useTranslation } from "react-i18next";
 
-// TODO: Na última pagina mostrar o botão de apanhar mais criptomoedas , o offset deverá ser o length das criptomoedas
-
 const Criptomoedas = () => {
    const [loading, setLoading] = useState(false);
    const { criptomoedas, paginaAtualCriptomoedas, itemsPorPaginaCriptomoedas, totalPaginasCriptomoedas } = useSelector(
