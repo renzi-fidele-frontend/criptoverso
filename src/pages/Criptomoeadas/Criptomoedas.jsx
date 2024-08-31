@@ -13,13 +13,13 @@ import Paginacao from "../../components/Paginacao/Paginacao";
 import { useTranslation } from "react-i18next";
 
 const Criptomoedas = () => {
-   const [loading, setLoading] = useState(false);
    const { criptomoedas, paginaAtualCriptomoedas, itemsPorPaginaCriptomoedas, totalPaginasCriptomoedas } = useSelector(
       (state) => state.criptomoedas
    );
    const dispatch = useDispatch();
    const [criptomoedasPaginadas, setCriptomoedasPaginadas] = useState([]);
    const [resultadosPesquisaInstantanea, setResultadosPesquisaInstantanea] = useState(null);
+   const [loading, setLoading] = useState(false);
    const termoPesquisaRef = useRef(null);
    const { t } = useTranslation();
 

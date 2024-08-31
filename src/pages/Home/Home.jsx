@@ -10,13 +10,14 @@ import CardMoeda from "../../components/CardMoeda/CardMoeda";
 import CardNoticia from "../../components/CardNoticia/CardNoticia";
 import foto from "../../assets/ill.png";
 import { setEstatisticasGerais } from "../../state/estatisticasGerais/estatisticasGeraisSlice";
-import { setCriptomoedas } from "../../state/criptomoedas/criptomoedasSlice";
+import { setCriptomoedas, setTotalPaginasCriptomoedas } from "../../state/criptomoedas/criptomoedasSlice";
 import { setNoticias } from "../../state/noticias/noticiasSlice";
 import { gerarArray } from "../../hooks/useGerarArray";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
 import { useTranslation } from "react-i18next";
+import { paginarArray } from "../../hooks/usePaginarArray";
 
 const Home = () => {
    // i18n
@@ -24,7 +25,8 @@ const Home = () => {
    const { lang } = useSelector((state) => state.idioma);
 
    const { estatisticasGerais } = useSelector((state) => state.estatisticasGerais);
-   const { criptomoedas } = useSelector((state) => state.criptomoedas);
+   const { criptomoedas, itemsPorPaginaCriptomoedas } = useSelector((state) => state.criptomoedas);
+
    const { noticias } = useSelector((state) => state.noticias);
    const { modoEscuro } = useSelector((state) => state.tema);
 
@@ -44,7 +46,9 @@ const Home = () => {
       let res;
       try {
          res = await axios.request({ ...CryptofetchOptions, url: "https://coinranking1.p.rapidapi.com/coins?limit=100" });
-         dispatch(setCriptomoedas(res?.data?.data?.coins));
+         let moedas = res?.data?.data?.coins;
+         dispatch(setCriptomoedas(moedas));
+         dispatch(setTotalPaginasCriptomoedas(Math.ceil(moedas.length / itemsPorPaginaCriptomoedas)));
       } catch (error) {
          console.log(error);
       }
