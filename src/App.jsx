@@ -13,6 +13,7 @@ import NavBarMobile from "./components/NavBarMobile/NavBarMobile";
 import FooterNavBar from "./components/FooterNavBar/FooterNavBar";
 import Carteiras from "./pages/Carteiras/Carteiras";
 import { Suspense } from "react";
+import PreLoader from "./components/PreLoader/PreLoader";
 
 // TODO: Adicionar particulas ao sidebar com o pacote: jsparticles
 function App() {
@@ -20,7 +21,7 @@ function App() {
       <>
          <BrowserRouter>
             <Provider store={store}>
-               <Suspense fallback={<p>Loading...</p>}>
+               <Suspense fallback={<PreLoader />}>
                   <div id="App" className="d-flex flex-column flex-lg-row w-100">
                      <div>
                         {/*  No Desktop */}
