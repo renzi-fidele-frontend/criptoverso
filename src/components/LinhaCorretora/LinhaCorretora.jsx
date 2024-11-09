@@ -1,4 +1,9 @@
-import { Badge, Collapse, Image, Modal, Placeholder } from "react-bootstrap";
+import Badge from "react-bootstrap/Badge";
+import Collapse from "react-bootstrap/Collapse";
+import Image from "react-bootstrap/Image";
+import Modal from "react-bootstrap/Modal";
+import Placeholder from "react-bootstrap/Placeholder";
+
 import styles from "./LinhaCorretora.module.css";
 import { useEffect, useState } from "react";
 import translate from "translate";

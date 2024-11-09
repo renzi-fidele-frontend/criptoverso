@@ -1,5 +1,7 @@
 import millify from "millify";
-import { Card, Image, Placeholder } from "react-bootstrap";
+import Card from "react-bootstrap/Card";
+import Placeholder from "react-bootstrap/Placeholder";
+import Image from "react-bootstrap/Image";
 import styles from "./CardMoeda.module.css";
 import { Link } from "react-router-dom";
 import { Line } from "react-chartjs-2";

@@ -1,4 +1,10 @@
-import { Badge, Col, Collapse, Image, Modal, Placeholder, Row } from "react-bootstrap";
+import Badge from "react-bootstrap/Badge";
+import Col from "react-bootstrap/Col";
+import Collapse from "react-bootstrap/Collapse";
+import Image from "react-bootstrap/Image";
+import Modal from "react-bootstrap/Modal";
+import Placeholder from "react-bootstrap/Placeholder";
+import Row from "react-bootstrap/Row";
 import styles from "./LinhaCarteira.module.css";
 import { useEffect, useState } from "react";
 import linux from "../../assets/linux.png";
@@ -14,7 +20,7 @@ import { useSelector } from "react-redux";
 import { Bar } from "react-chartjs-2";
 import { useTranslation } from "react-i18next";
 
-const LinhaCarteira = ({ carteira, chave }) => {
+const LinhaCarteira = ({ carteira }) => {
    const { t } = useTranslation();
    const [mostrar, setMostrar] = useState(false);
    const [segurancaTraduzido, setSegurancaTraduzido] = useState(false);

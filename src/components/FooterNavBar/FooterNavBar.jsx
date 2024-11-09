@@ -1,4 +1,6 @@
-import { Button, ButtonGroup, Collapse } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
+import Collapse from "react-bootstrap/Collapse";
 import { Link, useLocation } from "react-router-dom";
 import styles from "./FooterNavBar.module.css";
 import { useSelector } from "react-redux";

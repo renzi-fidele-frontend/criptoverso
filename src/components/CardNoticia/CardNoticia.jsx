@@ -1,4 +1,8 @@
-import { Card, Col, Image, Placeholder, Row } from "react-bootstrap";
+import Card from "react-bootstrap/Card";
+import Col from "react-bootstrap/Col";
+import Image from "react-bootstrap/Image";
+import Placeholder from "react-bootstrap/Placeholder";
+import Row from "react-bootstrap/Row";
 import styles from "./CardNoticia.module.css";
 import { Link } from "react-router-dom";
 import moment from "moment";
@@ -29,7 +33,7 @@ const CardNoticia = ({ noticia }) => {
          <Card.Body as={Row}>
             <Col xs={12} xl={6} className="position-relative">
                <div className="border rounded-1" id={styles.fotoIndisponivel}>
-                  <Image  id={styles.fotoNoticia} src={noticia?.imageurl} />
+                  <Image id={styles.fotoNoticia} src={noticia?.imageurl} />
                </div>
             </Col>
             <Col className="d-flex pt-2 pt-xl-0 flex-column justify-content-between">
@@ -39,7 +43,9 @@ const CardNoticia = ({ noticia }) => {
                   <Image id={styles.fotoAutor} src={noticia?.source_info?.img} />
                   <div>
                      <Card.Text className="mb-0 ">{noticia?.source_info?.name}</Card.Text>
-                     <span className="text-secondary fst-italic small">{lang === "pt" ? textoTraduzido : moment.unix(noticia?.published_on).fromNow() }</span>
+                     <span className="text-secondary fst-italic small">
+                        {lang === "pt" ? textoTraduzido : moment.unix(noticia?.published_on).fromNow()}
+                     </span>
                   </div>
                </Card.Footer>
             </Col>

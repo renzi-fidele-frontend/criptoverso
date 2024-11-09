@@ -1,4 +1,6 @@
-import { Col, Container, Row } from "react-bootstrap";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
 import CardNoticia from "../../components/CardNoticia/CardNoticia";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";

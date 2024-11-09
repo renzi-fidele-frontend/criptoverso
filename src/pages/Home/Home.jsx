@@ -1,8 +1,13 @@
-import { Button, Col, Container, Image, Placeholder, Row } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
+import Image from "react-bootstrap/Image";
+import Placeholder from "react-bootstrap/Placeholder";
+import Row from "react-bootstrap/Row";
 import styles from "./Home.module.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import millify from "millify";
 import { CryptofetchOptions } from "../../services/cryptoApi";
@@ -17,7 +22,6 @@ import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
 import { useTranslation } from "react-i18next";
-import { paginarArray } from "../../hooks/usePaginarArray";
 
 const Home = () => {
    // i18n

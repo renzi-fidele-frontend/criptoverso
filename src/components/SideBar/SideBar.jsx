@@ -1,10 +1,10 @@
 import styles from "./SideBar.module.css";
 import { CDBSidebar, CDBSidebarContent, CDBSidebarFooter, CDBSidebarHeader, CDBSidebarMenu, CDBSidebarMenuItem } from "cdbreact";
-
 import { NavLink, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setModoEscuro } from "../../state/tema/temaSlice";
-import { FormSelect, Image } from "react-bootstrap";
+import FormSelect from "react-bootstrap/FormSelect";
+import Image from "react-bootstrap/Image";
 import logo from "../../assets/logo1.png";
 import { useTranslation } from "react-i18next";
 import i18n from "../../i18n/i18n";

@@ -1,4 +1,6 @@
-import { Col, Pagination, Row } from "react-bootstrap";
+import Col from "react-bootstrap/Col";
+import Pagination from "react-bootstrap/Pagination";
+import Row from "react-bootstrap/Row";
 import { gerarArray } from "../../hooks/useGerarArray";
 
 const Paginacao = ({ onPageClick, paginaAtual, totalPaginas, tamanhoDesktop, tamanhoMobile }) => {

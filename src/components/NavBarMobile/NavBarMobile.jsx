@@ -1,6 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./NavBarMobile.module.css";
-import { Button, FormSelect, Image, Navbar } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import FormSelect from "react-bootstrap/FormSelect";
+import Image from "react-bootstrap/Image";
+import Navbar from "react-bootstrap/Navbar";
 import { setMostrar } from "../../state/MostrarNavBar/MostrarNavBarSlice";
 import { Link } from "react-router-dom";
 import { setModoEscuro } from "../../state/tema/temaSlice";
