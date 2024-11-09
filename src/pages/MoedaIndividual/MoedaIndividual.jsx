@@ -324,9 +324,9 @@ const MoedaIndividual = () => {
                         {!loading
                            ? criptomoeda?.links?.map((v, k) => (
                                 <ListGroup.Item action key={k}>
-                                   <div className="p-1 p-md-3 d-flex align-items-center justify-content-between">
+                                   <div className="p-1 p-md-3 d-flex gap-5 align-items-center justify-content-between">
                                       <p className="mb-0 text-capitalize fw-medium">{v?.type}</p>
-                                      <a href={v?.url} className="fw-bolder" target="_blank">
+                                      <a href={v?.url} className="fw-bolder text-truncate" target="_blank">
                                          {v?.name}
                                       </a>
                                    </div>
