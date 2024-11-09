@@ -2,6 +2,10 @@
    height: 500px;
 }
 
+#ico {
+   width: 100px;
+}
+
 @media screen and (max-width: 1390px) {
    #grafLoad {
       height: 400px;
@@ -61,5 +65,9 @@
 
    #descricao {
       font-size: 15px !important;
+   }
+
+   #ico {
+      width: 80px;
    }
 }

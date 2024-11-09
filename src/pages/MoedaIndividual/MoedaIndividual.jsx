@@ -8,6 +8,7 @@ import Form from "react-bootstrap/Form";
 import ListGroup from "react-bootstrap/ListGroup";
 import Placeholder from "react-bootstrap/Placeholder";
 import Row from "react-bootstrap/Row";
+import Image from "react-bootstrap/Image";
 import millify from "millify";
 import translate from "translate";
 import Chart from "chart.js/auto";
@@ -159,7 +160,8 @@ const MoedaIndividual = () => {
       <Container className="pb-5" fluid>
          <Row>
             <Col className="text-center">
-               <h2 id={styles.tit} className="fw-bold fs-1 mt-2 mt-md-4">
+               <Image className="mt-1 mt-md-0 mb-2" id={styles.ico} src={criptomoeda?.iconUrl} />
+               <h2 id={styles.tit} className="fw-bold fs-1">
                   {lang === "pt" && <span>{t("moedaIndividual.tit")} </span>}
                   {!loading ? (
                      <span style={{ color: modoEscuro ? null : criptomoeda?.color, textShadow: "1px 1px 1px black" }}>
