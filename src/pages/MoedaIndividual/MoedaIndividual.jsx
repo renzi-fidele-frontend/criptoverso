@@ -160,7 +160,10 @@ const MoedaIndividual = () => {
       <Container className="pb-5" fluid>
          <Row>
             <Col className="text-center">
-               <Image className="mt-1 mt-md-0 mb-2" id={styles.ico} src={criptomoeda?.iconUrl} />
+               <div className="mt-1 mt-md-0 mb-2">
+                  {!loading ? <Image id={styles.ico} src={criptomoeda?.iconUrl} /> : <Placeholder id={styles.loadIco} />}
+               </div>
+
                <h2 id={styles.tit} className="fw-bold fs-1">
                   {lang === "pt" && <span>{t("moedaIndividual.tit")} </span>}
                   {!loading ? (

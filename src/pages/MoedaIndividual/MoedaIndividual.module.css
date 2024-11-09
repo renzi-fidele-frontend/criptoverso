@@ -6,6 +6,12 @@
    width: 100px;
 }
 
+#loadIco {
+   height: 100px;
+   width: 100px;
+   border-radius: 15px;
+}
+
 @media screen and (max-width: 1390px) {
    #grafLoad {
       height: 400px;
@@ -68,6 +74,11 @@
    }
 
    #ico {
+      width: 80px;
+   }
+
+   #loadIco {
+      height: 80px;
       width: 80px;
    }
 }
