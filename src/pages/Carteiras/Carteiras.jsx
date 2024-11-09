@@ -91,7 +91,6 @@ const Carteiras = () => {
                tamanhoMobile="sm"
                totalPaginas={totalPaginas}
                onPageClick={(pagina) => {
-                  window.scrollTo({ top: 0, behavior: "smooth" });
                   dispatch(setPaginaAtual(pagina));
                   setCarteirasPaginadas(paginarArray(carteiras, pagina, itemsPorPagina));
                }}

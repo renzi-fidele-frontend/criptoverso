@@ -7,7 +7,7 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import ListGroup from "react-bootstrap/ListGroup";
 import Placeholder from "react-bootstrap/Placeholder";
-import Row from "react-bootstrap/Row"
+import Row from "react-bootstrap/Row";
 import millify from "millify";
 import translate from "translate";
 import Chart from "chart.js/auto";
@@ -87,7 +87,6 @@ const MoedaIndividual = () => {
 
    useEffect(() => {
       console.log(`O uuid é: ${uuid}`);
-      window.scrollTo({ top: 0, behavior: "smooth" });
       if (!criptomoeda) apanharDetalhesCriptomoeda();
       if (!historico) apanharHistoricoCriptomoeda("7d");
    }, [uuid]);

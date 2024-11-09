@@ -149,7 +149,6 @@ const Criptomoedas = () => {
                tamanhoMobile="sm"
                totalPaginas={totalPaginasCriptomoedas}
                onPageClick={(pagina) => {
-                  window.scrollTo({ top: 0, behavior: "smooth" });
                   dispatch(setPaginaAtualCriptomoedas(pagina));
                   setCriptomoedasPaginadas(paginarArray(criptomoedas, pagina, itemsPorPaginaCriptomoedas));
                }}

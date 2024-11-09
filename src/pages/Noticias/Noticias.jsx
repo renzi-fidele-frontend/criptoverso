@@ -78,7 +78,6 @@ const Noticias = () => {
          {noticias && (
             <Paginacao
                onPageClick={(pagina) => {
-                  window.scrollTo({ top: 0, behavior: "smooth" });
                   dispatch(setPaginaAtualNoticias(pagina));
                   setNoticiasPaginadas(paginarArray(noticias, pagina, itemsPorPaginaNoticias));
                }}

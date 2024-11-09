@@ -29,7 +29,7 @@ const NavBarMobile = () => {
       <Navbar className="d-lg-none d-flex" id={styles.ct} style={{ zIndex: 10 }}>
          <div className="px-3 px-sm-4 px-md-5 w-100 d-flex justify-content-between align-items-center">
             <div className="d-flex align-items-center">
-               <Link to="/" preventScrollReset={false}>
+               <Link to="/">
                   <Image src={logo} id={styles.logo} />
                </Link>
             </div>

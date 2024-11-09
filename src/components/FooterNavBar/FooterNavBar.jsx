@@ -15,20 +15,12 @@ const FooterNavBar = () => {
       <Collapse in={mostrar}>
          <div style={{ zIndex: 100 }} className={`w-100 "d-flex" d-lg-none position-fixed bottom-0 start-0 end-0`}>
             <ButtonGroup className="w-100">
-               <Button
-                  to="/"
-                  preventScrollReset={false}
-                  active={loc.pathname === "/"}
-                  style={{ width: "20%" }}
-                  className="rounded-0 d-flex flex-column"
-                  as={Link}
-               >
+               <Button to="/" active={loc.pathname === "/"} style={{ width: "20%" }} className="rounded-0 d-flex flex-column" as={Link}>
                   <i className="bi bi-house-heart-fill fs-2"></i>
                   <span className={`text-truncate ${styles.tit}`}>{t("sidebar.home")}</span>
                </Button>
                <Button
                   to="/criptomoedas"
-                  preventScrollReset={false}
                   active={loc.pathname === "/criptomoedas"}
                   style={{ width: "20%" }}
                   className="rounded-0 d-flex flex-column"
@@ -39,7 +31,6 @@ const FooterNavBar = () => {
                </Button>
                <Button
                   to="/corretoras"
-                  preventScrollReset={false}
                   active={loc.pathname === "/corretoras"}
                   style={{ width: "20%" }}
                   className="rounded-0 d-flex flex-column"
@@ -50,7 +41,6 @@ const FooterNavBar = () => {
                </Button>
                <Button
                   to="/carteiras"
-                  preventScrollReset={false}
                   active={loc.pathname === "/carteiras"}
                   style={{ width: "20%" }}
                   className="rounded-0 d-flex flex-column"
@@ -61,7 +51,6 @@ const FooterNavBar = () => {
                </Button>
                <Button
                   to="/noticias"
-                  preventScrollReset={false}
                   active={loc.pathname === "/noticias"}
                   style={{ width: "20%" }}
                   className="rounded-0 d-flex flex-column"

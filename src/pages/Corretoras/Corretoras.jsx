@@ -103,7 +103,6 @@ const Corretoras = () => {
                tamanhoMobile="sm"
                totalPaginas={totalPaginas}
                onPageClick={(pagina) => {
-                  window.scrollTo({ top: 0, behavior: "smooth" });
                   dispatch(setPaginaAtual(pagina));
                   setCorretorasPaginadas(paginarArray(corretoras, pagina, itemsPorPagina));
                }}
