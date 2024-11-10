@@ -43,6 +43,8 @@ const Carteiras = () => {
       }
    }, [carteiras, carteirasPaginadas]);
 
+   // TODO: Adicionar feature de filtragem da tabela
+
    return (
       <Container fluid>
          <Row>

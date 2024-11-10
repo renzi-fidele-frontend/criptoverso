@@ -26,7 +26,7 @@ const Noticias = () => {
       let res;
       try {
          res = await axios.get(
-            `https://min-api.cryptocompare.com/data/v2/news/?lang=${idioma}&api_key=${import.meta.env.VITE_CRYPTO_WATCH_APIKEY}`
+            `https://min-api.cryptocompare.com/data/v2/news/?lang=${idioma}&api_key=${import.meta.env.VITE_CRYPTO_WATCH_APIKEY}&limit=5`
          );
          dispatch(setNoticias(res.data.Data));
          dispatch(setTotalPaginasNoticias(Math.ceil(Number(res.data.Data.length) / itemsPorPaginaNoticias)));

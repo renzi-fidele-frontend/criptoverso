@@ -19,6 +19,7 @@ import translate from "translate";
 import { useSelector } from "react-redux";
 import { Bar } from "react-chartjs-2";
 import { useTranslation } from "react-i18next";
+import Button from "react-bootstrap/Button";
 
 const LinhaCarteira = ({ carteira }) => {
    const { t } = useTranslation();
@@ -154,13 +155,24 @@ const LinhaCarteira = ({ carteira }) => {
                      <a target="_blank" className="text-bg-primary rounded-1 py-1 px-2 shadow-sm" href={carteira?.AffiliateURL}>
                         {t("components.linha_carteira.btn1")} <i className="bi bi-box-arrow-in-up-right"></i>
                      </a>
-                     <a
-                        target="_blank"
-                        className={`rounded-1 py-1 px-2 shadow-sm ms-2 ${modoEscuro ? "text-bg-light" : "text-bg-dark"}`}
-                        href={carteira?.SourceCodeUrl}
-                     >
-                        {t("components.linha_carteira.btn2")} <i className="bi bi-github"></i>
-                     </a>
+                     {carteira?.SourceCodeUrl ? (
+                        <a
+                           target="_blank"
+                           className={`rounded-1 py-1 px-2 shadow-sm ms-2 ${modoEscuro ? "text-bg-light" : "text-bg-dark"}`}
+                           href={carteira?.SourceCodeUrl}
+                        >
+                           {t("components.linha_carteira.btn2")} <i className="bi bi-github"></i>
+                        </a>
+                     ) : (
+                        <a
+                           style={{ cursor: "not-allowed" }}
+                           target="_blank"
+                           className={`rounded-1 py-1 px-2 shadow-sm ms-2 ${modoEscuro ? "text-bg-light" : "text-bg-dark"}`}
+                        >
+                           {t("components.linha_carteira.noRepo")} <i className="bi bi-github"></i>
+                        </a>
+                     )}
+
                      <a
                         role="button"
                         onClick={() => setMostrarClassificacao(true)}

@@ -24,6 +24,8 @@ import { useTranslation } from "react-i18next";
 
 Chart.register(CategoryScale);
 
+// TODO: Mostrar erro se selecione um periodo maior do que o suportado
+
 const MoedaIndividual = () => {
    const { t } = useTranslation();
    const { uuid } = useParams();

@@ -49,6 +49,8 @@ const Corretoras = () => {
       }
    }, [corretoras, corretorasPaginadas]);
 
+   // TODO: Adicionar feature de filtragem da tabela
+
    return (
       <Container fluid>
          <Row>

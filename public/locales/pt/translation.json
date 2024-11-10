@@ -163,6 +163,7 @@
          "anon": "Anônimidade",
          "btn1": "Utilizar carteira",
          "btn2": "Acessar repositório",
+         "noRepo": "Indisponível",
          "btn3": "Classificação detalhada",
          "titMod": "Classificação detalhada do",
          "avg": "Média",

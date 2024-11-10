@@ -163,6 +163,7 @@
          "anon": "Anonymity",
          "btn1": "Use wallet",
          "btn2": "Access repository",
+         "noRepo": "Unavailable",
          "btn3": "Detailed score",
          "titMod": "Detailed score",
          "avg": "Average",
