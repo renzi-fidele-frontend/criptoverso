@@ -214,10 +214,14 @@ const MoedaIndividual = () => {
                      <span>
                         <i className="bi bi-arrow-down-up"></i> {t("moedaIndividual.change")}: <br className="d-inline d-sm-none" />
                         {!loading ? (
-                           <b className={`${historico?.change >= 0 ? "text-success" : "text-danger"}`}>
-                              {historico?.change >= 0 && "+"}
-                              {historico?.change}%{" "}
-                           </b>
+                           historico?.change ? (
+                              <b className={`${historico?.change >= 0 ? "text-success" : "text-danger"}`}>
+                                 {historico?.change >= 0 && "+"}
+                                 {historico?.change}%{" "}
+                              </b>
+                           ) : (
+                              <b className="text-warning">Ainda não existia</b>
+                           )
                         ) : (
                            <Placeholder xs={7} />
                         )}
