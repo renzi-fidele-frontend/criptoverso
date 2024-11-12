@@ -64,7 +64,8 @@ const Criptomoedas = () => {
    }
 
    function pesquisarAoDigitar() {
-      if (termoPesquisaRef?.current?.value === "") return setResultadosPesquisaInstantanea(null);
+      if ((termoPesquisaRef?.current?.value === "") | (termoPesquisaRef?.current?.value?.length < 2))
+         return setResultadosPesquisaInstantanea(null);
       setResultadosPesquisaInstantanea(
          criptomoedas?.filter((criptomoeda) => criptomoeda?.name?.toLowerCase()?.includes(termoPesquisaRef?.current?.value?.toLowerCase()))
       );
@@ -93,7 +94,7 @@ const Criptomoedas = () => {
                      required
                      type="text"
                   ></FormControl>
-                  <Button type="submit">
+                  <Button style={{ cursor: "not-allowed" }} type="submit">
                      <i className="bi bi-search"></i>
                   </Button>
                </Form>
@@ -101,7 +102,7 @@ const Criptomoedas = () => {
          </Row>
 
          {/*  Todas as criptomoedas   */}
-         <Row className="g-3">
+         <Row className="g-3 mb-4">
             {!loading ? (
                <>
                   {criptomoedas && !resultadosPesquisaInstantanea ? (

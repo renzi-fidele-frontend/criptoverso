@@ -61,6 +61,7 @@
    },
    "carteiras": {
       "tit": "See all crypto wallets on the market",
+      "search_placeholder": "Find your new crypto wallet",
       "th_wallet": "Wallet",
       "th_platforms": "Platforms",
       "th_security": "Security level",

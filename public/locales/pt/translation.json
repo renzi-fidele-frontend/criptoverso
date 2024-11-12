@@ -61,6 +61,7 @@
    },
    "carteiras": {
       "tit": "Veja todas as carteiras do mercado",
+      "search_placeholder": "Encontre a sua nova carteira crypto",
       "th_wallet": "Carteira",
       "th_platforms": "Plataformas",
       "th_security": "Tipo de Segurança",

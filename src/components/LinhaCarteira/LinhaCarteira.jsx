@@ -65,6 +65,8 @@ const LinhaCarteira = ({ carteira }) => {
       }
    };
 
+   // TODO: Adicionar tooltip aos icones das plataformas suportadas pela carteira crypto
+
    return carteira ? (
       <>
          <tr style={{ cursor: "pointer" }} onClick={() => setMostrar(!mostrar)}>

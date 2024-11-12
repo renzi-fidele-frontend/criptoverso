@@ -12,6 +12,8 @@ import { gerarArray } from "../../hooks/useGerarArray";
 import Paginacao from "../../components/Paginacao/Paginacao";
 import { paginarArray } from "../../hooks/usePaginarArray";
 import { useTranslation } from "react-i18next";
+import { Alert, Button, Form, FormControl, Image } from "react-bootstrap";
+import nadaEncontrado from "../../assets/nadaEncontrado.png";
 
 const Carteiras = () => {
    const { carteiras, paginaAtual, totalPaginas, itemsPorPagina } = useSelector((state) => state.carteiras);
@@ -19,6 +21,7 @@ const Carteiras = () => {
    const [loading, setLoading] = useState(false);
    const dispatch = useDispatch();
    const { t } = useTranslation();
+   const [resultadosPesquisaInstantanea, setResultadosPesquisaInstantanea] = useState(null);
 
    async function apanharCarteiras() {
       setLoading(true);
@@ -43,50 +46,74 @@ const Carteiras = () => {
       }
    }, [carteiras, carteirasPaginadas]);
 
-   // TODO: Adicionar feature de filtragem da tabela
+   function pesquisarAoDigitar(e) {
+      if ((e?.target?.value === "") | (e?.target?.value?.length < 2)) return setResultadosPesquisaInstantanea(null);
+      setResultadosPesquisaInstantanea(
+         carteiras?.filter((carteira) => carteira?.Name?.toLowerCase()?.includes(e?.target?.value?.toLowerCase()))
+      );
+   }
 
    return (
       <Container fluid>
+         {/*   Campo de pesquisa  */}
+         <Row className="mb-4">
+            <Col xs={12} lg={9}>
+               <h2 className="fw-bold titulo1">{t("carteiras.tit")}</h2>
+            </Col>
+            <Col>
+               <Form onSubmit={(e) => e.preventDefault()} className="d-flex gap-2">
+                  <FormControl placeholder={t("carteiras.search_placeholder")} onChange={pesquisarAoDigitar} required type="text"></FormControl>
+                  <Button style={{ cursor: "not-allowed" }} type="submit">
+                     <i className="bi bi-search"></i>
+                  </Button>
+               </Form>
+            </Col>
+         </Row>
+
          <Row>
             <Col>
-               <h2 className="fw-bold mb-4 titulo1">{t("carteiras.tit")}</h2>
-
-               <div>
-                  <Table bordered striped size="lg" responsive hover>
-                     <thead>
-                        <tr>
-                           <th id={styles.th} className="text-truncate">
-                              #
-                           </th>
-                           <th id={styles.th} className="text-truncate">
-                              {t("carteiras.th_wallet")}
-                           </th>
-                           <th id={styles.th} className="text-truncate">
-                              {t("carteiras.th_platforms")}
-                           </th>
-                           <th id={styles.th} className="d-none d-xl-block text-truncate">
-                              {t("carteiras.th_security")}
-                           </th>
-                           <th id={styles.th} className="text-truncate">
-                              {t("carteiras.th_rating")}
-                           </th>
-                           <th id={styles.th} className="text-truncate">
-                              {t("carteiras.th_ease")}
-                           </th>
-                        </tr>
-                     </thead>
-                     <tbody>
-                        {!loading
+               <Table bordered striped size="lg" responsive hover>
+                  <thead>
+                     <tr>
+                        <th id={styles.th} className="text-truncate">
+                           #
+                        </th>
+                        <th id={styles.th} className="text-truncate">
+                           {t("carteiras.th_wallet")}
+                        </th>
+                        <th id={styles.th} className="text-truncate">
+                           {t("carteiras.th_platforms")}
+                        </th>
+                        <th id={styles.th} className="d-none d-xl-block text-truncate">
+                           {t("carteiras.th_security")}
+                        </th>
+                        <th id={styles.th} className="text-truncate">
+                           {t("carteiras.th_rating")}
+                        </th>
+                        <th id={styles.th} className="text-truncate">
+                           {t("carteiras.th_ease")}
+                        </th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     {!loading
+                        ? !resultadosPesquisaInstantanea
                            ? carteirasPaginadas?.map((v, k) => <LinhaCarteira carteira={v} chave={k} key={k} />)
-                           : gerarArray(12).map((v, k) => <LinhaCarteira chave={k} key={k} />)}
-                     </tbody>
-                  </Table>
-               </div>
+                           : resultadosPesquisaInstantanea?.map((v, k) => <LinhaCarteira carteira={v} chave={k} key={k} />)
+                        : gerarArray(12).map((v, k) => <LinhaCarteira chave={k} key={k} />)}
+                  </tbody>
+               </Table>
+               {resultadosPesquisaInstantanea?.length === 0 && (
+                  <div className="d-flex flex-column align-items-center justify-content-center h-100 gap-4">
+                     <Image src={nadaEncontrado} />
+                     <Alert>Nada foi encontrado</Alert>
+                  </div>
+               )}
             </Col>
          </Row>
 
          {/*  Paginação  */}
-         {carteirasPaginadas && (
+         {carteirasPaginadas && !resultadosPesquisaInstantanea && (
             <Paginacao
                paginaAtual={paginaAtual}
                tamanhoDesktop="md"
