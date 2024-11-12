@@ -85,6 +85,7 @@
       },
       "h3_chart": "Gráfico do preço do",
       "change": "Alteração",
+      "noChange": "Ainda não existia",
       "price": "Preço atual",
       "chartLabel": "Preço em dólar",
       "chartLoad": "Carregando o gráfico",

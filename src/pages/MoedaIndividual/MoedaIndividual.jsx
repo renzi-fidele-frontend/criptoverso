@@ -220,7 +220,7 @@ const MoedaIndividual = () => {
                                  {historico?.change}%{" "}
                               </b>
                            ) : (
-                              <b className="text-warning">Ainda não existia</b>
+                              <b className="text-warning">{t("moedaIndividual.noChange")}</b>
                            )
                         ) : (
                            <Placeholder xs={7} />

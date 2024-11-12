@@ -85,6 +85,7 @@
       },
       "h3_chart": "Price chart",
       "change": "Change",
+      "noChange": "It didn't exist",
       "price": "Current price",
       "chartLabel": "Price in dollars",
       "chartLoad": "Loading the chart",
