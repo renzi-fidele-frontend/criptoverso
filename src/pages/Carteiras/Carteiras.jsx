@@ -7,12 +7,16 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Table from "react-bootstrap/Table";
+import Alert from "react-bootstrap/Alert";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import FormControl from "react-bootstrap/FormControl";
+import Image from "react-bootstrap/Image";
 import LinhaCarteira from "../../components/LinhaCarteira/LinhaCarteira";
 import { gerarArray } from "../../hooks/useGerarArray";
 import Paginacao from "../../components/Paginacao/Paginacao";
 import { paginarArray } from "../../hooks/usePaginarArray";
 import { useTranslation } from "react-i18next";
-import { Alert, Button, Form, FormControl, Image } from "react-bootstrap";
 import nadaEncontrado from "../../assets/nadaEncontrado.png";
 
 const Carteiras = () => {
@@ -99,7 +103,7 @@ const Carteiras = () => {
                      {!loading
                         ? !resultadosPesquisaInstantanea
                            ? carteirasPaginadas?.map((v, k) => <LinhaCarteira carteira={v} chave={k} key={k} />)
-                           : resultadosPesquisaInstantanea?.map((v, k) => <LinhaCarteira carteira={v} chave={k} key={k} />)
+                           : resultadosPesquisaInstantanea?.map((v, k) => <LinhaCarteira carteira={v} key={k} />)
                         : gerarArray(12).map((v, k) => <LinhaCarteira chave={k} key={k} />)}
                   </tbody>
                </Table>

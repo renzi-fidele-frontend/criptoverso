@@ -51,6 +51,7 @@
    },
    "corretoras": {
       "tit": "See all crypto exchanges on the market",
+      "search_placeholder": "Find your new exchange",
       "exchange": "Exchange",
       "points": "Score",
       "24hvol": "24h volume",

@@ -51,6 +51,7 @@
    },
    "corretoras": {
       "tit": "Veja todas as corretoras de criptomoedas",
+      "search_placeholder": "Encontre a sua nova corretora",
       "exchange": "Corretoras",
       "points": "Pontuação",
       "24hvol": "Volume de 24h",

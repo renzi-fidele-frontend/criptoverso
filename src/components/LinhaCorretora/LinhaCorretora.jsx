@@ -13,7 +13,7 @@ import { Pie } from "react-chartjs-2";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 
-const LinhaCorretora = ({ corretora, chave }) => {
+const LinhaCorretora = ({ corretora }) => {
    const { t } = useTranslation();
    const [mostrar, setMostrar] = useState(false);
    const [descricaoTraduzida, setDescricaoTraduzida] = useState("");
