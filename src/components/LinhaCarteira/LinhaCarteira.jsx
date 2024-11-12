@@ -19,7 +19,9 @@ import translate from "translate";
 import { useSelector } from "react-redux";
 import { Bar } from "react-chartjs-2";
 import { useTranslation } from "react-i18next";
-import Button from "react-bootstrap/Button";
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
+import "tippy.js/themes/light.css";
 
 const LinhaCarteira = ({ carteira }) => {
    const { t } = useTranslation();
@@ -47,25 +49,23 @@ const LinhaCarteira = ({ carteira }) => {
 
    const iconePlataforma = (plataforma) => {
       if (plataforma?.toLowerCase()?.includes("android")) {
-         return <Image title={plataforma} src={android} />;
+         return <Image src={android} />;
       } else if (plataforma?.toLowerCase()?.includes("mac")) {
-         return <i title={plataforma} className="bi bi-apple"></i>;
+         return <i className="bi bi-apple"></i>;
       } else if (plataforma?.toLowerCase()?.includes("windows")) {
-         return <Image title={plataforma} src={windows} />;
+         return <Image src={windows} />;
       } else if (plataforma?.toLowerCase()?.includes("linux")) {
-         return <Image title={plataforma} src={linux} />;
+         return <Image src={linux} />;
       } else if (plataforma?.toLowerCase()?.includes("web")) {
-         return <i title={plataforma} className="bi bi-globe"></i>;
+         return <i className="bi bi-globe"></i>;
       } else if (plataforma?.toLowerCase()?.includes("ios")) {
-         return <Image title={plataforma} src={ios} />;
+         return <Image src={ios} />;
       } else if (plataforma?.toLowerCase()?.includes("hardware")) {
-         return <Image title={plataforma} src={hardware} />;
+         return <Image src={hardware} />;
       } else if (plataforma?.toLowerCase()?.includes("chrome")) {
-         return <Image title={plataforma} src={chrome_extension} />;
+         return <Image src={chrome_extension} />;
       }
    };
-
-   // TODO: Adicionar tooltip aos icones das plataformas suportadas pela carteira crypto
 
    return carteira ? (
       <>
@@ -79,8 +79,12 @@ const LinhaCarteira = ({ carteira }) => {
             </td>
             <td className={styles.td}>
                <div id={styles.plataformas} className="d-flex gap-2 align-items-center flex-wrap h-100 ">
-                  {carteira?.Platforms?.map((v) => {
-                     return iconePlataforma(v);
+                  {carteira?.Platforms?.map((v, k) => {
+                     return (
+                        <Tippy key={k} content={v}>
+                           {iconePlataforma(v)}
+                        </Tippy>
+                     );
                   })}
                </div>
             </td>
