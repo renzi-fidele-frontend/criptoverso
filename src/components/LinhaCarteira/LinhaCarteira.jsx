@@ -25,9 +25,12 @@ import "tippy.js/themes/light.css";
 
 // TODO: Adicionar feat de filtragem das plataformas
 // TODO: Adicionar feat de filtragem das classificações
+function filtrarTabelas() {
+   return;
+}
 
 
-const LinhaCarteira = ({ carteira }) => {
+function LinhaCarteira({ carteira }) {
    const { t } = useTranslation();
    const [mostrar, setMostrar] = useState(false);
    const [segurancaTraduzido, setSegurancaTraduzido] = useState(false);
@@ -294,5 +297,5 @@ const LinhaCarteira = ({ carteira }) => {
          </tr>
       </>
    );
-};
+}
 export default LinhaCarteira;

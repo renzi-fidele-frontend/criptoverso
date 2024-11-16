@@ -18,6 +18,7 @@ import Paginacao from "../../components/Paginacao/Paginacao";
 import { paginarArray } from "../../hooks/usePaginarArray";
 import { useTranslation } from "react-i18next";
 import nadaEncontrado from "../../assets/nadaEncontrado.png";
+import Modal from "react-bootstrap/Modal";
 
 const Carteiras = () => {
    const { carteiras, paginaAtual, totalPaginas, itemsPorPagina } = useSelector((state) => state.carteiras);
@@ -26,6 +27,7 @@ const Carteiras = () => {
    const dispatch = useDispatch();
    const { t } = useTranslation();
    const [resultadosPesquisaInstantanea, setResultadosPesquisaInstantanea] = useState(null);
+   const [open, setOpen] = useState(false);
 
    async function apanharCarteiras() {
       setLoading(true);
@@ -57,6 +59,13 @@ const Carteiras = () => {
       );
    }
 
+   // TODO: Adicionar feat de filtragem das plataformas
+   // TODO: Adicionar feat de filtragem das classificações
+
+   function filtrarTabelas() {
+      return;
+   }
+
    return (
       <Container fluid>
          {/*   Campo de pesquisa  */}
@@ -67,9 +76,40 @@ const Carteiras = () => {
             <Col>
                <Form onSubmit={(e) => e.preventDefault()} className="d-flex gap-2">
                   <FormControl placeholder={t("carteiras.search_placeholder")} onChange={pesquisarAoDigitar} required type="text"></FormControl>
-                  <Button style={{ cursor: "not-allowed" }} type="submit">
-                     <i className="bi bi-search"></i>
+
+                  <Button onClick={() => setOpen(true)} variant="secondary">
+                     <i className="bi bi-filter"></i>
                   </Button>
+                  {/* Modal de filtragem de carteiras */}
+                  <Modal centered show={open} onHide={() => setOpen(false)}>
+                     <Modal.Header closeButton>
+                        <Modal.Title>Adicione as opções de filtragem das carteiras crypto:</Modal.Title>
+                     </Modal.Header>
+                     <Modal.Body>
+                        <Form>
+                           <Form.Group>
+                              <Form.Label className="fw-medium">Selecione a plataforma</Form.Label>
+                              <Form.Select role="button">
+                                 <option value="android">Android</option>
+                                 <option value="mac">Mac</option>
+                                 <option value="windows">Windows</option>
+                                 <option value="linux">Linux</option>
+                                 <option value="web">Web</option>
+                                 <option value="ios">IOS</option>
+                                 <option value="hardware">Hardware</option>
+                                 <option value="chrome">Google Chrome Extension</option>
+                              </Form.Select>
+                           </Form.Group>
+                           {/* TODO: Adicionar mais opções de filtragem de carteiras */}
+                        </Form>
+                     </Modal.Body>
+                     <Modal.Footer>
+                        <Button>Aplicar</Button>
+                        <Button onClick={() => setOpen(false)} variant="secondary">
+                           Cancelar
+                        </Button>
+                     </Modal.Footer>
+                  </Modal>
                </Form>
             </Col>
          </Row>
