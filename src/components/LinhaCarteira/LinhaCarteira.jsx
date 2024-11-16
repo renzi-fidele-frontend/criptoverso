@@ -23,13 +23,6 @@ import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
 
-// TODO: Adicionar feat de filtragem das plataformas
-// TODO: Adicionar feat de filtragem das classificações
-function filtrarTabelas() {
-   return;
-}
-
-
 function LinhaCarteira({ carteira }) {
    const { t } = useTranslation();
    const [mostrar, setMostrar] = useState(false);

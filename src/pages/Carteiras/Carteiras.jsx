@@ -2,7 +2,7 @@ import axios from "axios";
 import styles from "./Carteiras.module.css";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setCarteiras, setFiltros, setPaginaAtual, setTotalPaginas } from "../../state/carteiras/carteirasSlice";
+import { setCarteiras, setCarteirasFiltradas, setFiltros, setPaginaAtual, setTotalPaginas } from "../../state/carteiras/carteirasSlice";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -10,6 +10,7 @@ import Table from "react-bootstrap/Table";
 import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import Modal from "react-bootstrap/Modal";
 import FormControl from "react-bootstrap/FormControl";
 import Image from "react-bootstrap/Image";
 import LinhaCarteira from "../../components/LinhaCarteira/LinhaCarteira";
@@ -18,10 +19,9 @@ import Paginacao from "../../components/Paginacao/Paginacao";
 import { paginarArray } from "../../hooks/usePaginarArray";
 import { useTranslation } from "react-i18next";
 import nadaEncontrado from "../../assets/nadaEncontrado.png";
-import Modal from "react-bootstrap/Modal";
 
 const Carteiras = () => {
-   const { carteiras, paginaAtual, totalPaginas, itemsPorPagina } = useSelector((state) => state.carteiras);
+   const { carteiras, paginaAtual, totalPaginas, itemsPorPagina, carteirasFiltradas, filtros } = useSelector((state) => state.carteiras);
    const [carteirasPaginadas, setCarteirasPaginadas] = useState([]);
    const [loading, setLoading] = useState(false);
    const dispatch = useDispatch();
@@ -59,12 +59,27 @@ const Carteiras = () => {
       );
    }
 
-   // TODO: Adicionar feat de filtragem das plataformas
    // TODO: Adicionar feat de filtragem das classificações
+
+   
    const platRef = useRef();
-   function filtrarTabelas() {
+   function filtrarTabela() {
       dispatch(setFiltros({ plataforma: platRef?.current?.value }));
+      const plataformasFiltradas = carteiras?.filter((v) =>
+         v?.Platforms?.map((v) => v?.toLowerCase().includes(platRef?.current?.value))?.includes(true)
+      );
+      dispatch(setCarteirasFiltradas(plataformasFiltradas));
+      setCarteirasPaginadas(paginarArray(plataformasFiltradas, paginaAtual, itemsPorPagina));
+      setOpen(false);
    }
+
+   // Caso se chegue e hajam filtros
+   useEffect(() => {
+      if (carteirasFiltradas && !!filtros?.plataforma) {
+         console.log("Verifiquei se Caso se chegue e hajam filtros");
+         setCarteirasPaginadas(paginarArray(carteirasFiltradas, paginaAtual, itemsPorPagina));
+      }
+   }, []);
 
    return (
       <Container fluid>
@@ -89,7 +104,8 @@ const Carteiras = () => {
                         <Form>
                            <Form.Group>
                               <Form.Label className="fw-medium">Selecione a plataforma</Form.Label>
-                              <Form.Select ref={platRef} role="button">
+                              <Form.Select defaultValue={filtros?.plataforma ? filtros?.plataforma : "todos"} ref={platRef} role="button">
+                                 <option value="todos">Todas</option>
                                  <option value="android">Android</option>
                                  <option value="mac">Mac</option>
                                  <option value="windows">Windows</option>
@@ -104,7 +120,7 @@ const Carteiras = () => {
                         </Form>
                      </Modal.Body>
                      <Modal.Footer>
-                        <Button onClick={filtrarTabelas}>Aplicar</Button>
+                        <Button onClick={filtrarTabela}>Aplicar</Button>
                         <Button onClick={() => setOpen(false)} variant="secondary">
                            Cancelar
                         </Button>
@@ -164,8 +180,15 @@ const Carteiras = () => {
                tamanhoMobile="sm"
                totalPaginas={totalPaginas}
                onPageClick={(pagina) => {
+                  const condicionalCarteiras = (carteiras) => {
+                     if (filtros?.plataforma) {
+                        return carteirasFiltradas;
+                     } else {
+                        return carteiras;
+                     }
+                  };
                   dispatch(setPaginaAtual(pagina));
-                  setCarteirasPaginadas(paginarArray(carteiras, pagina, itemsPorPagina));
+                  setCarteirasPaginadas(paginarArray(condicionalCarteiras(), pagina, itemsPorPagina));
                }}
             />
          )}
