@@ -5,6 +5,7 @@ const initialState = {
    paginaAtual: 1,
    itemsPorPagina: 12,
    totalPaginas: 0,
+   filtros: null,
 };
 
 const carteiraSlice = createSlice({
@@ -23,9 +24,12 @@ const carteiraSlice = createSlice({
       setTotalPaginas: (state, action) => {
          state.totalPaginas = action.payload;
       },
+      setFiltros: (state, action) => {
+         state.filtros = action.payload;
+      },
    },
 });
 
-export const { setCarteiras, setItemsPorPagina, setPaginaAtual, setTotalPaginas } = carteiraSlice.actions;
+export const { setCarteiras, setItemsPorPagina, setPaginaAtual, setTotalPaginas, setFiltros } = carteiraSlice.actions;
 
 export default carteiraSlice.reducer;

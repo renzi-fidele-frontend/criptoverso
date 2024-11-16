@@ -1,8 +1,8 @@
 import axios from "axios";
 import styles from "./Carteiras.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setCarteiras, setPaginaAtual, setTotalPaginas } from "../../state/carteiras/carteirasSlice";
+import { setCarteiras, setFiltros, setPaginaAtual, setTotalPaginas } from "../../state/carteiras/carteirasSlice";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -61,9 +61,9 @@ const Carteiras = () => {
 
    // TODO: Adicionar feat de filtragem das plataformas
    // TODO: Adicionar feat de filtragem das classificações
-
+   const platRef = useRef();
    function filtrarTabelas() {
-      return;
+      dispatch(setFiltros({ plataforma: platRef?.current?.value }));
    }
 
    return (
@@ -89,7 +89,7 @@ const Carteiras = () => {
                         <Form>
                            <Form.Group>
                               <Form.Label className="fw-medium">Selecione a plataforma</Form.Label>
-                              <Form.Select role="button">
+                              <Form.Select ref={platRef} role="button">
                                  <option value="android">Android</option>
                                  <option value="mac">Mac</option>
                                  <option value="windows">Windows</option>
@@ -104,7 +104,7 @@ const Carteiras = () => {
                         </Form>
                      </Modal.Body>
                      <Modal.Footer>
-                        <Button>Aplicar</Button>
+                        <Button onClick={filtrarTabelas}>Aplicar</Button>
                         <Button onClick={() => setOpen(false)} variant="secondary">
                            Cancelar
                         </Button>
