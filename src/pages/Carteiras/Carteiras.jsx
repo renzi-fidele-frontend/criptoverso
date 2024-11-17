@@ -30,6 +30,7 @@ const Carteiras = () => {
    const [open, setOpen] = useState(false);
    const platRef = useRef();
    const nivelRef = useRef();
+   const securityRef = useRef();
 
    async function apanharCarteiras() {
       setLoading(true);
@@ -62,7 +63,7 @@ const Carteiras = () => {
    }
 
    function filtrarTabela() {
-      dispatch(setFiltros({ plataforma: platRef?.current?.value, nivel: nivelRef?.current?.value }));
+      dispatch(setFiltros({ plataforma: platRef?.current?.value, nivel: nivelRef?.current?.value, seguranca: securityRef?.current?.value }));
       const dadosFiltrados = carteiras
          ?.filter((plataforma) => {
             return platRef?.current?.value !== "todos"
@@ -71,6 +72,9 @@ const Carteiras = () => {
          })
          ?.filter((classificacao) => {
             return nivelRef?.current?.value !== "todos" ? Math.floor(classificacao?.Rating?.Avg) === Number(nivelRef?.current?.value) : true;
+         })
+         ?.filter((seguranca) => {
+            return securityRef?.current?.value !== "todos" ? seguranca?.Security?.toLowerCase().includes(securityRef?.current?.value) : true;
          });
 
       dispatch(setCarteirasFiltradas(dadosFiltrados));
@@ -141,7 +145,18 @@ const Carteiras = () => {
                               </Form.Select>
                            </Form.Group>
 
-                           {/* TODO: Adicionar a funcionalidade de filtragem do tipo de segurança */}
+                           {/* Tipo de segurança */}
+                           <Form.Group>
+                              <Form.Label className="fw-medium">
+                                 {t("carteiras.modal.lb_security")} <i className="bi bi-lock"></i>
+                              </Form.Label>
+                              <Form.Select role="button" defaultValue={filtros?.seguranca ? filtros?.seguranca : "todos"} ref={securityRef}>
+                                 <option value="todos">{t("carteiras.modal.default")}</option>
+                                 <option value="personal">{t("carteiras.modal.security.0")}</option>
+                                 <option value="third party encrypted">{t("carteiras.modal.security.1")}</option>
+                              </Form.Select>
+                           </Form.Group>
+
                            {/* TODO: Adicionar a funcionalidade de filtragem da facilidade de uso */}
                         </Form>
                      </Modal.Body>

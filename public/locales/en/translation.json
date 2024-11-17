@@ -72,11 +72,13 @@
          "tit": "Add the crypto wallet filtering options:",
          "lb_platform": "Select the platform",
          "lb_rating": "Select the rating level",
+         "lb_security": "Select the security level",
          "default": "All",
          "btn1": "Apply",
          "btn2": "Cancel",
          "extension": "Google Chrome Extension",
-         "stars": "Stars"
+         "stars": "Stars",
+         "security": ["Personal", "Third Party Encrypted"]
       },
       "notFound": "Nothing was found"
    },

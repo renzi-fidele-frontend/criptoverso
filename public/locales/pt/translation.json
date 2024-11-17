@@ -72,11 +72,13 @@
          "tit": "Adicione as opções de filtragem das carteiras crypto:",
          "lb_platform": "Selecione a plataforma",
          "lb_rating": "Selecione o nível da classificação",
+         "lb_security": "Selecione o tipo de seguraça",
          "default": "Todas",
          "btn1": "Aplicar",
          "btn2": "Cancelar",
          "extension": "Extensão do Google Chrome",
-         "stars": "Estrelas"
+         "stars": "Estrelas",
+         "security": ["Pessoal", "Criptografado por terceiros"]
       },
       "notFound": "Nada foi encontrado"
    },
