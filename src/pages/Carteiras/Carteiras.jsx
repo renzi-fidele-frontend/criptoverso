@@ -75,7 +75,6 @@ const Carteiras = () => {
    // Caso se chegue e hajam filtros
    useEffect(() => {
       if (carteirasFiltradas && !!filtros?.plataforma) {
-         console.log("Verifiquei se Caso se chegue e hajam filtros");
          setCarteirasPaginadas(paginarArray(carteirasFiltradas, paginaAtual, itemsPorPagina));
       }
    }, []);
@@ -173,7 +172,6 @@ const Carteiras = () => {
             </Col>
          </Row>
 
-         {/* TODO: Corrigir erro paginação no modo de filtragem */}
          {/*  Paginação  */}
          {carteirasPaginadas && !resultadosPesquisaInstantanea && (
             <Paginacao
@@ -190,7 +188,7 @@ const Carteiras = () => {
                      }
                   };
                   dispatch(setPaginaAtual(pagina));
-                  setCarteirasPaginadas(paginarArray(condicionalCarteiras(), pagina, itemsPorPagina));
+                  setCarteirasPaginadas(paginarArray(condicionalCarteiras(carteiras), pagina, itemsPorPagina));
                }}
             />
          )}
