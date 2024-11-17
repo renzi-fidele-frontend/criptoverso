@@ -28,6 +28,8 @@ const Carteiras = () => {
    const { t } = useTranslation();
    const [resultadosPesquisaInstantanea, setResultadosPesquisaInstantanea] = useState(null);
    const [open, setOpen] = useState(false);
+   const platRef = useRef();
+   const nivelRef = useRef();
 
    async function apanharCarteiras() {
       setLoading(true);
@@ -59,22 +61,26 @@ const Carteiras = () => {
       );
    }
 
-   // TODO: Adicionar feat de filtragem das classificações
-
-   const platRef = useRef();
    function filtrarTabela() {
-      dispatch(setFiltros({ plataforma: platRef?.current?.value }));
-      const plataformasFiltradas = carteiras?.filter((v) =>
-         v?.Platforms?.map((v) => v?.toLowerCase().includes(platRef?.current?.value))?.includes(true)
-      );
-      dispatch(setCarteirasFiltradas(plataformasFiltradas));
-      setCarteirasPaginadas(paginarArray(plataformasFiltradas, paginaAtual, itemsPorPagina));
+      dispatch(setFiltros({ plataforma: platRef?.current?.value, nivel: nivelRef?.current?.value }));
+      const dadosFiltrados = carteiras
+         ?.filter((plataforma) => {
+            return platRef?.current?.value !== "todos"
+               ? plataforma?.Platforms?.map((v) => v?.toLowerCase().includes(platRef?.current?.value))?.includes(true)
+               : true;
+         })
+         ?.filter((classificacao) => {
+            return nivelRef?.current?.value !== "todos" ? Math.floor(classificacao?.Rating?.Avg) === Number(nivelRef?.current?.value) : true;
+         });
+
+      dispatch(setCarteirasFiltradas(dadosFiltrados));
+      setCarteirasPaginadas(paginarArray(dadosFiltrados, paginaAtual, itemsPorPagina));
       setOpen(false);
    }
 
-   // Caso se chegue e hajam filtros
+   // Caso a página carregue e hajam filtros
    useEffect(() => {
-      if (carteirasFiltradas && !!filtros?.plataforma) {
+      if (carteirasFiltradas && !!filtros) {
          setCarteirasPaginadas(paginarArray(carteirasFiltradas, paginaAtual, itemsPorPagina));
       }
    }, []);
@@ -99,7 +105,7 @@ const Carteiras = () => {
                         <Modal.Title>{t("carteiras.modal.tit")}</Modal.Title>
                      </Modal.Header>
                      <Modal.Body>
-                        <Form>
+                        <Form className="d-flex flex-column gap-2">
                            <Form.Group>
                               <Form.Label className="fw-medium">
                                  {t("carteiras.modal.lb_platform")} <i className="bi bi-display ms-1"></i>
@@ -116,7 +122,21 @@ const Carteiras = () => {
                                  <option value="chrome">{t("carteiras.modal.extension")}</option>
                               </Form.Select>
                            </Form.Group>
-                           {/* TODO: Adicionar mais opções de filtragem de carteiras */}
+
+                           <Form.Group>
+                              <Form.Label className="fw-medium">
+                                 Selecione o nível da classificação <i className="bi bi-star"></i>
+                              </Form.Label>
+                              <Form.Select defaultValue={filtros?.nivel ? filtros?.nivel : "todos"} ref={nivelRef}>
+                                 <option value="todos">Todas</option>
+                                 <option value="2">2 estrelas</option>
+                                 <option value="3">3 estrelas</option>
+                                 <option value="4">4 estrelas</option>
+                                 <option value="5">5 estrelas</option>
+                              </Form.Select>
+                           </Form.Group>
+                           {/* TODO: Adicionar a funcionalidade de filtragem do tipo de segurança */}
+                           {/* TODO: Adicionar a funcionalidade de filtragem da facilidade de uso */}
                         </Form>
                      </Modal.Body>
                      <Modal.Footer>
@@ -171,7 +191,7 @@ const Carteiras = () => {
                )}
             </Col>
          </Row>
-
+         {/* TODO: Esconder as páginas além das suportadas quando se estive no modo de filtragem */}
          {/*  Paginação  */}
          {carteirasPaginadas && !resultadosPesquisaInstantanea && (
             <Paginacao
@@ -181,7 +201,7 @@ const Carteiras = () => {
                totalPaginas={totalPaginas}
                onPageClick={(pagina) => {
                   const condicionalCarteiras = (carteiras) => {
-                     if (filtros?.plataforma) {
+                     if (filtros) {
                         return carteirasFiltradas;
                      } else {
                         return carteiras;
