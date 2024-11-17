@@ -67,7 +67,16 @@
       "th_platforms": "Plataformas",
       "th_security": "Tipo de Segurança",
       "th_rating": "Classificação",
-      "th_ease": "Facilidade de uso"
+      "th_ease": "Facilidade de uso",
+      "modal": {
+         "tit": "Adicione as opções de filtragem das carteiras crypto:",
+         "lb_platform": "Selecione a plataforma",
+         "default": "Todas",
+         "btn1": "Aplicar",
+         "btn2": "Cancelar",
+         "extension": "Extensão do Google Chrome"
+      },
+      "notFound": "Nada foi encontrado"
    },
    "noticias": {
       "tit": "Veja as notícias sobre o mundo crypto"

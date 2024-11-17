@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import SideBar from "./components/SideBar/SideBar";
-
 import "./App.css";
 import Noticias from "./pages/Noticias/Noticias";
 import Home from "./pages/Home/Home";
@@ -15,6 +14,8 @@ import Carteiras from "./pages/Carteiras/Carteiras";
 import { Suspense } from "react";
 import PreLoader from "./components/PreLoader/PreLoader";
 import ScrollTop from "./components/ScrollTop/ScrollTop";
+
+// Substituir todos os tippys através de um componente individual
 
 // TODO: Adicionar particulas ao sidebar com o pacote: jsparticles
 function App() {

@@ -47,7 +47,7 @@ const Carteiras = () => {
 
    useEffect(() => {
       if (!carteiras) apanharCarteiras();
-      if (carteirasPaginadas.length === 0 && carteiras) {
+      if (carteirasPaginadas?.length === 0 && carteiras) {
          setCarteirasPaginadas(paginarArray(carteiras, paginaAtual, itemsPorPagina));
       }
    }, [carteiras, carteirasPaginadas]);
@@ -61,7 +61,6 @@ const Carteiras = () => {
 
    // TODO: Adicionar feat de filtragem das classificações
 
-   
    const platRef = useRef();
    function filtrarTabela() {
       dispatch(setFiltros({ plataforma: platRef?.current?.value }));
@@ -98,14 +97,16 @@ const Carteiras = () => {
                   {/* Modal de filtragem de carteiras */}
                   <Modal centered show={open} onHide={() => setOpen(false)}>
                      <Modal.Header closeButton>
-                        <Modal.Title>Adicione as opções de filtragem das carteiras crypto:</Modal.Title>
+                        <Modal.Title>{t("carteiras.modal.tit")}</Modal.Title>
                      </Modal.Header>
                      <Modal.Body>
                         <Form>
                            <Form.Group>
-                              <Form.Label className="fw-medium">Selecione a plataforma</Form.Label>
+                              <Form.Label className="fw-medium">
+                                 {t("carteiras.modal.lb_platform")} <i className="bi bi-display ms-1"></i>
+                              </Form.Label>
                               <Form.Select defaultValue={filtros?.plataforma ? filtros?.plataforma : "todos"} ref={platRef} role="button">
-                                 <option value="todos">Todas</option>
+                                 <option value="todos">{t("carteiras.modal.default")}</option>
                                  <option value="android">Android</option>
                                  <option value="mac">Mac</option>
                                  <option value="windows">Windows</option>
@@ -113,16 +114,16 @@ const Carteiras = () => {
                                  <option value="web">Web</option>
                                  <option value="ios">IOS</option>
                                  <option value="hardware">Hardware</option>
-                                 <option value="chrome">Google Chrome Extension</option>
+                                 <option value="chrome">{t("carteiras.modal.extension")}</option>
                               </Form.Select>
                            </Form.Group>
                            {/* TODO: Adicionar mais opções de filtragem de carteiras */}
                         </Form>
                      </Modal.Body>
                      <Modal.Footer>
-                        <Button onClick={filtrarTabela}>Aplicar</Button>
+                        <Button onClick={filtrarTabela}>{t("carteiras.modal.btn1")}</Button>
                         <Button onClick={() => setOpen(false)} variant="secondary">
-                           Cancelar
+                           {t("carteiras.modal.btn2")}
                         </Button>
                      </Modal.Footer>
                   </Modal>
@@ -166,12 +167,13 @@ const Carteiras = () => {
                {resultadosPesquisaInstantanea?.length === 0 && (
                   <div className="d-flex flex-column align-items-center justify-content-center h-100 gap-4">
                      <Image src={nadaEncontrado} />
-                     <Alert>Nada foi encontrado</Alert>
+                     <Alert>{t("carteiras.notFound")}</Alert>
                   </div>
                )}
             </Col>
          </Row>
 
+         {/* TODO: Corrigir erro paginação no modo de filtragem */}
          {/*  Paginação  */}
          {carteirasPaginadas && !resultadosPesquisaInstantanea && (
             <Paginacao
