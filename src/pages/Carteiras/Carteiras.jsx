@@ -76,6 +76,7 @@ const Carteiras = () => {
       dispatch(setCarteirasFiltradas(dadosFiltrados));
       setCarteirasPaginadas(paginarArray(dadosFiltrados, paginaAtual, itemsPorPagina));
       setOpen(false);
+      dispatch(setPaginaAtual(1));
    }
 
    // Caso a página carregue e hajam filtros
@@ -191,14 +192,14 @@ const Carteiras = () => {
                )}
             </Col>
          </Row>
-         {/* TODO: Esconder as páginas além das suportadas quando se estive no modo de filtragem */}
+         
          {/*  Paginação  */}
          {carteirasPaginadas && !resultadosPesquisaInstantanea && (
             <Paginacao
                paginaAtual={paginaAtual}
                tamanhoDesktop="md"
                tamanhoMobile="sm"
-               totalPaginas={totalPaginas}
+               totalPaginas={filtros ? Math.ceil(carteirasFiltradas?.length / itemsPorPagina) : totalPaginas}
                onPageClick={(pagina) => {
                   const condicionalCarteiras = (carteiras) => {
                      if (filtros) {
