@@ -90,7 +90,7 @@ const Carteiras = () => {
       <Container fluid>
          {/*   Campo de pesquisa  */}
          <Row className="mb-4">
-            <Col xs={12} lg={9}>
+            <Col xs={12} xxl={8}>
                <h2 className="fw-bold titulo1">{t("carteiras.tit")}</h2>
             </Col>
             <Col>
@@ -100,13 +100,15 @@ const Carteiras = () => {
                   <Button onClick={() => setOpen(true)} variant="secondary">
                      <i className="bi bi-filter"></i>
                   </Button>
+                  {/* TODO: Mostrar info caso não haja nenhum dado de filtragem */}
                   {/* Modal de filtragem de carteiras */}
                   <Modal centered show={open} onHide={() => setOpen(false)}>
-                     <Modal.Header closeButton>
+                     <Modal.Header className="align-items-start" closeButton>
                         <Modal.Title>{t("carteiras.modal.tit")}</Modal.Title>
                      </Modal.Header>
                      <Modal.Body>
                         <Form className="d-flex flex-column gap-2">
+                           {/* Plataformas */}
                            <Form.Group>
                               <Form.Label className="fw-medium">
                                  {t("carteiras.modal.lb_platform")} <i className="bi bi-display ms-1"></i>
@@ -124,18 +126,21 @@ const Carteiras = () => {
                               </Form.Select>
                            </Form.Group>
 
+                           {/* Classificações */}
                            <Form.Group>
                               <Form.Label className="fw-medium">
-                                 Selecione o nível da classificação <i className="bi bi-star"></i>
+                                 {t("carteiras.modal.lb_rating")} <i className="bi bi-star"></i>
                               </Form.Label>
-                              <Form.Select defaultValue={filtros?.nivel ? filtros?.nivel : "todos"} ref={nivelRef}>
-                                 <option value="todos">Todas</option>
-                                 <option value="2">2 estrelas</option>
-                                 <option value="3">3 estrelas</option>
-                                 <option value="4">4 estrelas</option>
-                                 <option value="5">5 estrelas</option>
+                              <Form.Select role="button" defaultValue={filtros?.nivel ? filtros?.nivel : "todos"} ref={nivelRef}>
+                                 <option value="todos">{t("carteiras.modal.default")}</option>
+                                 {[2, 3, 4, 5].map((v, k) => (
+                                    <option key={k} value={v}>
+                                       {v} {t("carteiras.modal.stars")}
+                                    </option>
+                                 ))}
                               </Form.Select>
                            </Form.Group>
+
                            {/* TODO: Adicionar a funcionalidade de filtragem do tipo de segurança */}
                            {/* TODO: Adicionar a funcionalidade de filtragem da facilidade de uso */}
                         </Form>
@@ -192,7 +197,7 @@ const Carteiras = () => {
                )}
             </Col>
          </Row>
-         
+
          {/*  Paginação  */}
          {carteirasPaginadas && !resultadosPesquisaInstantanea && (
             <Paginacao

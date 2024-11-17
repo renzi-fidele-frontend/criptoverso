@@ -71,10 +71,12 @@
       "modal": {
          "tit": "Adicione as opções de filtragem das carteiras crypto:",
          "lb_platform": "Selecione a plataforma",
+         "lb_rating": "Selecione o nível da classificação",
          "default": "Todas",
          "btn1": "Aplicar",
          "btn2": "Cancelar",
-         "extension": "Extensão do Google Chrome"
+         "extension": "Extensão do Google Chrome",
+         "stars": "Estrelas"
       },
       "notFound": "Nada foi encontrado"
    },
