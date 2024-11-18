@@ -74,13 +74,15 @@
          "lb_rating": "Select the rating level",
          "lb_security": "Select the security level",
          "lb_ease": "Select the ease of use",
+         "lb_github": "Repository availability",
          "default": "All",
          "btn1": "Apply",
          "btn2": "Cancel",
          "extension": "Google Chrome Extension",
          "stars": "Stars",
          "security": ["Personal", "Third Party Encrypted"],
-         "ease": ["Easy", "Average", "Difficult"]
+         "ease": ["Easy", "Average", "Difficult"],
+         "github": "Only wallets with an available repository"
       },
       "notFound": "Nothing was found"
    },

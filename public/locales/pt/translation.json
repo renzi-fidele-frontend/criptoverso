@@ -74,13 +74,15 @@
          "lb_rating": "Selecione o nível da classificação",
          "lb_security": "Selecione o tipo de seguraça",
          "lb_ease": "Selecione a facilidade de uso",
+         "lb_github": "Disponibilidade do repositório",
          "default": "Todas",
          "btn1": "Aplicar",
          "btn2": "Cancelar",
          "extension": "Extensão do Google Chrome",
          "stars": "Estrelas",
          "security": ["Pessoal", "Criptografado por terceiros"],
-         "ease": ["Fácil", "Médio", "Difícil"]
+         "ease": ["Fácil", "Médio", "Difícil"],
+         "github": "Apenas carteiras com repositório disponível"
       },
       "notFound": "Nada foi encontrado"
    },

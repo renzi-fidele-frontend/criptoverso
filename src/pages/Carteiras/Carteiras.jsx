@@ -32,6 +32,7 @@ const Carteiras = () => {
    const nivelRef = useRef();
    const securityRef = useRef();
    const easeRef = useRef();
+   const apenasGithubRef = useRef();
 
    async function apanharCarteiras() {
       setLoading(true);
@@ -71,6 +72,7 @@ const Carteiras = () => {
             nivel: nivelRef?.current?.value,
             seguranca: securityRef?.current?.value,
             facilidade: easeRef?.current?.value,
+            apenasGithub: apenasGithubRef?.current?.checked,
          })
       );
 
@@ -88,6 +90,9 @@ const Carteiras = () => {
          })
          ?.filter((facilidade) => {
             return easeRef?.current?.value !== "todos" ? facilidade?.EaseOfUse?.toLowerCase().includes(easeRef?.current?.value) : true;
+         })
+         ?.filter((github) => {
+            return apenasGithubRef?.current?.checked ? !!github?.SourceCodeUrl : true;
          });
 
       dispatch(setCarteirasFiltradas(dadosFiltrados));
@@ -182,9 +187,24 @@ const Carteiras = () => {
                               <Form.Select role="button" defaultValue={filtros?.facilidade ? filtros?.facilidade : "todos"} ref={easeRef}>
                                  <option value="todos">{t("carteiras.modal.default")}</option>
                                  <option value="easy">{t("carteiras.modal.ease.0")}</option>
+
                                  <option value="average">{t("carteiras.modal.ease.1")}</option>
                                  <option value="difficult">{t("carteiras.modal.ease.2")}</option>
                               </Form.Select>
+                           </Form.Group>
+
+                           {/* Disponibilidade do repositório */}
+                           <Form.Group>
+                              <Form.Label className="fw-medium">
+                                 {t("carteiras.modal.lb_github")} <i className="bi bi-github"></i>
+                              </Form.Label>
+                              <Form.Check
+                                 ref={apenasGithubRef}
+                                 defaultChecked={filtros?.apenasGithub}
+                                 role="button"
+                                 label={t("carteiras.modal.github")}
+                                 type="switch"
+                              />
                            </Form.Group>
                         </Form>
                      </Modal.Body>
