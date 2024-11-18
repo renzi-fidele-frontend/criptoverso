@@ -73,12 +73,14 @@
          "lb_platform": "Selecione a plataforma",
          "lb_rating": "Selecione o nível da classificação",
          "lb_security": "Selecione o tipo de seguraça",
+         "lb_ease": "Selecione a facilidade de uso",
          "default": "Todas",
          "btn1": "Aplicar",
          "btn2": "Cancelar",
          "extension": "Extensão do Google Chrome",
          "stars": "Estrelas",
-         "security": ["Pessoal", "Criptografado por terceiros"]
+         "security": ["Pessoal", "Criptografado por terceiros"],
+         "ease": ["Fácil", "Médio", "Difícil"]
       },
       "notFound": "Nada foi encontrado"
    },

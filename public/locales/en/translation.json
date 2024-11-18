@@ -73,12 +73,14 @@
          "lb_platform": "Select the platform",
          "lb_rating": "Select the rating level",
          "lb_security": "Select the security level",
+         "lb_ease": "Select the ease of use",
          "default": "All",
          "btn1": "Apply",
          "btn2": "Cancel",
          "extension": "Google Chrome Extension",
          "stars": "Stars",
-         "security": ["Personal", "Third Party Encrypted"]
+         "security": ["Personal", "Third Party Encrypted"],
+         "ease": ["Easy", "Average", "Difficult"]
       },
       "notFound": "Nothing was found"
    },

@@ -31,6 +31,7 @@ const Carteiras = () => {
    const platRef = useRef();
    const nivelRef = useRef();
    const securityRef = useRef();
+   const easeRef = useRef();
 
    async function apanharCarteiras() {
       setLoading(true);
@@ -63,7 +64,16 @@ const Carteiras = () => {
    }
 
    function filtrarTabela() {
-      dispatch(setFiltros({ plataforma: platRef?.current?.value, nivel: nivelRef?.current?.value, seguranca: securityRef?.current?.value }));
+      // Preservando as configurações para manter os filtros selecionados no formulário
+      dispatch(
+         setFiltros({
+            plataforma: platRef?.current?.value,
+            nivel: nivelRef?.current?.value,
+            seguranca: securityRef?.current?.value,
+            facilidade: easeRef?.current?.value,
+         })
+      );
+
       const dadosFiltrados = carteiras
          ?.filter((plataforma) => {
             return platRef?.current?.value !== "todos"
@@ -75,6 +85,9 @@ const Carteiras = () => {
          })
          ?.filter((seguranca) => {
             return securityRef?.current?.value !== "todos" ? seguranca?.Security?.toLowerCase().includes(securityRef?.current?.value) : true;
+         })
+         ?.filter((facilidade) => {
+            return easeRef?.current?.value !== "todos" ? facilidade?.EaseOfUse?.toLowerCase().includes(easeRef?.current?.value) : true;
          });
 
       dispatch(setCarteirasFiltradas(dadosFiltrados));
@@ -161,9 +174,18 @@ const Carteiras = () => {
                               </Form.Select>
                            </Form.Group>
 
-                           {/*  */}
-
-                           {/* TODO: Adicionar a funcionalidade de filtragem da facilidade de uso */}
+                           {/* Facilidade de uso */}
+                           <Form.Group>
+                              <Form.Label className="fw-medium">
+                                 {t("carteiras.modal.lb_ease")} <i className="bi bi-plus-slash-minus"></i>
+                              </Form.Label>
+                              <Form.Select role="button" defaultValue={filtros?.facilidade ? filtros?.facilidade : "todos"} ref={easeRef}>
+                                 <option value="todos">{t("carteiras.modal.default")}</option>
+                                 <option value="easy">{t("carteiras.modal.ease.0")}</option>
+                                 <option value="average">{t("carteiras.modal.ease.1")}</option>
+                                 <option value="difficult">{t("carteiras.modal.ease.2")}</option>
+                              </Form.Select>
+                           </Form.Group>
                         </Form>
                      </Modal.Body>
                      <Modal.Footer>
