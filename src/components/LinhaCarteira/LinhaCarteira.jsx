@@ -19,9 +19,7 @@ import translate from "translate";
 import { useSelector } from "react-redux";
 import { Bar } from "react-chartjs-2";
 import { useTranslation } from "react-i18next";
-import Tippy from "@tippyjs/react";
-import "tippy.js/dist/tippy.css";
-import "tippy.js/themes/light.css";
+import Tooltip from "../Tooltip/Tooltip";
 
 function LinhaCarteira({ carteira }) {
    const { t } = useTranslation();
@@ -81,9 +79,9 @@ function LinhaCarteira({ carteira }) {
                <div id={styles.plataformas} className="d-flex gap-2 align-items-center flex-wrap h-100 ">
                   {carteira?.Platforms?.map((v, k) => {
                      return (
-                        <Tippy key={k} content={v}>
+                        <Tooltip conteudo={v} key={k}>
                            {iconePlataforma(v)}
-                        </Tippy>
+                        </Tooltip>
                      );
                   })}
                </div>

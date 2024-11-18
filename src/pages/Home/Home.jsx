@@ -18,10 +18,8 @@ import { setEstatisticasGerais } from "../../state/estatisticasGerais/estatistic
 import { setCriptomoedas, setTotalPaginasCriptomoedas } from "../../state/criptomoedas/criptomoedasSlice";
 import { setNoticias } from "../../state/noticias/noticiasSlice";
 import { gerarArray } from "../../hooks/useGerarArray";
-import Tippy from "@tippyjs/react";
-import "tippy.js/dist/tippy.css";
-import "tippy.js/themes/light.css";
 import { useTranslation } from "react-i18next";
+import Tooltip from "../../components/Tooltip/Tooltip";
 
 const Home = () => {
    // i18n
@@ -137,9 +135,9 @@ const Home = () => {
                                 <p className="fs-2">
                                    {v.valor} {v?.usd ? "USD" : ""}
                                    {v?.tooltip && (
-                                      <Tippy theme={modoEscuro && "light"} content={v?.tooltip}>
+                                      <Tooltip conteudo={v?.tooltip}>
                                          <i className="bi bi-info-circle-fill ms-2"></i>
-                                      </Tippy>
+                                      </Tooltip>
                                    )}
                                 </p>
                              </div>

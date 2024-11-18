@@ -17,16 +17,13 @@ import LinhaCorretora from "../../components/LinhaCorretora/LinhaCorretora";
 import { paginarArray } from "../../hooks/usePaginarArray";
 import { gerarArray } from "../../hooks/useGerarArray";
 import Paginacao from "../../components/Paginacao/Paginacao";
-import Tippy from "@tippyjs/react";
-import "tippy.js/dist/tippy.css";
-import "tippy.js/themes/light.css";
 import nadaEncontrado from "../../assets/nadaEncontrado.png";
+import Tooltip from "../../components/Tooltip/Tooltip";
 
 const Corretoras = () => {
    const [loading, setLoading] = useState(false);
    const dispatch = useDispatch();
    const { corretoras, paginaAtual, itemsPorPagina, totalPaginas } = useSelector((state) => state.corretoras);
-   const { modoEscuro } = useSelector((state) => state.tema);
    const { t } = useTranslation();
    const [resultadosPesquisaInstantanea, setResultadosPesquisaInstantanea] = useState(null);
    const [corretorasPaginadas, setCorretorasPaginadas] = useState([]);
@@ -96,18 +93,18 @@ const Corretoras = () => {
                         </th>
                         <th id={styles.th} className="text-truncate">
                            {t("corretoras.24hvol")}{" "}
-                           <Tippy theme={modoEscuro && "light"} content={t("corretoras.24hvol_tt")}>
+                           <Tooltip conteudo={t("corretoras.24hvol_tt")}>
                               <i className="bi bi-info-circle-fill"></i>
-                           </Tippy>
+                           </Tooltip>
                         </th>
                         <th id={styles.th} className="text-truncate">
                            {t("corretoras.country")}
                         </th>
                         <th id={styles.th} className="text-truncate">
                            {t("corretoras.trades")}{" "}
-                           <Tippy theme={modoEscuro && "light"} content={t("corretoras.trades_tt")}>
+                           <Tooltip conteudo={t("corretoras.trades_tt")}>
                               <i className="bi bi-info-circle-fill"></i>
-                           </Tippy>
+                           </Tooltip>
                         </th>
                      </tr>
                   </thead>

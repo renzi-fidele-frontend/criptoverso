@@ -17,10 +17,8 @@ import { CategoryScale } from "chart.js";
 import styles from "./MoedaIndividual.module.css";
 import { gerarArray } from "../../hooks/useGerarArray";
 import { useSelector } from "react-redux";
-import Tippy from "@tippyjs/react";
-import "tippy.js/dist/tippy.css";
-import "tippy.js/themes/light.css";
 import { useTranslation } from "react-i18next";
+import Tooltip from "../../components/Tooltip/Tooltip";
 
 Chart.register(CategoryScale);
 
@@ -191,9 +189,9 @@ const MoedaIndividual = () => {
                         </option>
                      ))}
                   </Form.Select>
-                  <Tippy theme={modoEscuro && "light"} content={t("moedaIndividual.periodo.tooltip")}>
+                  <Tooltip conteudo={t("moedaIndividual.periodo.tooltip")}>
                      <i className="ms-1 bi fs-3 bi-info-circle-fill"></i>
-                  </Tippy>
+                  </Tooltip>
                </Col>
 
                {/*   Gráfico  */}
@@ -267,9 +265,9 @@ const MoedaIndividual = () => {
                                     <p className="mb-0 text-truncate">
                                        {v.titulo}{" "}
                                        {v?.tooltip && (
-                                          <Tippy theme={modoEscuro && "light"} content={v?.tooltip}>
+                                          <Tooltip conteudo={v?.tooltip}>
                                              <i className="ms-1 bi bi-info-circle-fill"></i>
-                                          </Tippy>
+                                          </Tooltip>
                                        )}
                                     </p>
                                  </div>
@@ -292,9 +290,9 @@ const MoedaIndividual = () => {
                                     <p className="mb-0 text-truncate">
                                        {v.titulo}{" "}
                                        {v?.tooltip && (
-                                          <Tippy theme={modoEscuro && "light"} content={v?.tooltip}>
+                                          <Tooltip conteudo={v?.tooltip}>
                                              <i className="ms-1 bi bi-info-circle-fill"></i>
-                                          </Tippy>
+                                          </Tooltip>
                                        )}
                                     </p>
                                  </div>
