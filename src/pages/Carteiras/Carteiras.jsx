@@ -50,13 +50,13 @@ const Carteiras = () => {
 
    useEffect(() => {
       if (!carteiras) apanharCarteiras();
-      if (carteirasPaginadas?.length === 0 && carteiras) {
+      if (carteirasPaginadas?.length === 0 && carteiras && !filtros) {
          setCarteirasPaginadas(paginarArray(carteiras, paginaAtual, itemsPorPagina));
       }
    }, [carteiras, carteirasPaginadas]);
 
    function pesquisarAoDigitar(e) {
-      if ((e?.target?.value === "") | (e?.target?.value?.length < 2)) return setResultadosPesquisaInstantanea(null);
+      if (e?.target?.value === "" || e?.target?.value?.length < 2) return setResultadosPesquisaInstantanea(null);
       setResultadosPesquisaInstantanea(
          carteiras?.filter((carteira) => carteira?.Name?.toLowerCase()?.includes(e?.target?.value?.toLowerCase()))
       );
@@ -78,7 +78,11 @@ const Carteiras = () => {
          });
 
       dispatch(setCarteirasFiltradas(dadosFiltrados));
-      setCarteirasPaginadas(paginarArray(dadosFiltrados, paginaAtual, itemsPorPagina));
+      if (dadosFiltrados?.length > 0) {
+         setCarteirasPaginadas(paginarArray(dadosFiltrados, paginaAtual, itemsPorPagina));
+      } else {
+         setCarteirasPaginadas([]);
+      }
       setOpen(false);
       dispatch(setPaginaAtual(1));
    }
@@ -104,7 +108,7 @@ const Carteiras = () => {
                   <Button onClick={() => setOpen(true)} variant="secondary">
                      <i className="bi bi-filter"></i>
                   </Button>
-                  {/* TODO: Mostrar info caso não haja nenhum dado de filtragem */}
+
                   {/* Modal de filtragem de carteiras */}
                   <Modal centered show={open} onHide={() => setOpen(false)}>
                      <Modal.Header className="align-items-start" closeButton>
@@ -157,6 +161,8 @@ const Carteiras = () => {
                               </Form.Select>
                            </Form.Group>
 
+                           {/*  */}
+
                            {/* TODO: Adicionar a funcionalidade de filtragem da facilidade de uso */}
                         </Form>
                      </Modal.Body>
@@ -204,12 +210,13 @@ const Carteiras = () => {
                         : gerarArray(12).map((v, k) => <LinhaCarteira chave={k} key={k} />)}
                   </tbody>
                </Table>
-               {resultadosPesquisaInstantanea?.length === 0 && (
-                  <div className="d-flex flex-column align-items-center justify-content-center h-100 gap-4">
-                     <Image src={nadaEncontrado} />
-                     <Alert>{t("carteiras.notFound")}</Alert>
-                  </div>
-               )}
+               {resultadosPesquisaInstantanea?.length === 0 ||
+                  (carteirasPaginadas?.length === 0 && (
+                     <div className="d-flex flex-column align-items-center justify-content-center h-100 gap-4">
+                        <Image src={nadaEncontrado} />
+                        <Alert>{t("carteiras.notFound")}</Alert>
+                     </div>
+                  ))}
             </Col>
          </Row>
 
