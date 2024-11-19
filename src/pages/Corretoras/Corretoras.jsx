@@ -63,17 +63,28 @@ const Corretoras = () => {
    }
 
    function filtrarTabela() {
+      const ordemSelecionada = document.querySelector("input[name='ordenar']:checked").value;
       // Preservando as configurações para manter os filtros selecionados no formulário
-      dispatch(setFiltros({ trades: tradesRef?.current?.checked }));
-      console.log(document.getElementsByName("ordenar"));
+      dispatch(setFiltros({ trades: tradesRef?.current?.checked, ordenarPor: ordemSelecionada }));
 
       const dadosFiltrados = corretoras?.filter((trades) => {
          return tradesRef?.current?.checked ? trades?.Trades : true;
       });
 
-      dispatch(setCorretorasFiltradas(dadosFiltrados));
-      if (dadosFiltrados?.length > 0) {
-         setCorretorasPaginadas(paginarArray(dadosFiltrados, paginaAtual, itemsPorPagina));
+      // Ordenando os dados de acordo com o filtro selecionado
+      let dadosOrdenados = dadosFiltrados;
+      if (ordemSelecionada === "#") {
+         dadosFiltrados?.sort((a, b) => a?.numero - b?.numero);
+      } else if (ordemSelecionada === "pontuacao") {
+         dadosFiltrados?.sort((a, b) => b?.GradePoints - a?.GradePoints);
+      } else if (ordemSelecionada === "vol24h") {
+         dadosFiltrados?.sort((a, b) => b?.TOTALVOLUME24H?.BTC - a?.TOTALVOLUME24H?.BTC);
+      }
+      // TODO: Adicionar funcionalidade de filtrar entre ordem Crescente ou Decrescente
+
+      dispatch(setCorretorasFiltradas(dadosOrdenados));
+      if (dadosOrdenados?.length > 0) {
+         setCorretorasPaginadas(paginarArray(dadosOrdenados, paginaAtual, itemsPorPagina));
       } else {
          setCorretorasPaginadas([]);
       }
@@ -125,16 +136,31 @@ const Corretoras = () => {
                               />
                            </Form.Group>
 
-                           {/* Ordenar tabela 
+                           {/* Ordenar tabela */}
                            <Form.Group>
-                              <Form.Label className="fw-medium">Ordenar ordem por:</Form.Label>
+                              <Form.Label className="fw-medium">Ordenar por:</Form.Label>
                               <div>
-                                 <Form.Check defaultChecked inline name="ordenar" role="button" type="radio" label="#" />
-                                 <Form.Check inline name="ordenar" role="button" type="radio" label="Pontuação" />
-                                 <Form.Check inline name="ordenar" role="button" type="radio" label="Volume de 24h" />
+                                 <Form.Check defaultChecked value="#" inline name="ordenar" role="button" type="radio" label="#" />
+                                 <Form.Check
+                                    defaultChecked={filtros?.ordenarPor === "pontuacao"}
+                                    value="pontuacao"
+                                    inline
+                                    name="ordenar"
+                                    role="button"
+                                    type="radio"
+                                    label="Pontuação"
+                                 />
+                                 <Form.Check
+                                    defaultChecked={filtros?.ordenarPor === "vol24h"}
+                                    value="vol24h"
+                                    inline
+                                    name="ordenar"
+                                    role="button"
+                                    type="radio"
+                                    label="Volume de 24h"
+                                 />
                               </div>
                            </Form.Group>
-                           */}
                         </Form>
                      </Modal.Body>
                      <Modal.Footer>
