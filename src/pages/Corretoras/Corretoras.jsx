@@ -64,8 +64,10 @@ const Corretoras = () => {
 
    function filtrarTabela() {
       const ordemSelecionada = document.querySelector("input[name='ordenar']:checked").value;
+      const direcaoSelecionada = document.querySelector("input[name='direcao']:checked").value;
+
       // Preservando as configurações para manter os filtros selecionados no formulário
-      dispatch(setFiltros({ trades: tradesRef?.current?.checked, ordenarPor: ordemSelecionada }));
+      dispatch(setFiltros({ trades: tradesRef?.current?.checked, ordenarPor: ordemSelecionada, direcao: direcaoSelecionada }));
 
       const dadosFiltrados = corretoras?.filter((trades) => {
          return tradesRef?.current?.checked ? trades?.Trades : true;
@@ -73,14 +75,24 @@ const Corretoras = () => {
 
       // Ordenando os dados de acordo com o filtro selecionado
       let dadosOrdenados = dadosFiltrados;
-      if (ordemSelecionada === "#") {
-         dadosFiltrados?.sort((a, b) => a?.numero - b?.numero);
-      } else if (ordemSelecionada === "pontuacao") {
-         dadosFiltrados?.sort((a, b) => b?.GradePoints - a?.GradePoints);
-      } else if (ordemSelecionada === "vol24h") {
-         dadosFiltrados?.sort((a, b) => b?.TOTALVOLUME24H?.BTC - a?.TOTALVOLUME24H?.BTC);
+
+      if (direcaoSelecionada === "decrescente") {
+         if (ordemSelecionada === "#") {
+            dadosFiltrados?.sort((a, b) => a?.numero - b?.numero);
+         } else if (ordemSelecionada === "pontuacao") {
+            dadosFiltrados?.sort((a, b) => b?.GradePoints - a?.GradePoints);
+         } else if (ordemSelecionada === "vol24h") {
+            dadosFiltrados?.sort((a, b) => b?.TOTALVOLUME24H?.BTC - a?.TOTALVOLUME24H?.BTC);
+         }
+      } else if (direcaoSelecionada === "crescente") {
+         if (ordemSelecionada === "#") {
+            dadosFiltrados?.sort((a, b) => a?.numero - b?.numero);
+         } else if (ordemSelecionada === "pontuacao") {
+            dadosFiltrados?.sort((a, b) => a?.GradePoints - b?.GradePoints);
+         } else if (ordemSelecionada === "vol24h") {
+            dadosFiltrados?.sort((a, b) => a?.TOTALVOLUME24H?.BTC - b?.TOTALVOLUME24H?.BTC);
+         }
       }
-      // TODO: Adicionar funcionalidade de filtrar entre ordem Crescente ou Decrescente
 
       dispatch(setCorretorasFiltradas(dadosOrdenados));
       if (dadosOrdenados?.length > 0) {
@@ -161,6 +173,31 @@ const Corretoras = () => {
                                  />
                               </div>
                            </Form.Group>
+
+                           {/* Direção da ordem */}
+                           <Form.Group>
+                              <Form.Label className="fw-medium">Direção da ordem:</Form.Label>
+                              <div>
+                                 <Form.Check
+                                    defaultChecked
+                                    value="decrescente"
+                                    inline
+                                    name="direcao"
+                                    role="button"
+                                    type="radio"
+                                    label="Decrescente"
+                                 />
+                                 <Form.Check
+                                    defaultChecked={filtros?.direcao === "crescente"}
+                                    value="crescente"
+                                    inline
+                                    name="direcao"
+                                    role="button"
+                                    type="radio"
+                                    label="Crescente"
+                                 />
+                              </div>
+                           </Form.Group>
                         </Form>
                      </Modal.Body>
                      <Modal.Footer>
@@ -177,6 +214,7 @@ const Corretoras = () => {
          <Row>
             <Col>
                <Table striped size="lg" responsive hover>
+                  {/* TODO: Destacar caso a pontuação ou volume esteja com filtro */}
                   <thead>
                      <tr>
                         <th id={styles.th} className="text-truncate">
