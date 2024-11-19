@@ -68,6 +68,7 @@
       "th_security": "Tipo de Segurança",
       "th_rating": "Classificação",
       "th_ease": "Facilidade de uso",
+      "filter": "Opções de filtragem",
       "modal": {
          "tit": "Adicione as opções de filtragem das carteiras crypto:",
          "lb_platform": "Selecione a plataforma",

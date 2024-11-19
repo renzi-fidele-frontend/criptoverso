@@ -68,6 +68,7 @@
       "th_security": "Security level",
       "th_rating": "Rating",
       "th_ease": "Ease of use",
+      "filter": "Filtering options",
       "modal": {
          "tit": "Add the crypto wallet filtering options:",
          "lb_platform": "Select the platform",

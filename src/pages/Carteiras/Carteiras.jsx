@@ -19,6 +19,7 @@ import Paginacao from "../../components/Paginacao/Paginacao";
 import { paginarArray } from "../../hooks/usePaginarArray";
 import { useTranslation } from "react-i18next";
 import nadaEncontrado from "../../assets/nadaEncontrado.png";
+import Tooltip from "../../components/Tooltip/Tooltip";
 
 const Carteiras = () => {
    const { carteiras, paginaAtual, totalPaginas, itemsPorPagina, carteirasFiltradas, filtros } = useSelector((state) => state.carteiras);
@@ -123,9 +124,11 @@ const Carteiras = () => {
                <Form onSubmit={(e) => e.preventDefault()} className="d-flex gap-2">
                   <FormControl placeholder={t("carteiras.search_placeholder")} onChange={pesquisarAoDigitar} required type="text"></FormControl>
 
-                  <Button onClick={() => setOpen(true)} variant="secondary">
-                     <i className="bi bi-filter"></i>
-                  </Button>
+                  <Tooltip conteudo={t("carteiras.filter")}>
+                     <Button onClick={() => setOpen(true)} variant="secondary">
+                        <i className="bi bi-filter"></i>
+                     </Button>
+                  </Tooltip>
 
                   {/* Modal de filtragem de carteiras */}
                   <Modal centered show={open} onHide={() => setOpen(false)}>
