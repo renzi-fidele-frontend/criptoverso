@@ -1,8 +1,8 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { setCorretoras, setPaginaAtual, setTotalPaginas } from "../../state/corretoras/corretorasSlice";
+import { setCorretoras, setCorretorasFiltradas, setFiltros, setPaginaAtual, setTotalPaginas } from "../../state/corretoras/corretorasSlice";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -24,11 +24,12 @@ import Tooltip from "../../components/Tooltip/Tooltip";
 const Corretoras = () => {
    const [loading, setLoading] = useState(false);
    const dispatch = useDispatch();
-   const { corretoras, paginaAtual, itemsPorPagina, totalPaginas } = useSelector((state) => state.corretoras);
+   const { corretoras, paginaAtual, itemsPorPagina, totalPaginas, filtros, corretorasFiltradas } = useSelector((state) => state.corretoras);
    const { t } = useTranslation();
    const [resultadosPesquisaInstantanea, setResultadosPesquisaInstantanea] = useState(null);
    const [corretorasPaginadas, setCorretorasPaginadas] = useState([]);
    const [open, setOpen] = useState(false);
+   const tradesRef = useRef();
 
    async function apanharCorretoras() {
       setLoading(true);
@@ -49,12 +50,11 @@ const Corretoras = () => {
    useEffect(() => {
       if (!corretoras) apanharCorretoras();
 
-      if (corretorasPaginadas.length === 0 && corretoras) {
+      if (corretorasPaginadas.length === 0 && corretoras && !filtros) {
          setCorretorasPaginadas(paginarArray(corretoras, paginaAtual, itemsPorPagina));
       }
    }, [corretoras, corretorasPaginadas]);
 
-   // TODO: Adicionar feature de filtragem da tabela
    function pesquisarAoDigitar(e) {
       if ((e?.target?.value === "") | (e?.target?.value?.length < 2)) return setResultadosPesquisaInstantanea(null);
       setResultadosPesquisaInstantanea(
@@ -62,7 +62,29 @@ const Corretoras = () => {
       );
    }
 
-   function filtrarTabela() {}
+   function filtrarTabela() {
+      // Preservando as configurações para manter os filtros selecionados no formulário
+      dispatch(setFiltros({ trades: tradesRef?.current?.checked }));
+
+      const dadosFiltrados = corretoras?.filter((trades) => trades?.Trades);
+
+      dispatch(setCorretorasFiltradas(dadosFiltrados));
+      if (dadosFiltrados?.length > 0) {
+         setCorretorasPaginadas(paginarArray(dadosFiltrados, paginaAtual, itemsPorPagina));
+      } else {
+         setCorretorasPaginadas([]);
+      }
+
+      setOpen(false);
+      dispatch(setPaginaAtual(1));
+   }
+
+   // Caso a página carregue e hajam filtros
+   useEffect(() => {
+      if (corretorasFiltradas && filtros) {
+         setCorretorasPaginadas(paginarArray(corretorasFiltradas, paginaAtual, itemsPorPagina));
+      }
+   }, []);
 
    return (
       <Container fluid>
@@ -86,6 +108,23 @@ const Corretoras = () => {
                      <Modal.Header className="align-items-start" closeButton>
                         <Modal.Title>{t("corretoras.modal.tit")}</Modal.Title>
                      </Modal.Header>
+                     <Modal.Body>
+                        <Form onSubmit={(e) => e.preventDefault()} className="d-flex flex-column gap-2">
+                           {/* Status de negociação */}
+                           <Form.Group>
+                              <Form.Label className="fw-medium">Status de negociação</Form.Label>
+                              <Form.Check
+                                 defaultChecked={filtros?.trades}
+                                 ref={tradesRef}
+                                 role="button"
+                                 type="switch"
+                                 label="Apenas corretoras negociáveis"
+                              />
+                           </Form.Group>
+
+                           {/* Ordenar tabela */}
+                        </Form>
+                     </Modal.Body>
                      <Modal.Footer>
                         <Button onClick={filtrarTabela}>{t("carteiras.modal.btn1")}</Button>
                         <Button onClick={() => setOpen(false)} variant="secondary">
@@ -151,10 +190,17 @@ const Corretoras = () => {
                paginaAtual={paginaAtual}
                tamanhoDesktop="md"
                tamanhoMobile="sm"
-               totalPaginas={totalPaginas}
+               totalPaginas={filtros ? Math.ceil(corretorasFiltradas?.length / itemsPorPagina) : totalPaginas}
                onPageClick={(pagina) => {
+                  const condicionalCorretoras = (corretoras) => {
+                     if (filtros) {
+                        return corretorasFiltradas;
+                     } else {
+                        return corretoras;
+                     }
+                  };
                   dispatch(setPaginaAtual(pagina));
-                  setCorretorasPaginadas(paginarArray(corretoras, pagina, itemsPorPagina));
+                  setCorretorasPaginadas(paginarArray(condicionalCorretoras(corretoras), pagina, itemsPorPagina));
                }}
             />
          )}

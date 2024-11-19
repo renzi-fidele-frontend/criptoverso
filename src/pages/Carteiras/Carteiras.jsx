@@ -108,7 +108,7 @@ const Carteiras = () => {
 
    // Caso a página carregue e hajam filtros
    useEffect(() => {
-      if (carteirasFiltradas && !!filtros) {
+      if (carteirasFiltradas && filtros) {
          setCarteirasPaginadas(paginarArray(carteirasFiltradas, paginaAtual, itemsPorPagina));
       }
    }, []);

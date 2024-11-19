@@ -5,6 +5,8 @@ const initialState = {
    paginaAtual: 1,
    itemsPorPagina: 12,
    totalPaginas: 0,
+   filtros: null,
+   corretorasFiltradas: null,
 };
 
 const corretorasSlice = createSlice({
@@ -23,9 +25,15 @@ const corretorasSlice = createSlice({
       setTotalPaginas: (state, action) => {
          state.totalPaginas = action.payload;
       },
+      setFiltros: (state, action) => {
+         state.filtros = action.payload;
+      },
+      setCorretorasFiltradas: (state, action) => {
+         state.corretorasFiltradas = action.payload;
+      },
    },
 });
 
-export const { setCorretoras, setItemsPorPagina, setPaginaAtual, setTotalPaginas } = corretorasSlice.actions;
+export const { setCorretoras, setItemsPorPagina, setPaginaAtual, setTotalPaginas, setFiltros, setCorretorasFiltradas } = corretorasSlice.actions;
 
 export default corretorasSlice.reducer;
