@@ -65,8 +65,11 @@ const Corretoras = () => {
    function filtrarTabela() {
       // Preservando as configurações para manter os filtros selecionados no formulário
       dispatch(setFiltros({ trades: tradesRef?.current?.checked }));
+      console.log(document.getElementsByName("ordenar"));
 
-      const dadosFiltrados = corretoras?.filter((trades) => trades?.Trades);
+      const dadosFiltrados = corretoras?.filter((trades) => {
+         return tradesRef?.current?.checked ? trades?.Trades : true;
+      });
 
       dispatch(setCorretorasFiltradas(dadosFiltrados));
       if (dadosFiltrados?.length > 0) {
@@ -122,7 +125,16 @@ const Corretoras = () => {
                               />
                            </Form.Group>
 
-                           {/* Ordenar tabela */}
+                           {/* Ordenar tabela 
+                           <Form.Group>
+                              <Form.Label className="fw-medium">Ordenar ordem por:</Form.Label>
+                              <div>
+                                 <Form.Check defaultChecked inline name="ordenar" role="button" type="radio" label="#" />
+                                 <Form.Check inline name="ordenar" role="button" type="radio" label="Pontuação" />
+                                 <Form.Check inline name="ordenar" role="button" type="radio" label="Volume de 24h" />
+                              </div>
+                           </Form.Group>
+                           */}
                         </Form>
                      </Modal.Body>
                      <Modal.Footer>
