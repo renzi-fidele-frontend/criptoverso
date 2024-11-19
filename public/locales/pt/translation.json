@@ -58,7 +58,10 @@
       "country": "País de origem",
       "trades": "É Negociável?",
       "trades_tt": "Indica se a corretora permite a execução de operações de compra e venda",
-      "24hvol_tt": "Volume total de transações realizadas na corretora nas últimas 24 horas"
+      "24hvol_tt": "Volume total de transações realizadas na corretora nas últimas 24 horas",
+      "modal": {
+         "tit": "Adicione as opções de filtragem das corretoras:"
+      }
    },
    "carteiras": {
       "tit": "Veja todas as carteiras do mercado",

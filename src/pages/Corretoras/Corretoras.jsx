@@ -12,6 +12,7 @@ import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import Alert from "react-bootstrap/Alert";
 import Image from "react-bootstrap/Image";
+import Modal from "react-bootstrap/Modal";
 import styles from "./Corretoras.module.css";
 import LinhaCorretora from "../../components/LinhaCorretora/LinhaCorretora";
 import { paginarArray } from "../../hooks/usePaginarArray";
@@ -27,6 +28,7 @@ const Corretoras = () => {
    const { t } = useTranslation();
    const [resultadosPesquisaInstantanea, setResultadosPesquisaInstantanea] = useState(null);
    const [corretorasPaginadas, setCorretorasPaginadas] = useState([]);
+   const [open, setOpen] = useState(false);
 
    async function apanharCorretoras() {
       setLoading(true);
@@ -60,19 +62,37 @@ const Corretoras = () => {
       );
    }
 
+   function filtrarTabela() {}
+
    return (
       <Container fluid>
          {/*   Campo de pesquisa  */}
          <Row className="mb-4">
-            <Col xs={12} lg={9}>
+            <Col xs={12} xxl={8}>
                <h2 className="fw-bold titulo1">{t("corretoras.tit")}</h2>
             </Col>
             <Col>
                <Form onSubmit={(e) => e.preventDefault()} className="d-flex gap-2">
                   <FormControl placeholder={t("corretoras.search_placeholder")} onChange={pesquisarAoDigitar} required type="text"></FormControl>
-                  <Button style={{ cursor: "not-allowed" }} type="submit">
-                     <i className="bi bi-search"></i>
-                  </Button>
+
+                  <Tooltip conteudo={t("carteiras.filter")}>
+                     <Button onClick={() => setOpen(true)} variant="secondary">
+                        <i className="bi bi-filter"></i>
+                     </Button>
+                  </Tooltip>
+
+                  {/* Modal de filtragem das corretoras */}
+                  <Modal centered show={open} onHide={() => setOpen(false)}>
+                     <Modal.Header className="align-items-start" closeButton>
+                        <Modal.Title>{t("corretoras.modal.tit")}</Modal.Title>
+                     </Modal.Header>
+                     <Modal.Footer>
+                        <Button onClick={filtrarTabela}>{t("carteiras.modal.btn1")}</Button>
+                        <Button onClick={() => setOpen(false)} variant="secondary">
+                           {t("carteiras.modal.btn2")}
+                        </Button>
+                     </Modal.Footer>
+                  </Modal>
                </Form>
             </Col>
          </Row>
