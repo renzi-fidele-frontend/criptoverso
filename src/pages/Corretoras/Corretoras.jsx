@@ -114,11 +114,11 @@ const Corretoras = () => {
 
    return (
       <Container fluid>
-         {/*   Campo de pesquisa  */}
          <Row className="mb-4">
             <Col xs={12} xxl={8}>
                <h2 className="fw-bold titulo1">{t("corretoras.tit")}</h2>
             </Col>
+            {/*   Campo de pesquisa  */}
             <Col>
                <Form onSubmit={(e) => e.preventDefault()} className="d-flex gap-2">
                   <FormControl placeholder={t("corretoras.search_placeholder")} onChange={pesquisarAoDigitar} required type="text"></FormControl>
@@ -214,7 +214,6 @@ const Corretoras = () => {
          <Row>
             <Col>
                <Table striped size="lg" responsive hover>
-                  {/* TODO: Destacar caso a pontuação ou volume esteja com filtro */}
                   <thead>
                      <tr>
                         <th id={styles.th} className="text-truncate">

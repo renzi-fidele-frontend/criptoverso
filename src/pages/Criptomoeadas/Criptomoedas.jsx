@@ -11,6 +11,7 @@ import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
+import Modal from "react-bootstrap/Modal";
 import styles from "./Criptomoedas.module.css";
 import CardMoeda from "../../components/CardMoeda/CardMoeda";
 import { gerarArray } from "../../hooks/useGerarArray";
@@ -18,6 +19,7 @@ import nadaEncontrado from "../../assets/nadaEncontrado.png";
 import { paginarArray } from "../../hooks/usePaginarArray";
 import Paginacao from "../../components/Paginacao/Paginacao";
 import { useTranslation } from "react-i18next";
+import Tooltip from "../../components/Tooltip/Tooltip";
 
 const Criptomoedas = () => {
    const { criptomoedas, paginaAtualCriptomoedas, itemsPorPaginaCriptomoedas, totalPaginasCriptomoedas } = useSelector(
@@ -29,6 +31,7 @@ const Criptomoedas = () => {
    const [loading, setLoading] = useState(false);
    const termoPesquisaRef = useRef(null);
    const { t } = useTranslation();
+   const [open, setOpen] = useState(false);
 
    async function apanharCriptomoedas() {
       setLoading(true);
@@ -71,6 +74,8 @@ const Criptomoedas = () => {
       );
    }
 
+   function filtrarTabela() {}
+
    useEffect(() => {
       if (!criptomoedas) apanharCriptomoedas();
 
@@ -78,10 +83,12 @@ const Criptomoedas = () => {
          setCriptomoedasPaginadas(paginarArray(criptomoedas, paginaAtualCriptomoedas, itemsPorPaginaCriptomoedas));
    }, [criptomoedas, criptomoedasPaginadas]);
 
+   // TODO: Adicionar a funcionalidade de filtragem de criptomoedas
+
    return (
       <Container id={styles.ct} fluid>
          <Row className="mb-4 mb-sm-5 mb-xl-5">
-            <Col xs={12} lg={9}>
+            <Col xs={12} xxl={8}>
                <h2 className="fw-bold titulo1">{t("criptomoedas.tit")}</h2>
             </Col>
             {/*   Campo de pesquisa  */}
@@ -94,9 +101,33 @@ const Criptomoedas = () => {
                      required
                      type="text"
                   ></FormControl>
-                  <Button style={{ cursor: "not-allowed" }} type="submit">
-                     <i className="bi bi-search"></i>
-                  </Button>
+
+                  <Tooltip conteudo={t("carteiras.filter")}>
+                     <Button onClick={() => setOpen(true)} variant="secondary">
+                        <i className="bi bi-filter"></i>
+                     </Button>
+                  </Tooltip>
+
+                  {/* Modal de filtragem das corretoras */}
+                  <Modal centered show={open} onHide={() => setOpen(false)}>
+                     <Modal.Header className="align-items-start" closeButton>
+                        <Modal.Title>Adicione as opções de filtragem das criptomoedas:</Modal.Title>
+                     </Modal.Header>
+                     <Modal.Body>
+                        <Form onSubmit={(e) => e.preventDefault()} className="d-flex flex-column gap-2">
+                           {/* TODO: Adicionar filtragem de ordenação do percentual de alteração do preço da criptomoeda */}
+                           {/* TODO: Adicionar filtragem de ordenação do preço da criptomoeda */}
+                           {/* TODO: Adicionar filtragem de ordenação do volume de 24h da criptomoeda */}
+                           <Form.Group></Form.Group>
+                        </Form>
+                     </Modal.Body>
+                     <Modal.Footer>
+                        <Button onClick={filtrarTabela}>{t("carteiras.modal.btn1")}</Button>
+                        <Button onClick={() => setOpen(false)} variant="secondary">
+                           {t("carteiras.modal.btn2")}
+                        </Button>
+                     </Modal.Footer>
+                  </Modal>
                </Form>
             </Col>
          </Row>
