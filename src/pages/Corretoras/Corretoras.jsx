@@ -225,12 +225,18 @@ const Corretoras = () => {
                         </th>
                         <th id={styles.th} className="text-truncate">
                            {t("corretoras.points")}
+                           {filtros?.ordenarPor === "pontuacao" && filtros?.direcao === "decrescente" && (
+                              <i className="bi bi-sort-down ms-2"></i>
+                           )}
+                           {filtros?.ordenarPor === "pontuacao" && filtros?.direcao === "crescente" && <i className="bi bi-sort-up ms-2"></i>}
                         </th>
                         <th id={styles.th} className="text-truncate">
                            {t("corretoras.24hvol")}{" "}
                            <Tooltip conteudo={t("corretoras.24hvol_tt")}>
                               <i className="bi bi-info-circle-fill"></i>
                            </Tooltip>
+                           {filtros?.ordenarPor === "vol24h" && filtros?.direcao === "decrescente" && <i className="bi bi-sort-down ms-2"></i>}
+                           {filtros?.ordenarPor === "vol24h" && filtros?.direcao === "crescente" && <i className="bi bi-sort-up ms-2"></i>}
                         </th>
                         <th id={styles.th} className="text-truncate">
                            {t("corretoras.country")}
