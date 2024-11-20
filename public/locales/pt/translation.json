@@ -60,7 +60,15 @@
       "trades_tt": "Indica se a corretora permite a execução de operações de compra e venda",
       "24hvol_tt": "Volume total de transações realizadas na corretora nas últimas 24 horas",
       "modal": {
-         "tit": "Adicione as opções de filtragem das corretoras:"
+         "tit": "Adicione as opções de filtragem das corretoras:",
+         "trades": "Status de negociação",
+         "sortBy": "Ordenar por:",
+         "lb_trades": "Apenas corretoras negociáveis",
+         "score": "Pontuação",
+         "vol": "Volume de 24h",
+         "sortOrder": "Direção da ordem:",
+         "decrease": "Decrescente",
+         "increase": "Crescente"
       }
    },
    "carteiras": {

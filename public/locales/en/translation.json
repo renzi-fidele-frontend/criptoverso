@@ -58,7 +58,18 @@
       "country": "Country of origin",
       "trades": "Trades?",
       "trades_tt": "Indicates whether the exchange allows the execution of purchase and sale operations",
-      "24hvol_tt": "Total volume of transactions carried out at the exchange in the last 24 hours"
+      "24hvol_tt": "Total volume of transactions carried out at the exchange in the last 24 hours",
+      "modal": {
+         "tit": "Add the filtering options of the exchanges:",
+         "trades": "Trading Status",
+         "sortBy": "Sort By:",
+         "lb_trades": "Only tradable brokers",
+         "score": "Score",
+         "vol": "24h volume",
+         "sortOrder": "Sort order:",
+         "decrease": "Descending",
+         "increase": "Ascending"
+      }
    },
    "carteiras": {
       "tit": "See all crypto wallets on the market",

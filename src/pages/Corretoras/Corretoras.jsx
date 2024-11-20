@@ -138,19 +138,19 @@ const Corretoras = () => {
                         <Form onSubmit={(e) => e.preventDefault()} className="d-flex flex-column gap-2">
                            {/* Status de negociação */}
                            <Form.Group>
-                              <Form.Label className="fw-medium">Status de negociação</Form.Label>
+                              <Form.Label className="fw-medium">{t("corretoras.modal.trades")}</Form.Label>
                               <Form.Check
                                  defaultChecked={filtros?.trades}
                                  ref={tradesRef}
                                  role="button"
                                  type="switch"
-                                 label="Apenas corretoras negociáveis"
+                                 label={t("corretoras.modal.lb_trades")}
                               />
                            </Form.Group>
 
                            {/* Ordenar tabela */}
                            <Form.Group>
-                              <Form.Label className="fw-medium">Ordenar por:</Form.Label>
+                              <Form.Label className="fw-medium">{t("corretoras.modal.sortBy")}</Form.Label>
                               <div>
                                  <Form.Check defaultChecked value="#" inline name="ordenar" role="button" type="radio" label="#" />
                                  <Form.Check
@@ -160,7 +160,7 @@ const Corretoras = () => {
                                     name="ordenar"
                                     role="button"
                                     type="radio"
-                                    label="Pontuação"
+                                    label={t("corretoras.modal.score")}
                                  />
                                  <Form.Check
                                     defaultChecked={filtros?.ordenarPor === "vol24h"}
@@ -169,14 +169,14 @@ const Corretoras = () => {
                                     name="ordenar"
                                     role="button"
                                     type="radio"
-                                    label="Volume de 24h"
+                                    label={t("corretoras.modal.vol")}
                                  />
                               </div>
                            </Form.Group>
 
                            {/* Direção da ordem */}
                            <Form.Group>
-                              <Form.Label className="fw-medium">Direção da ordem:</Form.Label>
+                              <Form.Label className="fw-medium">{t("corretoras.modal.sortOrder")}</Form.Label>
                               <div>
                                  <Form.Check
                                     defaultChecked
@@ -185,7 +185,7 @@ const Corretoras = () => {
                                     name="direcao"
                                     role="button"
                                     type="radio"
-                                    label="Decrescente"
+                                    label={t("corretoras.modal.decrease")}
                                  />
                                  <Form.Check
                                     defaultChecked={filtros?.direcao === "crescente"}
@@ -194,7 +194,7 @@ const Corretoras = () => {
                                     name="direcao"
                                     role="button"
                                     type="radio"
-                                    label="Crescente"
+                                    label={t("corretoras.modal.increase")}
                                  />
                               </div>
                            </Form.Group>
