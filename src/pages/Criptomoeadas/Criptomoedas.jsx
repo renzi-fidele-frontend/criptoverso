@@ -162,7 +162,7 @@ const Criptomoedas = () => {
                   {/* Modal de filtragem das corretoras */}
                   <Modal centered show={open} onHide={() => setOpen(false)}>
                      <Modal.Header className="align-items-start" closeButton>
-                        <Modal.Title>Adicione as opções de filtragem das criptomoedas:</Modal.Title>
+                        <Modal.Title>{t("criptomoedas.modal.tit")}</Modal.Title>
                      </Modal.Header>
                      <Modal.Body>
                         <Form onSubmit={(e) => e.preventDefault()} className="d-flex flex-column gap-2">
@@ -170,7 +170,15 @@ const Criptomoedas = () => {
                            <Form.Group>
                               <Form.Label className="fw-medium">{t("corretoras.modal.sortBy")}</Form.Label>
                               <div>
-                                 <Form.Check defaultChecked value="rank" inline name="ordenar" role="button" type="radio" label="Rank" />
+                                 <Form.Check
+                                    defaultChecked
+                                    value="rank"
+                                    inline
+                                    name="ordenar"
+                                    role="button"
+                                    type="radio"
+                                    label={t("criptomoedas.modal.rank")}
+                                 />
                                  <Form.Check
                                     defaultChecked={filtros?.ordenarPor === "alteracao"}
                                     value="alteracao"
@@ -178,7 +186,7 @@ const Criptomoedas = () => {
                                     name="ordenar"
                                     role="button"
                                     type="radio"
-                                    label="Alteração"
+                                    label={t("criptomoedas.modal.change")}
                                  />
                                  <Form.Check
                                     defaultChecked={filtros?.ordenarPor === "preco"}
@@ -187,7 +195,7 @@ const Criptomoedas = () => {
                                     name="ordenar"
                                     role="button"
                                     type="radio"
-                                    label="Preço"
+                                    label={t("criptomoedas.modal.price")}
                                  />
                                  <Form.Check
                                     defaultChecked={filtros?.ordenarPor === "volMercado"}
@@ -196,7 +204,7 @@ const Criptomoedas = () => {
                                     name="ordenar"
                                     role="button"
                                     type="radio"
-                                    label="Volume de mercado"
+                                    label={t("criptomoedas.modal.marketVol")}
                                  />
                               </div>
                            </Form.Group>

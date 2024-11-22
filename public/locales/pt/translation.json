@@ -47,7 +47,14 @@
    "criptomoedas": {
       "tit": "Veja todas as criptomoedas do mercado",
       "search_placeholder": "Encontre a sua moeda favorita",
-      "not_found": "Nada foi encontrado, tente clicar no botão de pesquisa"
+      "not_found": "Nada foi encontrado, tente clicar no botão de pesquisa",
+      "modal": {
+         "tit": "Adicione as opções de filtragem das criptomoedas:",
+         "change": "Alteração",
+         "price": "Preço",
+         "marketVol": "Volume de mercado",
+         "rank": "Posição global"
+      }
    },
    "corretoras": {
       "tit": "Veja todas as corretoras de criptomoedas",

@@ -47,7 +47,14 @@
    "criptomoedas": {
       "tit": "See all cryptocurrencies on the market",
       "search_placeholder": "Find your favorite currency",
-      "not_found": "Nothing found, try clicking the search button"
+      "not_found": "Nothing found, try clicking the search button",
+      "modal": {
+         "tit": "Add the filtering options of the cryptocurrencys:",
+         "change": "Change",
+         "price": "Price",
+         "marketVol": "Market volume",
+         "rank": "Global rank"
+      }
    },
    "corretoras": {
       "tit": "See all crypto exchanges on the market",
