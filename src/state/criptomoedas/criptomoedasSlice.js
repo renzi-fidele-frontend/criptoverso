@@ -6,6 +6,8 @@ const initialState = {
    paginaAtualCriptomoedas: 1,
    itemsPorPaginaCriptomoedas: 12,
    totalPaginasCriptomoedas: 0,
+   filtros: null,
+   criptomoedasFiltradas: null,
 };
 
 const criptomoedasSlice = createSlice({
@@ -24,10 +26,16 @@ const criptomoedasSlice = createSlice({
       setTotalPaginasCriptomoedas: (state, action) => {
          state.totalPaginasCriptomoedas = action.payload;
       },
+      setFiltros: (state, action) => {
+         state.filtros = action.payload;
+      },
+      setCriptomoedasFiltradas: (state, action) => {
+         state.criptomoedasFiltradas = action.payload;
+      },
    },
 });
 
-export const { setCriptomoedas, setPaginaAtualCriptomoedas, setItensPorPaginaCriptomoedas, setTotalPaginasCriptomoedas } =
+export const { setCriptomoedas, setPaginaAtualCriptomoedas, setItensPorPaginaCriptomoedas, setTotalPaginasCriptomoedas, setCriptomoedasFiltradas, setFiltros } =
    criptomoedasSlice.actions;
 
 export default criptomoedasSlice.reducer;

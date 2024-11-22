@@ -1,7 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CryptofetchOptions } from "../../services/cryptoApi";
-import { setCriptomoedas, setPaginaAtualCriptomoedas, setTotalPaginasCriptomoedas } from "../../state/criptomoedas/criptomoedasSlice";
+import {
+   setCriptomoedas,
+   setCriptomoedasFiltradas,
+   setFiltros,
+   setPaginaAtualCriptomoedas,
+   setTotalPaginasCriptomoedas,
+} from "../../state/criptomoedas/criptomoedasSlice";
 import axios from "axios";
 import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
@@ -20,11 +26,11 @@ import { paginarArray } from "../../hooks/usePaginarArray";
 import Paginacao from "../../components/Paginacao/Paginacao";
 import { useTranslation } from "react-i18next";
 import Tooltip from "../../components/Tooltip/Tooltip";
+import { setPaginaAtual } from "../../state/corretoras/corretorasSlice";
 
 const Criptomoedas = () => {
-   const { criptomoedas, paginaAtualCriptomoedas, itemsPorPaginaCriptomoedas, totalPaginasCriptomoedas } = useSelector(
-      (state) => state.criptomoedas
-   );
+   const { criptomoedas, paginaAtualCriptomoedas, itemsPorPaginaCriptomoedas, totalPaginasCriptomoedas, filtros, criptomoedasFiltradas } =
+      useSelector((state) => state.criptomoedas);
    const dispatch = useDispatch();
    const [criptomoedasPaginadas, setCriptomoedasPaginadas] = useState([]);
    const [resultadosPesquisaInstantanea, setResultadosPesquisaInstantanea] = useState(null);
@@ -74,16 +80,61 @@ const Criptomoedas = () => {
       );
    }
 
-   function filtrarTabela() {}
+   function filtrarTabela() {
+      const ordemSelecionada = document.querySelector("input[name='ordenar']:checked").value;
+      const direcaoSelecionada = document.querySelector("input[name='direcao']:checked").value;
+
+      // Preservando as configurações para manter os filtros selecionados no formulário
+      dispatch(setFiltros({ ordenarPor: ordemSelecionada, direcao: direcaoSelecionada }));
+
+      let dadosOrdenados = criptomoedas?.filter(() => true);
+
+      // Ordenando os dados de acordo com o filtro selecionado
+      if (direcaoSelecionada === "decrescente") {
+         if (ordemSelecionada === "rank") {
+            dadosOrdenados?.sort((a, b) => b?.rank - a?.rank);
+         } else if (ordemSelecionada === "alteracao") {
+            dadosOrdenados?.sort((a, b) => b?.change - a?.change);
+         } else if (ordemSelecionada === "preco") {
+            dadosOrdenados?.sort((a, b) => Number(b?.price) - a?.price);
+         } else if (ordemSelecionada === "volMercado") {
+            dadosOrdenados?.sort((a, b) => b?.marketCap - a?.marketCap);
+         }
+      } else if (direcaoSelecionada === "crescente") {
+         if (ordemSelecionada === "rank") {
+            dadosOrdenados?.sort((a, b) => a?.rank - b?.rank);
+         } else if (ordemSelecionada === "alteracao") {
+            dadosOrdenados?.sort((a, b) => a?.change - b?.change);
+         } else if (ordemSelecionada === "preco") {
+            dadosOrdenados?.sort((a, b) => Number(a?.price) - b?.price);
+         } else if (ordemSelecionada === "volMercado") {
+            dadosOrdenados?.sort((a, b) => a?.marketCap - b?.marketCap);
+         }
+      }
+
+      dispatch(setCriptomoedasFiltradas(dadosOrdenados));
+      if (dadosOrdenados?.length > 0) {
+         setCriptomoedasPaginadas(paginarArray(dadosOrdenados, paginaAtualCriptomoedas, itemsPorPaginaCriptomoedas));
+      } else {
+         setCriptomoedasPaginadas([]);
+      }
+
+      setOpen(false);
+      dispatch(setPaginaAtual(1));
+   }
 
    useEffect(() => {
       if (!criptomoedas) apanharCriptomoedas();
-
       if (criptomoedasPaginadas?.length === 0 && criptomoedas)
          setCriptomoedasPaginadas(paginarArray(criptomoedas, paginaAtualCriptomoedas, itemsPorPaginaCriptomoedas));
    }, [criptomoedas, criptomoedasPaginadas]);
 
-   // TODO: Adicionar a funcionalidade de filtragem de criptomoedas
+   // Caso a página carregue e hajam filtros
+   useEffect(() => {
+      if (criptomoedasFiltradas && filtros) {
+         setCriptomoedasPaginadas(paginarArray(criptomoedasFiltradas, paginaAtualCriptomoedas, itemsPorPaginaCriptomoedas));
+      }
+   }, []);
 
    return (
       <Container id={styles.ct} fluid>
@@ -115,10 +166,65 @@ const Criptomoedas = () => {
                      </Modal.Header>
                      <Modal.Body>
                         <Form onSubmit={(e) => e.preventDefault()} className="d-flex flex-column gap-2">
-                           {/* TODO: Adicionar filtragem de ordenação do percentual de alteração do preço da criptomoeda */}
-                           {/* TODO: Adicionar filtragem de ordenação do preço da criptomoeda */}
-                           {/* TODO: Adicionar filtragem de ordenação do volume de 24h da criptomoeda */}
-                           <Form.Group></Form.Group>
+                           {/* Ordenar tabela */}
+                           <Form.Group>
+                              <Form.Label className="fw-medium">{t("corretoras.modal.sortBy")}</Form.Label>
+                              <div>
+                                 <Form.Check defaultChecked value="rank" inline name="ordenar" role="button" type="radio" label="Rank" />
+                                 <Form.Check
+                                    defaultChecked={filtros?.ordenarPor === "alteracao"}
+                                    value="alteracao"
+                                    inline
+                                    name="ordenar"
+                                    role="button"
+                                    type="radio"
+                                    label="Alteração"
+                                 />
+                                 <Form.Check
+                                    defaultChecked={filtros?.ordenarPor === "preco"}
+                                    value="preco"
+                                    inline
+                                    name="ordenar"
+                                    role="button"
+                                    type="radio"
+                                    label="Preço"
+                                 />
+                                 <Form.Check
+                                    defaultChecked={filtros?.ordenarPor === "volMercado"}
+                                    value="volMercado"
+                                    inline
+                                    name="ordenar"
+                                    role="button"
+                                    type="radio"
+                                    label="Volume de mercado"
+                                 />
+                              </div>
+                           </Form.Group>
+
+                           {/* Direção da ordem */}
+                           <Form.Group>
+                              <Form.Label className="fw-medium">{t("corretoras.modal.sortOrder")}</Form.Label>
+                              <div>
+                                 <Form.Check
+                                    defaultChecked
+                                    value="decrescente"
+                                    inline
+                                    name="direcao"
+                                    role="button"
+                                    type="radio"
+                                    label={t("corretoras.modal.decrease")}
+                                 />
+                                 <Form.Check
+                                    defaultChecked={filtros?.direcao === "crescente"}
+                                    value="crescente"
+                                    inline
+                                    name="direcao"
+                                    role="button"
+                                    type="radio"
+                                    label={t("corretoras.modal.increase")}
+                                 />
+                              </div>
+                           </Form.Group>
                         </Form>
                      </Modal.Body>
                      <Modal.Footer>

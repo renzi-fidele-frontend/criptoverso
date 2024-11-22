@@ -104,6 +104,7 @@ function LinhaCarteira({ carteira }) {
                      </Placeholder>
                   ))}
             </td>
+            {/* TODO: Melhorar renderização da classificação de estrelas */}
             <td className={styles.td}>
                <div className="d-flex gap-2 align-items-center">
                   <span>{carteira?.Rating?.Avg}/5</span>

@@ -78,19 +78,19 @@ const Corretoras = () => {
 
       if (direcaoSelecionada === "decrescente") {
          if (ordemSelecionada === "#") {
-            dadosFiltrados?.sort((a, b) => a?.numero - b?.numero);
+            dadosOrdenados?.sort((a, b) => a?.numero - b?.numero);
          } else if (ordemSelecionada === "pontuacao") {
-            dadosFiltrados?.sort((a, b) => b?.GradePoints - a?.GradePoints);
+            dadosOrdenados?.sort((a, b) => b?.GradePoints - a?.GradePoints);
          } else if (ordemSelecionada === "vol24h") {
-            dadosFiltrados?.sort((a, b) => b?.TOTALVOLUME24H?.BTC - a?.TOTALVOLUME24H?.BTC);
+            dadosOrdenados?.sort((a, b) => b?.TOTALVOLUME24H?.BTC - a?.TOTALVOLUME24H?.BTC);
          }
       } else if (direcaoSelecionada === "crescente") {
          if (ordemSelecionada === "#") {
-            dadosFiltrados?.sort((a, b) => a?.numero - b?.numero);
+            dadosOrdenados?.sort((a, b) => a?.numero - b?.numero);
          } else if (ordemSelecionada === "pontuacao") {
-            dadosFiltrados?.sort((a, b) => a?.GradePoints - b?.GradePoints);
+            dadosOrdenados?.sort((a, b) => a?.GradePoints - b?.GradePoints);
          } else if (ordemSelecionada === "vol24h") {
-            dadosFiltrados?.sort((a, b) => a?.TOTALVOLUME24H?.BTC - b?.TOTALVOLUME24H?.BTC);
+            dadosOrdenados?.sort((a, b) => a?.TOTALVOLUME24H?.BTC - b?.TOTALVOLUME24H?.BTC);
          }
       }
 
