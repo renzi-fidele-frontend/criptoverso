@@ -104,16 +104,27 @@ function LinhaCarteira({ carteira }) {
                      </Placeholder>
                   ))}
             </td>
-            {/* TODO: Melhorar renderização da classificação de estrelas */}
+            {/* TODO: Melhorar renderização da classificação de estrelas
+             */}
             <td className={styles.td}>
                <div className="d-flex gap-2 align-items-center">
-                  <span>{carteira?.Rating?.Avg}/5</span>
+                  {gerarArray(5).map((v, k) => (
+                     <>
+                        {/* Prencher as alcancadas  */}
+                        {Math.floor(carteira?.Rating?.Avg) >= k + 1 && <i className="bi-star-fill" key={k}></i>}
+
+                        {/* Adicionar metade caso o arredondamento seja aplicavel */}
+                        {Math.floor(carteira?.Rating?.Avg) === k && <i className="bi-star-half" key={k}></i>}
+                     </>
+                  ))}
+
+                  {/* <span>{carteira?.Rating?.Avg}/5</span>
                   <div className="d-none d-xl-flex gap-1 align-items-center">
                      {gerarArray(carteira?.Rating?.Avg).map((v, k) => (
                         <Image key={k} id={styles.star} src={star} />
                      ))}
-                  </div>
-                  <Image className="d-xl-none" id={styles.star} src={star} />
+                  </div> 
+                  <Image className="d-xl-none" id={styles.star} src={star} /> */}
                </div>
             </td>
             <td className={styles.td}>
