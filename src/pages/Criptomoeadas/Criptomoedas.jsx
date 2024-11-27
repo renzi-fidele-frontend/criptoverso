@@ -294,10 +294,17 @@ const Criptomoedas = () => {
                paginaAtual={paginaAtualCriptomoedas}
                tamanhoDesktop="lg"
                tamanhoMobile="sm"
-               totalPaginas={totalPaginasCriptomoedas}
+               totalPaginas={filtros ? Math.ceil(criptomoedasFiltradas?.length / itemsPorPaginaCriptomoedas) : totalPaginasCriptomoedas}
                onPageClick={(pagina) => {
+                  const condicionalCriptomoedas = (criptomoedas) => {
+                     if (filtros) {
+                        return criptomoedasFiltradas;
+                     } else {
+                        return criptomoedas;
+                     }
+                  };
                   dispatch(setPaginaAtualCriptomoedas(pagina));
-                  setCriptomoedasPaginadas(paginarArray(criptomoedas, pagina, itemsPorPaginaCriptomoedas));
+                  setCriptomoedasPaginadas(paginarArray(condicionalCriptomoedas(criptomoedas), pagina, itemsPorPaginaCriptomoedas));
                }}
             />
          )}
