@@ -104,27 +104,26 @@ function LinhaCarteira({ carteira }) {
                      </Placeholder>
                   ))}
             </td>
-            {/* TODO: Melhorar renderização da classificação de estrelas
-             */}
             <td className={styles.td}>
                <div className="d-flex gap-2 align-items-center">
-                  {gerarArray(5).map((v, k) => (
+                  {gerarArray(4).map((v, nrEstrela) => (
                      <>
                         {/* Prencher as alcancadas  */}
-                        {Math.floor(carteira?.Rating?.Avg) >= k + 1 && <i className="bi-star-fill" key={k}></i>}
+                        {Math.floor(carteira?.Rating?.Avg) >= nrEstrela + 1 && <i className="bi-star-fill"></i>}
 
-                        {/* Adicionar metade caso o arredondamento seja aplicavel */}
-                        {Math.floor(carteira?.Rating?.Avg) === k && <i className="bi-star-half" key={k}></i>}
+                        {/* Preenchendo a metade caso o resto da divisão seja maior do que 0.5
+                         */}
+                        {(carteira?.Rating?.Avg % 1) * 10 !== 0 &&
+                           (carteira?.Rating?.Avg % 1) * 10 >= 5 &&
+                           nrEstrela + 1 === Math.floor(carteira?.Rating?.Avg) && <i className="bi-star-half"></i>}
+
+                        {/* Preencher as vazias */}
+                        {Math.floor(carteira?.Rating?.Avg) <= nrEstrela + 1 && (carteira?.Rating?.Avg % 1) * 10 < 5 && (
+                           <i className="bi-star"></i>
+                        )}
+                        {carteira?.Rating?.Avg <= nrEstrela + 1 && (carteira?.Rating?.Avg % 1) * 10 >= 5 && <i className="bi-star"></i>}
                      </>
                   ))}
-
-                  {/* <span>{carteira?.Rating?.Avg}/5</span>
-                  <div className="d-none d-xl-flex gap-1 align-items-center">
-                     {gerarArray(carteira?.Rating?.Avg).map((v, k) => (
-                        <Image key={k} id={styles.star} src={star} />
-                     ))}
-                  </div> 
-                  <Image className="d-xl-none" id={styles.star} src={star} /> */}
                </div>
             </td>
             <td className={styles.td}>

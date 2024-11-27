@@ -34,6 +34,7 @@ const NavBarMobile = () => {
                </Link>
             </div>
 
+            
             <div className="d-flex gap-2 gap-sm-3 align-items-center">
                <FormSelect className="d-none d-sm-block border-0 bg-opacity-25 text-light bg-light" role="button" onChange={mudarIdioma}>
                   <option className="bg-opacity-100 text-dark" value="pt">

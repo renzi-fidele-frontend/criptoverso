@@ -288,6 +288,7 @@ const Criptomoedas = () => {
          </Row>
 
          {/*  Paginação  */}
+         {/* TODO: fix: Ao se mudar de página no modo de filtragem, reseta a filtragem */}
          {!resultadosPesquisaInstantanea && criptomoedas && (
             <Paginacao
                paginaAtual={paginaAtualCriptomoedas}
