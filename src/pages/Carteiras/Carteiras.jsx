@@ -98,7 +98,7 @@ const Carteiras = () => {
 
       dispatch(setCarteirasFiltradas(dadosFiltrados));
       if (dadosFiltrados?.length > 0) {
-         setCarteirasPaginadas(paginarArray(dadosFiltrados, paginaAtual, itemsPorPagina));
+         setCarteirasPaginadas(paginarArray(dadosFiltrados, 1, itemsPorPagina));
       } else {
          setCarteirasPaginadas([]);
       }
