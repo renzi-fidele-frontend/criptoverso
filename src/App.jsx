@@ -15,9 +15,6 @@ import { Suspense } from "react";
 import PreLoader from "./components/PreLoader/PreLoader";
 import ScrollTop from "./components/ScrollTop/ScrollTop";
 
-// Substituir todos os tippys através de um componente individual
-
-// TODO: Adicionar particulas ao sidebar com o pacote: jsparticles
 function App() {
    return (
       <>

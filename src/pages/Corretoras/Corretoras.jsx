@@ -96,7 +96,7 @@ const Corretoras = () => {
 
       dispatch(setCorretorasFiltradas(dadosOrdenados));
       if (dadosOrdenados?.length > 0) {
-         setCorretorasPaginadas(paginarArray(dadosOrdenados, paginaAtual, itemsPorPagina));
+         setCorretorasPaginadas(paginarArray(dadosOrdenados, 1, itemsPorPagina));
       } else {
          setCorretorasPaginadas([]);
       }
